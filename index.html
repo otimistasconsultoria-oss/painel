@@ -1613,8 +1613,15 @@ async function carregaRegua(){
   $("rgList").innerHTML=`<ol class="regua">${Array.from({length:6},()=>`<li style="opacity:.4"><span class="n">·</span><span class="ph"></span><div><div class="sbar"><i style="width:40%;background:var(--track)"></i></div></div></li>`).join("")}</ol>`;
   $("rgPerfil").innerHTML=`<p class="empty">Toque num parlamentar da régua para ver o que ele pode oferecer.</p>`;
   const cliA=getCli().find(x=>x.id===st.rg.cli&&kk(x.cidade)===kk(mun));
-  let d; try{d=await api({acao:"regua",uf,municipio:mun,area,cnpj:cliA&&cliA.cnpj||""})}
-  catch(e){$("rgL").textContent=e.message==="sem-link"?"Conecte a planilha (card no fim da página).":"Não consegui ler a planilha. Se você atualizou o script, publique a nova versão (Gerenciar implantações → editar → Nova versão).";$("rgList").innerHTML="";return}
+  // mostra na hora a última régua guardada neste aparelho; a nova chega por cima
+  const ckR="otm-rg|"+uf+"|"+kk(mun)+"|"+area; let velha=null; try{velha=JSON.parse(localStorage.getItem(ckR)||"null")}catch(e){}
+  if(velha&&velha.d){st.rg.dados=velha.d;renderRegua();desenhaMapaRg();$("rgL").textContent=`Mostrando a consulta de ${new Date(velha.t).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})} enquanto atualiza…`}
+  let d; try{d=await api({acao:"regua",uf,municipio:mun,area,cnpj:cliA&&cliA.cnpj||""});
+    if(st.rg.uf!==uf||st.rg.mun!==mun||st.rg.area!==area) return;
+    try{localStorage.setItem(ckR,JSON.stringify({t:Date.now(),d}));const ks=Object.keys(localStorage).filter(k=>k.startsWith("otm-rg|"));
+      if(ks.length>12) ks.map(k=>[k,(JSON.parse(localStorage.getItem(k))||{}).t||0]).sort((a,b)=>a[1]-b[1]).slice(0,ks.length-12).forEach(([k])=>localStorage.removeItem(k))}catch(e){}}
+  catch(e){if(velha&&velha.d){$("rgL").textContent="Sem conexão com a planilha agora: mostrando a última consulta guardada.";return}
+    $("rgL").textContent=e.message==="sem-link"?"Conecte a planilha (card no fim da página).":"Não consegui ler a planilha. Se você atualizou o script, publique a nova versão (Gerenciar implantações → editar → Nova versão).";$("rgList").innerHTML="";return}
   st.rg.dados=d; st.rg.mapaParl=false; renderRegua(); desenhaMapaRg(); if(st.bc.uf!==uf) carregaBancada(uf);
   agendaVarr(uf,mun,area,0);
 }
