@@ -135,6 +135,15 @@
 .rxFavIn{margin-top:6px;border-left:3px solid var(--accent);padding:2px 0 2px 10px}
 .rxFavIn div{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;padding:2px 0}
 .rxFavIn b{white-space:nowrap}
+.pjPdf{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0 4px}
+.pdfBox{border:1px solid var(--line);border-left:3px solid var(--brand);border-radius:8px;padding:10px 12px;margin:8px 0}
+.kw{display:flex;flex-wrap:wrap;gap:6px}
+.kwb{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:6px;padding:4px 8px;font:inherit;font-size:13px;cursor:pointer;text-decoration:line-through}
+.kwb[aria-pressed="true"]{background:var(--watchbg);color:var(--brand);border-color:var(--brand2);text-decoration:none}
+.cliPaste{border:1px dashed var(--brand2);border-radius:10px;padding:10px 12px;margin-bottom:12px;background:var(--watchbg)}
+.cliPaste label{display:flex;flex-direction:column;gap:6px;font-size:13.5px}
+.cliPaste textarea{min-height:90px;font:inherit;font-size:14px}
+.inl{display:flex;gap:6px}.inl input{flex:1;min-width:0}
 .sb [data-view]{display:flex;flex-direction:column;gap:1px;padding:8px 12px}
 .sb [data-view] b{font-weight:600;font-size:14.5px}
 .sb [data-view] small{font-size:12px;color:var(--muted);line-height:1.3}
@@ -593,6 +602,9 @@ footer{margin-top:24px;font-size:12px;color:var(--muted);max-width:76ch}
       <div class="filt"><label style="grid-column:1/-1">Ideia ou palavras-chave<input id="pjQ" placeholder="Ex.: aquisição de equipamentos para hemodiálise"></label>
         <label>Estado<select id="pjUf"><option value="">Brasil</option></select></label><label>Cidade<input id="pjMun" placeholder="Opcional"></label>
         <label>Parlamentar<input id="pjAut" placeholder="Opcional"></label><button class="btn" id="pjGo">Buscar projetos</button></div>
+      <div class="pjPdf"><button class="btn ghost" id="pjPdfBtn" type="button">Comparar com um projeto em PDF</button><input type="file" id="pjPdf" accept="application/pdf" hidden>
+        <span class="sub">O PDF é lido aqui no aparelho (não é enviado a ninguém). O painel tira as palavras-chave e procura os projetos mais parecidos.</span></div>
+      <div id="pjPdfRes"></div>
       <div id="pjRes"></div>
     </section>
 
@@ -612,7 +624,7 @@ footer{margin-top:24px;font-size:12px;color:var(--muted);max-width:76ch}
       <div id="expBody"></div>
     </details>
     <details class="card fold" id="cliCard"><summary><h2>Meus clientes (cadastro)</h2></summary>
-      <p class="lead">Salvos neste aparelho. Os clientes aparecem no topo da tela, prontos para a régua.</p>
+      <p class="lead">Guardados na planilha: aparecem iguais no celular e no computador. Para cadastrar rápido, cole qualquer texto com os dados (cartão CNPJ, e-mail, assinatura) ou só o CNPJ.</p><p class="sub" id="cliSync"></p>
       <div id="cliList"></div>
       <div class="btns" style="margin-top:6px"><button class="btn" id="cliNovo">+ Adicionar cliente</button><button class="btn ghost" id="cliBkp">Copiar backup</button><button class="btn ghost" id="cliRest">Restaurar backup</button></div>
       <div id="cliForm" hidden style="margin-top:12px"></div>
@@ -1442,30 +1454,99 @@ function renderCli(){
   const l=getCli();
   $("cliList").innerHTML=l.length?l.map(c=>`<div class="cli" data-cli="${esc(c.id)}">
     <div class="h"><div><b>${esc(c.nome)}</b><div class="meta">${esc(c.cidade)} · ${esc(UFS[c.uf]||"")} · ${esc(c.tema)}${c.valor?` · meta R$ ${esc(c.valor)}`:""}${c.acao?` · ${esc(c.acao)}`:""}</div></div>
-      <button class="btn ghost sm" data-del="${esc(c.id)}" aria-label="Remover ${esc(c.nome)}">✕</button></div>
+      <span><button class="btn ghost sm" data-edcli="${esc(c.id)}">Editar</button> <button class="btn ghost sm" data-del="${esc(c.id)}" aria-label="Remover ${esc(c.nome)}">✕</button></span></div>
     ${c.causa?`<div class="sub" style="margin-bottom:8px">${esc(c.causa)}</div>`:""}
     <div class="btns"><button class="btn sm" data-plano="${esc(c.id)}">Plano de captação</button><button class="btn ghost sm" data-cid="${esc(c.id)}">Raio-X da cidade</button></div>
     <div class="plano" id="pl-${esc(c.id)}"></div></div>`).join(""):`<p class="empty">Nenhum cliente. Adicione o primeiro.</p>`;
 }
-function formCli(){
-  const F=$("cliForm"); F.hidden=!F.hidden; if(F.hidden) return;
-  F.innerHTML=`<div class="frm">
-    <label>Instituição<input id="fNome"></label>
-    <label>UF<select id="fUf">${Object.entries(UFS).map(([k,v])=>`<option value="${k}" ${k==="sp"?"selected":""}>${v}</option>`).join("")}</select></label>
-    <label>Cidade<input id="fCid" list="fMun" autocomplete="off"><datalist id="fMun"></datalist></label>
-    <label>Tema<select id="fTema">${Object.keys(TEMAS).map(t=>`<option>${t}</option>`).join("")}</select></label>
-    <label>Meta (R$)<input id="fVal" inputmode="numeric" placeholder="1.000.000"></label>
-    <label>Ação / programa<input id="fAcao" placeholder="MAC · Ação 2E90"></label>
-    <label>CNPJ<input id="fCnpj"></label>
-    <label>Causa prioritária<input id="fCausa"></label>
-    <label>Presidente / responsável<input id="fPres"></label><label>Cargo<input id="fCargo" placeholder="Presidente"></label>
-    <label>CNES (se tiver)<input id="fCnes" inputmode="numeric"></label><label>Endereço completo<input id="fEnd"></label></div>
-    <div class="btns" style="margin-top:10px"><button class="btn" id="fSalvar">Salvar cliente</button></div>`;
+function formCli(editId){
+  const F=$("cliForm"); const c=editId?getCli().find(x=>x.id===editId)||{}:{};
+  if(!editId&&!F.hidden&&!F.dataset.edit){F.hidden=true;return} F.hidden=false; F.dataset.edit=editId||"";
+  const v=k=>esc(c[k]||"");
+  F.innerHTML=`<div class="cliPaste"><label><b>${editId?"Editar "+esc(c.nome):"Novo cliente"}: cole aqui qualquer texto com os dados</b>
+      <textarea id="fTexto" placeholder="Ex.: Irmandade da Santa Casa de Louveira, CNPJ 46.959.862/0001-47, CNES 2083035, Rua Tal 100, Louveira/SP, presidente João da Silva, tel (19) 3878-0000, contato@santacasa.org.br, pedido R$ 1.000.000 para custeio"></textarea></label>
+    <div class="btns"><button class="btn" id="fLer">Preencher a partir do texto</button><span class="sub" id="fMsg"></span></div></div>
+    <div class="frm">
+    <label>Nome curto (aparece na régua)<input id="fNome" value="${v("nome")}"></label>
+    <label>Razão social<input id="fRazao" value="${v("razao")}"></label>
+    <label>CNPJ<span class="inl"><input id="fCnpj" value="${v("cnpj")}" inputmode="numeric"><button class="btn ghost sm" id="fBuscaCnpj" type="button">Buscar dados</button></span></label>
+    <label>CNES (se tiver)<input id="fCnes" inputmode="numeric" value="${v("cnes")}"></label>
+    <label>UF<select id="fUf">${Object.entries(UFS).map(([k,n])=>`<option value="${k}" ${k===(c.uf||"sp")?"selected":""}>${n}</option>`).join("")}</select></label>
+    <label>Cidade<input id="fCid" list="fMun" autocomplete="off" value="${v("cidade")}"><datalist id="fMun"></datalist></label>
+    <label>Tema<select id="fTema">${Object.keys(TEMAS).map(t=>`<option ${t===(c.tema||"Saúde")?"selected":""}>${t}</option>`).join("")}</select></label>
+    <label>Meta (R$)<input id="fVal" inputmode="numeric" placeholder="1.000.000" value="${v("valor")}"></label>
+    <label>Ação / programa<input id="fAcao" placeholder="2E90 – Incremento ao custeio (MAC)" value="${v("acao")}"></label>
+    <label>Órgão<input id="fOrgao" placeholder="Ministério da Saúde" value="${v("orgao")}"></label>
+    <label>Presidente / responsável<input id="fPres" value="${v("presidente")}"></label><label>Cargo<input id="fCargo" placeholder="Presidente" value="${v("cargo")}"></label>
+    <label>Endereço completo<input id="fEnd" value="${v("endereco")}"></label>
+    <label>E-mail<input id="fEmail" value="${v("email")}"></label><label>Telefone<input id="fTel" value="${v("telefone")}"></label>
+    <label>Causa / objeto<input id="fCausa" value="${v("causa")||v("objeto")}"></label></div>
+    <div class="btns" style="margin-top:10px"><button class="btn" id="fSalvar">${editId?"Salvar alterações":"Salvar cliente"}</button><button class="btn ghost" id="fCancela" type="button">Cancelar</button></div>`;
   const fill=()=>{$("fMun").innerHTML=(st.muns[$("fUf").value]||[]).map(m=>`<option value="${esc(m.nm)}">`).join("")};
   $("fUf").onchange=fill; loadMuns().then(fill); fill();
-  $("fSalvar").onclick=()=>{const nome=$("fNome").value.trim(),cidade=$("fCid").value.trim(); if(!nome||!cidade){alert("Preencha instituição e cidade.");return}
-    const l=getCli(); l.push({id:"c"+Date.now(),nome,cidade,uf:$("fUf").value,tema:$("fTema").value,valor:$("fVal").value.trim(),acao:$("fAcao").value.trim(),cnpj:$("fCnpj").value.trim(),causa:$("fCausa").value.trim(),presidente:$("fPres").value.trim(),cargo:$("fCargo").value.trim()||"Presidente",cnes:$("fCnes").value.trim(),endereco:$("fEnd").value.trim(),razao:nome,gnd:"3 – Outras Despesas Correntes (Custeio)"});
-    setCli(l); $("cliForm").hidden=true; renderCli();};
+  $("fCancela").onclick=()=>{F.hidden=true;F.dataset.edit=""};
+  $("fLer").onclick=async()=>{const d=lerTextoCliente($("fTexto").value); poeForm(d); $("fMsg").textContent=Object.keys(d).length?`Encontrei: ${Object.keys(d).map(k=>ROT_CLI[k]||k).join(", ")}.`:"Não encontrei dados no texto.";
+    if(d.cnpj) await buscaCnpj(true)};
+  $("fBuscaCnpj").onclick=()=>buscaCnpj(false);
+  $("fSalvar").onclick=()=>{const nome=$("fNome").value.trim(),cidade=$("fCid").value.trim(); if(!nome||!cidade){alert("Preencha pelo menos o nome e a cidade.");return}
+    const novo={...c,id:c.id||"c"+Date.now(),nome,razao:$("fRazao").value.trim(),cidade,uf:$("fUf").value,tema:$("fTema").value,valor:$("fVal").value.trim(),acao:$("fAcao").value.trim(),orgao:$("fOrgao").value.trim(),
+      cnpj:$("fCnpj").value.trim(),cnes:$("fCnes").value.trim(),causa:$("fCausa").value.trim(),objeto:c.objeto||$("fCausa").value.trim(),presidente:$("fPres").value.trim(),cargo:$("fCargo").value.trim()||"Presidente",endereco:$("fEnd").value.trim(),email:$("fEmail").value.trim(),telefone:$("fTel").value.trim()};
+    const l=getCli(), i=l.findIndex(x=>x.id===novo.id); if(i>=0) l[i]=novo; else l.push(novo);
+    setCli(l); F.hidden=true; F.dataset.edit=""; renderCli(); salvaCliPlanilha(novo);};
+}
+const ROT_CLI={nome:"nome",razao:"razão social",cnpj:"CNPJ",cnes:"CNES",cidade:"cidade",uf:"UF",tema:"tema",valor:"meta",presidente:"responsável",cargo:"cargo",endereco:"endereço",email:"e-mail",telefone:"telefone",acao:"ação",causa:"causa"};
+const SIGLAS=Object.keys(UFS).map(k=>k.toUpperCase());
+// lê um texto livre e acha os dados do cliente (sem custo: regras simples)
+function lerTextoCliente(t){
+  const d={}, T=String(t||""), N=norm(T);
+  let m=T.match(/\b(\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2})\b/); if(m){const x=m[1].replace(/\D/g,"");d.cnpj=x.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,"$1.$2.$3/$4-$5")}
+  m=T.match(/CNES[^\d]{0,12}(\d{7})/i); if(m) d.cnes=m[1];
+  m=T.match(/[\w.+-]+@[\w-]+\.[\w.]+/); if(m) d.email=m[0].replace(/[.,;]$/,"");
+  m=T.match(/\(?\b\d{2}\)?\s?9?\d{4}[-\s]?\d{4}\b/); if(m) d.telefone=m[0].trim();
+  m=T.match(/R\$\s?([\d.]+(?:,\d{2})?)\s*(mil|milh[aã]o|milh[õo]es|mi)?/i); if(m){let v=m[1];if(m[2]){const n=parseFloat(v.replace(/\./g,"").replace(",","."))*(/mil$/i.test(m[2])?1e3:1e6);v=n.toLocaleString("pt-BR",{maximumFractionDigits:0})}d.valor=v}
+  m=T.match(/([A-ZÀ-Úa-zà-ú' .-]{3,40}?)\s*[\/\-–]\s*([A-Z]{2})\b/); if(m&&SIGLAS.includes(m[2])){d.cidade=m[1].replace(/^.*\b(em|de|na|no)\s+/i,"").trim();d.uf=m[2].toLowerCase()}
+  m=T.match(/(presidente|provedor[a]?|diretor[a]?(?: executiv[ao]| geral| presidente)?|superintendente|coordenador[a]?)\s*[:\-–]?\s*(?:é\s+|o\s+|a\s+|sr\.?\s+|sra\.?\s+|dr\.?\s+|dra\.?\s+)?([A-ZÀ-Ú][a-zà-ú]+(?:\s+(?:d[aeo]s?\s+)?[A-ZÀ-Ú][a-zà-ú]+){1,4})/i); if(m){d.cargo=m[1][0].toUpperCase()+m[1].slice(1).toLowerCase();d.presidente=m[2]}
+  m=T.match(/((?:Rua|Av\.?|Avenida|Pra[çc]a|Travessa|Rodovia|Estrada|Alameda)[^\n]{5,90}?)(?=,?\s*(?:CEP|[\n]|$|tel|fone|\(|presidente|e-?mail))/i); if(m) d.endereco=m[1].trim().replace(/[,;]$/,"");
+  m=T.match(/(?:a[çc][ãa]o|programa)\s*[:\-–]?\s*(\d{2}[A-Z0-9]{2})\b/i)||T.match(/\b(2E90|2E89|8585|8581|21FZ|21G1|21AR|20ZF|20YE)\b/i); if(m) d.acao=m[1].toUpperCase();
+  const tema=/c[aâ]ncer|oncolog/.test(N)?"Câncer":/hospital|santa casa|saude|cnes|ambulatorial|irmandade/.test(N)?"Saúde":/cultur|teatro|musica|museu|artes/.test(N)?"Cultura":/idos/.test(N)?"Pessoa idosa":/escola|educa/.test(N)?"Educação":/esporte|futebol|atleta/.test(N)?"Esporte":/assist|social|crian[cç]a|vulnerab/.test(N)?"Assistência social":""; if(tema) d.tema=tema;
+  const l1=T.split(/\n|,|;/).map(x=>x.trim()).find(x=>/santa casa|hospital|associa|instituto|funda[cç][ãa]o|irmandade|n[uú]cleo|grupo|apae|lar |casa d|centro|obra|sociedade/i.test(x)); if(l1){d.razao=l1.replace(/\s*CNPJ.*$/i,"");d.nome=d.razao.replace(/^(irmandade|associa[cç][ãa]o)\s+(d[aeo]s?\s+)?/i,"").replace(/\s+de miseric[oó]rdia/i,"").slice(0,60)}
+  return d;
+}
+function poeForm(d){const M={nome:"fNome",razao:"fRazao",cnpj:"fCnpj",cnes:"fCnes",cidade:"fCid",valor:"fVal",acao:"fAcao",presidente:"fPres",cargo:"fCargo",endereco:"fEnd",email:"fEmail",telefone:"fTel",tema:"fTema",uf:"fUf",causa:"fCausa"};
+  Object.entries(d).forEach(([k,v])=>{const el=$(M[k]);if(el&&v&&(!el.value||k==="uf"||k==="tema"))el.value=v}); if(d.uf) $("fUf").onchange&&$("fUf").onchange()}
+// completa pelo CNPJ (Receita, via BrasilAPI: gratuito)
+async function buscaCnpj(silencioso){
+  const n=$("fCnpj").value.replace(/\D/g,""); if(n.length!==14){if(!silencioso)alert("Digite um CNPJ com 14 números.");return}
+  $("fMsg").textContent="Consultando o CNPJ na Receita…";
+  try{const r=await fetch("https://brasilapi.com.br/api/cnpj/v1/"+n); if(!r.ok) throw 0; const j=await r.json();
+    const pres=(j.qsa||[]).find(q=>/presidente|diretor|administrador|provedor/i.test(q.qualificacao_socio||""))||(j.qsa||[])[0];
+    const desc=norm((j.cnae_fiscal_descricao||"")+" "+(j.razao_social||""));
+    poeForm({razao:tc(j.razao_social||""),nome:tc(j.nome_fantasia||j.razao_social||"").slice(0,60),cidade:tc(j.municipio||""),uf:(j.uf||"").toLowerCase(),
+      endereco:[tc([j.descricao_tipo_de_logradouro,j.logradouro].filter(Boolean).join(" ")),j.numero,j.complemento,tc(j.bairro||""),tc(j.municipio||"")+"/"+(j.uf||""),j.cep?"CEP "+String(j.cep).replace(/^(\d{5})(\d{3})$/,"$1-$2"):""].filter(Boolean).join(", "),
+      telefone:j.ddd_telefone_1?String(j.ddd_telefone_1).replace(/^(\d{2})(\d{4,5})(\d{4})$/,"($1) $2-$3"):"",email:(j.email||"").toLowerCase(),
+      presidente:pres?tc(pres.nome_socio||""):"",cargo:pres&&/presidente/i.test(pres.qualificacao_socio||"")?"Presidente":"",
+      tema:/hospital|saude|ambulatori/.test(desc)?"Saúde":/cultur|artistic/.test(desc)?"Cultura":/assist|social/.test(desc)?"Assistência social":""});
+    $("fMsg").textContent=`Dados da Receita preenchidos: ${tc(j.razao_social||"")}. Confira antes de salvar.`}
+  catch(e){$("fMsg").textContent="Não consegui consultar o CNPJ agora; preencha à mão ou tente de novo."}
+}
+// ---- clientes na planilha (iguais em todos os aparelhos)
+async function postPlanilha(body){
+  let pin=store.get("otm-pin"); if(!pin){pin=prompt("PIN da planilha (linha PIN_OFICIO na aba Config):");if(!pin)throw new Error("sem PIN");store.set("otm-pin",pin)}
+  const r=await fetch(apiBase(),{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...body,pin})});
+  const j=await r.json(); if(j.erro){if(/PIN/.test(j.erro))store.set("otm-pin","");throw new Error(j.erro)} return j;
+}
+async function salvaCliPlanilha(c){
+  const el=$("cliSync"); if(el) el.textContent="Salvando na planilha…";
+  try{const j=await postPlanilha({acao:"clienteSalvar",cliente:c}); if(j.lista) mesclaClientes(j.lista); if(el) el.textContent="Salvo na planilha. A varredura da cidade já entrou na fila.";}
+  catch(e){if(el) el.textContent="Ficou salvo só neste aparelho ("+e.message+"). Tente de novo mais tarde."}
+}
+function mesclaClientes(lista){ if(!Array.isArray(lista)||!lista.length) return; setCli(lista.map(c=>({...c,uf:String(c.uf||"").toLowerCase()}))); renderCli(); }
+async function puxaClientes(){
+  if(!apiBase()) return; let r=null; try{r=await api({acao:"clientes"})}catch(e){return}
+  if(r&&r.lista&&r.lista.length){mesclaClientes(r.lista); if($("cliSync")) $("cliSync").textContent=`${r.lista.length} clientes sincronizados com a planilha.`; if(st.rg&&!st.rg.dados&&typeof initRegua==="function"){} return}
+  // planilha vazia: manda a lista deste aparelho (uma vez)
+  if(store.get("otm-pin")){try{const j=await postPlanilha({acao:"clientesTodos",lista:getCli()}); if(j.lista) mesclaClientes(j.lista); if($("cliSync")) $("cliSync").textContent="Clientes deste aparelho enviados para a planilha."}catch(e){}}
+  else if($("cliSync")) $("cliSync").innerHTML=`Os clientes ainda estão só neste aparelho. <button class="btn ghost sm" id="cliEnviar">Enviar para a planilha</button>`;
 }
 const acharMun=(uf,nome)=>(st.muns[uf]||[]).find(m=>norm(m.nm)===norm(nome));
 async function planoCli(id){
@@ -1512,7 +1593,9 @@ document.addEventListener("click",e=>{
   const tb=t.closest(".tabbar button"); if(tb){setPane(tb.dataset.pane);return}
   const gt=t.closest("[data-goto]"); if(gt){e.preventDefault();setPane(gt.dataset.goto);return}
   const pl=t.closest("[data-plano]"); if(pl){planoCli(pl.dataset.plano);return}
-  const dl=t.closest("[data-del]"); if(dl){const cl=getCli().find(x=>x.id===dl.dataset.del); if(cl&&confirm(`Remover ${cl.nome}?`)){setCli(getCli().filter(x=>x.id!==cl.id));renderCli()}return}
+  const dl=t.closest("[data-del]"); if(dl){const cl=getCli().find(x=>x.id===dl.dataset.del); if(cl&&confirm(`Remover ${cl.nome}?`)){setCli(getCli().filter(x=>x.id!==cl.id));renderCli();postPlanilha({acao:"clienteApagar",id:cl.id}).catch(()=>{})}return}
+  const ed=t.closest("[data-edcli]"); if(ed){formCli(ed.dataset.edcli);$("cliForm").scrollIntoView({behavior:"smooth"});return}
+  if(t.closest("#cliEnviar")){postPlanilha({acao:"clientesTodos",lista:getCli()}).then(j=>{if(j.lista)mesclaClientes(j.lista);$("cliSync").textContent="Clientes enviados para a planilha."}).catch(e=>alert(e.message));return}
   const ci=t.closest("[data-cid]"); if(ci){const cl=getCli().find(x=>x.id===ci.dataset.cid); if(!cl) return; loadMuns().then(()=>{const m=acharMun(cl.uf,cl.cidade); if(m){setPane("dados");abreCidade(cl.uf,m.cd,"6")} else alert("Cidade não encontrada na lista do TSE.")});return}
   if(t.closest("#cliNovo")){formCli();return}
   if(t.closest("#cliBkp")){const j=JSON.stringify(getCli()); (navigator.clipboard?navigator.clipboard.writeText(j):Promise.reject()).then(()=>alert("Backup copiado. Cole num lugar seguro (WhatsApp, Notas, e-mail).")).catch(()=>prompt("Copie o backup:",j));return}
@@ -2354,13 +2437,16 @@ function pjCard(x){return `<div class="pj"><div class="m">${esc(x.ano)} · ${esc
   <div class="m">Emenda ${esc(x.emenda)} · <b style="color:var(--ink)">${esc(tc(x.parl))}</b>${x.valor?" · "+fmtR(x.valor):""}${x.imp?" · impositiva: "+esc(tc(x.imp)):""}</div>
   <div class="m">${esc(tc(x.orgao))} · programa ${esc(x.codProg)} – ${esc(x.prog)}${x.mod?" · "+esc(x.mod):""}</div>
   <div class="c">${x.email?`<a href="mailto:${esc(x.email)}">${esc(x.email)}</a>`:""}${x.tel?`<a href="tel:${esc(String(x.tel).replace(/\D/g,""))}">${esc(x.tel)}</a>`:""}
-   <a href="https://www.google.com/search?q=${encodeURIComponent(x.prop+" "+x.mun)}" target="_blank" rel="noopener">Pesquisar instituição</a></div></div>`}
+   <a href="https://www.google.com/search?q=${encodeURIComponent(x.prop+" "+x.mun)}" target="_blank" rel="noopener">Pesquisar instituição</a>
+   ${x.id?`<a href="https://discricionarias.transferegov.sistema.gov.br/voluntarias/ConsultarProposta/PreenchaOsDadosDaConsultaDeProposta.do" target="_blank" rel="noopener" data-copia="${esc(x.id)}" title="Abre a consulta pública; o nº da proposta é copiado para você colar">Ver no TransfereGov (proposta ${esc(x.id)})</a>`:""}</div>${x.sc&&x.sc<100?`<div class="m">Semelhança com a ideia: ${x.sc}%</div>`:""}</div>`}
+document.addEventListener("click",e=>{const a=e.target.closest("[data-copia]");if(a&&navigator.clipboard)navigator.clipboard.writeText(a.dataset.copia).catch(()=>{})});
 async function buscaPj(){
   const q=$("pjQ").value.trim(),uf=$("pjUf").value,mun=$("pjMun").value.trim(),autor=$("pjAut").value.trim();
   if(!q&&!mun&&!autor){$("pjRes").innerHTML=`<p class="empty">Escreva a ideia ou escolha uma cidade ou parlamentar.</p>`;return}
   $("pjRes").innerHTML=`<p class="sub">Procurando nos projetos… pode levar alguns segundos.</p>`;
   let d;try{d=await api({acao:"projetos",q,uf:uf?UFS[uf]:"",municipio:mun,autor})}catch(e){$("pjRes").innerHTML=`<p class="empty">${/vazio|importar/i.test(e.message)?"O banco de projetos ainda não foi carregado (Preparador + importarProjetos).":"Não consegui consultar a planilha."}</p>`;return}
   if(!d.itens.length){$("pjRes").innerHTML=`<p class="empty">Nenhum projeto encontrado. Tente palavras mais gerais.</p>`;return}
+  st.pjUlt=d.itens;
   $("pjRes").innerHTML=(q?`<h3>Onde a ideia costuma caber</h3><div class="cabe">${d.ondeCabe.slice(0,3).map(o=>`<div><b>${esc(o.nome||o.cod)}</b><span class="sub">${esc(tc(o.orgao))} · programa ${esc(o.cod)}<br>${o.n} projetos parecidos · média ${fmtR(o.media)}</span></div>`).join("")}</div>
     <p class="sub" style="margin:0">Modalidade mais comum: ${d.modalidades.map(([m,n])=>`${esc(m)} (${n})`).join(", ")}. O programa do TransfereGov indica o órgão e a linha de financiamento; confirme a ação orçamentária na cartilha do ministério.</p>`:"")+
     `<h3>${d.total.toLocaleString("pt-BR")} projetos${q?" parecidos":""}${d.total>d.itens.length?` (mostrando ${d.itens.length})`:""}</h3>`+d.itens.map(pjCard).join("")+`<p class="sub">Fonte: dados abertos do TransfereGov · ${esc(d.base||"")}</p>`;
@@ -2370,11 +2456,48 @@ async function pjDoParl(nome,box){
     b.innerHTML=d.itens&&d.itens.length?`<p class="sub" style="margin:0">${d.total} projetos com emenda dele no TransfereGov (convênios e termos de fomento). Os mais recentes:</p>`+d.itens.slice(0,6).map(pjCard).join(""):`<p class="sub">Nenhum projeto dele no banco do TransfereGov (as emendas de saúde fundo a fundo não passam por lá).</p>`}
   catch(e){const b=$(box);if(b)b.innerHTML=`<p class="sub">${/vazio|importar/i.test(e.message)?"Banco de projetos ainda não carregado.":"Não consegui consultar."}</p>`}
 }
+// ---- comparar um PDF de projeto com o banco
+const STOP_PT=new Set("a o as os e de da do das dos em no na nos nas um uma uns umas para por com sem sob sobre entre ate ao aos à às que se seu sua seus suas este esta estes estas esse essa isso isto aquele aquela ser sao foi sera como mais menos muito muitos muitas tambem ja nao sim ou nem pelo pela pelos pelas cada qual quais onde quando porque pois assim bem todo toda todos todas outro outra outros outras mesmo mesma ainda apenas sendo tem ter sua projeto projetos proposta objetivo objetivos geral especifico especificos justificativa meta metas acao acoes atividade atividades execucao realizacao valor total recursos recurso plano trabalho anexo pagina item itens conforme deste desta neste nesta forma meio partir atraves durante periodo ano anos mes meses dia dias numero sobre via institucao entidade municipio cidade estado federal nacional publico publica rua avenida cep cnpj telefone email presidente diretor".split(" "));
+let pdfjsOk=null;
+function carregaPdfJs(){ if(pdfjsOk) return pdfjsOk; pdfjsOk=new Promise((ok,err)=>{const sc=document.createElement("script");sc.src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+  sc.onload=()=>{window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";ok(window.pdfjsLib)};sc.onerror=()=>{pdfjsOk=null;err(new Error("pdf.js"))};document.head.appendChild(sc)}); return pdfjsOk; }
+async function textoPdf(file){
+  const lib=await carregaPdfJs(), doc=await lib.getDocument({data:await file.arrayBuffer()}).promise; let t="";
+  for(let i=1;i<=Math.min(doc.numPages,25);i++){const pg=await doc.getPage(i);const c=await pg.getTextContent();t+=c.items.map(x=>x.str).join(" ")+"\n"; progIni&&0}
+  return t;
+}
+function palavrasChave(t,n){
+  const N=norm(t).replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(w=>w.length>3&&!STOP_PT.has(w)&&!/^\d+$/.test(w));
+  const f={}; N.forEach(w=>f[w]=(f[w]||0)+1);
+  return Object.entries(f).sort((a,b)=>b[1]-a[1]).slice(0,n).map(x=>x[0]);
+}
+$("pjPdfBtn").onclick=()=>$("pjPdf").click();
+$("pjPdf").onchange=async e=>{
+  const f=e.target.files[0]; if(!f) return; const box=$("pjPdfRes");
+  box.innerHTML=`<p class="sub">Lendo ${esc(f.name)}…</p>`; progIni("Lendo o PDF do projeto");
+  let t=""; try{t=await textoPdf(f)}catch(err){progFim();box.innerHTML=`<p class="empty">Não consegui ler esse PDF. Se for uma imagem escaneada, ele não tem texto para comparar; tente a versão em Word ou PDF gerado pelo computador.</p>`;return}
+  progFim();
+  if(t.replace(/\s/g,"").length<200){box.innerHTML=`<p class="empty">Esse PDF quase não tem texto (provavelmente é escaneado). Tente a versão gerada pelo computador.</p>`;return}
+  const kw=palavrasChave(t,18), titulo=(t.split("\n").map(x=>x.trim()).find(x=>x.length>15&&x.length<160)||f.name);
+  st.pdfProj={nome:f.name,titulo,trecho:t.replace(/\s+/g," ").slice(0,3500),kw};
+  box.innerHTML=`<div class="pdfBox"><b>${esc(f.name)}</b><p class="sub" style="margin:2px 0 6px">Palavras-chave encontradas (toque para tirar as que não importam):</p>
+    <div class="kw">${kw.map(w=>`<button class="kwb" aria-pressed="true" data-kw="${esc(w)}">${esc(w)}</button>`).join("")}</div>
+    <div class="btns" style="margin-top:8px"><button class="btn" id="pjPdfBusca">Buscar projetos parecidos</button><button class="btn ghost" id="pjPdfClaude">Pedir análise completa ao Claude</button></div><p class="sub" id="pjPdfMsg"></p></div>`;
+  $("pjQ").value=kw.join(" "); buscaPj(); e.target.value="";
+};
+document.addEventListener("click",e=>{
+  const k=e.target.closest("[data-kw]"); if(k){k.setAttribute("aria-pressed",k.getAttribute("aria-pressed")==="true"?"false":"true");$("pjQ").value=[...document.querySelectorAll("[data-kw][aria-pressed=true]")].map(b=>b.dataset.kw).join(" ");return}
+  if(e.target.closest("#pjPdfBusca")){buscaPj();return}
+  if(e.target.closest("#pjPdfClaude")&&st.pdfProj){
+    const P=st.pdfProj, its=(st.pjUlt||[]).slice(0,10).map((x,i)=>`${i+1}. ${x.ano} · ${tc(x.mun)}/${x.uf} · ${tc(x.prop)} · ${x.objeto} · ${tc(x.orgao)} · programa ${x.codProg} – ${x.prog} · ${x.mod||""} · emenda de ${tc(x.parl)} · ${fmtR(x.valor||0)} · proposta ${x.id||""}`).join("\n");
+    const txt=`Sou consultor de captação de emendas parlamentares (Otimistas Consultoria). Analise o projeto abaixo e compare com os projetos parecidos que já receberam emenda no TransfereGov.\n\nPROJETO (${P.nome}) — trecho inicial:\n${P.trecho}\n\nPROJETOS PARECIDOS JÁ APOIADOS:\n${its||"(nenhum encontrado)"}\n\nQuero: 1) quais 3 projetos são mais próximos e por quê; 2) em qual ministério, programa e ação orçamentária o meu projeto melhor se enquadra, e a modalidade (fundo a fundo, convênio, termo de fomento); 3) se é custeio ou investimento (GND 3 ou 4); 4) ajustes no texto para aumentar a chance de aprovação; 5) que tipo de parlamentar costuma apoiar esse tipo de projeto. Separe fato, inferência e recomendação.`;
+    (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>{$("pjPdfMsg").innerHTML="Pedido copiado. Abra o Claude, cole na conversa e <b>anexe o mesmo PDF</b>: a análise fica completa."}).catch(()=>prompt("Copie o pedido:",txt));return}
+});
 $("pjGo").onclick=buscaPj; $("pjQ").addEventListener("keydown",e=>{if(e.key==="Enter")buscaPj()});
 $("pjUf").innerHTML+=Object.entries(UFS).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");
 
 buildUFs(); buildMap(); renderCli(); testaApi(); initRegua(); carregaRel().then(()=>{renderHist();if(st.rg.dados)renderRegua()}); if(store.get("otm-pane")==="dados") setPane("dados");
-marcaViews(); {let v0="rg";try{v0=localStorage.getItem("otm-view2")||"rg"}catch(e){} setView(v0,true);} $("thm2").textContent=$("thm").textContent;
+puxaClientes(); marcaViews(); {let v0="rg";try{v0=localStorage.getItem("otm-view2")||"rg"}catch(e){} setView(v0,true);} $("thm2").textContent=$("thm").textContent;
 const v0=store.get("otm-view"),u0=store.get("otm-uf");
 if(v0==="uf"&&UFS[u0]){st.view="uf";st.uf=u0}
 paint();
