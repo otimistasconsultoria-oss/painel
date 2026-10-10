@@ -128,6 +128,9 @@
 .zoomBox .zIni{width:200px;height:200px;border-radius:10px;background:#1F3FA0;display:grid;place-items:center;font-size:64px;font-weight:700;margin:0 auto 10px}
 .zoomBox figcaption{font-weight:700;font-size:18px}
 .cl.novos li{cursor:pointer}
+.renK .kb{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.renK .kb b{display:block;font-size:24px;font-weight:800;color:var(--brand)}.renK .kb span{font-size:12px;color:var(--muted)}
+.renK .kb:hover{border-color:var(--brand2)}.renK .kb[disabled]{opacity:.5;cursor:default}
 .rxCrumb{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:12px 0 4px;font-size:13px}
 .rxCrumb span{color:var(--muted)}
 .rxEm li{cursor:pointer;align-items:flex-start}
@@ -1461,19 +1464,20 @@ function itemRen(it,extra){
   return `<li ${c?`data-c="${esc(cid(c))}"`:""}><span class="cw">${ph}<span><b>${esc(nome)}</b><br><span class="sub">${esc(part||"")}${c?` · ${fmt(c.votos)} votos`:""}${extra?` · ${extra(it)}`:""}</span></span></span></li>`;
 }
 function renderRenov(){
-  const show=st.view==="uf"; $("renCard").hidden=!show; if(!show) return;
+  const show=st.view==="uf"&&st.cargo==="6"; $("renCard").hidden=!show; if(!show) return;
   const uf=st.uf; $("renT").textContent=`Renovação da bancada federal · ${UFS[uf]}`;
   const L=st.cam[uf];
   if(!L||L.status==="run"){$("renBody").innerHTML=`<p class="empty">Consultando a Câmara…</p>`;return}
   if(L.status==="err"){$("renBody").innerHTML=`<p class="empty">Não consegui consultar a lista de deputados da Câmara deste navegador.</p>`;return}
   const R=renovacao(uf); if(!R){$("renBody").innerHTML=`<p class="empty">Aguardando o resultado de deputado federal do TSE.</p>`;return}
   const sit=it=>{const [,t]=situacao(it.c);return t};
-  const bloco=(t,arr,ex)=>arr.length?`<details class="lst"><summary>${t} (${arr.length})</summary><ul class="cl">${arr.map(i=>itemRen(i,ex)).join("")}</ul></details>`:"";
-  $("renBody").innerHTML=`<div class="big4"><div><b>${R.re.length}</b><span>reeleitos/nas vagas</span></div><div><b>${R.novos.length}</b><span>novos</span></div><div><b>${R.fora.length}</b><span>fora (tentaram)</span></div><div><b>${R.sen.length+R.gov.length}</b><span>foram p/ Senado ou governo</span></div><div><b>${R.nc.length}</b><span>não achados no TSE</span></div></div>
-    ${bloco("Reeleitos ou nas vagas",R.re,sit)}${bloco("Novos (sem mandato federal hoje)",R.novos,sit)}
-    ${bloco("Não reeleitos: ainda indicam emendas da LOA 2027",R.fora,sit)}
-    ${bloco("Disputaram o Senado",R.sen,it=>"Senado: "+sit(it))}${bloco("Disputaram o governo",R.gov,it=>"Governo: "+sit(it))}
-    ${bloco("Sem candidatura encontrada (não concorreram ou nome diferente)",R.nc)}
+  const bloco=(k,t,arr,ex)=>arr.length?`<details class="lst" id="ren-${k}"><summary>${t} (${arr.length})</summary><ul class="cl">${arr.map(i=>itemRen(i,ex)).join("")}</ul></details>`:"";
+  const cx=(k,n,t)=>`<button class="kb" data-renk="${k}" ${n?"":"disabled"}><b>${n}</b><span>${t}</span></button>`;
+  $("renBody").innerHTML=`<div class="big4 renK">${cx("re",R.re.length,"reeleitos/nas vagas")}${cx("novos",R.novos.length,"novos")}${cx("fora",R.fora.length,"não reeleitos")}${cx("sen",R.sen.length+R.gov.length,"foram p/ Senado ou governo")}${cx("nc",R.nc.length,"sem candidatura encontrada")}</div>
+    ${bloco("re","Reeleitos ou nas vagas",R.re,sit)}${bloco("novos","Novos (sem mandato federal hoje)",R.novos,sit)}
+    ${bloco("fora","Não reeleitos: ainda indicam emendas da LOA 2027",R.fora,sit)}
+    ${bloco("sen","Disputaram o Senado",R.sen,it=>"Senado: "+sit(it))}${bloco("gov","Disputaram o governo",R.gov,it=>"Governo: "+sit(it))}
+    ${bloco("nc","Sem candidatura encontrada (não concorreram ou nome diferente)",R.nc)}
     <p class="sub">Cruzamento por nome de urna × nome parlamentar: confira casos duvidosos na ficha.</p>`;
   ligaFotos($("renBody"));
 }
@@ -1524,6 +1528,17 @@ const CLI_PADRAO=[
  {nome:"Associação Esparatrapo",razao:"Associação Esparatrapo",cidade:"São Paulo",uf:"sp",tema:"Cultura",valor:"1.000.000",acao:"20ZF – Promoção e Fomento à Cultura Brasileira",orgao:"Ministério da Cultura",uo:"42101 – Ministério da Cultura",gnd:"3 – Outras Despesas Correntes (Custeio)",modalidade:"50 (OSCs)",cnpj:"15.523.256/0001-50",cnes:"",presidente:"Felipe Fonseca Ribeiro",cargo:"Presidente",endereco:"Rua Kansas, 234, Brooklin Paulista, São Paulo/SP, CEP 04550-000",causa:"Projeto O Circo Cura",objeto:"à estruturação, qualificação e ampliação das atividades artísticas e de humanização da Esparatrapo em hospitais e casas de apoio"},
  {nome:"Santa Casa de Sabará",razao:"Santa Casa de Misericórdia de Sabará",cidade:"Sabará",uf:"mg",tema:"Saúde",valor:"1.000.000",acao:"2E90 – Incremento Temporário ao Custeio dos Serviços de Assistência Hospitalar e Ambulatorial para Cumprimento de Metas",orgao:"Ministério da Saúde",uo:"Fundo Nacional de Saúde – FNS",gnd:"3 – Outras Despesas Correntes (Custeio)",modalidade:"",cnpj:"24.315.681/0001-45",cnes:"2117282",presidente:"Eberth Lucas Duarte",cargo:"Presidente",endereco:"Sabará/MG",causa:"Fortalecimento da assistência hospitalar",objeto:"ao custeio hospitalar, permitindo direcionar recursos próprios para a ampliação dos leitos"},
  {nome:"Fundação NHR Brasil",razao:"Fundação NHR Brasil",cidade:"Fortaleza",uf:"ce",tema:"Assistência social",valor:"500.000",acao:"21G1 (opção 2: 21AR)",orgao:"Ministério dos Direitos Humanos e da Cidadania",uo:"",gnd:"3 – Outras Despesas Correntes (Custeio)",modalidade:"50 (OSCs)",cnpj:"",cnes:"",presidente:"Ana Rita Cardoso",cargo:"Diretora Executiva",endereco:"Av. Santos Dumont, nº 2727, Sala 704, Aldeota, Fortaleza/CE, CEP 60125-150",causa:"Projeto Caminhos da Inclusão",objeto:"à execução do Projeto Caminhos da Inclusão: inclusão social, garantia de direitos, apoio psicossocial e orientação jurídica para pessoas acometidas pela hanseníase e seus familiares"}];
+// clientes novos que entram sozinhos na lista (e são salvos na planilha) uma única vez
+const CLI_EXTRA=[{id:"c-hemt",nome:"Hospital Evangélico de Mato Grosso",razao:"Missão Cristã Brasileira – Hospital Evangélico de Mato Grosso",cidade:"Vila Bela da Santíssima Trindade",uf:"mt",tema:"Saúde",valor:"",
+  acao:"2E90 – Incremento Temporário ao Custeio dos Serviços de Assistência Hospitalar e Ambulatorial para Cumprimento de Metas",orgao:"Ministério da Saúde",uo:"Fundo Nacional de Saúde – FNS",gnd:"3 – Outras Despesas Correntes (Custeio)",modalidade:"",
+  cnpj:"03.004.504/0003-30",cnes:"",presidente:"",cargo:"Presidente",endereco:"Rua Marechal Rondon, s/n, Centro, Vila Bela da Santíssima Trindade/MT, CEP 78245-000",email:"hosp.diretoriavilabela@gmail.com",telefone:"(65) 3259-1625",
+  causa:"Hospital filantrópico (associação privada) com pronto-socorro, ambulatório cirúrgico, diálise, imagem e hemoterapia"}];
+function garanteClientesExtra(){
+  let feitos=[]; try{feitos=JSON.parse(store.get("otm-cli-extra")||"[]")}catch(e){}
+  CLI_EXTRA.forEach(c=>{ if(feitos.includes(c.id)) return; const l=getCli(); const n=String(c.cnpj).replace(/\D/g,"");
+    if(!l.some(x=>String(x.cnpj||"").replace(/\D/g,"")===n)){l.push(c);setCli(l);if(typeof renderCli==="function")renderCli()}
+    if(apiBase()&&store.get("otm-pin")) salvaCliPlanilha(c).then(ok=>{if(ok){feitos.push(c.id);store.set("otm-cli-extra",JSON.stringify(feitos))}}); });
+}
 const CAMPOS_OF=["razao","cnes","presidente","cargo","endereco","orgao","uo","gnd","modalidade","objeto"];
 function getCli(){let v=null;try{v=JSON.parse(store.get("otm-clientes")||"null")}catch(e){}
   if(!Array.isArray(v)) return CLI_PADRAO.map((c,i)=>({...c,id:"c"+i}));
@@ -1617,8 +1632,8 @@ async function postPlanilha(body){
 }
 async function salvaCliPlanilha(c){
   const el=$("cliSync"); if(el) el.textContent="Salvando na planilha…";
-  try{const j=await postPlanilha({acao:"clienteSalvar",cliente:c}); if(j.lista) mesclaClientes(j.lista); if(el) el.textContent="Salvo na planilha. A varredura da cidade já entrou na fila.";}
-  catch(e){if(el) el.textContent="Ficou salvo só neste aparelho ("+e.message+"). Tente de novo mais tarde."}
+  try{const j=await postPlanilha({acao:"clienteSalvar",cliente:c}); if(j.lista) mesclaClientes(j.lista); if(el) el.textContent="Salvo na planilha. A varredura da cidade já entrou na fila."; return true}
+  catch(e){if(el) el.textContent="Ficou salvo só neste aparelho ("+e.message+"). Tente de novo mais tarde."; return false}
 }
 function mesclaClientes(lista){ if(!Array.isArray(lista)||!lista.length) return; setCli(lista.map(c=>({...c,uf:String(c.uf||"").toLowerCase()}))); renderCli(); }
 async function puxaClientes(){
@@ -2342,6 +2357,9 @@ document.addEventListener("click",e=>{
   const zp=t.closest("[data-zoom]"); if(zp){zoomFoto(zp.dataset.zoom,zp.dataset.zoomnm);return}
   const mp=t.closest("[data-rgmapa]"); if(mp){$("rgMun").value=mp.dataset.rgmapa;st.rg.cli=null;renderCliChips();carregaRegua();window.scrollTo({top:0,behavior:reduz()?"auto":"smooth"});return}
   const mpp=t.closest("[data-mapp]"); if(mpp){st.rg.mapaParl=mpp.dataset.mapp==="1";desenhaMapaRg();return}
+  const rk2=t.closest("[data-renk]"); if(rk2){const ks=rk2.dataset.renk==="sen"?["sen","gov"]:[rk2.dataset.renk];
+    document.querySelectorAll("#renBody details").forEach(d=>d.open=ks.includes(d.id.replace("ren-","")));
+    document.querySelectorAll("[data-renk]").forEach(b=>b.setAttribute("aria-pressed",b===rk2));const d=$("ren-"+ks[0]);if(d)d.scrollIntoView({behavior:reduz()?"auto":"smooth",block:"start"});return}
   const ku=t.closest("[data-rkuf]"); if(ku){$("rkUf").value=ku.dataset.rkuf;carregaRank();return}
   const bk=t.closest("[data-bc]"); if(bk){st.bc.sel=st.bc.sel===bk.dataset.bc?null:bk.dataset.bc;renderBancada();return}
   if(t.closest("#thm")){trocaTema();return}
@@ -2606,7 +2624,7 @@ $("pjGo").onclick=buscaPj; $("pjQ").addEventListener("keydown",e=>{if(e.key==="E
 $("pjUf").innerHTML+=Object.entries(UFS).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");
 
 buildUFs(); buildMap(); renderCli(); testaApi(); initRegua(); carregaRel().then(()=>{renderHist();if(st.rg.dados)renderRegua()}); if(store.get("otm-pane")==="dados") setPane("dados");
-puxaClientes(); marcaViews(); irPara("ini",true); $("thm2").textContent=$("thm").textContent;
+Promise.resolve(puxaClientes()).catch(()=>{}).then(garanteClientesExtra); marcaViews(); irPara("ini",true); $("thm2").textContent=$("thm").textContent;
 const v0=store.get("otm-view"),u0=store.get("otm-uf");
 if(v0==="uf"&&UFS[u0]){st.view="uf";st.uf=u0}
 paint();
