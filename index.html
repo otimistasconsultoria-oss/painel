@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Apuração 2026 · Otimistas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem("otm-theme")||"light"}catch(e){document.documentElement.dataset.theme="light"}</script>
 <style>
 :root{
@@ -135,6 +135,64 @@
 .rxFavIn{margin-top:6px;border-left:3px solid var(--accent);padding:2px 0 2px 10px}
 .rxFavIn div{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;padding:2px 0}
 .rxFavIn b{white-space:nowrap}
+/* ===== identidade 2: app azul ===== */
+:root:not([data-theme="dark"]){--bg:#F3F6FC;--panel:#FFFFFF;--ink:#0E1B3D;--muted:#5B6785;--line:#E3E8F3;--track:#EDF1FA;--brand:#1E3FAE;--brand2:#2E6BFF;--watchbg:#EAF0FF}
+:root[data-theme="dark"]{--bg:#0A1024;--panel:#121A35;--line:#232E52;--track:#1A2445}
+body{font-family:"Plus Jakarta Sans","Archivo",system-ui,-apple-system,sans-serif!important;background:var(--bg)!important}
+.card{border-radius:16px!important;border:1px solid var(--line)!important;box-shadow:0 1px 2px rgba(14,27,61,.04),0 8px 24px rgba(14,27,61,.05)!important}
+.ttl{font-family:"Plus Jakarta Sans",sans-serif!important;font-weight:800!important;font-stretch:100%!important;letter-spacing:-.02em;color:var(--ink)!important}
+.btn{border-radius:12px!important;font-weight:700}
+.sb{background:linear-gradient(180deg,#0A2266 0%,#12379E 55%,#1B4FD8 100%)!important;border-right:0!important;color:#fff;padding:18px 12px 24px!important}
+@media (min-width:1024px){.sb{border-radius:0 26px 26px 0}}
+.sbLogo .logo{background:#fff!important;border-radius:12px;padding:6px 10px!important;display:inline-flex}
+.sbLogo::after{content:"Captação em ordem";display:block;color:rgba(255,255,255,.7);font-size:12.5px;margin:6px 4px 0}
+.sb .sbG{color:rgba(255,255,255,.55)!important}
+.sb [data-view]{color:#fff!important;border-radius:14px!important}
+.sb [data-view] small{color:rgba(255,255,255,.62)!important}
+.sb [data-view]:hover{background:rgba(255,255,255,.08)!important}
+.sb [data-view][aria-current="page"]{background:#3A6DFF!important;color:#fff!important;box-shadow:0 6px 18px rgba(20,60,200,.45)!important}
+.sb [data-view][aria-current="page"] small{color:rgba(255,255,255,.85)!important}
+.sb .thm{background:rgba(255,255,255,.12)!important;color:#fff!important;border-color:rgba(255,255,255,.25)!important}
+.tabbar{background:var(--panel)!important;border-bottom:1px solid var(--line)!important;box-shadow:none!important}
+.card.hero{background:linear-gradient(135deg,#0A2266,#1B4FD8)!important;border:0!important;border-radius:18px!important}
+/* início */
+.ini{display:block;margin:4px 0 18px}
+.iniData{margin:0;color:var(--muted);font-size:13px}
+.iniOi{font-size:clamp(28px,6vw,40px);font-weight:800;letter-spacing:-.025em;margin:4px 0 2px;color:var(--ink)}
+.iniProx{margin:0 0 16px;color:var(--muted);font-size:15px}
+.iniHero{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;background:linear-gradient(135deg,#0A2266 0%,#1440C0 70%,#2E6BFF 100%);color:#fff;border-radius:20px;padding:22px;box-shadow:0 14px 34px rgba(18,55,158,.28)}
+@media (max-width:640px){.iniHero{grid-template-columns:1fr;justify-items:start}}
+.ring{position:relative;width:132px;height:132px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .rb{fill:none;stroke:rgba(255,255,255,.18);stroke-width:10}
+.ring .rf{fill:none;stroke:#7FA8FF;stroke-width:10;stroke-linecap:round;stroke-dasharray:0 400;transition:stroke-dasharray .8s ease}
+.ring>div{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ring b{font-size:30px;font-weight:800;line-height:1}.ring span{font-size:11px;opacity:.75;margin-top:2px}
+.iniChk h2{color:#fff!important;font-size:19px;margin:0 0 8px;font-weight:800}
+.iniChk ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+@media (min-width:900px){.iniChk ul{grid-template-columns:1fr 1fr;column-gap:16px}}
+.iniChk button{display:flex;gap:10px;align-items:flex-start;width:100%;background:none;border:0;color:#fff;text-align:left;padding:6px 6px;border-radius:10px;cursor:pointer;font:inherit}
+.iniChk button:hover{background:rgba(255,255,255,.08)}
+.iniChk i{flex:0 0 22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.45);display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800;margin-top:1px}
+.iniChk li.ok i{background:#22C55E;border-color:#22C55E}
+.iniChk li.ok b{text-decoration:line-through;text-decoration-color:rgba(255,255,255,.5)}
+.iniChk b{display:block;font-size:14px;font-weight:700}.iniChk small{display:block;font-size:12px;opacity:.72}
+.iniNums{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0 0}
+@media (min-width:760px){.iniNums{grid-template-columns:repeat(4,1fr)}}
+.iniNums div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.iniNums b{display:block;font-size:24px;font-weight:800;color:var(--ink)}.iniNums span{font-size:12.5px;color:var(--muted)}
+.iniH{margin:22px 0 8px!important;font-size:16px!important;color:var(--ink)!important;font-weight:800}
+.iniCont{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px}
+.ct{flex:0 0 auto;min-width:220px;max-width:300px;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer;font:inherit;color:var(--ink)}
+.ct b{display:block;font-size:14px}.ct span{font-size:12.5px;color:var(--muted)}
+.ct:hover{border-color:var(--brand2)}
+.iniAt{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (min-width:900px){.iniAt{grid-template-columns:repeat(3,1fr)}}
+.at{text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;font:inherit;color:var(--ink);min-height:96px;display:flex;flex-direction:column;gap:4px}
+.at b{font-size:15px;font-weight:800}.at span{font-size:12.5px;color:var(--muted)}
+.at:hover{border-color:var(--brand2);transform:translateY(-1px)}
+.at.a1{background:linear-gradient(135deg,#0A2266,#1B4FD8);color:#fff;border:0}.at.a1 span{color:rgba(255,255,255,.75)}
+@media (prefers-reduced-motion:reduce){.ring .rf{transition:none}.at:hover{transform:none}}
 .pjPdf{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0 4px}
 .pdfBox{border:1px solid var(--line);border-left:3px solid var(--brand);border-radius:8px;padding:10px 12px;margin:8px 0}
 .kw{display:flex;flex-wrap:wrap;gap:6px}
@@ -512,6 +570,7 @@ footer{margin-top:24px;font-size:12px;color:var(--muted);max-width:76ch}
 <nav class="tabbar" aria-label="Topo"><button class="sbBtn" id="sbBtn" aria-controls="sb" aria-expanded="false"><span class="hb3" aria-hidden="true"><i></i><i></i><i></i></span>Menu</button><b class="tbT" id="tbT">Régua de potencial</b><div class="ldg" id="prog" hidden role="status" aria-live="polite"><div class="progTxt"><span id="progTxt"></span><b id="progPct"></b></div><div class="progBar"><i id="progI"></i></div></div></nav>
 <aside class="sb" id="sb" aria-label="Menu">
   <div class="sbLogo"></div>
+  <button data-view="ini"><b>Início</b><small>Resumo e atalhos</small></button>
   <p class="sbG">Captação para o cliente</p>
   <button data-view="rg"><b>Quem procurar</b><small>Régua de quem mais pode ajudar</small></button>
   <button data-view="mapa"><b>Onde o recurso chegou</b><small>Mapa da região, comissões e bancada</small></button>
@@ -539,6 +598,27 @@ footer{margin-top:24px;font-size:12px;color:var(--muted);max-width:76ch}
   <div class="ttl">Captação de emendas federais</div><p class="vHint" id="vHint"></p><div class="rule"></div><p class="empty" id="vEmpty" hidden></p>
 
   <div id="pCapt">
+    <section id="iniCard" class="ini">
+      <p class="iniData" id="iniData"></p>
+      <h1 class="iniOi" id="iniOi">Bom dia, Phelipe.</h1>
+      <p class="iniProx" id="iniProx"></p>
+      <div class="iniHero">
+        <div class="ring" id="iniRing"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="50" class="rb"/><circle cx="60" cy="60" r="50" class="rf" id="iniArc"/></svg><div><b id="iniPct">–</b><span>em ordem</span></div></div>
+        <div class="iniChk"><h2>Seu motor de captação</h2><ul id="iniChk"></ul></div>
+      </div>
+      <div class="iniNums" id="iniNums"></div>
+      <h3 class="iniH">Continue de onde parou</h3>
+      <div class="iniCont" id="iniCont"></div>
+      <h3 class="iniH">Atalhos</h3>
+      <div class="iniAt">
+        <button class="at a1" data-ir="rg"><b>Quem procurar</b><span>Régua de quem mais pode mandar emenda para cada cliente</span></button>
+        <button class="at" data-ir="vt"><b>Votos por cidade</b><span>Onde cada candidato foi votado</span></button>
+        <button class="at" data-ir="exp"><b>Buscar parlamentar</b><span>Tudo o que ele já indicou</span></button>
+        <button class="at" data-ir="pj"><b>Projetos já aprovados</b><span>Compare sua ideia ou um PDF</span></button>
+        <button class="at" data-ir="bc"><b>Quem fica e quem sai</b><span>Bancada 2027</span></button>
+        <button class="at" data-ir="cli"><b>Novo cliente</b><span>Cole um texto ou só o CNPJ</span></button>
+      </div>
+    </section>
     <section class="card hero">
       <h2>Para quem vamos captar?</h2>
       <div class="chips" id="rgCli" role="group" aria-label="Instituição"></div>
@@ -1158,7 +1238,7 @@ function extrasFicha(c){
 // ---- raio-x da cidade ----
 const TABS=[["6","Dep. federal"],["E","Dep. estadual"],["5","Senado"]];
 const cargoTab=uf=>st.cityTab==="E"?cEst(uf):st.cityTab;
-function abreCidade(uf,cd,tab){ if(typeof setView==="function"&&VIEW!=="cx") setView("cx",true);
+function abreCidade(uf,cd,tab){ if(typeof irPara==="function"&&VIEW!=="cx") irPara("cx",true);
   st.mun={uf,cd};
   if(tab) st.cityTab=tab; else if(["6","5"].includes(st.cargo)) st.cityTab=st.cargo; else if(st.cargo==="7") st.cityTab="E";
   if(st.view!=="uf"||st.uf!==uf) setView("uf",uf,true);
@@ -1631,7 +1711,7 @@ const fmtR=v=>v>=1e6?`R$ ${(v/1e6).toLocaleString("pt-BR",{maximumFractionDigits
 async function testaApi(){
   const el=$("apiStatus"); $("apiUrl").value=apiBase(); if(!apiBase()){el.textContent="Sem link ainda.";return}
   el.textContent="Testando…";
-  try{const j=await api({acao:"status"}); el.textContent=`Conectado. Última atualização completa: ${j.ultimaSync?new Date(j.ultimaSync).toLocaleDateString("pt-BR"):"ainda não concluída"} · ${j.status||""}`}
+  try{const j=await api({acao:"status"}); st.status=j; el.textContent=`Conectado. Última atualização completa: ${j.ultimaSync||"ainda não concluída"} · ${j.status||""}`; if(typeof renderInicio==="function") renderInicio()}
   catch(e){el.textContent="Não consegui ler a planilha com esse link. Confira se a implantação está como “Qualquer pessoa”."}
 }
 
@@ -1969,7 +2049,7 @@ function zoomFoto(src,nm){
 
 // ===== RAIO-X DE EMENDAS: abre de qualquer nome e vai descendo (área → estado → cidade → emenda → quem recebeu)
 st.rx=null;
-async function abreRaioX(nome,foto,nm){
+async function abreRaioX(nome,foto,nm){ store.set("otm-ultparl",nome);
   st.rx={nome,foto,nm:nm||tc(nome),itens:null,path:[]};
   const dl=$("dlg"); st.dlgK=null;
   $("dlgIn").innerHTML=`<button class="x" id="dlgX" aria-label="Fechar">✕</button><div id="rxBox"><p class="sub">Buscando as emendas de ${esc(st.rx.nm)}…</p></div>`;
@@ -2009,8 +2089,36 @@ async function rxFav(cod){
   catch(e){b.innerHTML=`<p class="sub">O Portal não respondeu agora.</p>`}
 }
 
+// ===== INÍCIO =====
+function renderInicio(){
+  const S=st.status||{}, h=new Date().getHours();
+  $("iniOi").textContent=(h<12?"Bom dia":h<18?"Boa tarde":"Boa noite")+", Phelipe.";
+  const dt=new Date().toLocaleDateString("pt-BR",{weekday:"long",day:"numeric",month:"long"}); $("iniData").textContent="Otimistas Consultoria · "+dt[0].toUpperCase()+dt.slice(1);
+  const nCli=S.clientes||getCli().length, nCid=S.cidadesClientes||nCli;
+  const itens=[
+    ["Clientes cadastrados",nCli>0,`${nCli} instituições`,"cli"],
+    ["Cidades dos clientes varridas no Portal",S.varridas&&S.varridas>=nCid,S.varridas!=null?`${S.varridas} de ${nCid}${S.filaVarredura&&S.filaVarredura.length?" · lendo "+S.filaVarredura[0]:""}`:"aguardando o motor","mapa"],
+    ["Base de emendas atualizada",!!S.ultimaSync,S.ultimaSync?`${(S.emendas||0).toLocaleString("pt-BR")} emendas · ${S.ultimaSync}`:"aguardando o motor","rk"],
+    ["Votos do TSE guardados na planilha",/^OK/.test(S.votos||""),S.votos||"rodar importarVotos","vt"],
+    ["Banco de projetos carregado",(S.projetos||0)>0,(S.projetos||0)>0?`${S.projetos.toLocaleString("pt-BR")} projetos`:"Preparador + importarProjetos","pj"],
+    ["Cadernos parlamentares lidos",/^OK/.test(S.cadernos||""),S.cadernos||"aguardando","hs"]];
+  const ok=itens.filter(x=>x[1]).length, pct=Math.round(ok/itens.length*100);
+  $("iniPct").textContent=st.status?pct+"%":"–"; const C=2*Math.PI*50; $("iniArc").style.strokeDasharray=`${C*pct/100} ${C}`;
+  $("iniChk").innerHTML=itens.map(([t,b,sub,v])=>`<li class="${b?"ok":""}"><button data-ir="${v}"><i aria-hidden="true">${b?"✓":""}</i><span><b>${esc(t)}</b><small>${esc(sub)}</small></span></button></li>`).join("");
+  const PX={cli:"cadastrar os clientes",mapa:"terminar a varredura das cidades dos clientes (o motor faz sozinho)",rk:"atualizar a base de emendas",vt:"terminar a cópia dos votos do TSE (o motor faz sozinho)",pj:"carregar o banco de projetos (Preparador + importarProjetos)",hs:"ler os Cadernos Parlamentares"};
+  const prox=itens.find(x=>!x[1]); $("iniProx").textContent=!st.status?"Conectando ao motor de dados…":prox?`Próximo passo: ${PX[prox[3]]}.`:"Tudo em ordem. Bom trabalho de captação.";
+  $("iniNums").innerHTML=[[nCli,"clientes"],[(S.documentosCidade||0).toLocaleString("pt-BR"),"documentos lidos nas cidades"],[(S.relacionamentos||0).toLocaleString("pt-BR"),"registros de gabinete"],[(S.votosLinhas||0).toLocaleString("pt-BR"),"candidatos com votos por cidade"]]
+    .map(([n,t])=>`<div><b>${n}</b><span>${t}</span></div>`).join("");
+  const cli=getCli().find(x=>x.id===store.get("otm-rgcli")), up=store.get("otm-ultparl"), uv=store.get("otm-ultvt");
+  const cont=[cli?`<button class="ct" data-ir="rg"><b>Régua · ${esc(cli.nome)}</b><span>${esc(cli.cidade)} · ${esc(cli.tema||"")}</span></button>`:"",
+    up?`<button class="ct" data-rx="${esc(up)}" data-rxfoto=""><b>Emendas de ${esc(tc(up))}</b><span>Raio-X do parlamentar</span></button>`:"",
+    uv?`<button class="ct" data-ir="vt"><b>Votos de ${esc(tc(uv))}</b><span>Mapa de votos por cidade</span></button>`:""].filter(Boolean);
+  $("iniCont").innerHTML=cont.length?cont.join(""):`<p class="sub">Nada recente ainda. Comece por <b>Quem procurar</b>.</p>`;
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-ir]");if(b){if(b.dataset.ir==="cli"&&b.closest(".iniAt")){irPara("cli");formCli();return}irPara(b.dataset.ir)}});
+
 // ===== MENU LATERAL: cada item mostra só a sua área =====
-const VIEWS={rg:["capt","Quem procurar","Parlamentares em ordem de potencial para a cidade e a área do cliente."],
+const VIEWS={ini:["capt","Início",""],rg:["capt","Quem procurar","Parlamentares em ordem de potencial para a cidade e a área do cliente."],
   mapa:["capt","Onde o recurso chegou","Para onde foram as emendas no estado, a distância até o cliente e as emendas de comissão e bancada que chegaram à cidade."],
   hs:["capt","Histórico com gabinetes","O que a Otimistas já fez com cada gabinete, a partir dos Cadernos Parlamentares."],
   pj:["capt","Projetos já aprovados","Projetos que já viraram emenda no TransfereGov, para usar de modelo."],
@@ -2027,6 +2135,7 @@ const VIEWS={rg:["capt","Quem procurar","Parlamentares em ordem de potencial par
 function marcaViews(){
   const q=(sel,v)=>{const el=typeof sel==="string"?document.querySelector(sel):sel;if(el)el.dataset.vw=v};
   q("#pCapt .hero","rg mapa"); q("#rgKpi","rg mapa"); q("#mapCardRg","mapa"); q("#pCapt .rgGrid","rg"); q("#rgCidCard","mapa");
+  q("#iniCard","ini"); q(".ttl","rg mapa hs pj exp rk bc vt cx ap pt base cli con"); q("#vHint","rg mapa hs pj exp rk bc vt cx ap pt base cli con"); q(".rule","rg mapa hs pj exp rk bc vt cx ap pt base cli con");
   q("#bcCard","bc"); q("#hsCard","hs"); q("#pjCard","pj"); q("#expCard","exp"); q("#cliCard","cli");
   const con=$("apiUrl")&&$("apiUrl").closest("details"); if(con){con.id="conCard";q(con,"con")}
   q("#rkCard","rk"); q("#pDados > .row","ap pt"); q("#ufs","ap pt"); q("#msg","ap pt"); q("#pDados > .meter","ap pt");
@@ -2037,7 +2146,7 @@ function marcaViews(){
   const lg=document.querySelector(".top .logo"); if(lg) document.querySelector(".sbLogo").appendChild(lg.cloneNode(true));
 }
 let VIEW="rg";
-function setView(v,semRolar){
+function irPara(v,semRolar){
   if(v==="ren") v="bc"; if(!VIEWS[v]) v="rg"; VIEW=v; try{localStorage.setItem("otm-view2",v)}catch(e){}
   if(st.pane!==VIEWS[v][0]) _setPane2(VIEWS[v][0]);
   document.querySelectorAll("[data-vw]").forEach(el=>el.classList.toggle("vOff",!el.dataset.vw.split(" ").includes(v)));
@@ -2045,7 +2154,7 @@ function setView(v,semRolar){
   document.querySelectorAll("#sb [data-view]").forEach(b=>b.setAttribute("aria-current",b.dataset.view===v?"page":"false"));
   $("tbT").textContent=VIEWS[v][1]; const tt=document.querySelector(".ttl"); if(tt) tt.textContent=VIEWS[v][1]; if($("vHint")) $("vHint").textContent=VIEWS[v][2]||"";
   if(VIEWS[v][0]==="dados"&&!st.apOk&&v!=="rk"&&v!=="vt"){st.apOk=true;load()}       // apuração só carrega quando for usada
-  if(v==="vt") abreVt(); if(v==="mapa"&&st.rg.mapaPend){st.rg.mapaPend=false;desenhaMapaRg()} if(v==="bc"&&st.bc&&!st.bc.uf) carregaBancada(st.rg.uf||"sp");
+  if(v==="ini") renderInicio(); if(v==="vt") abreVt(); if(v==="mapa"&&st.rg.mapaPend){st.rg.mapaPend=false;desenhaMapaRg()} if(v==="bc"&&st.bc&&!st.bc.uf) carregaBancada(st.rg.uf||"sp");
   if(v==="hs"&&$("hsCard").hidden){$("vEmpty").hidden=false;$("vEmpty").textContent="Ainda não há registros dos Cadernos Parlamentares para esta instituição. Escolha um cliente na Régua de potencial."}else $("vEmpty").hidden=true;
   fechaSb(); if(!semRolar) window.scrollTo({top:0});
 }
@@ -2054,7 +2163,7 @@ function fechaSb(){$("sb").classList.remove("on");$("sbVeil").hidden=true;$("sbB
 $("sbBtn").addEventListener("click",()=>$("sb").classList.contains("on")?fechaSb():abreSb());
 $("sbVeil").addEventListener("click",fechaSb);
 document.addEventListener("keydown",e=>{if(e.key==="Escape")fechaSb()});
-$("sb").addEventListener("click",e=>{const b=e.target.closest("[data-view]");if(b)setView(b.dataset.view);if(e.target.closest("#thm2")){trocaTema();$("thm2").textContent=$("thm").textContent}});
+$("sb").addEventListener("click",e=>{const b=e.target.closest("[data-view]");if(b)irPara(b.dataset.view);if(e.target.closest("#thm2")){trocaTema();$("thm2").textContent=$("thm").textContent}});
 
 // ===== VOTOS POR CIDADE: mapa com votos ao passar o mouse (ou tocar) + lista completa =====
 st.vt={uf:null,cargo:"6",lista:null,cand:null,arr:null,fonte:""};
@@ -2085,7 +2194,7 @@ $("vtNome").addEventListener("blur",()=>setTimeout(()=>{$("vtPop").hidden=true},
 $("vtNome").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();const o=$("vtPop").querySelector("[data-vtsq]");if(o){const c=st.vt.lista.find(x=>x.sq===o.dataset.vtsq);if(c)vtEscolhe(c)}}});
 $("vtPop").addEventListener("mousedown",e=>{const o=e.target.closest("[data-vtsq]");if(!o)return;e.preventDefault();const c=st.vt.lista.find(x=>x.sq===o.dataset.vtsq);if(c)vtEscolhe(c)});
 $("vtUf").addEventListener("change",()=>{$("vtNome").value="";vtCarregaLista()}); $("vtCargo").addEventListener("change",()=>{$("vtNome").value="";vtCarregaLista()});
-async function vtEscolhe(c){
+async function vtEscolhe(c){ store.set("otm-ultvt",c.nome);
   $("vtPop").hidden=true; $("vtNome").value=c.nome; st.vt.cand=c; const uf=st.vt.uf, cargo=st.vt.cargo;
   $("vtInfo").innerHTML=`<div class="vtHead"><div><h2 style="margin:0">${esc(c.nome)}</h2><p class="sub" style="margin:2px 0 0">${esc(c.partido||"")} · ${fmt(c.total)} votos em ${esc(UFS[uf])}${c.sit?" · "+esc(c.sit):""}</p></div>
     <button class="btn ghost sm" data-rx="${esc(c.nome)}" data-rxfoto="">Emendas que indicou</button></div>`;
@@ -2131,7 +2240,7 @@ $("vtLista").addEventListener("click",e=>{const r=e.target.closest("[data-vtm]")
   setTimeout(()=>{const b2=pth.getBoundingClientRect();st.vt.fixo=true;vtTip(i,{clientX:b2.left+b2.width/2,clientY:b2.top+b2.height/2},true)},350)});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-vtcx]"); if(!b) return; loadMuns().then(()=>{const m=acharMun(st.vt.uf,b.dataset.vtcx); if(m) abreCidade(st.vt.uf,m.cd,st.vt.cargo)})});
 // da ficha do candidato: abrir no mapa de votos
-function abreVtCand(c){ setView("vt"); $("vtUf").value=c.uf; $("vtCargo").value=c.cargo==="5"?"5":"6"; $("vtNome").value=c.nome; vtCarregaLista(); }
+function abreVtCand(c){ irPara("vt"); $("vtUf").value=c.uf; $("vtCargo").value=c.cargo==="5"?"5":"6"; $("vtNome").value=c.nome; vtCarregaLista(); }
 
 // ---- Mapa da captação: valor por cidade no estado, instituição no centro dos círculos de distância
 function centroPath(dstr){let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;const n=dstr.match(/-?[\d.]+/g)||[];
@@ -2240,7 +2349,7 @@ document.addEventListener("click",e=>{
   if(t.closest("[data-rkall]")){st.rk.tudo=true;renderRank();return}
   const pl=t.closest("[data-pfloc]"); if(pl){const on=pl.classList.contains("on");desenhaLocais(on?null:pl.dataset.pfloc);return}
   const rm=t.closest("[data-rgmun]"); if(rm){$("rgMun").value=rm.dataset.rgmun;carregaRegua();$("rgCard").scrollIntoView({behavior:reduz()?"auto":"smooth"});return}
-  const cm=t.closest("[data-caminho]"); if(cm){fecha();if(st.pane!=="capt")setPane("capt");setView("exp",true);const x=$("expCard");x.open=true;$("expIn").value=cm.dataset.caminho;carregaDep(cm.dataset.caminho);x.scrollIntoView({behavior:reduz()?"auto":"smooth"});return}
+  const cm=t.closest("[data-caminho]"); if(cm){fecha();if(st.pane!=="capt")setPane("capt");irPara("exp",true);const x=$("expCard");x.open=true;$("expIn").value=cm.dataset.caminho;carregaDep(cm.dataset.caminho);x.scrollIntoView({behavior:reduz()?"auto":"smooth"});return}
 },true);
 $("rgUf").addEventListener("change",()=>{$("rgMun").value="";st.rg.cli=null;renderCliChips();carregaMunIbge($("rgUf").value);$("rgMun").focus();abreCbx()});
 // combobox de cidades: lista do IBGE filtrada enquanto digita
@@ -2267,7 +2376,7 @@ $("rgMunPop").addEventListener("mousedown",e=>{const o=e.target.closest("[data-c
 $("rkUf").addEventListener("change",carregaRank); $("rkOrig").addEventListener("change",()=>{st.rk.tudo=false;renderRank()}); $("rkArea").addEventListener("change",carregaRank);
 let rkFeito=false;
 const _setPane=setPane; setPane=function(p){_setPane(p); if(p==="dados"&&!rkFeito){rkFeito=true;carregaRank()}};
-var _setPane2=setPane; setPane=function(p){_setPane2(p); if(VIEWS[VIEW]&&VIEWS[VIEW][0]!==p) setView(p==="dados"?"ap":"rg",true)};
+var _setPane2=setPane; setPane=function(p){_setPane2(p); if(VIEWS[VIEW]&&VIEWS[VIEW][0]!==p) irPara(p==="dados"?"ap":"rg",true)};
 
 // ======== OFÍCIO + E-MAIL (Fase B) ========
 const extenso=v=>{const n=Math.round(Number(String(v||"").replace(/\./g,"").replace(",",".")));if(!n)return"";
@@ -2497,7 +2606,7 @@ $("pjGo").onclick=buscaPj; $("pjQ").addEventListener("keydown",e=>{if(e.key==="E
 $("pjUf").innerHTML+=Object.entries(UFS).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");
 
 buildUFs(); buildMap(); renderCli(); testaApi(); initRegua(); carregaRel().then(()=>{renderHist();if(st.rg.dados)renderRegua()}); if(store.get("otm-pane")==="dados") setPane("dados");
-puxaClientes(); marcaViews(); {let v0="rg";try{v0=localStorage.getItem("otm-view2")||"rg"}catch(e){} setView(v0,true);} $("thm2").textContent=$("thm").textContent;
+puxaClientes(); marcaViews(); irPara("ini",true); $("thm2").textContent=$("thm").textContent;
 const v0=store.get("otm-view"),u0=store.get("otm-uf");
 if(v0==="uf"&&UFS[u0]){st.view="uf";st.uf=u0}
 paint();
