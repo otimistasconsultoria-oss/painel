@@ -138,6 +138,29 @@
 .rxFavIn{margin-top:6px;border-left:3px solid var(--accent);padding:2px 0 2px 10px}
 .rxFavIn div{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;padding:2px 0}
 .rxFavIn b{white-space:nowrap}
+/* menu: 3 grupos */
+#sb .sbIni{font-weight:800!important;font-size:16px!important;margin-bottom:6px}
+#sb .sbGrp{margin:10px 0 4px;padding:8px 0 6px;border-top:1px solid rgba(255,255,255,.14)}
+#sb .sbG{font-size:17px!important;font-weight:800!important;color:#fff!important;letter-spacing:-.01em;margin:4px 12px 6px!important}
+#sb .sbGrp [data-view],#sb .sbGrp .sbTog{font-size:14px!important;font-weight:500!important;padding:7px 12px 7px 22px!important;color:rgba(255,255,255,.82)!important;text-align:left;border:0;background:none;border-radius:12px;cursor:pointer;font-family:inherit;width:100%}
+#sb .sbGrp .sbTog:hover,#sb .sbGrp [data-view]:hover{background:rgba(255,255,255,.08)!important}
+#sb .sbGrp [data-view][aria-current="page"]{font-weight:700!important;color:#fff!important;background:#3A6DFF!important}
+.dosF label[hidden]{display:none!important}
+/* dossiê e partidos */
+.dosTabs{display:inline-flex}
+.rostos{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.rosto{display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 8px;cursor:pointer;font:inherit;color:var(--ink)}
+.rosto:hover{border-color:var(--brand2);transform:translateY(-1px)}
+.rosto .ph{width:64px;height:64px;flex-basis:64px;font-size:18px;margin-bottom:4px}
+.rosto b{font-size:13.5px;line-height:1.2}.rosto small{font-size:11.5px;color:var(--muted)}.rosto small.v{color:var(--brand);font-weight:700}
+.mapW{position:relative}.mapIn{position:relative}
+.mapIn svg{width:100%;height:auto;max-height:420px;display:block}
+.mapIn path{stroke:var(--panel);stroke-width:.5;cursor:pointer}
+.mapIn path:hover,.mapIn path.on{stroke:var(--ink);stroke-width:1.5}
+.mapIn path.cli{stroke:#E3262E;stroke-width:2}
+.mapIn .vtTip{max-width:220px}
+#dosBoxCard .pf h3{font-size:26px}
+@media (prefers-reduced-motion:reduce){.rosto:hover{transform:none}}
 /* ===== identidade 2: app azul ===== */
 :root:not([data-theme="dark"]){--bg:#F3F6FC;--panel:#FFFFFF;--ink:#0E1B3D;--muted:#5B6785;--line:#E3E8F3;--track:#EDF1FA;--brand:#1E3FAE;--brand2:#2E6BFF;--watchbg:#EAF0FF}
 :root[data-theme="dark"]{--bg:#0A1024;--panel:#121A35;--line:#232E52;--track:#1A2445}
@@ -573,26 +596,19 @@ footer{margin-top:24px;font-size:12px;color:var(--muted);max-width:76ch}
 <nav class="tabbar" aria-label="Topo"><button class="sbBtn" id="sbBtn" aria-controls="sb" aria-expanded="false"><span class="hb3" aria-hidden="true"><i></i><i></i><i></i></span>Menu</button><b class="tbT" id="tbT">Régua de potencial</b><div class="ldg" id="prog" hidden role="status" aria-live="polite"><div class="progTxt"><span id="progTxt"></span><b id="progPct"></b></div><div class="progBar"><i id="progI"></i></div></div></nav>
 <aside class="sb" id="sb" aria-label="Menu">
   <div class="sbLogo"></div>
-  <button data-view="ini"><b>Início</b><small>Resumo e atalhos</small></button>
-  <p class="sbG">Captação para o cliente</p>
-  <button data-view="rg"><b>Quem procurar</b><small>Régua de quem mais pode ajudar</small></button>
-  <button data-view="mapa"><b>Onde o recurso chegou</b><small>Mapa da região, comissões e bancada</small></button>
-  <button data-view="hs"><b>Histórico com gabinetes</b><small>Visitas, retornos e próximos passos</small></button>
-  <button data-view="pj"><b>Projetos já aprovados</b><small>Ideias que já viraram emenda</small></button>
-  <p class="sbG">Parlamentares</p>
-  <button data-view="exp"><b>Buscar parlamentar</b><small>Tudo o que ele já indicou</small></button>
-  <button data-view="rk"><b>Quem mais manda emenda</b><small>Ranking por área e estado</small></button>
-  <button data-view="bc"><b>Quem fica e quem sai</b><small>Bancada 2027: reeleitos e novos</small></button>
-  <p class="sbG">Eleições 2026</p>
-  <button data-view="vt"><b>Votos por cidade</b><small>Mapa de votação de cada candidato</small></button>
-  <button data-view="cx"><b>Raio-X de uma cidade</b><small>Quem foi mais votado ali</small></button>
-  <button data-view="ap"><b>Resultado da eleição</b><small>Eleitos e votação por estado</small></button>
-  <button data-view="pt"><b>Partidos e vagas</b><small>Quociente eleitoral</small></button>
-  <button data-view="base"><b>Candidatos que acompanho</b><small>Sua lista pessoal</small></button>
-  <p class="sbG">Ajustes</p>
-  <button data-view="cli"><b>Cadastro de clientes</b><small>Dados usados no ofício</small></button>
-  <button data-view="con"><b>Conexão com a planilha</b><small>Link do motor de dados</small></button>
-  <div class="sbFoot"><button class="thm" id="thm2" type="button">Modo escuro</button></div>
+  <button data-view="ini" class="sbIni">Início</button>
+  <div class="sbGrp"><p class="sbG">Captação</p>
+    <button data-view="rg">Quem procurar</button>
+    <button data-view="dos">Dossiê do parlamentar</button>
+    <button data-view="pj">Projetos aprovados</button></div>
+  <div class="sbGrp"><p class="sbG">Eleições 2026</p>
+    <button data-view="ap">Resultado da eleição</button>
+    <button data-view="vt">Votos por cidade</button>
+    <button data-view="pt">Partidos e bancadas</button></div>
+  <div class="sbGrp"><p class="sbG">Ajustes</p>
+    <button data-view="cli">Clientes</button>
+    <button data-view="con">Motor de dados</button>
+    <button class="sbTog" id="thm2" type="button">Modo escuro</button></div>
 </aside>
 <div class="sbVeil" id="sbVeil" hidden></div>
 <div class="wrap">
@@ -616,9 +632,9 @@ footer{margin-top:24px;font-size:12px;color:var(--muted);max-width:76ch}
       <div class="iniAt">
         <button class="at a1" data-ir="rg"><b>Quem procurar</b><span>Régua de quem mais pode mandar emenda para cada cliente</span></button>
         <button class="at" data-ir="vt"><b>Votos por cidade</b><span>Onde cada candidato foi votado</span></button>
-        <button class="at" data-ir="exp"><b>Buscar parlamentar</b><span>Tudo o que ele já indicou</span></button>
+        <button class="at" data-ir="dos"><b>Dossiê do parlamentar</b><span>Tudo o que ele já indicou, com mapa</span></button>
         <button class="at" data-ir="pj"><b>Projetos já aprovados</b><span>Compare sua ideia ou um PDF</span></button>
-        <button class="at" data-ir="bc"><b>Quem fica e quem sai</b><span>Bancada 2027</span></button>
+        <button class="at" data-ir="pt"><b>Partidos e bancadas</b><span>Eleitos por partido e quem fica e quem sai</span></button>
         <button class="at" data-ir="cli"><b>Novo cliente</b><span>Cole um texto ou só o CNPJ</span></button>
       </div>
     </section>
@@ -691,6 +707,17 @@ footer{margin-top:24px;font-size:12px;color:var(--muted);max-width:76ch}
       <div id="pjRes"></div>
     </section>
 
+    <section class="card" id="dosCard" style="margin-bottom:14px">
+      <div class="seg dosTabs" role="tablist"><button data-dosm="nome" aria-pressed="true">Por nome</button><button data-dosm="uf" aria-pressed="false">Por estado</button><button data-dosm="cid" aria-pressed="false">Por cidade</button></div>
+      <div class="filt3 dosF" style="margin-top:10px">
+        <label class="dosUf" hidden>Estado<select id="dosUf"></select></label>
+        <label class="cbx dosNome">Nome do deputado ou senador<input id="dosNome" placeholder="Digite o nome" autocomplete="off"><div class="cbxPop" id="dosPop" role="listbox" hidden></div></label>
+        <label class="cbx dosCid" hidden>Cidade<input id="dosCid" placeholder="Digite a cidade" autocomplete="off"><div class="cbxPop" id="dosCidPop" role="listbox" hidden></div></label>
+      </div>
+      <div id="dosLista"></div>
+    </section>
+    <section class="card" id="dosBoxCard" style="margin-bottom:14px" hidden><div id="dosBox"></div></section>
+
     <section class="card" id="rgCidCard" hidden>
       <h2 id="rgCidT">Para onde vai o recurso desta área no estado</h2>
       <p class="lead">Cidades que mais receberam. Toque numa cidade para refazer a régua com ela.</p>
@@ -712,6 +739,7 @@ footer{margin-top:24px;font-size:12px;color:var(--muted);max-width:76ch}
       <div class="btns" style="margin-top:6px"><button class="btn" id="cliNovo">+ Adicionar cliente</button><button class="btn ghost" id="cliBkp">Copiar backup</button><button class="btn ghost" id="cliRest">Restaurar backup</button></div>
       <div id="cliForm" hidden style="margin-top:12px"></div>
     </details>
+    <section class="card" id="motorCard" style="margin-bottom:14px"><h2>Situação das cargas</h2><div id="motorBody"><p class="sub">Conectando…</p></div></section>
     <details class="card fold"><summary><h2>Conexão com a planilha</h2></summary>
       <p class="lead">Cole o link do App da Web da planilha “OTIMISTAS | Motor de Dados”. Fica salvo neste aparelho.</p>
       <div class="cityTop"><input type="search" id="apiUrl" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off"><button class="btn sm" id="apiSalvar">Salvar</button></div>
@@ -842,6 +870,8 @@ footer{margin-top:24px;font-size:12px;color:var(--muted);max-width:76ch}
       </section>
     </aside>
   </div>
+
+  <section class="card" id="ptLista" style="margin-bottom:14px"><h2 id="ptT">Eleitos do partido</h2><p class="lead">Toque num partido acima (nas barras ou na tabela do quociente) para ver os eleitos dele aqui.</p><div id="ptBody"></div></section>
 
   <footer>
     Fonte: divulgação oficial do TSE (resultados.tse.jus.br), arquivos de resultado unificado, de configuração de municípios e fotos. “Eleito” só aparece quando o próprio TSE marca o candidato. “Nas vagas (proj.)” é projeção: as vagas que o TSE calcula para cada partido/federação com a apuração atual, preenchidas pelos mais votados dele; muda até a totalização final. QE pela regra do Código Eleitoral (votos válidos ÷ vagas). Força de voto numa cidade é sinal de interesse político, não garantia de emenda. Causas na ficha: para deputados federais com mandato, vêm das comissões e frentes registradas nos dados abertos da Câmara; o sinal pelo nome de urna é só inferência. Mapa dos estados: svg-maps/brazil, de Victor Cazanave (CC BY 4.0). Cores de partido servem só para leitura.
@@ -1376,7 +1406,8 @@ function abreCand(k){
 function fecha(){st.dlgK=null;const d=$("dlg");if(d.close)d.close();else d.removeAttribute("open")}
 
 // ---- navegação e eventos ----
-function setFiltro(p){st.fp=st.fp===p?null:p;st.limite=50;render();
+function setFiltro(p){ if(typeof VIEW!=="undefined"&&VIEW==="pt"){ptAbre(p);return}
+  st.fp=st.fp===p?null:p;st.limite=50;render();
   if(st.fp) $("titulo").scrollIntoView({behavior:reduz()?"auto":"smooth",block:"start"})}
 function buildUFs(){
   const box=$("ufs");
@@ -1909,9 +1940,20 @@ async function carregaRegua(){
       if(ks.length>12) ks.map(k=>[k,(JSON.parse(localStorage.getItem(k))||{}).t||0]).sort((a,b)=>a[1]-b[1]).slice(0,ks.length-12).forEach(([k])=>localStorage.removeItem(k))}catch(e){}}
   catch(e){if(velha&&velha.d){$("rgL").textContent="Sem conexão com a planilha agora: mostrando a última consulta guardada.";return}
     $("rgL").textContent=e.message==="sem-link"?"Conecte a planilha (card no fim da página).":"Não consegui ler a planilha. Se você atualizou o script, publique a nova versão (Gerenciar implantações → editar → Nova versão).";$("rgList").innerHTML="";return}
-  st.rg.dados=d; st.rg.mapaParl=false; renderRegua(); if(VIEW==="mapa") desenhaMapaRg(); else st.rg.mapaPend=true;
+  try{await enriqueceMandato(d,uf)}catch(e){}
+  st.rg.dados=d; st.rg.mapaParl=false; renderRegua(); if(VIEW==="rg") desenhaMapaRg(); else st.rg.mapaPend=true;
   clearTimeout(st.rg.tBc); st.rg.tBc=setTimeout(()=>{if(st.bc.uf!==uf) carregaBancada(uf)},2500);
   agendaVarr(uf,mun,area,0);
+}
+// reserva: se a planilha não trouxe quem está em mandato (Câmara fora do ar para o Google), o painel busca direto
+async function enriqueceMandato(d,uf){
+  if(!d||!Array.isArray(d.lista)||d.lista.some(o=>o.mand&&o.mand.cargo==="D")) return;
+  const L=await camUF(uf); if(!L||L.status!=="ok") return;
+  const usados=new Set();
+  d.lista.forEach(o=>{const a=L.lista.find(x=>mesmoNome(x.nome,o.autor)); if(a){usados.add(a.id);o.mand={cargo:"D",partido:a.siglaPartido,uf:a.siglaUf,foto:a.urlFoto,id:a.id,nome:a.nome};o.grupo=o.uf>0?1:2}});
+  L.lista.filter(a=>!usados.has(a.id)).forEach(a=>d.lista.push({autor:a.nome.toUpperCase(),uf:0,ufArea:0,cid:0,cidArea:0,viz:0,vizArea:0,vizCid:[],anos:[],areas:[],sub:[],tipos:{},ult:0,score:0,porque:["Sem emendas registradas no estado desde 2023"],grupo:2,
+    mand:{cargo:"D",partido:a.siglaPartido,uf:a.siglaUf,foto:a.urlFoto,id:a.id,nome:a.nome}}));
+  d.lista.sort((a,b)=>a.grupo-b.grupo||b.score-a.score||b.ufArea-a.ufArea);
 }
 const nomeDe=o=>o.mand?o.mand.nome:tc(o.autor);
 // situação na eleição de 2026 (cruza Câmara de hoje + TSE)
@@ -1993,18 +2035,19 @@ async function abrePerfil(autor,src){
     ${o.vizCid.length?`<h4>Cidades vizinhas atendidas</h4>${barras2(o.vizCid.map(([k,v])=>[tc(k),v]),o.vizCid[0][1])}`:""}
     ${typeof blocoRel==="function"?blocoRel(nm):""}
     <h4>Projetos que ele apadrinhou (TransfereGov)</h4><div id="pfPj"><p class="sub">Carregando…</p></div>
+    <h4>Mapa de onde mandou em ${esc(ufN)}</h4><div class="mapW" id="pfMapa"><p class="sub">Carregando o mapa…</p></div>
     <h4>Para onde mandou (toque para ver o detalhe)</h4><div id="pfCid"><p class="sub">Carregando…</p></div>
     <div class="btns" style="margin-top:14px"><button class="btn" data-texto="${esc(o.autor)}" data-cli="${esc(st.rg.cli||"")}" ${o.mand&&o.mand.cargo==="S"?'data-sen="1"':""}>Texto de apresentação</button>
       <button class="btn" data-oficio="${esc(o.autor)}" data-src="${src}">Ofício + e-mail</button>
       <button class="btn ghost" data-caminho="${esc(o.autor)}">Caminho completo</button>
-      <button class="btn ghost" data-rx="${esc(o.autor)}" data-rxfoto="${esc(o.mand&&o.mand.foto||"")}" data-rxnm="${esc(nm)}">Raio-X de todas as emendas</button></div>
+      <button class="btn ghost" data-dos="${esc(o.autor)}" data-dosfoto="${esc(o.mand&&o.mand.foto||"")}" data-dosnm="${esc(nm)}" data-dosuf="${esc(o.mand&&o.mand.uf||"")}" data-doscargo="${esc(o.mand&&o.mand.cargo||"")}">Abrir dossiê completo</button></div>
     <div class="lnk">${o.mand&&o.mand.cargo==="D"?`<a href="https://www.camara.leg.br/deputados/${o.mand.id}" target="_blank" rel="noopener">Perfil e gabinete</a>`:""}${o.mand&&o.mand.cargo==="S"?`<a href="https://www25.senado.leg.br/web/senadores/senador/-/perfil/${o.mand.id}" target="_blank" rel="noopener">Perfil e gabinete</a>`:""}
       <a href="https://news.google.com/search?q=${encodeURIComponent('"'+nm+'"')}&hl=pt-BR&gl=BR&ceid=BR:pt-419" target="_blank" rel="noopener">Notícias</a>
       <a href="https://portaldatransparencia.gov.br/emendas" target="_blank" rel="noopener">Transparência</a></div></div>`;
   if(src==="rg"&&matchMedia("(min-width:980px)").matches) $("rgPerfil").innerHTML=html;
   else{st.dlgK=null;$("dlgIn").innerHTML=`<button class="x" id="dlgX" aria-label="Fechar">✕</button>`+html;const dl=$("dlg");if(!dl.open){if(dl.showModal)dl.showModal();else dl.setAttribute("open","")}}
   st.pf={autor,mun,itens:null}; if(typeof pjDoParl==="function") pjDoParl(nm,"pfPj");
-  try{const dd=await api({acao:"deputado",autor});if(!st.pf||st.pf.autor!==autor)return;st.pf.itens=dd.itens;desenhaLocais();if(st.pf.drill)drillArea(st.pf.drill);if(src==="rg"){st.rg.mapaParl=true;desenhaMapaRg()}}
+  try{const dd=await api({acao:"deputado",autor});if(!st.pf||st.pf.autor!==autor)return;st.pf.itens=dd.itens;desenhaLocais();{const u=(d.uf||"").toUpperCase(); if(u&&UFS[u.toLowerCase()]&&$("pfMapa")) mapaEmendas("pfMapa",u.toLowerCase(),dd.itens.filter(x=>x.uf===u));}if(st.pf.drill)drillArea(st.pf.drill);if(src==="rg"){st.rg.mapaParl=true;desenhaMapaRg()}}
   catch(e){const b=$("pfCid");if(b)b.innerHTML=`<p class="empty">Não consegui carregar.</p>`}
 }
 function desenhaLocais(sel){
@@ -2064,18 +2107,20 @@ function zoomFoto(src,nm){
 
 // ===== RAIO-X DE EMENDAS: abre de qualquer nome e vai descendo (área → estado → cidade → emenda → quem recebeu)
 st.rx=null;
-async function abreRaioX(nome,foto,nm){ store.set("otm-ultparl",nome);
-  st.rx={nome,foto,nm:nm||tc(nome),itens:null,path:[]};
-  const dl=$("dlg"); st.dlgK=null;
+async function abreRaioX(nome,foto,nm,meta){ store.set("otm-ultparl",nome);
+  const naTela=meta&&meta.tela;
+  st.rx={nome,foto,nm:nm||tc(nome),itens:null,path:[],box:naTela?"dosBox":"rxBox",meta:meta||{}};
+  if(naTela){ if(VIEW!=="dos") irPara("dos",true); $("dosBoxCard").hidden=false; $("dosBox").innerHTML=`<p class="sub">Montando o dossiê de ${esc(st.rx.nm)}…</p>`; $("dosBoxCard").scrollIntoView({behavior:reduz()?"auto":"smooth",block:"start"}); }
+  else{ const dl=$("dlg"); st.dlgK=null;
   $("dlgIn").innerHTML=`<button class="x" id="dlgX" aria-label="Fechar">✕</button><div id="rxBox"><p class="sub">Buscando as emendas de ${esc(st.rx.nm)}…</p></div>`;
-  if(!dl.open){if(dl.showModal)dl.showModal();else dl.setAttribute("open","")}
+  if(!dl.open){if(dl.showModal)dl.showModal();else dl.setAttribute("open","")} }
   try{const d=await api({acao:"deputado",autor:nome}); if(!st.rx||st.rx.nome!==nome) return; st.rx.itens=d.itens||[]; st.rx.autor=d.autor||nome; renderRx()}
-  catch(e){$("rxBox").innerHTML=`<p class="empty">${e.message==="sem-link"?"Conecte a planilha (card no fim da aba Captação).":"Não consegui ler a planilha agora. Tente de novo em instantes."}</p>`}
+  catch(e){$(st.rx.box).innerHTML=`<p class="empty">${e.message==="sem-link"?"Conecte a planilha (card no fim da aba Captação).":"Não consegui ler a planilha agora. Tente de novo em instantes."}</p>`}
 }
 const RXF={area:x=>x.funcao||"Outros",uf:x=>x.uf||(/nacional/i.test(x.localidade)?"Nacional":"Múltiplo"),loc:x=>locLabel(x),ano:x=>String(x.ano),sub:x=>x.subfuncao||"Outros"};
 const RXN={area:"Área",uf:"Estado",loc:"Cidade",ano:"Ano",sub:"Tipo de projeto"};
 function renderRx(){
-  const R=st.rx, box=$("rxBox"); if(!R||!box) return;
+  const R=st.rx, box=$(R&&R.box||"rxBox"); if(!R||!box) return;
   let its=R.itens; R.path.forEach(f=>{its=its.filter(x=>RXF[f.t](x)===f.v)});
   const fix=new Set(R.path.map(f=>f.t)), tot=its.reduce((a,x)=>a+(x.empenhado||0),0), pago=its.reduce((a,x)=>a+(x.pago||0),0);
   const anos=[...new Set(its.map(x=>x.ano))].sort();
@@ -2091,8 +2136,42 @@ function renderRx(){
     ${!R.itens.length?`<p class="empty">Nenhuma emenda encontrada para esse nome desde 2023. Se for novo na Câmara, é esperado; se não, o nome no Portal pode ser diferente.</p>`:`
     <div class="k3"><div><b>${fmtR(tot)}</b><span>empenhado</span></div><div><b>${fmtR(pago)}</b><span>pago (${tot?Math.round(pago/tot*100):0}%)</span></div><div><b>${its.length}</b><span>emendas · ${esc(anos.join(", "))}</span></div></div>
     <p class="sub" style="margin:6px 0 0">Toque em qualquer barra para descer um nível. O caminho acima volta para onde você estava.</p>
+    <h4>Mapa de onde mandou${R.path.length?" (com o filtro acima)":""}</h4><div class="mapW" id="rxMapa"><p class="sub">Carregando o mapa…</p></div>
     ${area.length>1?`<h4>Por área</h4>${donut(area.slice(0,6),"data-rxarea")}`:""}
-    ${bar("uf",8)}${bar("loc",10)}${bar("ano",6)}${bar("sub",6)}${lista}`}</div>`;
+    ${bar("uf",8)}${bar("loc",10)}${bar("ano",6)}${bar("sub",6)}${lista}
+    ${typeof blocoRel==="function"?`<h4>Relacionamento Otimistas</h4>${blocoRel(R.nm)}`:""}
+    <h4>Votação em 2026</h4><div id="rxVotos"><p class="sub">Buscando…</p></div>`}</div>`;
+  if(R.itens.length){ const ufm=(R.path.find(f=>f.t==="uf")||{}).v||ufPrincipal(its); if(ufm&&UFS[ufm.toLowerCase()]) mapaEmendas("rxMapa",ufm.toLowerCase(),its.filter(x=>(x.uf||"")===ufm)); else $("rxMapa").innerHTML=`<p class="sub">Sem cidades identificadas para o mapa.</p>`;
+    rxVotos(R); }
+}
+function rxTopo(){ if(st.rx&&st.rx.box==="dosBox") $("dosBoxCard").scrollIntoView({behavior:reduz()?"auto":"smooth",block:"start"}); else $("dlgIn").scrollTo({top:0,behavior:reduz()?"auto":"smooth"}) }
+function ufPrincipal(its){const g={};its.forEach(x=>{if(x.uf&&x.municipio)g[x.uf]=(g[x.uf]||0)+(x.empenhado||0)});return (Object.entries(g).sort((a,b)=>b[1]-a[1])[0]||[""])[0]}
+async function rxVotos(R){
+  const el=$("rxVotos"); if(!el) return; if(R.votos===undefined){ R.votos=null;
+    const uf=(R.meta.uf||ufPrincipal(R.itens)||"").toLowerCase(); const cargo=R.meta.cargo==="S"?"5":"6";
+    try{const r=await api({acao:"votos",uf,cargo,nome:R.nm}); R.votos=r&&r.cidades?{...r,uf,cargo}:false}catch(e){R.votos=false} if(st.rx!==R) return; }
+  const V=R.votos, e2=$("rxVotos"); if(!e2) return;
+  e2.innerHTML=!V?`<p class="sub">Sem votação de 2026 guardada para esse nome neste estado.</p>`:`<p class="sub" style="margin:0 0 6px">${fmt(V.total)} votos em ${esc(UFS[V.uf]||"")} · ${esc(V.situacao||"")}. Cidades onde foi mais votado:</p>
+    ${barras2(V.cidades.slice(0,6).map(([m,v])=>[tc(m),v]),V.cidades[0][1])}<button class="btn ghost sm" style="margin-top:8px" data-vtir="${esc(R.nm)}" data-vtuf="${esc(V.uf)}" data-vtcargo="${V.cargo}">Ver no mapa de votos</button>`;
+}
+// ---- mapa de emendas por cidade, com valor e "para quê" ao passar o mouse (ou tocar)
+async function mapaEmendas(boxId,uf,its){
+  const box=$(boxId); if(!box) return; let M; try{M=await malhaUF(uf)}catch(e){box.innerHTML=`<p class="sub">O mapa do IBGE não carregou agora.</p>`;return}
+  if(!$(boxId)) return;
+  const G={}; its.forEach(x=>{if(!x.municipio)return;const k=kk(x.municipio);const o=G[k]=G[k]||{v:0,n:0,f:{},via:0};o.v+=x.empenhado||0;o.n++;const a=(x.funcao||"Outros")+(x.subfuncao?": "+x.subfuncao:"");o.f[a]=(o.f[a]||0)+(x.empenhado||0);if(x.via)o.via++});
+  const mx=Math.max(1,...Object.values(G).map(o=>o.v)), cl=new Set(getCli().filter(x=>(x.uf||"").toLowerCase()===uf).map(x=>kk(x.cidade)));
+  box.innerHTML=`<div class="mapIn"><svg viewBox="0 0 ${M.W.toFixed(0)} ${M.H.toFixed(0)}" role="group" aria-label="Mapa das emendas">${M.feats.map((f,i)=>{const o=G[kk(f.nome)];
+    return `<path d="${f.d}" data-mi="${i}" class="${cl.has(kk(f.nome))?"cli":""}" style="fill:${o?"#2F7BFF":"var(--track)"};fill-opacity:${o?(0.18+0.82*Math.sqrt(o.v/mx)).toFixed(2):1}"></path>`}).join("")}</svg><div class="vtTip" hidden></div></div>
+    <div class="mapLeg"><span><i class="grad"></i> menos → mais recurso</span><span>${Object.keys(G).length} cidades em ${esc(UFS[uf])}</span><span style="color:var(--accent);font-weight:700">▢ cidade de cliente</span></div>`;
+  box.querySelectorAll("path.cli").forEach(p=>p.parentNode.appendChild(p));
+  const tip=box.querySelector(".vtTip"), wrap=box.querySelector(".mapIn");
+  const mostra=(i,ev)=>{const f=M.feats[i], o=G[kk(f.nome)], r=wrap.getBoundingClientRect();
+    tip.innerHTML=`<b>${esc(f.nome)}</b><br>${o?`${fmtR(o.v)} · ${o.n} emenda${o.n>1?"s":""}${o.via?" (via fundo municipal)":""}<br>${Object.entries(o.f).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([a,v])=>`${esc(a)}: ${fmtR(v)}`).join("<br>")}`:"nenhuma emenda para esta cidade"}`;
+    tip.hidden=false; tip.style.left=Math.min(r.width-210,Math.max(0,ev.clientX-r.left+12))+"px"; tip.style.top=Math.max(0,ev.clientY-r.top+12)+"px";
+    wrap.querySelectorAll("path.on").forEach(p=>p.classList.remove("on")); const pth=wrap.querySelector(`path[data-mi="${i}"]`); if(pth) pth.classList.add("on");};
+  wrap.addEventListener("mousemove",e=>{const p=e.target.closest("[data-mi]"); if(p) mostra(+p.dataset.mi,e); else tip.hidden=true});
+  wrap.addEventListener("mouseleave",()=>tip.hidden=true);
+  wrap.addEventListener("click",e=>{const p=e.target.closest("[data-mi]"); if(p) mostra(+p.dataset.mi,e)});
 }
 async function rxFav(cod){
   const b=$("rxf"+cod); if(!b) return; if(b.dataset.on){b.innerHTML="";delete b.dataset.on;return} b.dataset.on=1;
@@ -2103,6 +2182,73 @@ async function rxFav(cod){
     b.innerHTML=a.length?`<div class="rxFavIn">${a.map(([k,v])=>`<div><span>${esc(tc(k))}</span><b>${fmtR(v.e)}${v.p?` · ${fmtR(v.p)} pago`:""}</b></div>`).join("")}</div>`:`<p class="sub">Sem documentos de empenho no Portal para esta emenda.</p>`}
   catch(e){b.innerHTML=`<p class="sub">O Portal não respondeu agora.</p>`}
 }
+
+function ptAbre(p){
+  const cs=[]; entradas().forEach(e=>{if(e.status==="ok")e.data.cands.forEach(c=>{if((c.grupo===p||c.partido===p)&&c.votos>0)cs.push(c)})});
+  const el=cs.filter(c=>nasVagas(c)).sort((a,b)=>b.votos-a.votos), resto=cs.filter(c=>!nasVagas(c)).sort((a,b)=>b.votos-a.votos).slice(0,30);
+  $("ptT").textContent=`${p}: ${el.length} eleito${el.length===1?"":"s"} ou nas vagas`;
+  const porUf={}; el.forEach(c=>{(porUf[c.uf]=porUf[c.uf]||[]).push(c)});
+  const r=c=>`<button class="rosto" data-dos="${esc(c.nome)}" data-dosfoto="${esc(fotoUrl(c.uf,c.sq,c.ele))}" data-dosnm="${esc(tc(c.nome))}" data-dosuf="${esc(String(c.uf).toUpperCase())}" data-doscargo="${c.cargo==="5"?"S":"D"}" data-dospart="${esc(c.partido)}"><span class="ph">${esc(iniciais(c.nome))}<img loading="lazy" alt="" src="${esc(fotoUrl(c.uf,c.sq,c.ele))}" onerror="this.remove()"></span><b>${esc(tc(c.nome))}</b><small>${esc(c.partido)}/${esc(String(c.uf).toUpperCase())} · ${fmt(c.votos)} votos</small><small class="v">${esc(situacao(c)[1])}</small></button>`;
+  $("ptBody").innerHTML=(el.length?Object.entries(porUf).sort((a,b)=>b[1].length-a[1].length).map(([u,l])=>`<h3 class="iniH">${esc(UFS[u]||String(u).toUpperCase())} (${l.length})</h3><div class="rostos">${l.map(r).join("")}</div>`).join(""):`<p class="empty">Nenhum eleito desse partido com o filtro atual.</p>`)
+    +(resto.length?`<details class="lst"><summary>Não eleitos mais votados (${resto.length})</summary><div class="rostos">${resto.map(r).join("")}</div></details>`:"");
+  $("ptLista").scrollIntoView({behavior:reduz()?"auto":"smooth",block:"start"});
+}
+
+function renderMotor(){const S=st.status; const b=$("motorBody"); if(!b) return; if(!S){b.innerHTML=`<p class="sub">Sem resposta do motor ainda. Confira o link abaixo.</p>`;return}
+  const L=[["Base de emendas",S.ultimaSync?`${(S.emendas||0).toLocaleString("pt-BR")} emendas · atualizada em ${S.ultimaSync}`:"—"],["Destinos (emendas para o estado)",S.destinos||"—"],["Varredura das cidades",`${S.varridas||0} de ${S.cidadesClientes||0} cidades de clientes${S.filaVarredura&&S.filaVarredura.length?" · na fila: "+S.filaVarredura.join(", "):""}`],
+    ["Votos do TSE",S.votos||"—"],["Banco de projetos",(S.projetos||0).toLocaleString("pt-BR")+" projetos"],["Cadernos parlamentares",S.cadernos||"—"],["Clientes na planilha",String(S.clientes||0)]];
+  b.innerHTML=`<ul class="cl">${L.map(([k,v])=>`<li><span><b>${esc(k)}</b></span><span class="r">${esc(v)}</span></li>`).join("")}</ul>`}
+
+// ===== DOSSIÊ: escolher por nome, estado ou cidade =====
+st.dos={modo:"nome",lista:{},uf:null};
+function abreDosView(){
+  if(!$("dosUf").options.length){$("dosUf").innerHTML=Object.entries(UFS).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");$("dosUf").value=st.rg.uf||"sp"}
+  dosModo(st.dos.modo);
+}
+async function dosParl(uf){ const k=uf||"br"; if(st.dos.lista[k]) return st.dos.lista[k];
+  try{const r=await api({acao:"parlamentares",uf:uf||""}); st.dos.lista[k]=r.lista||[]}catch(e){st.dos.lista[k]=null} return st.dos.lista[k]; }
+function dosModo(m){
+  st.dos.modo=m; document.querySelectorAll("[data-dosm]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.dosm===m));
+  document.querySelector(".dosUf").hidden=m==="nome"; document.querySelector(".dosNome").hidden=m!=="nome"; document.querySelector(".dosCid").hidden=m!=="cid";
+  $("dosLista").innerHTML=""; if(m==="uf") dosPorUf(); if(m==="nome") dosParl("");
+}
+const rosto=(p,extra)=>`<button class="rosto" data-dos="${esc(p.nome)}" data-dosfoto="${esc(p.foto||"")}" data-dosnm="${esc(tc(p.nome))}" data-dosuf="${esc(p.uf||"")}" data-doscargo="${esc(p.cargo||"")}" data-dospart="${esc(p.partido||"")}">
+  <span class="ph">${esc(iniciais(p.nome))}${p.foto?`<img loading="lazy" alt="" src="${esc(p.foto)}" onerror="this.remove()">`:""}</span><b>${esc(tc(p.nome))}</b><small>${p.cargo==="S"?"Senador(a)":"Deputado(a)"} · ${esc(p.partido||"")}/${esc(p.uf||"")}</small>${extra?`<small class="v">${extra}</small>`:""}</button>`;
+async function dosPorUf(){
+  const uf=$("dosUf").value; $("dosLista").innerHTML=`<p class="sub">Carregando a bancada de ${esc(UFS[uf])}…</p>`;
+  const L=await dosParl(uf); if(st.dos.modo!=="uf") return;
+  if(!L){$("dosLista").innerHTML=`<p class="empty">Não consegui a lista agora. Publique a versão nova do motor (v12.7) e tente de novo.</p>`;return}
+  const sen=L.filter(p=>p.cargo==="S"), dep=L.filter(p=>p.cargo==="D");
+  $("dosLista").innerHTML=`<h3 class="iniH">Senadores (${sen.length})</h3><div class="rostos">${sen.map(p=>rosto(p,p.total?fmtR(p.total)+" em emendas":"")).join("")}</div>
+    <h3 class="iniH">Deputados federais (${dep.length}) · do que mais mandou emenda ao que menos</h3><div class="rostos">${dep.map(p=>rosto(p,p.total?fmtR(p.total)+" em emendas":"sem emendas registradas")).join("")}</div>`;
+}
+async function dosPorCid(cid){
+  const uf=$("dosUf").value; $("dosLista").innerHTML=`<p class="sub">Buscando quem mandou para ${esc(cid)}…</p>`;
+  let d; try{d=await api({acao:"regua",uf,municipio:cid,area:""}); await enriqueceMandato(d,uf)}catch(e){$("dosLista").innerHTML=`<p class="empty">Não consegui consultar a planilha.</p>`;return}
+  const L=d.lista.filter(o=>o.cid>0).sort((a,b)=>b.cid-a.cid);
+  $("dosLista").innerHTML=L.length?`<h3 class="iniH">Mandaram para ${esc(cid)} (${L.length})</h3><div class="rostos">${L.map(o=>rosto({nome:o.mand?o.mand.nome:o.autor,foto:o.mand&&o.mand.foto,uf:o.mand?o.mand.uf:(o.ufPrinc||""),cargo:o.mand?o.mand.cargo:"",partido:o.mand?o.mand.partido:"fora do mandato"},fmtR(o.cid)+" para a cidade")).join("")}</div>`:`<p class="empty">Nenhuma emenda registrada para ${esc(cid)} desde 2023${d.varredura&&d.varredura.pendente?" ainda (a busca completa da cidade está na fila)":""}.</p>`;
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-dosm]");if(b)dosModo(b.dataset.dosm)});
+$("dosUf").addEventListener("change",()=>{if(st.dos.modo==="uf")dosPorUf();$("dosCid").value="";$("dosLista").innerHTML=st.dos.modo==="cid"?"":$("dosLista").innerHTML});
+// combobox de nome
+function dosPopNome(){const L=st.dos.lista.br||[], q=kk($("dosNome").value), pop=$("dosPop");
+  const f=(q?L.filter(p=>kk(p.nome).includes(q)):L).slice(0,40);
+  pop.innerHTML=L.length?(f.length?f.map(p=>`<div role="option" data-dosn="${esc(p.nome)}"><b>${esc(tc(p.nome))}</b> <span class="sub">${p.cargo==="S"?"Senador(a)":"Deputado(a)"} · ${esc(p.partido)}/${esc(p.uf)}</span></div>`).join(""):`<div class="cbxNo">Ninguém em mandato com esse nome. Aperte Enter para buscar mesmo assim (ex-parlamentares).</div>`):`<div class="cbxNo">Carregando a lista…</div>`; pop.hidden=false;}
+$("dosNome").addEventListener("focus",()=>{dosParl("").then(dosPopNome);dosPopNome()}); $("dosNome").addEventListener("input",dosPopNome);
+$("dosNome").addEventListener("blur",()=>setTimeout(()=>{$("dosPop").hidden=true},180));
+$("dosNome").addEventListener("keydown",e=>{if(e.key!=="Enter")return;e.preventDefault();const o=$("dosPop").querySelector("[data-dosn]");$("dosPop").hidden=true;
+  if(o) dosEscolheNome(o.dataset.dosn); else if($("dosNome").value.trim()) abreRaioX($("dosNome").value.trim(),"","",{tela:true})});
+$("dosPop").addEventListener("mousedown",e=>{const o=e.target.closest("[data-dosn]");if(!o)return;e.preventDefault();$("dosPop").hidden=true;dosEscolheNome(o.dataset.dosn)});
+function dosEscolheNome(n){const p=(st.dos.lista.br||[]).find(x=>x.nome===n)||{nome:n}; $("dosNome").value=tc(n); abreRaioX(p.nome,p.foto||"",tc(p.nome),{tela:true,uf:p.uf||"",cargo:p.cargo||"",partido:p.partido||""});}
+// combobox de cidade
+function dosPopCid(){const uf=$("dosUf").value, all=st.rg.munIbge[uf]||[], q=kk($("dosCid").value), pop=$("dosCidPop");
+  if(!all.length){carregaMunIbge(uf).then(()=>{if(document.activeElement===$("dosCid"))dosPopCid()})}
+  const f=(q?all.filter(n=>kk(n).startsWith(q)).concat(all.filter(n=>!kk(n).startsWith(q)&&kk(n).includes(q))):all).slice(0,80);
+  pop.innerHTML=all.length?f.map(n=>`<div role="option" data-dosc="${esc(n)}">${esc(n)}</div>`).join("")||`<div class="cbxNo">Nenhuma cidade.</div>`:`<div class="cbxNo">Carregando cidades…</div>`; pop.hidden=false;}
+$("dosCid").addEventListener("focus",dosPopCid); $("dosCid").addEventListener("input",dosPopCid);
+$("dosCid").addEventListener("blur",()=>setTimeout(()=>{$("dosCidPop").hidden=true},180));
+$("dosCid").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();const o=$("dosCidPop").querySelector("[data-dosc]");$("dosCidPop").hidden=true;if(o){$("dosCid").value=o.dataset.dosc;dosPorCid(o.dataset.dosc)}}});
+$("dosCidPop").addEventListener("mousedown",e=>{const o=e.target.closest("[data-dosc]");if(!o)return;e.preventDefault();$("dosCidPop").hidden=true;$("dosCid").value=o.dataset.dosc;dosPorCid(o.dataset.dosc)});
 
 // ===== INÍCIO =====
 function renderInicio(){
@@ -2133,43 +2279,42 @@ function renderInicio(){
 document.addEventListener("click",e=>{const b=e.target.closest("[data-ir]");if(b){if(b.dataset.ir==="cli"&&b.closest(".iniAt")){irPara("cli");formCli();return}irPara(b.dataset.ir)}});
 
 // ===== MENU LATERAL: cada item mostra só a sua área =====
-const VIEWS={ini:["capt","Início",""],rg:["capt","Quem procurar","Parlamentares em ordem de potencial para a cidade e a área do cliente."],
-  mapa:["capt","Onde o recurso chegou","Para onde foram as emendas no estado, a distância até o cliente e as emendas de comissão e bancada que chegaram à cidade."],
-  hs:["capt","Histórico com gabinetes","O que a Otimistas já fez com cada gabinete, a partir dos Cadernos Parlamentares."],
-  pj:["capt","Projetos já aprovados","Projetos que já viraram emenda no TransfereGov, para usar de modelo."],
-  exp:["capt","Buscar parlamentar","Digite um nome e veja áreas, cidades e instituições que ele já atendeu."],
-  rk:["dados","Quem mais manda emenda","Ranking de deputados e senadores pelo valor empenhado desde 2023."],
-  bc:["capt","Quem fica e quem sai","Bancada federal de 2027: reeleitos, novos, não reeleitos e quem foi para o Senado."],
-  vt:["dados","Votos por cidade","Escolha um candidato e veja no mapa quantos votos ele teve em cada cidade."],
-  cx:["dados","Raio-X de uma cidade","Quem foi mais votado numa cidade e quem a tem como base eleitoral."],
-  ap:["dados","Resultado da eleição","Eleitos, votação e mapa, por estado e cargo."],
-  pt:["dados","Partidos e vagas","Votos, quociente eleitoral e vagas por partido ou federação."],
-  base:["dados","Candidatos que acompanho","Sua lista pessoal de nomes para acompanhar na apuração."],
-  cli:["capt","Cadastro de clientes","Dados das instituições usados na régua e no ofício."],
-  con:["capt","Conexão com a planilha","Link do motor de dados (Google Planilhas)."]};
+const VIEWS={ini:["capt","Início",""],
+  rg:["capt","Quem procurar","Quem mais pode mandar emenda para a cidade e a área do cliente, onde o recurso já chegou e o que a Otimistas já fez com cada gabinete."],
+  dos:["capt","Dossiê do parlamentar","Escolha por nome, por estado ou por cidade e veja a vida inteira de emendas dele: áreas, cidades, mapa, instituições e relacionamento."],
+  pj:["capt","Projetos aprovados","Projetos que já viraram emenda no TransfereGov. Compare a sua ideia ou um PDF."],
+  ap:["dados","Resultado da eleição","Eleitos, votação, mapa e renovação, por estado e cargo."],
+  vt:["dados","Votos por cidade","Onde cada candidato foi votado e quem foi mais votado em cada cidade."],
+  pt:["dados","Partidos e bancadas","Toque num partido para ver os eleitos dele; toque no rosto para abrir o dossiê. Embaixo, quem fica e quem sai da bancada."],
+  cli:["capt","Clientes","Instituições atendidas: dados usados na régua e no ofício."],
+  con:["capt","Motor de dados","Conexão com a planilha e situação das cargas automáticas."]};
+const VIEW_ALIAS={mapa:"rg",hs:"rg",exp:"dos",rk:"dos",bc:"pt",cx:"vt",base:"ap",ren:"ap"};
 function marcaViews(){
   const q=(sel,v)=>{const el=typeof sel==="string"?document.querySelector(sel):sel;if(el)el.dataset.vw=v};
-  q("#pCapt .hero","rg mapa"); q("#rgKpi","rg mapa"); q("#mapCardRg","mapa"); q("#pCapt .rgGrid","rg"); q("#rgCidCard","mapa");
-  q("#iniCard","ini"); q(".ttl","rg mapa hs pj exp rk bc vt cx ap pt base cli con"); q("#vHint","rg mapa hs pj exp rk bc vt cx ap pt base cli con"); q(".rule","rg mapa hs pj exp rk bc vt cx ap pt base cli con");
-  q("#bcCard","bc"); q("#hsCard","hs"); q("#pjCard","pj"); q("#expCard","exp"); q("#cliCard","cli");
-  const con=$("apiUrl")&&$("apiUrl").closest("details"); if(con){con.id="conCard";q(con,"con")}
-  q("#rkCard","rk"); q("#pDados > .row","ap pt"); q("#ufs","ap pt"); q("#msg","ap pt"); q("#pDados > .meter","ap pt");
-  q("#renCard","ap"); q("#vtCard","vt"); q("#cityCard","cx"); q("#mapCard","ap"); q("#mosaicCard","ap"); q("#qCard","pt");
+  q("#iniCard","ini"); const T="rg dos pj ap vt pt cli con"; q(".ttl",T); q("#vHint",T); q(".rule",T);
+  q("#pCapt .hero","rg"); q("#rgKpi","rg"); q("#mapCardRg","rg"); q("#pCapt .rgGrid","rg"); q("#rgCidCard","rg"); q("#hsCard","rg");
+  q("#dosCard","dos"); q("#dosBoxCard","dos"); q("#rkCard","dos"); q("#expCard","nenhum");
+  q("#bcCard","pt"); q("#pjCard","pj"); q("#cliCard","cli");
+  const con=$("apiUrl")&&$("apiUrl").closest("details"); if(con){con.id="conCard";q(con,"con")} q("#motorCard","con");
+  q("#pDados > .row","ap pt"); q("#ufs","ap pt"); q("#msg","ap pt"); q("#pDados > .meter","ap pt");
+  q("#renCard","ap"); q("#vtCard","vt"); q("#cityCard","vt"); q("#mapCard","ap"); q("#mosaicCard","ap"); q("#qCard","pt"); q("#ptLista","pt");
   const gt=document.querySelector("#pDados .grid.two"); if(gt) q(gt,"pt");
   const tc2=$("titulo")&&$("titulo").closest("section"); if(tc2) q(tc2,"ap");
-  q("#pDados aside.side","base"); q("#pDados footer","ap pt cx vt");
-  const lg=document.querySelector(".top .logo"); if(lg) document.querySelector(".sbLogo").appendChild(lg.cloneNode(true));
+  q("#pDados aside.side","ap"); q("#pDados footer","ap pt vt");
+  const mv=(id,depois)=>{const x=$(id),y=$(depois); if(x&&y) y.after(x)}; mv("rkCard","dosBoxCard"); mv("bcCard","ptLista");
+  const lg=document.querySelector(".top .logo"); if(lg&&!document.querySelector(".sbLogo .logo")) document.querySelector(".sbLogo").appendChild(lg.cloneNode(true));
 }
 let VIEW="rg";
 function irPara(v,semRolar){
-  if(v==="ren") v="bc"; if(!VIEWS[v]) v="rg"; VIEW=v; try{localStorage.setItem("otm-view2",v)}catch(e){}
+  if(VIEW_ALIAS[v]) v=VIEW_ALIAS[v]; if(!VIEWS[v]) v="ini"; VIEW=v; try{localStorage.setItem("otm-view2",v)}catch(e){}
   if(st.pane!==VIEWS[v][0]) _setPane2(VIEWS[v][0]);
   document.querySelectorAll("[data-vw]").forEach(el=>el.classList.toggle("vOff",!el.dataset.vw.split(" ").includes(v)));
-  ["expCard","cliCard","conCard"].forEach(id=>{const d=$(id);if(d&&d.dataset.vw===v)d.open=true});
+  ["cliCard","conCard"].forEach(id=>{const d=$(id);if(d&&d.dataset.vw===v)d.open=true});
   document.querySelectorAll("#sb [data-view]").forEach(b=>b.setAttribute("aria-current",b.dataset.view===v?"page":"false"));
   $("tbT").textContent=VIEWS[v][1]; const tt=document.querySelector(".ttl"); if(tt) tt.textContent=VIEWS[v][1]; if($("vHint")) $("vHint").textContent=VIEWS[v][2]||"";
-  if(VIEWS[v][0]==="dados"&&!st.apOk&&v!=="rk"&&v!=="vt"){st.apOk=true;load()}       // apuração só carrega quando for usada
-  if(v==="ini") renderInicio(); if(v==="vt") abreVt(); if(v==="mapa"&&st.rg.mapaPend){st.rg.mapaPend=false;desenhaMapaRg()} if(v==="bc"&&st.bc&&!st.bc.uf) carregaBancada(st.rg.uf||"sp");
+  if(VIEWS[v][0]==="dados"&&!st.apOk&&v!=="vt"){st.apOk=true;load()}
+  if(v==="dos"&&!rkFeito){rkFeito=true;carregaRank()}       // apuração só carrega quando for usada
+  if(v==="ini") renderInicio(); if(v==="vt") abreVt(); if(v==="dos") abreDosView(); if(v==="con") renderMotor(); if(v==="pt"&&st.bc&&!st.bc.uf) carregaBancada(st.rg.uf||"sp"); if(v==="rg"&&st.rg.mapaPend){st.rg.mapaPend=false;desenhaMapaRg()}
   if(v==="hs"&&$("hsCard").hidden){$("vEmpty").hidden=false;$("vEmpty").textContent="Ainda não há registros dos Cadernos Parlamentares para esta instituição. Escolha um cliente na Régua de potencial."}else $("vEmpty").hidden=true;
   fechaSb(); if(!semRolar) window.scrollTo({top:0});
 }
@@ -2261,7 +2406,7 @@ function abreVtCand(c){ irPara("vt"); $("vtUf").value=c.uf; $("vtCargo").value=c
 function centroPath(dstr){let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;const n=dstr.match(/-?[\d.]+/g)||[];
   for(let i=0;i+1<n.length;i+=2){const x=+n[i],y=+n[i+1];if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}return[(x0+x1)/2,(y0+y1)/2]}
 async function desenhaMapaRg(){
-  const d=st.rg.dados, card=$("mapCardRg"); if(!d){card.hidden=true;return} card.hidden=false;
+  const d=st.rg.dados, card=$("mapCardRg"); if(!d||!Array.isArray(d.lista)){card.hidden=true;return} card.hidden=false;
   const uf=(d.uf||st.rg.uf||"").toLowerCase(), mun=d.municipio, area=d.area||"";
   // comissões / bancada + status da varredura
   const C=d.coletivas||[];
@@ -2346,10 +2491,12 @@ document.addEventListener("click",e=>{
   const rf=t.closest("[data-rgf]"); if(rf){st.rg.f=rf.dataset.rgf;renderRegua();return}
   if(t.closest("[data-rgall]")){st.rg.tudo=true;renderRegua();return}
   const rl=t.closest("[data-rg]"); if(rl){abrePerfil(rl.dataset.rg,"rg");return}
-  const rk=t.closest("[data-rk]"); if(rk){abrePerfil(rk.dataset.rk,"rk");return}
+  const rk=t.closest("[data-rk]"); if(rk){const o=st.rk.dados&&st.rk.dados.lista.find(x=>x.autor===rk.dataset.rk); abreRaioX(rk.dataset.rk,o&&o.mand&&o.mand.foto||"",o?nomeDe(o):"",{tela:true,uf:o&&o.mand?o.mand.uf:"",cargo:o&&o.mand?o.mand.cargo:""});return}
   const rx=t.closest("[data-rx]"); if(rx){abreRaioX(rx.dataset.rx,rx.dataset.rxfoto,rx.dataset.rxnm);return}
-  const rg2=t.closest("[data-rxgo]"); if(rg2&&st.rx){st.rx.path.push({t:rg2.dataset.rxgo,v:rg2.dataset.rxv});renderRx();$("dlgIn").scrollTo({top:0,behavior:reduz()?"auto":"smooth"});return}
-  const ra=t.closest("[data-rxarea]"); if(ra&&st.rx){st.rx.path.push({t:"area",v:ra.dataset.rxarea});renderRx();$("dlgIn").scrollTo({top:0});return}
+  const rg2=t.closest("[data-rxgo]"); if(rg2&&st.rx){st.rx.path.push({t:rg2.dataset.rxgo,v:rg2.dataset.rxv});renderRx();rxTopo();return}
+  const ra=t.closest("[data-rxarea]"); if(ra&&st.rx){st.rx.path.push({t:"area",v:ra.dataset.rxarea});renderRx();rxTopo();return}
+  const vi=t.closest("[data-vtir]"); if(vi){fecha();abreVtCand({uf:vi.dataset.vtuf,cargo:vi.dataset.vtcargo,nome:vi.dataset.vtir});return}
+  const dz=t.closest("[data-dos]"); if(dz){fecha();abreRaioX(dz.dataset.dos,dz.dataset.dosfoto||"",dz.dataset.dosnm||"",{tela:true,uf:dz.dataset.dosuf||"",cargo:dz.dataset.doscargo||"",partido:dz.dataset.dospart||""});return}
   const rb=t.closest("[data-rxback]"); if(rb&&st.rx){st.rx.path=st.rx.path.slice(0,+rb.dataset.rxback);renderRx();return}
   const re2=t.closest("[data-rxem]"); if(re2){rxFav(re2.dataset.rxem);return}
   if(t.closest("[data-vtabre]")){const c=st.reg[st.dlgK];fecha();if(c)abreVtCand(c);return}
