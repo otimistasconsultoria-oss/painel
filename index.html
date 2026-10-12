@@ -2816,8 +2816,8 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-iroptab]")
 
 // ======== OPORTUNIDADES ========
 st.op={tab:"ab",area:"",dados:null,lim:40,kpi:""};
-const OP_COR={"Saúde":"#E3262E","Cultura":"#8B5CF6","Esporte":"#00A35C","Assistência social":"#F08C00","Educação":"#2F7BFF","Meio ambiente":"#0E9F8E","Ciência e inovação":"#0EA5E9","Direitos humanos":"#D946EF","Trabalho e renda":"#B07800","Outras":"#8A94A8"};
-const OP_IC={"Saúde":"🩺","Cultura":"🎭","Esporte":"🏅","Assistência social":"🤝","Educação":"📚","Meio ambiente":"🌱","Ciência e inovação":"🔬","Direitos humanos":"⚖️","Trabalho e renda":"💼","Outras":"📌"};
+const OP_COR={"Saúde":"#E3262E","Cultura":"#8B5CF6","Esporte":"#00A35C","Assistência social":"#F08C00","Educação":"#2F7BFF","Meio ambiente":"#0E9F8E","Ciência e inovação":"#0EA5E9","Direitos humanos":"#D946EF","Trabalho e renda":"#B07800","Projetos sociais (várias áreas)":"#1F3FA0","Outras":"#8A94A8"};
+const OP_IC={"Saúde":"🩺","Cultura":"🎭","Esporte":"🏅","Assistência social":"🤝","Educação":"📚","Meio ambiente":"🌱","Ciência e inovação":"🔬","Direitos humanos":"⚖️","Trabalho e renda":"💼","Projetos sociais (várias áreas)":"🧩","Outras":"📌"};
 function marcaOpSb(){document.querySelectorAll('#sb [data-optab]').forEach(b=>b.setAttribute("aria-current",VIEW==="op"&&b.dataset.optab===st.op.tab?"page":"false"))}
 function dBR(s){const m=String(s||"").match(/(\d{2})\/(\d{2})\/(\d{4})/);return m?new Date(+m[3],m[2]-1,+m[1]):null}
 function diasAte(s){const d=dBR(s);if(!d)return null;const h=new Date();h.setHours(0,0,0,0);return Math.round((d-h)/864e5)}
@@ -2826,7 +2826,7 @@ const OP_AREA_RX=[["Saúde",/SAUD|HOSPIT|ONCO|CANCER|MEDIC/],["Cultura",/CULTUR|
 function areasDoTema(t){const n=nrm(t);return OP_AREA_RX.filter(([,rx])=>rx.test(n)).map(([a])=>a)}
 function serveOp(o,c){const cu=String(c.uf||"").toUpperCase();if(o.uf!=="BR"&&o.uf!==cu)return false;
   if(o.municipio&&nrm(o.municipio).replace(/[^A-Z]/g,"")!==nrm(c.cidade).replace(/[^A-Z]/g,""))return false;
-  const as=areasDoTema(c.tema||"");return !as.length||o.area==="Outras"||as.includes(o.area)}
+  const as=areasDoTema(c.tema||"");return !as.length||o.area==="Outras"||/^Projetos sociais/.test(o.area)||as.includes(o.area)}
 async function abreOp(){
   if(!$("opUf").options.length){$("opUf").innerHTML=`<option value="">Todos os estados</option><option value="BR">Só nacionais</option>`+Object.values(UFS).map(u=>`<option value="${u}">${u}</option>`).join("");
     const cl=getCli();$("opCli").innerHTML=`<option value="">Todos os clientes</option>`+cl.map(c=>`<option value="${esc(c.id)}">${esc(c.nome)}</option>`).join("");
@@ -2853,7 +2853,7 @@ function cardOp(o,cls){
   return `<article class="opC" style="--cor:${cor}"><div class="tg"><span class="opT ${sc}"><i></i>${esc(sit==="Anunciado"?"Anunciado · confirmar prazo":sit)}</span><span class="opT">${OP_IC[o.area]||""} ${esc(o.area)}</span><span class="opT">${esc(lugar)}</span><span class="opT">${esc(String(o.tipo).replace("Programa Transferegov – ","Transferegov · "))}</span></div>
     <h4>${o.link?`<a href="${esc(o.link)}" target="_blank" rel="noopener">${esc(o.titulo)}</a>`:esc(o.titulo)}</h4>
     <div class="m">${esc(o.orgao&&o.orgao!==o.fonte?tc(o.orgao)+" · ":"")}${esc(o.fonte||"")}${o.encontrado?" · visto em "+esc(o.encontrado):""}</div>
-    ${o.trecho&&o.tipo!=="Notícia"?`<div class="m">${esc(o.trecho)}</div>`:""}${pz}
+    ${(()=>{const m=String(o.trecho||"").match(/^Público: ([^·]+)(?:· )?([\s\S]*)$/);return (m?`<div class="m"><b style="color:var(--win)">✓ Aberto a OSC</b> · ${esc(m[1].trim())}</div>`+(m[2]?`<div class="m">${esc(m[2])}</div>`:""):(o.trecho?`<div class="m">${esc(o.trecho)}</div>`:""))})()}${pz}
     ${cls.length?`<div class="sv">Serve para: ${cls.slice(0,4).map(c=>`<span>${esc(c.nome)}</span>`).join("")}${cls.length>4?` +${cls.length-4}`:""}</div>`:""}
     <div class="ac">${o.link?`<a href="${esc(o.link)}" target="_blank" rel="noopener">${/transferegov/.test(o.link)?"Abrir Transferegov ↗":/news\.google/.test(o.link)?"Abrir notícia ↗":"Abrir edital ↗"}</a>`:""}<button data-opcopia="${esc(o.id)}">Copiar resumo</button></div></article>`;
 }
@@ -2861,7 +2861,7 @@ function renderOp(){
   const d=st.op.dados;if(!d)return;const cl=getCli(),todos=filtraOp();
   const serve=o=>cl.filter(c=>serveOp(o,c));
   const ab=todos.filter(o=>o.situacao!=="Previsto"),pv=todos.filter(o=>o.situacao==="Previsto"),fecha=ab.filter(o=>{const x=diasAte(o.prazo);return x!=null&&x>=0&&x<=7}),pcli=ab.filter(o=>serve(o).length);
-  $("opSub").textContent=`${d.lista.length.toLocaleString("pt-BR")} oportunidades ativas no Brasil${d.ultima?` · atualizado em ${d.ultima}`:""}. Busca diária às 6h; resumo no seu e-mail às segundas, 8h.`;
+  $("opSub").textContent=`${d.lista.length.toLocaleString("pt-BR")} oportunidades abertas a OSCs e entidades sem fins lucrativos${d.ultima?` · atualizado em ${d.ultima}`:""}. Busca diária às 6h; resumo no seu e-mail às segundas, 8h.`;
   const T=Math.max(1,todos.length),k=[["ab","📣",ab.length,"Abertas e anunciadas","#2F7BFF",ab.length/T],["fe","⏳",fecha.length,"Fecham em 7 dias","#E3262E",fecha.length/Math.max(1,ab.length)],["pv","📅",pv.length,"Previstas","#B07800",pv.length/T],["cl","🎯",pcli.length,"Servem aos clientes","#00A35C",pcli.length/Math.max(1,ab.length)]];
   $("opK").innerHTML=k.map(([id,ic,n,l,cor,p])=>`<button data-opk="${id}" aria-pressed="${st.op.kpi===id}"><span class="ic">${ic}</span><span class="tx"><span class="n">${n.toLocaleString("pt-BR")}</span><span class="l" style="display:block">${l}</span></span>${anelOp(p,cor)}</button>`).join("");
   document.querySelectorAll("#opTabs [data-tab]").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===st.op.tab));
