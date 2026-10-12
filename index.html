@@ -600,7 +600,7 @@ footer{margin-top:24px;font-size:12px;color:var(--muted);max-width:76ch}
 .opHero .k{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.7;font-weight:700}
 .opHero h2{margin:6px 0 4px;font-size:26px;line-height:1.15;color:#fff;letter-spacing:-.01em}
 .opHero p{margin:0;font-size:13px;opacity:.78;max-width:62ch}
-.opF{display:grid;grid-template-columns:1fr;gap:8px;margin-top:16px;position:relative;z-index:1}@media(min-width:760px){.opF{grid-template-columns:2fr 1fr 1fr 1.3fr}}
+.opF{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;position:relative;z-index:1}.opF input{grid-column:1/-1}@media(min-width:760px){.opF{grid-template-columns:2fr 1fr 1fr 1.3fr 1.2fr}.opF input{grid-column:auto}}
 .opF input,.opF select{width:100%;min-width:0;font:inherit;font-size:14px;color:#fff;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:10px 15px;outline:none;-webkit-appearance:none;appearance:none}
 .opF select{background-image:linear-gradient(45deg,transparent 50%,#fff 50%),linear-gradient(135deg,#fff 50%,transparent 50%);background-position:calc(100% - 18px) 55%,calc(100% - 13px) 55%;background-size:5px 5px;background-repeat:no-repeat;padding-right:30px}
 .opF select option{color:#0F1E45}.opF input::placeholder{color:rgba(255,255,255,.6)}.opF input:focus,.opF select:focus{border-color:#7FB0FF;background:rgba(255,255,255,.14)}
@@ -662,6 +662,13 @@ body .chips button,body .chip{border-radius:999px!important}
 .iniAtn button{all:unset;cursor:pointer;display:flex;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--c,#F0C766);border-radius:14px;padding:11px 14px;box-shadow:0 1px 2px rgba(14,27,61,.04)}
 .iniAtn button:hover{border-color:var(--brand2);border-left-color:var(--c,#F0C766)}
 .iniAtn .n{font-size:20px;font-weight:800;color:var(--ink);min-width:28px;text-align:center}.iniAtn .t{font-size:13.5px;color:var(--ink);line-height:1.3}.iniAtn .t small{display:block;color:var(--muted);font-size:12px}
+
+.pzBar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:end;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px 14px 12px;margin-bottom:6px;box-shadow:var(--shadow)}
+.pzBar div{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}.pzBar i{display:block;width:100%;max-width:70px;border-radius:8px 8px 3px 3px}
+.pzBar b{font-size:20px;color:var(--ink);line-height:1}.pzBar span{font-size:11.5px;color:var(--muted);line-height:1.2}
+.pzL{display:grid;gap:8px}.pzI{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cor);border-radius:14px;padding:10px 12px}
+.pzI:hover{border-color:var(--brand2);border-left-color:var(--cor)}.pzI .d{flex:none;width:58px;text-align:center}.pzI .d b{display:block;font-size:17px}.pzI .d small{font-size:11px;color:var(--muted)}
+.pzI .t{font-size:14px;font-weight:600;line-height:1.3;min-width:0}.pzI .t small{display:block;font-weight:500;font-size:12px;color:var(--muted);margin-top:3px}.pzI .t small b{color:var(--brand)}
 </style>
 </head>
 <body>
@@ -777,10 +784,10 @@ body .chips button,body .chip{border-radius:999px!important}
       <div class="opHero"><div class="k">Captação · editais, chamamentos e programas</div><h2>Oportunidades abertas</h2>
         <p id="opSub">Todo o Brasil, por estado e área. Atualiza sozinho todo dia às 6h; resumo no seu e-mail às segundas, 8h.</p>
         <div class="opF"><input id="opQ" type="search" placeholder="Buscar: hospital, Aldir Blanc, esporte, idoso…" aria-label="Buscar oportunidade">
-          <select id="opUf" aria-label="Estado"></select><select id="opTp" aria-label="Tipo"><option value="">Todos os tipos</option><option value="oficial">Fontes oficiais</option><option value="Transferegov">Programas Transferegov</option><option value="Diário">Diários municipais</option><option value="Notícia">Notícias</option><option value="Calendário">Calendário</option></select>
-          <select id="opCli" aria-label="Cliente"></select></div></div>
+          <select id="opUf" aria-label="Estado"></select><select id="opTp" aria-label="Tipo"><option value="">Todas as fontes</option><option value="oficial">Fontes oficiais</option><option value="Transferegov">Programas Transferegov</option><option value="Diário">Diários municipais</option><option value="Notícia">Notícias</option><option value="Calendário">Calendário</option><option value="Curadoria">Curadorias por e-mail</option></select>
+          <select id="opCli" aria-label="Cliente"></select><select id="opAr" aria-label="Área"><option value="">Todas as áreas</option></select></div></div>
       <div class="opK" id="opK"></div>
-      <div class="opTabs" role="tablist" id="opTabs"><button role="tab" data-tab="ab">Abertas e anunciadas</button><button role="tab" data-tab="pv">Previstas</button><button role="tab" data-tab="cl">Por cliente</button></div>
+      <div class="opTabs" role="tablist" id="opTabs"><button role="tab" data-tab="ab">Abertas</button><button role="tab" data-tab="pz">Prazos</button><button role="tab" data-tab="pv">Previstas</button><button role="tab" data-tab="cl">Por cliente</button></div>
       <div class="opAreas" id="opAreas"></div>
       <div id="opRes"><p class="sub">Carregando oportunidades…</p></div>
     </section>
@@ -2060,7 +2067,7 @@ function eleicao26(o){
   return has(R.novos)?`<span class="pill ok">Eleito(a) para 2027</span>`:"";
 }
 function tagDe(o){const u=(o.mand&&o.mand.uf)||o.ufPrinc||"";return (!o.mand?`<span class="pill fora">Fora do mandato${o.ufPrinc?" · atuou em "+esc(o.ufPrinc):""}</span>`:o.mand.cargo==="S"?`<span class="pill sen">Senador(a) · ${esc(o.mand.partido||"")}/${esc(u)}</span>`:`<span class="pill re">Deputado(a) · ${esc(o.mand.partido||"")}/${esc(u)}</span>`)+(o.perto?`<span class="pill dist">${o.perto[1]<=1?"Já atende a cidade":"A "+o.perto[1]+" km: "+esc(o.perto[0])}</span>`:"")}
-const fotoDe=(o,cls="")=>`<span class="ph ${cls}">${esc(iniciais(nomeDe(o)))}${o.mand&&o.mand.foto?`<img loading="lazy" alt="" src="${esc(o.mand.foto)}" onerror="this.remove()">`:""}</span>`;
+const fotoDe=(o,cls="")=>{const u=https_(o.mand&&o.mand.foto||fotoPorNome(nomeDe(o))||fotoPorNome(o.autor));return `<span class="ph ${cls}">${esc(iniciais(nomeDe(o)))}${u?`<img loading="lazy" alt="" src="${esc(u)}" onerror="this.remove()">`:""}</span>`};
 function filtra(L,f){return f==="perto"?L.filter(o=>o.perto).sort((a,b)=>a.grupo-b.grupo||a.perto[1]-b.perto[1]||b.score-a.score):f==="cid"?L.filter(o=>o.cid>0):f==="viz"?L.filter(o=>o.viz>0):f==="D"||f==="S"?L.filter(o=>o.mand&&o.mand.cargo===f):f==="mand"?L.filter(o=>o.mand):L}
 function renderRegua(){
   const d=st.rg.dados; if(!d||!Array.isArray(d.lista)) return;
@@ -2196,7 +2203,7 @@ function zoomFoto(src,nm){
 
 // ===== RAIO-X DE EMENDAS: abre de qualquer nome e vai descendo (área → estado → cidade → emenda → quem recebeu)
 st.rx=null;
-async function abreRaioX(nome,foto,nm,meta){ store.set("otm-ultparl",nome);
+async function abreRaioX(nome,foto,nm,meta){ store.set("otm-ultparl",nome); foto=https_(foto||fotoPorNome(nome)||fotoPorNome(nm));
   const naTela=meta&&meta.tela;
   st.rx={nome,foto,nm:nm||tc(nome),itens:null,path:[],box:naTela?"dosBox":"rxBox",meta:meta||{}};
   if(naTela){ if(VIEW!=="dos") irPara("dos",true); $("dosBoxCard").hidden=false; $("dosBox").innerHTML=`<p class="sub">Montando o dossiê de ${esc(st.rx.nm)}…</p>`; $("dosBoxCard").scrollIntoView({behavior:reduz()?"auto":"smooth",block:"start"}); }
@@ -2301,8 +2308,8 @@ function dosModo(m){
   document.querySelector(".dosUf").hidden=m==="nome"; document.querySelector(".dosNome").hidden=m!=="nome"; document.querySelector(".dosCid").hidden=m!=="cid";
   $("dosLista").innerHTML=""; if(m==="uf") dosPorUf(); if(m==="nome") dosParl("");
 }
-const rosto=(p,extra)=>`<button class="rosto" data-dos="${esc(p.nome)}" data-dosfoto="${esc(p.foto||"")}" data-dosnm="${esc(tc(p.nome))}" data-dosuf="${esc(p.uf||"")}" data-doscargo="${esc(p.cargo||"")}" data-dospart="${esc(p.partido||"")}">
-  <span class="ph">${esc(iniciais(p.nome))}${p.foto?`<img loading="lazy" alt="" src="${esc(p.foto)}" onerror="this.remove()">`:""}</span><b>${esc(tc(p.nome))}</b><small>${p.cargo==="S"?"Senador(a)":"Deputado(a)"} · ${esc(p.partido||"")}/${esc(p.uf||"")}</small>${extra?`<small class="v">${extra}</small>`:""}</button>`;
+const rosto=(p,extra)=>{p={...p,foto:https_(p.foto||fotoPorNome(p.nome))};return `<button class="rosto" data-dos="${esc(p.nome)}" data-dosfoto="${esc(p.foto||"")}" data-dosnm="${esc(tc(p.nome))}" data-dosuf="${esc(p.uf||"")}" data-doscargo="${esc(p.cargo||"")}" data-dospart="${esc(p.partido||"")}">
+  <span class="ph">${esc(iniciais(p.nome))}${p.foto?`<img loading="lazy" alt="" src="${esc(p.foto)}" onerror="this.remove()">`:""}</span><b>${esc(tc(p.nome))}</b><small>${p.cargo==="S"?"Senador(a)":"Deputado(a)"} · ${esc(p.partido||"")}/${esc(p.uf||"")}</small>${extra?`<small class="v">${extra}</small>`:""}</button>`};
 async function dosPorUf(){
   const uf=$("dosUf").value; $("dosLista").innerHTML=`<p class="sub">Carregando a bancada de ${esc(UFS[uf])}…</p>`;
   const L=await dosParl(uf); if(st.dos.modo!=="uf") return;
@@ -2737,9 +2744,19 @@ document.addEventListener("click",e=>{const of=e.target.closest("[data-oficio]")
 $("dlg").addEventListener("close",()=>$("dlg").classList.remove("wide"));
 
 // ======== RELACIONAMENTO (Cadernos Parlamentares) ========
+
+// ---- fotos: um índice de todos os deputados e senadores em mandato (Câmara + Senado), guardado 24 h no aparelho
+st.fotos=null;
+function https_(u){return String(u||"").replace(/^http:\/\//,"https://")}
+function fotoPorNome(n){ if(!st.fotos||!n) return ""; const k=kParl(n); if(!k) return ""; if(st.fotos[k]) return st.fotos[k];
+  const t=kk(tiraTitulo(n)); for(const [x,u] of Object.entries(st.fotos)){ if((t.length>5&&x===t)||(Math.abs(x.length-k.length)<=2&&lev(x,k)<=2)) return u } return "" }
+function carregaFotos(){ if(st.fotosP) return st.fotosP;
+  try{const c=JSON.parse(store.get("otm-fotos")||"null"); if(c&&c.m&&Date.now()-c.t<864e5){st.fotos=c.m; return st.fotosP=Promise.resolve()}}catch(e){}
+  return st.fotosP=api({acao:"parlamentares"}).then(r=>{const m={};(r.lista||[]).forEach(p=>{if(p.foto)m[kParl(p.nome)]=https_(p.foto)}); if(Object.keys(m).length>100){st.fotos=m;store.set("otm-fotos",JSON.stringify({t:Date.now(),m}))}
+    try{if(VIEW==="rg"&&st.rg.dados)renderRegua(); if(VIEW==="dos"&&st.rx)renderRx()}catch(e){}}).catch(()=>{st.fotosP=null}) }
 st.rel=null;
 const lev=(a,b)=>{const m=[];for(let i=0;i<=a.length;i++){m[i]=[i];for(let j=1;j<=b.length;j++)m[i][j]=i?Math.min(m[i-1][j]+1,m[i][j-1]+1,m[i-1][j-1]+(a[i-1]===b[j-1]?0:1)):j}return m[a.length][b.length]};
-const kParl=s=>kk(norm(s).replace(/^(dep|sen|deputado|deputada|senador|senadora)\.?\s*/,""));
+const kParl=s=>kk(norm(s).replace(/^(deputad[oa]|senador(a)?|dep|sen)\b\.?\s*/,""));
 function mesmoParl(a,b){const x=kParl(a),y=kParl(b);if(!x||!y)return false;if(x===y)return true;
   if(Math.abs(x.length-y.length)<=2&&lev(x,y)<=2)return true; const tx=kk(tiraTitulo(a)),ty=kk(tiraTitulo(b)); return tx.length>5&&tx===ty}
 const doCliente=(r,cl)=>cl&&kk(cl.nome+" "+(cl.razao||"")).includes(kk(r.cliente));
@@ -2828,9 +2845,10 @@ function serveOp(o,c){const cu=String(c.uf||"").toUpperCase();if(o.uf!=="BR"&&o.
   if(o.municipio&&nrm(o.municipio).replace(/[^A-Z]/g,"")!==nrm(c.cidade).replace(/[^A-Z]/g,""))return false;
   const as=areasDoTema(c.tema||"");return !as.length||o.area==="Outras"||/^Projetos sociais/.test(o.area)||as.includes(o.area)}
 async function abreOp(){
-  if(!$("opUf").options.length){$("opUf").innerHTML=`<option value="">Todos os estados</option><option value="BR">Só nacionais</option>`+Object.values(UFS).map(u=>`<option value="${u}">${u}</option>`).join("");
-    const cl=getCli();$("opCli").innerHTML=`<option value="">Todos os clientes</option>`+cl.map(c=>`<option value="${esc(c.id)}">${esc(c.nome)}</option>`).join("");
-    ["opQ","opUf","opTp","opCli"].forEach(id=>$(id).addEventListener(id==="opQ"?"input":"change",()=>{st.op.lim=40;renderOp()}))}
+  if(!$("opUf").options.length){$("opUf").innerHTML=`<option value="">Todo o Brasil</option><option value="BR">Só nacionais</option>`+Object.values(UFS).map(u=>`<option value="${u}">${u}</option>`).join("");
+    const cl=getCli();$("opCli").innerHTML=`<option value="">Clientes</option>`+cl.map(c=>`<option value="${esc(c.id)}">${esc(c.nome)}</option>`).join("");
+    $("opAr").innerHTML=`<option value="">Áreas</option>`+Object.keys(OP_COR).map(a=>`<option value="${esc(a)}">${OP_IC[a]||""} ${esc(a)}</option>`).join("");
+    ["opQ","opUf","opTp","opCli","opAr"].forEach(id=>$(id).addEventListener(id==="opQ"?"input":"change",()=>{st.op.lim=40;renderOp()}))}
   marcaOpSb();
   if(!st.op.dados){try{const c=JSON.parse(store.get("otm-op")||"null");if(c&&c.lista){st.op.dados=c;renderOp()}}catch(e){}}
   else renderOp();
@@ -2842,9 +2860,9 @@ async function abreOp(){
 }
 function anelOp(p,cor){const r=15,c=2*Math.PI*r,v=Math.max(0,Math.min(1,p));return `<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="${r}" fill="none" stroke="var(--track)" stroke-width="5"/><circle cx="20" cy="20" r="${r}" fill="none" stroke="${cor}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(c*v).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 20 20)"/></svg>`}
 function filtraOp(){
-  const d=st.op.dados;if(!d)return [];const q=nrm($("opQ").value.trim()),uf=$("opUf").value,tp=$("opTp").value,cid=$("opCli").value;
+  const d=st.op.dados;if(!d)return [];const q=nrm($("opQ").value.trim()),uf=$("opUf").value,tp=$("opTp").value,cid=$("opCli").value,ar=$("opAr").value;
   const cli=cid?getCli().find(c=>c.id===cid):null;
-  return d.lista.filter(o=>(!uf||o.uf===uf)&&(!tp||(tp==="oficial"?/Página oficial/.test(o.tipo):String(o.tipo).includes(tp)))&&(!cli||serveOp(o,cli))&&(!q||nrm(o.titulo+" "+o.orgao+" "+o.municipio+" "+o.trecho+" "+o.area).includes(q)));
+  return d.lista.filter(o=>(!ar||o.area===ar)&&(!uf||o.uf===uf)&&(!tp||(tp==="oficial"?/Página oficial/.test(o.tipo):String(o.tipo).includes(tp)))&&(!cli||serveOp(o,cli))&&(!q||nrm(o.titulo+" "+o.orgao+" "+o.municipio+" "+o.trecho+" "+o.area).includes(q)));
 }
 function cardOp(o,cls){
   const cor=OP_COR[o.area]||OP_COR.Outras,dd=diasAte(o.prazo),sit=o.situacao,sc=sit==="Aberto"?"ab":sit==="Previsto"?"pv":"an";
@@ -2871,6 +2889,15 @@ function renderOp(){
   $("opAreas").style.display=st.op.tab==="cl"?"none":"";
   if(st.op.area)base=base.filter(o=>o.area===st.op.area);
   const ord=(a,b)=>{const x=diasAte(a.prazo),y=diasAte(b.prazo);return (a.situacao==="Aberto"?0:1)-(b.situacao==="Aberto"?0:1)||(x==null?999:x)-(y==null?999:y)||(serve(b).length-serve(a).length)};
+  if(st.op.tab==="pz"){
+    const com=ab.concat(pv).filter(o=>diasAte(o.prazo)!=null&&diasAte(o.prazo)>=0&&(!st.op.area||o.area===st.op.area));
+    const G=[["Esta semana",0,7,"#E3262E"],["Próximos 15 dias",8,15,"#F08C00"],["Ainda este mês",16,31,"#2F7BFF"],["Depois",32,9999,"#8A94A8"]];
+    const max=Math.max(1,...G.map(([,a,b])=>com.filter(o=>{const x=diasAte(o.prazo);return x>=a&&x<=b}).length));
+    $("opRes").innerHTML=com.length?`<div class="pzBar">${G.map(([t,a,b,c])=>{const n=com.filter(o=>{const x=diasAte(o.prazo);return x>=a&&x<=b}).length;return `<div><i style="height:${Math.max(6,Math.round(n/max*84))}px;background:${c}"></i><b>${n}</b><span>${t}</span></div>`}).join("")}</div>`+
+      G.map(([t,a,b,c])=>{const l=com.filter(o=>{const x=diasAte(o.prazo);return x>=a&&x<=b}).sort((x,y)=>diasAte(x.prazo)-diasAte(y.prazo));if(!l.length)return "";
+        return `<h3 class="iniH" style="color:${c}!important">${t} · ${l.length}</h3><div class="pzL">${l.map(o=>{const x=diasAte(o.prazo),sv=serve(o);return `<a class="pzI" href="${esc(o.link)}" target="_blank" rel="noopener" style="--cor:${OP_COR[o.area]||OP_COR.Outras}"><span class="d"><b>${esc(o.prazo.slice(0,5))}</b><small>${x===0?"hoje":x===1?"amanhã":x+" dias"}</small></span><span class="t">${esc(o.titulo)}<small>${OP_IC[o.area]||""} ${esc(o.area)} · ${esc(o.uf==="BR"?"Nacional":(o.municipio?tc(o.municipio)+"/":"")+o.uf)}${sv.length?` · <b>serve para ${esc(sv.map(c=>c.nome).slice(0,2).join(", "))}${sv.length>2?" +"+(sv.length-2):""}</b>`:""}</small></span></a>`}).join("")}</div>`}).join("")+
+      `<p class="sub" style="margin-top:12px">Só entram aqui as oportunidades com prazo identificado. As "anunciadas" sem prazo ficam na aba Abertas.</p>`
+      :`<p class="empty">Nenhuma oportunidade com prazo identificado com esses filtros.</p>`;return}
   if(st.op.tab==="cl"){
     if(!cl.length){$("opRes").innerHTML=`<p class="empty">Cadastre os clientes (Ajustes › Clientes) para ver o que serve para cada um.</p>`;return}
     $("opRes").innerHTML=`<div class="opL">`+cl.map(c=>{const l=ab.filter(o=>serveOp(o,c)).sort(ord);return `<div class="opCli"><h4>${esc(c.nome)}</h4><div class="s">${esc(tc(c.cidade||""))}/${esc(String(c.uf||"").toUpperCase())}${c.tema?" · "+esc(c.tema):""} · <b>${l.length}</b> oportunidades</div>
@@ -2999,7 +3026,7 @@ $("cargo").onchange=e=>{st.fp=null;st.cargo=e.target.value;st.limite=50;render()
 $("sim").onchange=e=>{st.sim=e.target.checked;st.munOk=false;st.muns={};st.mun=null;st.scan={};renderCidade();fillMunList();render();load()};
 ["busca","soEleitos","soBase"].forEach(id=>$(id).addEventListener("input",()=>{st.limite=50;render()}));
 $("more").onclick=()=>{st.limite+=100;render()};
-fillMunList(); render(); setInterval(tick,1000);
+fillMunList(); render(); setInterval(tick,1000); setTimeout(carregaFotos,1500);
 </script>
 </body>
 </html>
