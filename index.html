@@ -2818,7 +2818,7 @@ document.addEventListener("click",e=>{
 // Atenções da captação: o que pede ação agora
 function renderAtencoes(itens){
   const box=$("iniAtn"); if(!box) return; const at=[];
-  let op=null; try{op=st.op&&st.op.dados||JSON.parse(store.get("otm-op")||"null")}catch(e){}
+  let op=null; try{op=st.op&&st.op.dados||JSON.parse(store.get("otm-op2")||"null")}catch(e){}
   if(op&&op.lista){const L=op.lista.map(a=>Array.isArray(a)?Object.fromEntries((op.campos||[]).map((k,i)=>[k,a[i]])):a), cl=getCli();
     const fecha=L.filter(o=>{const x=diasAte(o.prazo);return x!=null&&x>=0&&x<=7&&o.situacao!=="Previsto"}), fcli=fecha.filter(o=>cl.some(c=>serveOp(o,c)));
     if(fcli.length) at.push(["#E3262E",fcli.length,`oportunidades fecham em até 7 dias e servem aos seus clientes`,fcli.slice(0,2).map(o=>o.titulo.slice(0,70)).join(" · "),"op","ab"]);
@@ -2850,11 +2850,11 @@ async function abreOp(){
     $("opAr").innerHTML=`<option value="">Áreas</option>`+Object.keys(OP_COR).map(a=>`<option value="${esc(a)}">${OP_IC[a]||""} ${esc(a)}</option>`).join("");
     ["opQ","opUf","opTp","opCli","opAr"].forEach(id=>$(id).addEventListener(id==="opQ"?"input":"change",()=>{st.op.lim=40;renderOp()}))}
   marcaOpSb();
-  if(!st.op.dados){try{const c=JSON.parse(store.get("otm-op")||"null");if(c&&c.lista){st.op.dados=c;renderOp()}}catch(e){}}
+  if(!st.op.dados){try{const c=JSON.parse(store.get("otm-op2")||"null");if(c&&c.lista){st.op.dados=c;renderOp()}}catch(e){}}
   else renderOp();
   if(st.op.carregando)return; st.op.carregando=true;
   try{const r=await api({acao:"oportunidades"});const C=r.campos||[];r.lista=(r.lista||[]).map(a=>{const o={};C.forEach((k,i)=>o[k]=a[i]);return o});
-    st.op.dados=r;store.set("otm-op",JSON.stringify(r));renderOp()}
+    st.op.dados=r;store.set("otm-op2",JSON.stringify(r));renderOp()}
   catch(e){if(!st.op.dados)$("opRes").innerHTML=`<p class="empty">${/sem-link/.test(e.message)?"Conecte o motor de dados (Ajustes › Motor de dados).":"Não consegui buscar as oportunidades agora."}</p>`}
   finally{st.op.carregando=false}
 }
