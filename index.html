@@ -2711,7 +2711,7 @@ function pjCard(x){return `<div class="pj"><div class="m">${esc(x.ano)} · ${esc
   <div class="o">${esc(x.objeto)}</div>
   <div class="m"><b style="color:var(--ink)">${esc(tc(x.prop))}</b>${x.cnpj?" · "+esc(x.cnpj):""}${x.nat?" · "+esc(x.nat):""}</div>
   <div class="m">Emenda ${esc(x.emenda)} · <b style="color:var(--ink)">${esc(tc(x.parl))}</b>${x.valor?" · "+fmtR(x.valor):""}${x.imp?" · impositiva: "+esc(tc(x.imp)):""}</div>
-  <div class="m"><span class="pjTag">Ministério: ${esc(tc(x.orgao))}</span><span class="pjTag">Programa ${esc(x.codProg)}</span>${x.acao?`<span class="pjTag">Ação ${esc(x.acao)}</span>`:""}${x.mod?`<span class="pjTag">${esc(x.mod)}</span>`:""}</div>
+  <div class="m"><span class="pjTag">Ministério: ${esc(tc(x.orgao))}</span><span class="pjTag">Programa ${esc(x.codProg)}</span>${x.acao?`<span class="pjTag">Ação ${esc(x.acao)}</span>`:""}${x.ppa?`<span class="pjTag">Programa PPA ${esc(x.ppa)}</span>`:""}${x.mod?`<span class="pjTag">${esc(x.mod)}</span>`:""}</div>
   <div class="m">${esc(x.prog)}</div>
   <div class="c"><a href="#" data-ficha="${esc(x.id)}">Baixar ficha (PDF)</a>
    <a href="${linkCartilha(x.orgao)}" target="_blank" rel="noopener" title="Busca a cartilha de emendas do ministério">Cartilha do ministério</a>
@@ -2730,7 +2730,7 @@ table{width:100%;border-collapse:collapse}th{text-align:left;width:32%;color:#55
 <div class="bt"><button onclick="print()">Salvar como PDF / imprimir</button></div>
 <h1>${esc(tc(x.prop))}</h1><div style="color:#555">Proposta TransfereGov nº ${esc(x.id)} · ${esc(tc(x.mun))}/${esc(x.uf)} · ${esc(x.ano)}</div>
 <h2>Objeto</h2><div class="obj">${esc(x.objeto)}</div>
-<h2>Enquadramento</h2><table>${L("Ministério / órgão",tc(x.orgao))}${L("Programa",(x.codProg?x.codProg+" – ":"")+(x.prog||""))}${L("Ação orçamentária",x.acao||"não informada na base aberta – confirmar na cartilha do ministério")}${L("Modalidade",x.mod)}${L("Situação",x.sit)}</table>
+<h2>Enquadramento</h2><table>${L("Ministério / órgão",tc(x.orgao))}${L("Programa TransfereGov",(x.codProg?x.codProg+" – ":"")+(x.prog||""))}${L("Programa orçamentário (PPA)",x.ppa)}${L("Ação orçamentária",x.acao||"não informada na base aberta – confirmar na cartilha do ministério")}${L("Modalidade",x.mod)}${L("Situação",x.sit)}</table>
 <h2>Emenda</h2><table>${L("Nº da emenda",x.emenda)}${L("Parlamentar",tc(x.parl))}${L("Tipo",x.tipo)}${L("Impositiva",x.imp)}${L("Valor da emenda",x.valor?fmtR(x.valor):"")}${L("Valor global do projeto",x.vglobal?fmtR(x.vglobal):"")}${L("Valor de repasse",x.vrepasse?fmtR(x.vrepasse):"")}</table>
 <h2>Proponente</h2><table>${L("Instituição",tc(x.prop))}${L("CNPJ",x.cnpj)}${L("Natureza jurídica",x.nat)}${L("Município/UF",tc(x.mun)+"/"+x.uf)}${L("E-mail",x.email)}${L("Telefone",x.tel)}</table>
 <h2>Como abrir no TransfereGov</h2><div>1. Acesse discricionarias.transferegov.sistema.gov.br e, na tela do gov.br, clique em <b>Acesso livre</b>.<br>2. Menu <b>Propostas › Consultar propostas</b>.<br>3. Digite o nº da proposta <b>${esc(x.id)}</b> e clique em Consultar. Lá estão o plano de trabalho, metas e anexos.</div>
@@ -2753,7 +2753,7 @@ async function buscaPj(){
   if(!d.itens.length){$("pjRes").innerHTML=`<p class="empty">Nenhum projeto encontrado. Tente palavras mais gerais.</p>`;return}
   st.pjUlt=d.itens;
   const cab=pg?`<div class="pjFiltro"><span>Programa <b>${esc(pg.cod)}</b> – ${esc(pg.nome||"")}</span><button data-pjlimpa>← voltar à busca da ideia</button></div>`
-   :(q&&d.ondeCabe.length?`<h3>Onde a ideia costuma caber</h3><p class="sub" style="margin:0">Clique num programa para ver todos os projetos aprovados nele.</p><div class="cabe">${d.ondeCabe.slice(0,3).map(o=>`<button data-pjprog="${esc(o.cod)}" data-nome="${esc(o.nome||"")}"><b>${esc(o.nome||o.cod)}</b><span class="sub">Ministério: ${esc(tc(o.orgao))}<br>Programa ${esc(o.cod)}${o.acao?` · Ação ${esc(o.acao)}`:""}<br>${o.n} projetos parecidos · média ${fmtR(o.media)}</span><span class="vai">Ver projetos deste programa →</span></button>`).join("")}</div>
+   :(q&&d.ondeCabe.length?`<h3>Onde a ideia costuma caber</h3><p class="sub" style="margin:0">Clique num programa para ver todos os projetos aprovados nele.</p><div class="cabe">${d.ondeCabe.slice(0,3).map(o=>`<button data-pjprog="${esc(o.cod)}" data-nome="${esc(o.nome||"")}"><b>${esc(o.nome||o.cod)}</b><span class="sub">Ministério: ${esc(tc(o.orgao))}<br>Programa ${esc(o.cod)}${o.acao?` · Ação ${esc(o.acao)}${o.ppa?` (PPA ${esc(o.ppa)})`:""}`:""}<br>${o.n} projetos parecidos · média ${fmtR(o.media)}</span><span class="vai">Ver projetos deste programa →</span></button>`).join("")}</div>
     <p class="sub" style="margin:0">Modalidade mais comum: ${d.modalidades.map(([m,n])=>`${esc(m)} (${n})`).join(", ")}. Cartilhas: ${[...new Set(d.ondeCabe.slice(0,3).map(o=>o.orgao))].map(o=>`<a href="${linkCartilha(o)}" target="_blank" rel="noopener">${esc(tc(o))}</a>`).join(" · ")}.</p>`:"");
   $("pjRes").innerHTML=cab+
     `<h3>${d.total.toLocaleString("pt-BR")} projetos${pg?" neste programa":q?" parecidos":""}${d.total>d.itens.length?` (mostrando ${d.itens.length})`:""}</h3>`+d.itens.map(pjCard).join("")+`<p class="sub">Fonte: dados abertos do TransfereGov · ${esc(d.base||"")}</p>`;
