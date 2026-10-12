@@ -437,9 +437,9 @@ details.fold[open] summary{margin-bottom:8px}
 .cabe button{font:inherit;text-align:left;cursor:pointer;color:inherit;border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--panel);transition:border-color .15s,transform .15s}.cabe button:hover{border-color:var(--brand2);transform:translateY(-1px)}.cabe .vai{display:block;margin-top:6px;font-size:12px;font-weight:700;color:var(--brand2)}
 .pjTag{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(46,107,255,.1);color:var(--brand);margin:2px 4px 2px 0}
 .pjFiltro{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0;padding:8px 11px;border-radius:10px;background:rgba(46,107,255,.08)}.pjFiltro button{font:inherit;font-size:12.5px;font-weight:700;border:0;background:none;color:var(--brand2);cursor:pointer;padding:0}.cabe b{display:block;color:var(--brand);font-size:13.5px}
-dialog.wide{width:min(860px,96vw)}
+dialog.wide{width:min(960px,96vw)}.ofx>div{min-width:0}
 .ofx{display:grid;grid-template-columns:1fr;gap:12px}
-@media (min-width:760px){.ofx{grid-template-columns:300px 1fr}}
+@media (min-width:760px){.ofx{grid-template-columns:300px minmax(0,1fr)}}
 .ofx .frm{grid-template-columns:1fr!important}
 .ofx textarea{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:8px;font:inherit;background:var(--panel);min-height:70px}
 .folha{background:#fff;color:#111;border:1px solid var(--line);border-radius:6px;padding:28px 30px;font-family:Georgia,"Times New Roman",serif;font-size:13px;line-height:1.5;max-height:65vh;overflow:auto}
@@ -669,6 +669,20 @@ body .chips button,body .chip{border-radius:999px!important}
 .pzL{display:grid;gap:8px}.pzI{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cor);border-radius:14px;padding:10px 12px}
 .pzI:hover{border-color:var(--brand2);border-left-color:var(--cor)}.pzI .d{flex:none;width:58px;text-align:center}.pzI .d b{display:block;font-size:17px}.pzI .d small{font-size:11px;color:var(--muted)}
 .pzI .t{font-size:14px;font-weight:600;line-height:1.3;min-width:0}.pzI .t small{display:block;font-weight:500;font-size:12px;color:var(--muted);margin-top:3px}.pzI .t small b{color:var(--brand)}
+
+.ofDrive{margin-top:14px;padding:12px;border:1px dashed var(--line);border-radius:14px;background:var(--tint)}
+.ofArq{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid var(--line)}.ofArq small{display:block;color:var(--muted);font-size:12px}
+.ofArq .acts{display:flex;gap:8px;flex-wrap:wrap}.ofArq .acts a,.ofArq .acts button{font:inherit;font-size:12.5px}
+.plB{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.mlG{display:grid;grid-template-columns:1fr;gap:14px}@media(min-width:820px){.mlG{grid-template-columns:1fr 1.2fr}}
+.mlLista{max-height:46vh;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:4px 10px}
+.mlL{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer}.mlL:last-child{border-bottom:0}
+.mlL span{flex:1;min-width:0}.mlL small{color:var(--muted)}.mlL input[type=email]{width:100%;margin-top:4px;font:inherit;font-size:13px;padding:6px 9px;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--ink)}
+.mlF label{display:block;margin:0 0 10px;font-size:13px;color:var(--muted);font-weight:600}.mlF input:not([type=checkbox]):not([type=radio]),.mlF textarea{display:block;width:100%;margin-top:4px;font:inherit;font-size:14px;color:var(--ink);padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.mlF .mlChk{display:flex;gap:8px;align-items:center;color:var(--ink);font-weight:500}.mlModo label{display:flex!important;gap:8px;align-items:flex-start;color:var(--ink)!important;font-weight:400!important}
+.ofx .acts{display:flex;flex-wrap:wrap;gap:8px}.ofx .acts>button{flex:1 1 150px;width:auto!important}.ofArq .acts>*{width:auto!important;flex:0 0 auto!important;padding:6px 12px}
+.mlModo{border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:4px 0}.mlModo label{display:block;margin:4px 0;font-size:13.5px}
+.mlR{list-style:none;padding:0;margin:10px 0 0}.mlR li{padding:5px 0;border-bottom:1px solid var(--line);font-size:13.5px}
 </style>
 </head>
 <body>
@@ -1790,12 +1804,13 @@ async function planoCli(id){
   eleitos.forEach(x=>{x.af=afin(x);x.re=!!mandatoDe(x);x.score=x.peso*100+(x.af.length?6:0)+(x.re?3:0)});
   eleitos.sort((a,b)=>b.score-a.score);
   const pills=x=>`${x.eleito?`<span class="pill ok">Eleito</span>`:`<span class="pill ok">Nas vagas (proj.)</span>`}${x.re?`<span class="pill re">Reeleição</span>`:`<span class="pill nv">Novo</span>`}${x.af.length?`<span class="pill re">Afinidade: ${esc(x.af[0])}</span>`:""}`;
-  const li=(x,why)=>`<li data-c="${esc(cid(x))}">${foto(x)}<div style="flex:1"><b>${esc(x.nome)}</b> <span class="sub">${esc(x.partido)}</span><div>${why.pills||""}</div><div class="why">${why.t}</div></div><button class="btn ghost sm" data-texto="${esc(x.nome)}" data-cli="${esc(cl.id)}" ${x.cargo==="5"?'data-sen="1"':""}>Texto</button></li>`;
+  const li=(x,why)=>`<li data-c="${esc(cid(x))}">${foto(x)}<div style="flex:1"><b>${esc(x.nome)}</b> <span class="sub">${esc(x.partido)}</span><div>${why.pills||""}</div><div class="why">${why.t}</div></div><span class="plB"><button class="btn ghost sm" data-texto="${esc(x.nome)}" data-cli="${esc(cl.id)}" ${x.cargo==="5"?'data-sen="1"':""}>Texto</button><button class="btn ghost sm" data-oficio="${esc(x.nome)}" data-src="pl" ${x.cargo==="5"?'data-ofsen="1"':""} data-ofcli="${esc(cl.id)}">Ofício / e-mail</button></span></li>`;
   const S5=st.cache[ck(cl.uf,"5")], C5=st.cache[ck(cl.uf,"5",m.cd)];
   let sen=[]; if(S5&&S5.status==="ok"&&C5&&C5.status==="ok"){const m5={};S5.data.cands.forEach(x=>m5[x.sq]=x);
     sen=C5.data.cands.filter(x=>x.valido&&x.votos>0).map(x=>{const t=m5[x.sq]||x;return {...t,vc:x.votos}}).filter(nasVagas)}
   const top=eleitos[0];
-  el.innerHTML=`<div class="insight" style="margin-top:10px"><p><b>Recomendação:</b> ${top?`começar por <b>${esc(top.nome)}</b> (${esc(top.partido)}): ${p1(top.peso*100)}% dos votos dele saíram de ${esc(m.nm)}${top.af.length?` e a atuação dele já passa por ${esc(top.af[0].toLowerCase())}`:""}. Quanto maior a dependência da cidade, maior o incentivo para mandar recurso para lá.`:`ainda não há eleitos ou deputados nas vagas com votos registrados em ${esc(m.nm)}.`}</p>
+  st.mala[cl.id]=[...eleitos,...atuaisFora].map(x=>({nome:x.nome,partido:x.partido,sen:false})).concat(sen.map(x=>({nome:x.nome,partido:x.partido,sen:true})));
+  el.innerHTML=`<div class="acts" style="margin:10px 0 0"><button class="btn sm" data-mala="${esc(cl.id)}">✉️ Mala direta para esta lista</button><button class="btn ghost sm" data-boletim="${esc(cl.id)}">Boletim do mês</button></div><div class="insight" style="margin-top:10px"><p><b>Recomendação:</b> ${top?`começar por <b>${esc(top.nome)}</b> (${esc(top.partido)}): ${p1(top.peso*100)}% dos votos dele saíram de ${esc(m.nm)}${top.af.length?` e a atuação dele já passa por ${esc(top.af[0].toLowerCase())}`:""}. Quanto maior a dependência da cidade, maior o incentivo para mandar recurso para lá.`:`ainda não há eleitos ou deputados nas vagas com votos registrados em ${esc(m.nm)}.`}</p>
     ${atuaisFora.length?`<p><b>Janela LOA 2027:</b> ${atuaisFora.map(x=>esc(x.nome)).join(", ")} ${atuaisFora.length>1?"têm":"tem"} mandato até janeiro, votos em ${esc(m.nm)} e não ${atuaisFora.length>1?"estão":"está"} nas vagas. ${atuaisFora.length>1?"Podem":"Pode"} indicar emenda agora e costuma${atuaisFora.length>1?"m":""} estar mais aberto${atuaisFora.length>1?"s":""} a deixar entregas na base.</p>`:""}
     <p class="sub">Ordem = peso da cidade na votação + afinidade com o tema (${esc(cl.tema)}) + continuidade de mandato. É recomendação, não garantia. Situação de vaga é projeção até o fim da totalização.</p></div>
     <h3>Ordem sugerida de abordagem · Câmara</h3>
@@ -2687,9 +2702,10 @@ function oficioHtml(f){
 st.of=null;
 async function abreOficio(autor,src){
   const S=st[src], o=S&&S.dados&&S.dados.lista.find(x=>x.autor===autor); const l=getCli(); if(!l.length){alert("Cadastre um cliente primeiro.");return}
-  const sen=o&&o.mand&&o.mand.cargo==="S"; const nm=o?nomeDe(o):tc(autor); const fem=/a$/i.test(nm.split(" ")[0]);
+  const btn=document.activeElement&&document.activeElement.closest?document.activeElement.closest("[data-oficio]"):null;
+  const sen=o?o.mand&&o.mand.cargo==="S":!!(btn&&btn.dataset.ofsen); const nm=o?nomeDe(o):tc(autor); const fem=/a$/i.test(nm.split(" ")[0]);
   st.of={autor,nm,partido:o&&o.mand?`${o.mand.partido}/${o.mand.uf}`:"",email:"",gab:""};
-  const cli=l.find(c=>c.id===st.rg.cli)||l[0];
+  const cli=l.find(c=>c.id===(btn&&btn.dataset.ofcli))||l.find(c=>c.id===st.rg.cli)||l[0];
   $("dlg").classList.add("wide");
   $("dlgIn").innerHTML=`<button class="x" id="dlgX" aria-label="Fechar">✕</button><h3 id="dlgNome" style="margin:0 0 4px">Ofício + e-mail</h3><p class="sub" style="margin:0 0 10px">${esc(nm)}</p>
   <div class="ofx"><div class="frm">
@@ -2704,8 +2720,10 @@ async function abreOficio(autor,src){
     <details><summary class="sub" style="cursor:pointer">Dados da instituição (CNES, endereço, ação…)</summary><div class="frm" id="ofCampos" style="margin-top:6px"></div></details>
   </div>
   <div><div class="folha" id="ofPrev"></div>
-    <div class="acts" style="margin-top:10px"><button id="ofPdf">Baixar PDF / imprimir</button><button id="ofGmail" class="btn">Rascunho no Gmail com anexo</button></div>
-    <p class="sub" id="ofMsg"></p></div></div>`;
+    <div class="acts" style="margin-top:10px"><button id="ofPdf">Baixar PDF / imprimir</button><button id="ofGmail" class="btn">Rascunho no Gmail com anexo</button><button id="ofAbreGm">Abrir no Gmail (sem anexo)</button></div>
+    <p class="sub" id="ofMsg"></p>
+    <div class="ofDrive"><b>Já tem ofício pronto no Drive?</b><p class="sub" style="margin:2px 0 8px">Procura nas pastas do cliente o ofício com o nome deste parlamentar e transforma em PDF.</p>
+      <button class="btn ghost sm" id="ofBuscaDrive">Procurar no Drive</button><div id="ofDriveRes"></div></div></div></div>`;
   const LBL={razao:"Razão social",cnes:"CNES",presidente:"Presidente / responsável",cargo:"Cargo",endereco:"Endereço",orgao:"Órgão",uo:"Unidade orçamentária",acao:"Ação orçamentária",gnd:"GND",modalidade:"Modalidade",objeto:"Objeto (destinada ao/à…)",causa:"Assunto / causa"};
   const camposDe=c=>{$("ofCampos").innerHTML=Object.entries(LBL).map(([k,t])=>`<label>${t}<input data-ofc="${k}" value="${esc(c[k]||"")}"></label>`).join("");
     $("ofNum").value=proxNumOf(c);$("ofVal").value=c.valor||""};
@@ -2714,6 +2732,7 @@ async function abreOficio(autor,src){
   camposDe(cli);
   const rr=(typeof relDe==="function")?relDe(nm,cli).concat(relDe(nm)):[]; const r0=rr.find(x=>x.email)||rr[0];
   if(r0){if(r0.email)$("ofEmail").value=r0.email;if(r0.gab)$("ofGab").value=/gab/i.test(r0.gab)?r0.gab:"Gabinete "+r0.gab}
+  if(!$("ofEmail").value) $("ofEmail").value=(o&&o.mand&&o.mand.email)||emailPorNome(nm)||emailPorNome(autor)||"";
   prev();
   $("ofCli").onchange=()=>{camposDe(getCli().find(x=>x.id===$("ofCli").value));prev()};
   $("dlgIn").addEventListener("input",e=>{if(e.target.closest(".ofx"))prev()});
@@ -2721,6 +2740,8 @@ async function abreOficio(autor,src){
   $("ofPdf").onclick=()=>{const w=window.open("","_blank");if(!w){alert("Permita pop-ups para baixar o PDF.");return}
     w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Ofício ${$("ofNum").value} – ${esc(atual().nome)}</title><style>@page{margin:2cm}body{font-family:Georgia,serif;font-size:12.5px;line-height:1.5;color:#111;max-width:760px;margin:auto}p{text-align:justify;margin:0 0 9px}h5{margin:12px 0 4px}</style></head><body>${$("ofPrev").innerHTML}<script>setTimeout(()=>print(),400)<\/script></body></html>`);w.document.close();marcaNum()};
   $("ofGmail").onclick=enviaRascunho;
+  $("ofAbreGm").onclick=()=>{const c=atual();window.open(linkGmail($("ofEmail").value.trim(),`Solicitação de emenda parlamentar – ${c.razao||c.nome}`,montaTexto(c,nm,$("ofTrat").value.replace(" Federal",""),0)),"_blank","noopener")};
+  $("ofBuscaDrive").onclick=()=>buscaOficioDrive(nm,$("ofCli").value,$("ofEmail").value.trim(),$("ofTrat").value);
   const dl=$("dlg");if(!dl.open){if(dl.showModal)dl.showModal();else dl.setAttribute("open","")}
   if(o&&o.mand&&o.mand.cargo==="D"){try{const d=await camJson(`${API_CAM}/deputados/${o.mand.id}`);const g=d.ultimoStatus&&d.ultimoStatus.gabinete;
     if(g&&st.of&&st.of.autor===autor){if(!$("ofGab").value)$("ofGab").value=`Gabinete ${g.sala||""}${g.predio?`, Anexo ${g.predio}`:""}`;if(!$("ofEmail").value)$("ofEmail").value=g.email||"";prev()}}catch(e){}}
@@ -2740,6 +2761,67 @@ async function enviaRascunho(){
     msg.innerHTML=`Rascunho criado no Gmail da Otimistas com o ofício em PDF anexo. <a href="https://mail.google.com/mail/?authuser=otimistasconsultoria@gmail.com#drafts" target="_blank" rel="noopener">Abrir rascunhos</a>`; marcaNum()}
   catch(e){msg.textContent="Não consegui criar o rascunho: "+e.message+". Use “Baixar PDF” e anexe manualmente."}
 }
+
+// ===== Ofício pronto no Drive (por parlamentar) =====
+const TRAT_VOC={"Deputado Federal":"Excelentíssimo Senhor Deputado","Deputada Federal":"Excelentíssima Senhora Deputada","Senador":"Excelentíssimo Senhor Senador","Senadora":"Excelentíssima Senhora Senadora"};
+function dadosCli(c){return {cliente:c.nome,razao:c.razao||c.nome,cidade:tc(c.cidade||""),uf:String(c.uf||"").toUpperCase(),objeto:c.objeto||"",valor:c.valor?("R$ "+c.valor):""}}
+async function buscaOficioDrive(nm,cliId,email,trat){
+  const box=$("ofDriveRes"), c=getCli().find(x=>x.id===cliId); if(!c)return; box.innerHTML=`<p class="sub">Procurando no Drive…</p>`;
+  try{const r=await postPlanilha({acao:"oficioBuscar",cliente:c.nome+" "+(c.razao||""),cidade:c.cidade,parlamentar:nm});
+    const l=r.lista||[]; if(!l.length){box.innerHTML=`<p class="sub">Não achei ofício de ${esc(c.nome)} para ${esc(nm)} no Drive. Dica: nomeie o arquivo como “Ofício - ${esc(c.nome)} - ${esc(nm)}”.</p>`;return}
+    box.innerHTML=l.map(f=>`<div class="ofArq"><div><b>${esc(f.nome)}</b><small>${esc(f.tipo)} · pasta ${esc(tc(f.pasta))} · ${esc(f.atualizado)}${f.especifico?"":" · ofício geral do cliente"}</small></div>
+      <div class="acts"><a href="${esc(f.url)}" target="_blank" rel="noopener">Abrir</a><button data-ofpdf="${esc(f.id)}">Baixar PDF</button><button data-ofrasc="${esc(f.id)}" class="btn">Rascunho com este PDF</button></div></div>`).join("")+`<p class="sub" id="ofDriveMsg"></p>`;
+    box.onclick=async e=>{const pf=e.target.closest("[data-ofpdf]"),rs=e.target.closest("[data-ofrasc]");const m=$("ofDriveMsg");
+      if(pf){m.textContent="Convertendo em PDF…";try{const j=await postPlanilha({acao:"oficioPdf",fileId:pf.dataset.ofpdf});m.innerHTML=`PDF pronto: <a href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.nome)}</a> (salvo na mesma pasta do Drive)`}catch(x){m.textContent="Não consegui: "+x.message}}
+      if(rs){m.textContent="Criando o rascunho com o PDF anexado…";const d=dadosCli(c),voc=TRAT_VOC[trat]||"Excelentíssimo(a) Senhor(a)";
+        try{const j=await postPlanilha({acao:"rascunhoParl",modo:"rascunho",cliente:c.nome,cidade:c.cidade,parlamentar:nm,para:email,fileId:rs.dataset.ofrasc,
+          assunto:`Solicitação de emenda parlamentar – ${d.razao} (${d.cidade}/${d.uf})`,corpo:`${voc} ${nm},\n\nCumprimentando-o(a) cordialmente, encaminhamos em anexo o ofício da ${d.razao}, de ${d.cidade}/${d.uf}, com a solicitação de apoio por meio de emenda parlamentar.\n\nColocamo-nos à disposição para apresentar o projeto ao gabinete.\n\nAtenciosamente,\nPhelipe Sales\nOtimistas Consultoria`});
+          m.innerHTML=`Rascunho criado com <b>${esc(j.anexo||"o ofício")}</b>. <a href="${esc(j.link)}" target="_blank" rel="noopener">Abrir no Gmail para revisar e enviar</a>`}catch(x){m.textContent="Não consegui: "+x.message}}};
+  }catch(e){box.innerHTML=`<p class="sub">Não consegui consultar o Drive: ${esc(e.message)}</p>`}
+}
+// ===== Mala direta por cliente (a partir do Plano de captação) =====
+st.mala={};
+function abreMala(cliId){
+  const c=getCli().find(x=>x.id===cliId), L=(st.mala[cliId]||[]); if(!c||!L.length){alert("Abra o Plano de captação do cliente primeiro.");return}
+  const lin=L.map((p,i)=>{const em=emailPorNome(p.nome);return `<label class="mlL"><input type="checkbox" data-mli="${i}" ${em?"checked":""}><span><b>${esc(p.nome)}</b> <small>${p.sen?"Senado":"Câmara"}${p.partido?" · "+esc(p.partido):""}</small><input data-mle="${i}" type="email" value="${esc(em)}" placeholder="e-mail do gabinete"></span></label>`}).join("");
+  $("dlg").classList.add("wide");
+  $("dlgIn").innerHTML=`<button class="x" id="dlgX" aria-label="Fechar">✕</button><h3 id="dlgNome" style="margin:0 0 2px">Mala direta · ${esc(c.nome)}</h3>
+   <p class="sub" style="margin:0 0 10px">Um e-mail por parlamentar, com o ofício dele (do Drive) em PDF anexado. Use {{tratamento}}, {{parlamentar}}, {{razao}}, {{cidade}}, {{uf}}, {{objeto}} e {{valor}} no texto.</p>
+   <div class="mlG"><div><div class="mlLista">${lin}</div><p class="sub" style="margin:6px 0 0">Sem e-mail = só rascunho (você completa no Gmail). Novos eleitos só têm e-mail oficial a partir de fevereiro.</p></div>
+   <div class="mlF"><label>Assunto<input id="mlAs" value="Solicitação de emenda parlamentar – {{razao}} ({{cidade}}/{{uf}})"></label>
+    <label>Texto<textarea id="mlTx" rows="9">{{tratamento}} {{parlamentar}},
+
+Cumprimentando-o(a) cordialmente, encaminhamos em anexo o ofício da {{razao}}, de {{cidade}}/{{uf}}, com a solicitação de apoio por meio de emenda parlamentar.
+
+Colocamo-nos à disposição para apresentar o projeto ao gabinete.
+
+Atenciosamente,
+Phelipe Sales
+Otimistas Consultoria</textarea></label>
+    <label class="mlChk"><input type="checkbox" id="mlExige" checked> Só incluir quem tem ofício próprio no Drive</label>
+    <fieldset class="mlModo"><legend>Como sair</legend>
+     <label><input type="radio" name="mlModo" value="rascunho" checked> <b>Rascunhos no Gmail</b> para eu revisar e enviar (recomendado)</label>
+     <label><input type="radio" name="mlModo" value="enviar"> <b>Enviar agora</b> (limite do Google: cerca de 100 por dia)</label></fieldset>
+    <div class="acts"><button class="btn" id="mlVai">Preparar</button></div><div id="mlRes"></div></div></div>`;
+  const dl=$("dlg");if(!dl.open){if(dl.showModal)dl.showModal();else dl.setAttribute("open","")}
+  $("mlVai").onclick=async()=>{
+    const modo=document.querySelector('[name="mlModo"]:checked').value, sel=[...document.querySelectorAll("[data-mli]:checked")].map(x=>+x.dataset.mli);
+    if(!sel.length){alert("Marque pelo menos um parlamentar.");return}
+    if(modo==="enviar"&&!confirm(`Enviar AGORA ${sel.length} e-mail(s) em nome da Otimistas, com os ofícios anexados? Não dá para desfazer.`))return;
+    const itens=sel.map(i=>{const p=L[i];return {parlamentar:p.nome,email:document.querySelector(`[data-mle="${i}"]`).value.trim(),dados:{tratamento:p.sen?"Excelentíssimo(a) Senhor(a) Senador(a)":"Excelentíssimo(a) Senhor(a) Deputado(a)"}}});
+    const res=$("mlRes"), out=[]; $("mlVai").disabled=true;
+    for(let k=0;k<itens.length;k+=5){res.innerHTML=`<p class="sub">Processando ${Math.min(k+5,itens.length)} de ${itens.length}… (procura o ofício, converte em PDF e ${modo==="enviar"?"envia":"cria o rascunho"})</p>`;
+      try{const j=await postPlanilha({acao:"malaDireta",cliente:c.nome+(c.razao?" "+c.razao:""),cidade:c.cidade,modo,exigeOficio:$("mlExige").checked,assunto:$("mlAs").value,corpo:$("mlTx").value,dados:dadosCli(c),itens:itens.slice(k,k+5)});out.push(...(j.resultados||[]))}
+      catch(e){itens.slice(k,k+5).forEach(i=>out.push({parlamentar:i.parlamentar,status:"erro: "+e.message}))}}
+    $("mlVai").disabled=false;
+    res.innerHTML=`<ul class="mlR">${out.map(r=>`<li><b>${esc(r.parlamentar)}</b> · ${esc(r.status)}${r.anexo?` · ${esc(r.anexo)}`:""}${r.link?` · <a href="${esc(r.link)}" target="_blank" rel="noopener">abrir</a>`:""}</li>`).join("")}</ul><p class="sub">Tudo fica registrado na aba Envios da planilha. ${modo==="rascunho"?`<a href="https://mail.google.com/mail/?authuser=${encodeURIComponent(CONTA_GMAIL)}#drafts" target="_blank" rel="noopener">Abrir rascunhos no Gmail</a>`:""}</p>`;
+  };
+}
+document.addEventListener("click",e=>{const m=e.target.closest("[data-mala]");if(m){abreMala(m.dataset.mala);return}
+  const nl=e.target.closest("[data-boletim]");if(nl){const c=getCli().find(x=>x.id===nl.dataset.boletim);if(!c)return;nl.disabled=true;nl.textContent="Gerando…";
+    postPlanilha({acao:"newsletterTeste",cliente:c.nome}).then(j=>{const f=(j.feitos||[])[0];nl.textContent="Boletim do mês";nl.disabled=false;if(f)window.open(f.link,"_blank","noopener");else alert(j.erro||"Cliente não encontrado na planilha (envie os clientes para a planilha).")}).catch(x=>{nl.disabled=false;nl.textContent="Boletim do mês";alert(x.message)})}
+});
+
 document.addEventListener("click",e=>{const of=e.target.closest("[data-oficio]");if(of){e.stopPropagation();abreOficio(of.dataset.oficio,of.dataset.src||"rg")}},true);
 $("dlg").addEventListener("close",()=>$("dlg").classList.remove("wide"));
 
@@ -2750,9 +2832,13 @@ st.fotos=null;
 function https_(u){return String(u||"").replace(/^http:\/\//,"https://")}
 function fotoPorNome(n){ if(!st.fotos||!n) return ""; const k=kParl(n); if(!k) return ""; if(st.fotos[k]) return st.fotos[k];
   const t=kk(tiraTitulo(n)); for(const [x,u] of Object.entries(st.fotos)){ if((t.length>5&&x===t)||(Math.abs(x.length-k.length)<=2&&lev(x,k)<=2)) return u } return "" }
+function emailPorNome(n){ if(!st.emails||!n) return ""; const k=kParl(n); if(st.emails[k]) return st.emails[k];
+  for(const [x,u] of Object.entries(st.emails)){ if(Math.abs(x.length-k.length)<=2&&lev(x,k)<=2) return u } return "" }
+const CONTA_GMAIL="otimistasconsultoria@gmail.com";
+function linkGmail(para,assunto,corpo){return `https://mail.google.com/mail/?authuser=${encodeURIComponent(CONTA_GMAIL)}&view=cm&fs=1&to=${encodeURIComponent(para||"")}&su=${encodeURIComponent(assunto||"")}&body=${encodeURIComponent(corpo||"")}`}
 function carregaFotos(){ if(st.fotosP) return st.fotosP;
-  try{const c=JSON.parse(store.get("otm-fotos")||"null"); if(c&&c.m&&Date.now()-c.t<864e5){st.fotos=c.m; return st.fotosP=Promise.resolve()}}catch(e){}
-  return st.fotosP=api({acao:"parlamentares"}).then(r=>{const m={};(r.lista||[]).forEach(p=>{if(p.foto)m[kParl(p.nome)]=https_(p.foto)}); if(Object.keys(m).length>100){st.fotos=m;store.set("otm-fotos",JSON.stringify({t:Date.now(),m}))}
+  try{const c=JSON.parse(store.get("otm-fotos2")||"null"); if(c&&c.m&&Date.now()-c.t<864e5){st.fotos=c.m;st.emails=c.em||{}; return st.fotosP=Promise.resolve()}}catch(e){}
+  return st.fotosP=api({acao:"parlamentares"}).then(r=>{const m={},em={};(r.lista||[]).forEach(p=>{const k=kParl(p.nome);if(p.foto)m[k]=https_(p.foto);if(p.email)em[k]=p.email}); if(Object.keys(m).length>100){st.fotos=m;st.emails=em;store.set("otm-fotos2",JSON.stringify({t:Date.now(),m,em}))}
     try{if(VIEW==="rg"&&st.rg.dados)renderRegua(); if(VIEW==="dos"&&st.rx)renderRx()}catch(e){}}).catch(()=>{st.fotosP=null}) }
 st.rel=null;
 const lev=(a,b)=>{const m=[];for(let i=0;i<=a.length;i++){m[i]=[i];for(let j=1;j<=b.length;j++)m[i][j]=i?Math.min(m[i-1][j]+1,m[i][j-1]+1,m[i-1][j-1]+(a[i-1]===b[j-1]?0:1)):j}return m[a.length][b.length]};
