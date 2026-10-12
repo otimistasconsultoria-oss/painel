@@ -434,7 +434,9 @@ details.fold[open] summary{margin-bottom:8px}
 .pj .o{font-weight:600;color:var(--ink);margin:2px 0 4px}.pj .m{color:var(--muted);font-size:12.5px}
 .pj .c{display:flex;gap:8px;flex-wrap:wrap;margin-top:5px}.pj .c a{font-size:12.5px;font-weight:600;color:var(--brand)}
 .cabe{display:grid;grid-template-columns:1fr;gap:8px;margin:10px 0}@media(min-width:700px){.cabe{grid-template-columns:repeat(3,1fr)}}
-.cabe div{border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--panel)}.cabe b{display:block;color:var(--brand);font-size:13.5px}
+.cabe button{font:inherit;text-align:left;cursor:pointer;color:inherit;border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--panel);transition:border-color .15s,transform .15s}.cabe button:hover{border-color:var(--brand2);transform:translateY(-1px)}.cabe .vai{display:block;margin-top:6px;font-size:12px;font-weight:700;color:var(--brand2)}
+.pjTag{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(46,107,255,.1);color:var(--brand);margin:2px 4px 2px 0}
+.pjFiltro{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0;padding:8px 11px;border-radius:10px;background:rgba(46,107,255,.08)}.pjFiltro button{font:inherit;font-size:12.5px;font-weight:700;border:0;background:none;color:var(--brand2);cursor:pointer;padding:0}.cabe b{display:block;color:var(--brand);font-size:13.5px}
 dialog.wide{width:min(860px,96vw)}
 .ofx{display:grid;grid-template-columns:1fr;gap:12px}
 @media (min-width:760px){.ofx{grid-template-columns:300px 1fr}}
@@ -2709,25 +2711,56 @@ function pjCard(x){return `<div class="pj"><div class="m">${esc(x.ano)} · ${esc
   <div class="o">${esc(x.objeto)}</div>
   <div class="m"><b style="color:var(--ink)">${esc(tc(x.prop))}</b>${x.cnpj?" · "+esc(x.cnpj):""}${x.nat?" · "+esc(x.nat):""}</div>
   <div class="m">Emenda ${esc(x.emenda)} · <b style="color:var(--ink)">${esc(tc(x.parl))}</b>${x.valor?" · "+fmtR(x.valor):""}${x.imp?" · impositiva: "+esc(tc(x.imp)):""}</div>
-  <div class="m">${esc(tc(x.orgao))} · programa ${esc(x.codProg)} – ${esc(x.prog)}${x.mod?" · "+esc(x.mod):""}</div>
-  <div class="c">${x.email?`<a href="mailto:${esc(x.email)}">${esc(x.email)}</a>`:""}${x.tel?`<a href="tel:${esc(String(x.tel).replace(/\D/g,""))}">${esc(x.tel)}</a>`:""}
+  <div class="m"><span class="pjTag">Ministério: ${esc(tc(x.orgao))}</span><span class="pjTag">Programa ${esc(x.codProg)}</span>${x.acao?`<span class="pjTag">Ação ${esc(x.acao)}</span>`:""}${x.mod?`<span class="pjTag">${esc(x.mod)}</span>`:""}</div>
+  <div class="m">${esc(x.prog)}</div>
+  <div class="c"><a href="#" data-ficha="${esc(x.id)}">Baixar ficha (PDF)</a>
+   <a href="${linkCartilha(x.orgao)}" target="_blank" rel="noopener" title="Busca a cartilha de emendas do ministério">Cartilha do ministério</a>
+   ${x.email?`<a href="mailto:${esc(x.email)}">${esc(x.email)}</a>`:""}${x.tel?`<a href="tel:${esc(String(x.tel).replace(/\D/g,""))}">${esc(x.tel)}</a>`:""}
    <a href="https://www.google.com/search?q=${encodeURIComponent(x.prop+" "+x.mun)}" target="_blank" rel="noopener">Pesquisar instituição</a>
-   ${x.id?`<a href="https://discricionarias.transferegov.sistema.gov.br/voluntarias/ConsultarProposta/PreenchaOsDadosDaConsultaDeProposta.do" target="_blank" rel="noopener" data-copia="${esc(x.id)}" title="Abre a consulta pública; o nº da proposta é copiado para você colar">Ver no TransfereGov (proposta ${esc(x.id)})</a>`:""}</div>${x.sc&&x.sc<100?`<div class="m">Semelhança com a ideia: ${x.sc}%</div>`:""}</div>`}
+   ${x.id?`<a href="https://discricionarias.transferegov.sistema.gov.br/voluntarias/ConsultarProposta/PreenchaOsDadosDaConsultaDeProposta.do" target="_blank" rel="noopener" data-copia="${esc(x.id)}" title="Na tela do gov.br, escolha Acesso livre; o nº da proposta já vai copiado">Ver no TransfereGov (proposta ${esc(x.id)})</a>`:""}</div>${x.sc&&x.sc<100?`<div class="m">Semelhança com a ideia: ${x.sc}%</div>`:""}</div>`}
 document.addEventListener("click",e=>{const a=e.target.closest("[data-copia]");if(a&&navigator.clipboard)navigator.clipboard.writeText(a.dataset.copia).catch(()=>{})});
+function linkCartilha(org){return "https://www.google.com/search?q="+encodeURIComponent("cartilha emendas parlamentares 2026 "+tc(org||""))}
+function fichaPj(x){
+  const fmtR=v=>Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+  const L=(r,v)=>v||v===0?`<tr><th>${r}</th><td>${esc(String(v))}</td></tr>`:"";
+  const h=`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Ficha proposta ${esc(x.id)} – ${esc(tc(x.prop))}</title>
+<style>body{font:13px/1.45 Arial,Helvetica,sans-serif;color:#111;margin:28px}h1{font-size:18px;margin:0 0 2px;color:#1E3FAE}h2{font-size:13px;margin:18px 0 6px;color:#1E3FAE;border-bottom:1.5px solid #1E3FAE;padding-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
+table{width:100%;border-collapse:collapse}th{text-align:left;width:32%;color:#555;font-weight:600;vertical-align:top;padding:4px 8px 4px 0}td{padding:4px 0;border-bottom:1px solid #eee}.obj{background:#F3F6FC;padding:10px 12px;border-radius:6px}
+.nota{font-size:11px;color:#555;margin-top:18px}.bt{margin:0 0 16px}.bt button{font:inherit;font-weight:700;padding:8px 14px;border:0;border-radius:8px;background:#1E3FAE;color:#fff;cursor:pointer}@media print{.bt{display:none}body{margin:12mm}}</style></head><body>
+<div class="bt"><button onclick="print()">Salvar como PDF / imprimir</button></div>
+<h1>${esc(tc(x.prop))}</h1><div style="color:#555">Proposta TransfereGov nº ${esc(x.id)} · ${esc(tc(x.mun))}/${esc(x.uf)} · ${esc(x.ano)}</div>
+<h2>Objeto</h2><div class="obj">${esc(x.objeto)}</div>
+<h2>Enquadramento</h2><table>${L("Ministério / órgão",tc(x.orgao))}${L("Programa",(x.codProg?x.codProg+" – ":"")+(x.prog||""))}${L("Ação orçamentária",x.acao||"não informada na base aberta – confirmar na cartilha do ministério")}${L("Modalidade",x.mod)}${L("Situação",x.sit)}</table>
+<h2>Emenda</h2><table>${L("Nº da emenda",x.emenda)}${L("Parlamentar",tc(x.parl))}${L("Tipo",x.tipo)}${L("Impositiva",x.imp)}${L("Valor da emenda",x.valor?fmtR(x.valor):"")}${L("Valor global do projeto",x.vglobal?fmtR(x.vglobal):"")}${L("Valor de repasse",x.vrepasse?fmtR(x.vrepasse):"")}</table>
+<h2>Proponente</h2><table>${L("Instituição",tc(x.prop))}${L("CNPJ",x.cnpj)}${L("Natureza jurídica",x.nat)}${L("Município/UF",tc(x.mun)+"/"+x.uf)}${L("E-mail",x.email)}${L("Telefone",x.tel)}</table>
+<h2>Como abrir no TransfereGov</h2><div>1. Acesse discricionarias.transferegov.sistema.gov.br e, na tela do gov.br, clique em <b>Acesso livre</b>.<br>2. Menu <b>Propostas › Consultar propostas</b>.<br>3. Digite o nº da proposta <b>${esc(x.id)}</b> e clique em Consultar. Lá estão o plano de trabalho, metas e anexos.</div>
+<p class="nota">Fonte: dados abertos do TransfereGov (Siconv), organizados pela Otimistas Consultoria em ${new Date().toLocaleDateString("pt-BR")}. A base aberta não traz o plano de trabalho completo; valores e situação podem ter mudado desde a última atualização.</p>
+</body></html>`;
+  const w=window.open("","_blank");
+  if(!w){const b=new Blob([h],{type:"text/html"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=`ficha-proposta-${x.id}.html`;a.click();return}
+  w.document.open();w.document.write(h);w.document.close();setTimeout(()=>{try{w.focus();w.print()}catch(e){}},400);
+}
+document.addEventListener("click",e=>{
+  const f=e.target.closest("[data-ficha]");if(f){e.preventDefault();const x=(st.pjUlt||[]).concat(st.pjOutros||[]).find(i=>String(i.id)===f.dataset.ficha);if(x)fichaPj(x);return}
+  const c=e.target.closest("[data-pjprog]");if(c){st.pjProg={cod:c.dataset.pjprog,nome:c.dataset.nome};buscaPj();$("pjRes").scrollIntoView({behavior:"smooth",block:"start"});return}
+  if(e.target.closest("[data-pjlimpa]")){st.pjProg=null;buscaPj();return}
+});
 async function buscaPj(){
-  const q=$("pjQ").value.trim(),uf=$("pjUf").value,mun=$("pjMun").value.trim(),autor=$("pjAut").value.trim();
-  if(!q&&!mun&&!autor){$("pjRes").innerHTML=`<p class="empty">Escreva a ideia ou escolha uma cidade ou parlamentar.</p>`;return}
+  const q=$("pjQ").value.trim(),uf=$("pjUf").value,mun=$("pjMun").value.trim(),autor=$("pjAut").value.trim(),pg=st.pjProg;
+  if(!q&&!mun&&!autor&&!pg){$("pjRes").innerHTML=`<p class="empty">Escreva a ideia ou escolha uma cidade ou parlamentar.</p>`;return}
   $("pjRes").innerHTML=`<p class="sub">Procurando nos projetos… pode levar alguns segundos.</p>`;
-  let d;try{d=await api({acao:"projetos",q,uf:uf?UFS[uf]:"",municipio:mun,autor})}catch(e){$("pjRes").innerHTML=`<p class="empty">${/vazio|importar/i.test(e.message)?"O banco de projetos ainda não foi carregado (Preparador + importarProjetos).":"Não consegui consultar a planilha."}</p>`;return}
+  let d;try{d=await api(pg?{acao:"projetos",prog:pg.cod,uf:uf?UFS[uf]:"",municipio:mun,autor}:{acao:"projetos",q,uf:uf?UFS[uf]:"",municipio:mun,autor})}catch(e){$("pjRes").innerHTML=`<p class="empty">${/vazio|importar/i.test(e.message)?"O banco de projetos ainda não foi carregado (Preparador + importarProjetos).":"Não consegui consultar a planilha."}</p>`;return}
   if(!d.itens.length){$("pjRes").innerHTML=`<p class="empty">Nenhum projeto encontrado. Tente palavras mais gerais.</p>`;return}
   st.pjUlt=d.itens;
-  $("pjRes").innerHTML=(q?`<h3>Onde a ideia costuma caber</h3><div class="cabe">${d.ondeCabe.slice(0,3).map(o=>`<div><b>${esc(o.nome||o.cod)}</b><span class="sub">${esc(tc(o.orgao))} · programa ${esc(o.cod)}<br>${o.n} projetos parecidos · média ${fmtR(o.media)}</span></div>`).join("")}</div>
-    <p class="sub" style="margin:0">Modalidade mais comum: ${d.modalidades.map(([m,n])=>`${esc(m)} (${n})`).join(", ")}. O programa do TransfereGov indica o órgão e a linha de financiamento; confirme a ação orçamentária na cartilha do ministério.</p>`:"")+
-    `<h3>${d.total.toLocaleString("pt-BR")} projetos${q?" parecidos":""}${d.total>d.itens.length?` (mostrando ${d.itens.length})`:""}</h3>`+d.itens.map(pjCard).join("")+`<p class="sub">Fonte: dados abertos do TransfereGov · ${esc(d.base||"")}</p>`;
+  const cab=pg?`<div class="pjFiltro"><span>Programa <b>${esc(pg.cod)}</b> – ${esc(pg.nome||"")}</span><button data-pjlimpa>← voltar à busca da ideia</button></div>`
+   :(q&&d.ondeCabe.length?`<h3>Onde a ideia costuma caber</h3><p class="sub" style="margin:0">Clique num programa para ver todos os projetos aprovados nele.</p><div class="cabe">${d.ondeCabe.slice(0,3).map(o=>`<button data-pjprog="${esc(o.cod)}" data-nome="${esc(o.nome||"")}"><b>${esc(o.nome||o.cod)}</b><span class="sub">Ministério: ${esc(tc(o.orgao))}<br>Programa ${esc(o.cod)}${o.acao?` · Ação ${esc(o.acao)}`:""}<br>${o.n} projetos parecidos · média ${fmtR(o.media)}</span><span class="vai">Ver projetos deste programa →</span></button>`).join("")}</div>
+    <p class="sub" style="margin:0">Modalidade mais comum: ${d.modalidades.map(([m,n])=>`${esc(m)} (${n})`).join(", ")}. Cartilhas: ${[...new Set(d.ondeCabe.slice(0,3).map(o=>o.orgao))].map(o=>`<a href="${linkCartilha(o)}" target="_blank" rel="noopener">${esc(tc(o))}</a>`).join(" · ")}.</p>`:"");
+  $("pjRes").innerHTML=cab+
+    `<h3>${d.total.toLocaleString("pt-BR")} projetos${pg?" neste programa":q?" parecidos":""}${d.total>d.itens.length?` (mostrando ${d.itens.length})`:""}</h3>`+d.itens.map(pjCard).join("")+`<p class="sub">Fonte: dados abertos do TransfereGov · ${esc(d.base||"")}</p>`;
 }
 async function pjDoParl(nome,box){
   try{const d=await api({acao:"projetos",autor:tiraTitulo(nome)});const b=$(box);if(!b)return;
-    b.innerHTML=d.itens&&d.itens.length?`<p class="sub" style="margin:0">${d.total} projetos com emenda dele no TransfereGov (convênios e termos de fomento). Os mais recentes:</p>`+d.itens.slice(0,6).map(pjCard).join(""):`<p class="sub">Nenhum projeto dele no banco do TransfereGov (as emendas de saúde fundo a fundo não passam por lá).</p>`}
+    st.pjOutros=(st.pjOutros||[]).concat(d.itens||[]).slice(-200);b.innerHTML=d.itens&&d.itens.length?`<p class="sub" style="margin:0">${d.total} projetos com emenda dele no TransfereGov (convênios e termos de fomento). Os mais recentes:</p>`+d.itens.slice(0,6).map(pjCard).join(""):`<p class="sub">Nenhum projeto dele no banco do TransfereGov (as emendas de saúde fundo a fundo não passam por lá).</p>`}
   catch(e){const b=$(box);if(b)b.innerHTML=`<p class="sub">${/vazio|importar/i.test(e.message)?"Banco de projetos ainda não carregado.":"Não consegui consultar."}</p>`}
 }
 // ---- comparar um PDF de projeto com o banco
@@ -2757,17 +2790,17 @@ $("pjPdf").onchange=async e=>{
   box.innerHTML=`<div class="pdfBox"><b>${esc(f.name)}</b><p class="sub" style="margin:2px 0 6px">Palavras-chave encontradas (toque para tirar as que não importam):</p>
     <div class="kw">${kw.map(w=>`<button class="kwb" aria-pressed="true" data-kw="${esc(w)}">${esc(w)}</button>`).join("")}</div>
     <div class="btns" style="margin-top:8px"><button class="btn" id="pjPdfBusca">Buscar projetos parecidos</button><button class="btn ghost" id="pjPdfClaude">Pedir análise completa ao Claude</button></div><p class="sub" id="pjPdfMsg"></p></div>`;
-  $("pjQ").value=kw.join(" "); buscaPj(); e.target.value="";
+  $("pjQ").value=kw.join(" "); st.pjProg=null; buscaPj(); e.target.value="";
 };
 document.addEventListener("click",e=>{
   const k=e.target.closest("[data-kw]"); if(k){k.setAttribute("aria-pressed",k.getAttribute("aria-pressed")==="true"?"false":"true");$("pjQ").value=[...document.querySelectorAll("[data-kw][aria-pressed=true]")].map(b=>b.dataset.kw).join(" ");return}
-  if(e.target.closest("#pjPdfBusca")){buscaPj();return}
+  if(e.target.closest("#pjPdfBusca")){st.pjProg=null;buscaPj();return}
   if(e.target.closest("#pjPdfClaude")&&st.pdfProj){
     const P=st.pdfProj, its=(st.pjUlt||[]).slice(0,10).map((x,i)=>`${i+1}. ${x.ano} · ${tc(x.mun)}/${x.uf} · ${tc(x.prop)} · ${x.objeto} · ${tc(x.orgao)} · programa ${x.codProg} – ${x.prog} · ${x.mod||""} · emenda de ${tc(x.parl)} · ${fmtR(x.valor||0)} · proposta ${x.id||""}`).join("\n");
     const txt=`Sou consultor de captação de emendas parlamentares (Otimistas Consultoria). Analise o projeto abaixo e compare com os projetos parecidos que já receberam emenda no TransfereGov.\n\nPROJETO (${P.nome}) — trecho inicial:\n${P.trecho}\n\nPROJETOS PARECIDOS JÁ APOIADOS:\n${its||"(nenhum encontrado)"}\n\nQuero: 1) quais 3 projetos são mais próximos e por quê; 2) em qual ministério, programa e ação orçamentária o meu projeto melhor se enquadra, e a modalidade (fundo a fundo, convênio, termo de fomento); 3) se é custeio ou investimento (GND 3 ou 4); 4) ajustes no texto para aumentar a chance de aprovação; 5) que tipo de parlamentar costuma apoiar esse tipo de projeto. Separe fato, inferência e recomendação.`;
     (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>{$("pjPdfMsg").innerHTML="Pedido copiado. Abra o Claude, cole na conversa e <b>anexe o mesmo PDF</b>: a análise fica completa."}).catch(()=>prompt("Copie o pedido:",txt));return}
 });
-$("pjGo").onclick=buscaPj; $("pjQ").addEventListener("keydown",e=>{if(e.key==="Enter")buscaPj()});
+$("pjGo").onclick=()=>{st.pjProg=null;buscaPj()}; $("pjQ").addEventListener("keydown",e=>{if(e.key==="Enter"){st.pjProg=null;buscaPj()}});
 $("pjUf").innerHTML+=Object.entries(UFS).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");
 
 buildUFs(); buildMap(); renderCli(); testaApi(); initRegua(); carregaRel().then(()=>{renderHist();if(st.rg.dados)renderRegua()}); if(store.get("otm-pane")==="dados") setPane("dados");
