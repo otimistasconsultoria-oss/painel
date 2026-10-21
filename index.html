@@ -701,6 +701,74 @@ body .chips button,body .chip{border-radius:999px!important}
 .lgnMsg.err{color:var(--err)}
 .lgnX{font:inherit;font-size:13px;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;justify-self:center;padding:4px}
 .lgn:not(.cad) .lgnCad{display:none}
+/* portal do cliente */
+.ptl{position:fixed;inset:0;z-index:950;background:var(--bg);overflow:auto;-webkit-overflow-scrolling:touch}
+.ptl[hidden]{display:none}
+.ptlIn{max-width:980px;margin:0 auto;padding:16px 16px 40px;box-sizing:border-box;display:grid;gap:14px}
+.ptlTop{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.ptlMarca{font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+.ptlMarca b{color:var(--brand)}
+.ptlAcoes{display:flex;gap:8px;flex-wrap:wrap}
+.ptlHero{background:var(--brand);color:#fff;border-radius:18px;padding:20px 18px 18px;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(31,63,160,.28)}
+.ptlHero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--accent) 0 34%,var(--gold) 34% 52%,var(--brand2) 52%)}
+:root[data-theme="dark"] .ptlHero{background:#1A2C6B}
+.ptlHero .k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.8;font-weight:700}
+.ptlHero h1{margin:4px 0 4px;font-size:clamp(24px,5.5vw,34px);letter-spacing:-.02em;line-height:1.1}
+.ptlHero p{margin:0;opacity:.88;font-size:14px;line-height:1.45}
+.ptlNums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
+@media (min-width:720px){.ptlNums{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.ptlNums div{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 12px}
+.ptlNums b{display:block;font-size:22px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.ptlNums span{font-size:12px;opacity:.85;line-height:1.3;display:block}
+.ptlCard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow);min-width:0}
+.ptlCard h2{margin:0 0 4px;font-size:17px;color:var(--ink);letter-spacing:-.01em}
+.ptlCard .sub{margin:0 0 12px;font-size:13px;color:var(--muted);line-height:1.45}
+.ptlDuo{display:grid;gap:14px}
+@media (min-width:820px){.ptlDuo{grid-template-columns:1fr 1fr}}
+.ptlAviso{background:var(--ins);border:1px solid var(--insl);border-radius:12px;padding:10px 12px;font-size:13px;color:var(--ink);line-height:1.45}
+.ptlAviso b{display:block;margin-bottom:2px}
+.ptlFunil{display:grid;gap:8px}
+.ptlFunil .f{display:grid;grid-template-columns:minmax(0,170px) 1fr 34px;align-items:center;gap:10px;font-size:13px}
+.ptlFunil .f span{color:var(--ink);font-weight:600}
+.ptlFunil .f i{display:block;height:10px;border-radius:99px;background:var(--track);overflow:hidden}
+.ptlFunil .f i em{display:block;height:100%;border-radius:99px}
+.ptlFunil .f b{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
+.e1{--c:var(--out)}.e2{--c:var(--brand2)}.e3{--c:var(--gold)}.e4{--c:var(--brand)}.e5{--c:var(--win)}
+.ptlFunil .f i em{background:var(--c)}
+.ptlChips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.ptlChips button{font:inherit;font-size:12px;font-weight:700;border:1.5px solid var(--line);background:var(--panel);color:var(--muted);border-radius:99px;padding:5px 10px;cursor:pointer}
+.ptlChips button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.ptlLista{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ptlP{display:grid;grid-template-columns:40px 1fr;gap:10px;align-items:start;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--tint)}
+.ptlP .av{width:40px;height:40px;border-radius:50%;background:var(--track) center/cover no-repeat;display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--muted)}
+.ptlP .t{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap}
+.ptlP .nm{font-weight:700;color:var(--ink);font-size:14px}
+.ptlP .mt{font-size:12px;color:var(--muted)}
+.ptlP .dt{font-size:13px;color:var(--ink);margin-top:4px;line-height:1.4}
+.ptlEt{font-size:11px;font-weight:800;letter-spacing:.02em;border-radius:99px;padding:3px 9px;color:#fff;background:var(--c);white-space:nowrap}
+.e3 .ptlEt{color:#3a2a00}
+.ptlUl{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;color:var(--ink)}
+.ptlUl li{padding-left:14px;position:relative;line-height:1.4}
+.ptlUl li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--brand2)}
+.ptlUl small{display:block;color:var(--muted);font-size:12px}
+.ptlTab{width:100%!important;min-width:0!important;max-width:100%;table-layout:fixed;border-collapse:collapse;font-size:13px}
+.ptlTab th.n,.ptlTab td.n{width:30%}
+.ptlTab td,.ptlTab th{overflow-wrap:anywhere}
+.ptlTab th{text-align:left;font-weight:700;color:var(--muted);font-size:12px;padding:6px 4px;border-bottom:1px solid var(--line)}
+.ptlTab td{padding:7px 4px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top}
+.ptlTab td.n,.ptlTab th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ptlOp{display:block;text-decoration:none;color:var(--ink);padding:10px 0;border-bottom:1px solid var(--line)}
+.ptlOp:last-child{border-bottom:0}
+.ptlOp b{display:block;font-size:14px;color:var(--brand);line-height:1.35}
+.ptlOp span{font-size:12px;color:var(--muted)}
+.ptlVazio{font-size:13px;color:var(--muted);margin:0}
+.ptlRod{font-size:12px;color:var(--muted);line-height:1.5}
+.ptlRod dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:8px 0}
+.ptlRod dt{font-weight:700;color:var(--ink)}
+.ptlRod dd{margin:0}
+.ptlConv{background:var(--watchbg);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:14px;color:var(--ink);line-height:1.5}
+.ptlConv code{font-size:18px;font-weight:800;letter-spacing:.06em;color:var(--brand)}
+.ptlCarr{padding:60px 16px;text-align:center;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -719,6 +787,7 @@ body .chips button,body .chip{border-radius:999px!important}
   <button class="lgnX" id="lgFecha" type="button" hidden>Agora não</button>
  </form>
 </div>
+<div class="ptl" id="ptl" hidden aria-label="Portal do Cliente"></div>
 <nav class="tabbar" aria-label="Topo"><button class="sbBtn" id="sbBtn" aria-controls="sb" aria-expanded="false"><span class="hb3" aria-hidden="true"><i></i><i></i><i></i></span>Menu</button><b class="tbT" id="tbT">Régua de potencial</b><div class="ldg" id="prog" hidden role="status" aria-live="polite"><div class="progTxt"><span id="progTxt"></span><b id="progPct"></b></div><div class="progBar"><i id="progI"></i></div></div></nav>
 <aside class="sb" id="sb" aria-label="Menu">
   <div class="sbLogo"></div>
@@ -1719,7 +1788,7 @@ function renderCli(){
     <div class="h"><div><b>${esc(c.nome)}</b><div class="meta">${esc(c.cidade)} · ${esc(UFS[c.uf]||"")} · ${esc(c.tema)}${c.valor?` · meta R$ ${esc(c.valor)}`:""}${c.acao?` · ${esc(c.acao)}`:""}</div></div>
       <span><button class="btn ghost sm" data-edcli="${esc(c.id)}">Editar</button> <button class="btn ghost sm" data-del="${esc(c.id)}" aria-label="Remover ${esc(c.nome)}">✕</button></span></div>
     ${c.causa?`<div class="sub" style="margin-bottom:8px">${esc(c.causa)}</div>`:""}
-    <div class="btns"><button class="btn sm" data-plano="${esc(c.id)}">Plano de captação</button><button class="btn ghost sm" data-cid="${esc(c.id)}">Raio-X da cidade</button></div>
+    <div class="btns"><button class="btn sm" data-plano="${esc(c.id)}">Plano de captação</button><button class="btn ghost sm" data-cid="${esc(c.id)}">Raio-X da cidade</button><button class="btn ghost sm" data-ptl="${esc(c.id)}">Portal do cliente</button></div>
     <div class="plano" id="pl-${esc(c.id)}"></div></div>`).join(""):`<p class="empty">Nenhum cliente. Adicione o primeiro.</p>`;
 }
 function formCli(editId){
@@ -1882,7 +1951,7 @@ async function perguntaEu(){const u=apiBase(); const r=await fetch(u+(u.includes
 // Na abertura: com sessão guardada, segue na hora e confere em segundo plano; sem sessão, pergunta ao motor se o login é obrigatório.
 async function iniciaSessao(){
   if(!apiBase()) return;
-  if(tok()){ perguntaEu().then(r=>{ if(r&&r.email){EU=r;mostraUsuario();if(typeof VIEW!=="undefined"&&VIEW==="ini")renderInicio()} else if(r&&r.anonimo){store.set("otm-tok","");EU=null;mostraUsuario();if(r.obrigatorio)sessaoCaiu()} }).catch(()=>{}); return }
+  if(tok()){ perguntaEu().then(r=>{ if(r&&r.email){const antes=store.get("otm-perfil"); EU=r; store.set("otm-perfil",r.perfil||""); if((r.perfil==="cliente")!==(antes==="cliente")){location.reload();return} mostraUsuario();if(typeof VIEW!=="undefined"&&VIEW==="ini")renderInicio()} else if(r&&r.anonimo){store.set("otm-tok","");EU=null;mostraUsuario();if(r.obrigatorio)sessaoCaiu()} }).catch(()=>{}); return }
   let r=null; try{r=await perguntaEu()}catch(e){return}
   if(r&&r.obrigatorio) await pedeLogin(true);
 }
@@ -1911,7 +1980,7 @@ document.addEventListener("click",e=>{
   const tb=e.target.closest("[data-lgn]"); if(tb){lgnModo(tb.dataset.lgn);return}
   if(e.target.closest("#lgFecha")){$("lgn").hidden=true;lgnEspera=null;return}
   if(e.target.closest("#eu")){
-    if(EU){ if(!confirm(`Sair do painel (${EU.nome})?`)) return; postAcesso({acao:"sair",t:tok()}).catch(()=>{}).then(()=>{store.set("otm-tok","");location.reload()}) }
+    if(EU){ if(!confirm(`Sair do painel (${EU.nome})?`)) return; postAcesso({acao:"sair",t:tok()}).catch(()=>{}).then(()=>{store.set("otm-tok","");store.set("otm-perfil","");location.reload()}) }
     else pedeLogin(false).then(()=>location.reload());
   }
 });
@@ -1926,10 +1995,75 @@ $("lgnForm").addEventListener("submit",async e=>{
   try{
     if(cad){ const j=await postAcesso({acao:"cadastrar",nome:$("lgNome").value.trim(),email,senha,convite:$("lgConv").value.trim()});
       lgnModo("entrar"); $("lgSenha").value=""; $("lgSenha2").value=""; M.textContent=j.msg||"Cadastro recebido."; }
-    else { const j=await postAcesso({acao:"entrar",email,senha}); store.set("otm-tok",j.t); EU=j; $("lgSenha").value="";
+    else { const j=await postAcesso({acao:"entrar",email,senha}); store.set("otm-tok",j.t); store.set("otm-perfil",j.perfil||""); EU=j; $("lgSenha").value="";
       $("lgn").hidden=true; mostraUsuario(); const w=lgnEspera; lgnEspera=null; if(w) w.res(j); else location.reload(); }
   }catch(err){erro(err.message||"Não consegui falar com o motor. Tente de novo.")}
   finally{go.disabled=false}
+});
+
+// ======== Portal do Cliente (v14.6) ========
+// Cliente logado vê só esta tela. Administrador e equipe abrem pelo cartão do cliente ("Portal do cliente") para conferir antes de convidar.
+const PTL_EXPL={"Relacionamento":"Contato aberto com o gabinete","Solicitação formalizada":"Ofício com o pedido enviado ao parlamentar","Sinalização":"Parlamentar sinalizou apoio (ainda não é recurso)","Empenhado":"Recurso reservado no orçamento para a instituição","Pago":"Recurso pago à instituição"};
+let PTL={d:null,filtro:0,admin:false};
+async function abrePortal(id,admin){
+  const P=$("ptl"); PTL={d:null,filtro:0,admin:!!admin}; P.hidden=false; P.scrollTop=0;
+  P.innerHTML=`<div class="ptlIn"><p class="ptlCarr">Carregando o portal…</p></div>`;
+  try{ PTL.d=await api(id?{acao:"portal",id}:{acao:"portal"}); renderPortal() }
+  catch(e){ if(e.message==="login") return; P.innerHTML=`<div class="ptlIn">${ptlTopo()}<div class="ptlAviso"><b>Não consegui abrir o portal.</b>${esc(e.message)}</div></div>` }
+}
+function ptlTopo(){
+  const adm=PTL.admin, d=PTL.d;
+  return `<div class="ptlTop"><div class="ptlMarca"><b>Otimistas Consultoria</b> · Portal do Cliente</div><div class="ptlAcoes">
+    ${adm&&EU&&EU.perfil==="admin"&&d?`<button class="thm" type="button" data-ptlconv="${esc(d.cliente.id)}">Gerar convite</button>`:""}
+    ${adm?`<button class="thm" type="button" id="ptlFecha">Fechar</button>`:`<button class="thm" type="button" id="ptlSair">${esc(primeiroNome())} · sair</button>`}</div></div>`;
+}
+function renderPortal(){
+  const d=PTL.d, P=$("ptl"); if(!d) return; const c=d.cliente, R=d.resumo, nv=x=>`e${x}`;
+  const maxF=Math.max(1,...d.funil.map(f=>f.n));
+  const lista=d.parlamentares.filter(p=>!PTL.filtro||p.nivel===PTL.filtro);
+  const ini=n=>String(n).split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase();
+  const din=v=>v?fmtR(v):"R$ 0";
+  let h=`<div class="ptlIn">${ptlTopo()}`;
+  if(d.avisos&&d.avisos.length) h+=`<div class="ptlAviso"><b>Só você vê este quadro (pré-visualização da Otimistas).</b>${d.avisos.map(esc).join("<br>")}</div>`;
+  if(PTL.conv) h+=`<div class="ptlConv">Convite de <b>${esc(PTL.conv.cliente)}</b>: <code>${esc(PTL.conv.codigo)}</code><br>Vale para <b>uma pessoa</b>. Mensagem pronta para enviar:<br><i>${esc(PTL.conv.msg)}</i><br><button class="btn sm" type="button" id="ptlCopia" style="margin-top:8px">Copiar mensagem</button></div>`;
+  h+=`<section class="ptlHero"><div class="k">${esc(c.cidade)}/${esc(c.uf)}${c.tema?` · ${esc(c.tema)}`:""}</div><h1>${esc(c.nome)}</h1>
+    ${c.causa?`<p>${esc(c.causa)}</p>`:""}${c.valor?`<p style="margin-top:6px">Meta de captação: <b>R$ ${esc(c.valor)}</b></p>`:""}
+    <div class="ptlNums"><div><b>${R.parlamentares}</b><span>parlamentares acompanhados</span></div><div><b>${R.formalizadas}</b><span>solicitações formalizadas</span></div>
+    <div><b>${R.sinalizacoes}</b><span>sinalizações de apoio</span></div><div><b>${din(R.empenhado)}</b><span>empenhado para a instituição${R.pago?` · ${din(R.pago)} pago`:""}</span></div></div></section>`;
+  h+=`<section class="ptlCard"><h2>Caminho da captação</h2><p class="sub">Cada parlamentar avança por estas etapas. O número mostra quantos já chegaram a cada uma.</p><div class="ptlFunil">
+    ${d.funil.map((f,i)=>`<div class="f ${nv(i+1)}"><span>${esc(f.etapa)}</span><i><em style="width:${Math.max(f.n?4:0,Math.round(100*f.n/maxF))}%"></em></i><b>${f.n}</b></div>`).join("")}</div></section>`;
+  h+=`<section class="ptlCard"><h2>Parlamentares</h2><p class="sub">Situação de cada gabinete trabalhado para ${esc(c.nome)}.</p>
+    <div class="ptlChips"><button type="button" data-ptlf="0" aria-pressed="${!PTL.filtro}">Todos (${d.parlamentares.length})</button>${d.etapas.map((e,i)=>{const n=d.parlamentares.filter(p=>p.nivel===i+1).length;return n?`<button type="button" data-ptlf="${i+1}" aria-pressed="${PTL.filtro===i+1}">${esc(e)} (${n})</button>`:""}).join("")}</div>
+    ${lista.length?`<ul class="ptlLista">${lista.map(p=>`<li class="ptlP ${nv(p.nivel)}"><div class="av" ${p.foto?`style="background-image:url('${esc(p.foto)}')"`:""}>${p.foto?"":esc(ini(p.nome))}</div>
+      <div><div class="t"><div><div class="nm">${esc(p.nome)}</div><div class="mt">${esc([p.cargo,[p.partido,p.uf].filter(Boolean).join("/")].filter(Boolean).join(" · "))}${p.ultima?`${p.cargo||p.partido?" · ":""}última interação ${esc(p.ultima)}`:""}</div></div><span class="ptlEt">${esc(p.etapa)}</span></div>
+      ${p.detalhe?`<div class="dt">${esc(p.detalhe)}</div>`:""}${p.emp||p.pago?`<div class="dt">Empenhado ${din(p.emp)}${p.pago?` · pago ${din(p.pago)}`:""}</div>`:""}</div></li>`).join("")}</ul>`:`<p class="ptlVazio">Nenhum parlamentar nesta etapa ainda.</p>`}</section>`;
+  h+=`<div class="ptlDuo"><section class="ptlCard"><h2>Em ${esc(d.mes.rotulo)}</h2>
+    <p class="sub">${d.mes.oficios.length} solicitaç${d.mes.oficios.length===1?"ão formalizada":"ões formalizadas"} · ${d.mes.agendas} agenda${d.mes.agendas===1?"":"s"} com gabinetes</p>
+    ${d.mes.oficios.length?`<ul class="ptlUl">${d.mes.oficios.map(n=>`<li>Ofício a ${esc(n)}</li>`).join("")}</ul>`:`<p class="ptlVazio">Nenhum ofício registrado ainda neste mês.</p>`}</section>
+    <section class="ptlCard"><h2>Próximos passos</h2>${d.proximos.length?`<ul class="ptlUl">${d.proximos.map(x=>`<li>${esc(x.texto)}${x.parlamentar||x.quando?`<small>${esc([x.parlamentar,x.quando?(x.edital?"até ":"")+x.quando:""].filter(Boolean).join(" · "))}</small>`:""}</li>`).join("")}</ul>`:`<p class="ptlVazio">A Otimistas atualiza os próximos passos a cada etapa.</p>`}</section></div>`;
+  const inst=d.recursos.instituicao, cid=d.recursos.cidade;
+  h+=`<section class="ptlCard"><h2>Recursos para a instituição</h2><p class="sub">Empenhos e pagamentos de emendas com ${esc(c.razao||c.nome)} como favorecida, segundo o Portal da Transparência.</p>
+    ${inst.length?`<table class="ptlTab"><thead><tr><th>Autor da emenda</th><th class="n">Empenhado</th><th class="n">Pago</th></tr></thead><tbody>${inst.map(a=>`<tr><td>${esc(a.autor)}</td><td class="n">${din(a.emp)}</td><td class="n">${din(a.pago)}</td></tr>`).join("")}</tbody></table>`:`<p class="ptlVazio">Ainda não há empenho de emenda registrado para a instituição desde 2023.</p>`}
+    ${cid.length?`<h2 style="margin-top:18px">Emendas que chegaram à cidade</h2><p class="sub">Recursos destinados a outros órgãos e entidades de ${esc(c.cidade)} (prefeitura, fundos municipais e outras instituições). <b>Não são recursos da instituição</b>; mostram quem já atende a cidade.</p>
+    <table class="ptlTab"><thead><tr><th>Autor · favorecido</th><th class="n">Empenhado</th></tr></thead><tbody>${cid.map(a=>`<tr><td>${esc(a.autor)}<br><span style="color:var(--muted);font-size:12px">${esc(a.favorecido)}</span></td><td class="n">${din(a.emp)}</td></tr>`).join("")}</tbody></table>`:""}</section>`;
+  h+=`<section class="ptlCard"><h2>Oportunidades abertas</h2><p class="sub">Editais e chamamentos que a instituição pode disputar. Confirme requisitos e prazo no edital.</p>
+    ${d.oportunidades.length?d.oportunidades.map(o=>`<a class="ptlOp" href="${esc(o.link)}" target="_blank" rel="noopener"><b>${esc(o.titulo)}</b><span>${esc([o.area,o.uf==="BR"?"Nacional":o.uf,o.situacao,o.prazo?"prazo "+o.prazo:""].filter(Boolean).join(" · "))}</span></a>`).join(""):`<p class="ptlVazio">Nenhuma oportunidade compatível aberta agora.</p>`}</section>`;
+  h+=`<footer class="ptlCard ptlRod"><b style="color:var(--ink)">Como ler as etapas</b><dl>${d.etapas.map(e=>`<dt>${esc(e)}</dt><dd>${esc(PTL_EXPL[e]||"")}</dd>`).join("")}</dl>
+    Solicitação formalizada e sinalização são etapas de relacionamento: <b>não significam recurso garantido</b>. Só é recurso da instituição o que aparece como empenhado ou pago.<br>
+    Atualizado em ${esc(d.atualizado.hoje)}${d.atualizado.emendas?` · emendas do Portal da Transparência até ${esc(d.atualizado.emendas)}`:""}. Dúvidas: fale com a Otimistas Consultoria.</footer></div>`;
+  P.innerHTML=h;
+}
+document.addEventListener("click",async e=>{
+  const t=e.target;
+  const ab=t.closest("[data-ptl]"); if(ab){abrePortal(ab.dataset.ptl,true);return}
+  const f=t.closest("[data-ptlf]"); if(f){PTL.filtro=Number(f.dataset.ptlf);renderPortal();return}
+  if(t.closest("#ptlFecha")){$("ptl").hidden=true;PTL.conv=null;return}
+  if(t.closest("#ptlSair")){postAcesso({acao:"sair",t:tok()}).catch(()=>{}).then(()=>{store.set("otm-tok","");store.set("otm-perfil","");location.reload()});return}
+  const cv=t.closest("[data-ptlconv]"); if(cv){ if(!confirm("Gerar um código de convite? Ele vale para UMA pessoa e dá acesso só ao portal deste cliente.")) return;
+    try{const j=await postPlanilha({acao:"conviteCliente",id:cv.dataset.ptlconv}); const url=j.painel||location.href.split("#")[0];
+      PTL.conv={...j,msg:`Olá! Seu acesso ao Portal do Cliente da Otimistas Consultoria: abra ${url} › Entrar › Criar acesso, preencha seus dados e use o código de convite ${j.codigo}. O código vale para uma pessoa.`}; renderPortal(); $("ptl").scrollTop=0}
+    catch(err){alert("Não consegui gerar o convite: "+err.message)} return}
+  if(t.closest("#ptlCopia")&&PTL.conv){(navigator.clipboard?navigator.clipboard.writeText(PTL.conv.msg):Promise.reject()).then(()=>{t.textContent="Copiado"}).catch(()=>prompt("Copie a mensagem:",PTL.conv.msg))}
 });
 
 // ======== conexão com a planilha ========
@@ -3191,7 +3325,8 @@ $("pjGo").onclick=()=>{st.pjProg=null;buscaPj()}; $("pjQ").addEventListener("key
 $("pjUf").innerHTML+=Object.entries(UFS).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");
 
 buildUFs(); buildMap(); renderCli(); marcaViews(); $("thm2").textContent=$("thm").textContent;
-iniciaSessao().catch(()=>{}).then(()=>{ testaApi(); initRegua(); carregaRel().then(()=>{renderHist();if(st.rg.dados)renderRegua()}); if(store.get("otm-pane")==="dados") setPane("dados");
+iniciaSessao().catch(()=>{}).then(()=>{ if((EU&&EU.perfil==="cliente")||(tok()&&store.get("otm-perfil")==="cliente")){abrePortal(null,false);return}
+  testaApi(); initRegua(); carregaRel().then(()=>{renderHist();if(st.rg.dados)renderRegua()}); if(store.get("otm-pane")==="dados") setPane("dados");
   Promise.resolve(puxaClientes()).catch(()=>{}).then(garanteClientesExtra); irPara("ini",true); mostraUsuario(); });
 const v0=store.get("otm-view"),u0=store.get("otm-uf");
 if(v0==="uf"&&UFS[u0]){st.view="uf";st.uf=u0}
