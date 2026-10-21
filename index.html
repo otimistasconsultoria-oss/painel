@@ -700,97 +700,240 @@ body .chips button,body .chip{border-radius:999px!important}
 .lgnMsg{margin:0;font-size:13px;line-height:1.45;color:var(--muted);min-height:1.2em}
 .lgnMsg.err{color:var(--err)}
 .lgnX{font:inherit;font-size:13px;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;justify-self:center;padding:4px}
-.lgn:not(.cad) .lgnCad{display:none}
-/* portal do cliente */
+.lgn .lgnCad,.lgn .lgnNova,.lgn .lgnS2{display:none}
+.lgn.cad .lgnCad,.lgn.cad .lgnS2,.lgn.nova .lgnNova,.lgn.nova .lgnS2{display:grid}
+.lgn.esq .lgnSen{display:none}
+.lgn.esq .lgnTabs,.lgn.nova .lgnTabs{display:none}
+.lgn:not(.ent) #lgEsq,.lgn.ent #lgVolta,.lgn.cad #lgVolta{display:none}
+.lgnLk{font:inherit;font-size:13px;font-weight:700;background:none;border:0;color:var(--brand);cursor:pointer;justify-self:center;padding:2px}
+/* portal do cliente (v14.7: abas, gráficos clicáveis, Explorar) */
 .ptl{position:fixed;inset:0;z-index:950;background:var(--bg);overflow:auto;-webkit-overflow-scrolling:touch}
 .ptl[hidden]{display:none}
-.ptlIn{max-width:980px;margin:0 auto;padding:16px 16px 40px;box-sizing:border-box;display:grid;gap:14px}
+.ptlIn{max-width:1020px;margin:0 auto;padding:14px 16px 40px;box-sizing:border-box;display:grid;gap:14px;min-width:0}
 .ptlTop{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .ptlMarca{font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--muted)}
 .ptlMarca b{color:var(--brand)}
 .ptlAcoes{display:flex;gap:8px;flex-wrap:wrap}
-.ptlHero{background:var(--brand);color:#fff;border-radius:18px;padding:20px 18px 18px;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(31,63,160,.28)}
+.ptlHero{background:#1F3FA0;color:#fff;border-radius:18px;padding:18px 18px 16px;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(31,63,160,.28)}
 .ptlHero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--accent) 0 34%,var(--gold) 34% 52%,var(--brand2) 52%)}
 :root[data-theme="dark"] .ptlHero{background:#1A2C6B}
 .ptlHero .k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.8;font-weight:700}
 .ptlHero h1{margin:4px 0 4px;font-size:clamp(24px,5.5vw,34px);letter-spacing:-.02em;line-height:1.1}
 .ptlHero p{margin:0;opacity:.88;font-size:14px;line-height:1.45}
-.ptlNums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
+.ptlHero .cz{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ptlNums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}
 @media (min-width:720px){.ptlNums{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.ptlNums div{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 12px}
+.ptlNums button{font:inherit;text-align:left;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:10px 26px 10px 12px;cursor:pointer;position:relative;min-width:0;transition:background .15s}
+.ptlNums button:hover,.ptlNums button:focus-visible{background:rgba(255,255,255,.2);outline:none}
 .ptlNums b{display:block;font-size:22px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
-.ptlNums span{font-size:12px;opacity:.85;line-height:1.3;display:block}
+.ptlNums span{font-size:12px;opacity:.88;line-height:1.3;display:block}
+.ptlNums i{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-style:normal;font-size:20px;opacity:.6}
+.ptlTabs{position:sticky;top:0;z-index:3;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:var(--bg);padding:8px 0;margin:-6px 0 -4px;border-bottom:1px solid var(--line)}
+.ptlTabs::-webkit-scrollbar{display:none}
+.ptlTabs button{font:inherit;font-size:14px;font-weight:700;white-space:nowrap;border:0;border-radius:99px;padding:8px 14px;background:transparent;color:var(--muted);cursor:pointer;flex:0 0 auto}
+.ptlTabs button small{font-size:11px;font-weight:800;background:var(--track);color:var(--muted);border-radius:99px;padding:1px 7px;margin-left:2px}
+.ptlTabs button[aria-selected="true"]{background:var(--ink);color:var(--panel)}
+.ptlTabs button[aria-selected="true"] small{background:rgba(255,255,255,.2);color:inherit}
+.ptlTabs button.novo{position:relative;color:var(--accent)}
+.ptlTabs button.novo::after{content:"";position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.ptlTabs button.novo[aria-selected="true"]{color:var(--panel);background:var(--accent)}
+.ptlTabs button.novo[aria-selected="true"]::after{display:none}
+.ptlTabs .sh{display:none}
+@media (max-width:600px){.ptlTabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px}.ptlTabs button{padding:9px 2px;font-size:12.5px;text-align:center}.ptlTabs .lg,.ptlTabs button small{display:none}.ptlTabs .sh{display:inline}.ptlTabs button.novo::after{top:4px;right:4px}}
+.ptlCorpo{display:grid;gap:14px;min-width:0}
 .ptlCard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow);min-width:0}
 .ptlCard h2{margin:0 0 4px;font-size:17px;color:var(--ink);letter-spacing:-.01em}
 .ptlCard .sub{margin:0 0 12px;font-size:13px;color:var(--muted);line-height:1.45}
-.ptlDuo{display:grid;gap:14px}
-@media (min-width:820px){.ptlDuo{grid-template-columns:1fr 1fr}}
+.ptlDuo{display:grid;gap:14px;min-width:0}
+@media (min-width:820px){.ptlDuo{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 .ptlAviso{background:var(--ins);border:1px solid var(--insl);border-radius:12px;padding:10px 12px;font-size:13px;color:var(--ink);line-height:1.45}
 .ptlAviso b{display:block;margin-bottom:2px}
-.ptlFunil{display:grid;gap:8px}
-.ptlFunil .f{display:grid;grid-template-columns:minmax(0,170px) 1fr 34px;align-items:center;gap:10px;font-size:13px}
-.ptlFunil .f span{color:var(--ink);font-weight:600}
-.ptlFunil .f i{display:block;height:10px;border-radius:99px;background:var(--track);overflow:hidden}
-.ptlFunil .f i em{display:block;height:100%;border-radius:99px}
-.ptlFunil .f b{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
 .e1{--c:var(--out)}.e2{--c:var(--brand2)}.e3{--c:var(--gold)}.e4{--c:var(--brand)}.e5{--c:var(--win)}
-.ptlFunil .f i em{background:var(--c)}
-.ptlChips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.ptlChips button{font:inherit;font-size:12px;font-weight:700;border:1.5px solid var(--line);background:var(--panel);color:var(--muted);border-radius:99px;padding:5px 10px;cursor:pointer}
+/* rosca */
+.ptlDon{display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;align-items:center}
+@media (max-width:420px){.ptlDon{grid-template-columns:120px minmax(0,1fr);gap:10px}}
+.ptlRosca{position:relative;aspect-ratio:1}
+.ptlRosca svg{width:100%;height:100%;display:block;overflow:visible}
+.ptlRosca path{cursor:pointer;stroke:var(--panel);stroke-width:1.5;transition:transform .15s,opacity .15s;transform-origin:60px 60px}
+.ptlRosca path:hover,.ptlRosca path:focus-visible,.ptlRosca path.on{transform:scale(1.06);outline:none}
+.ptlRosca .c{position:absolute;inset:0;display:grid;place-content:center;text-align:center;pointer-events:none}
+.ptlRosca .c b{font-size:26px;color:var(--ink);line-height:1}
+.ptlRosca .c span{font-size:11px;color:var(--muted)}
+.ptlRosca.vazio{display:grid;place-items:center;border-radius:50%;border:10px solid var(--track);font-size:12px;color:var(--muted);text-align:center;padding:10px}
+.ptlLeg{display:grid;gap:4px;min-width:0}
+.ptlLeg button{font:inherit;display:grid;grid-template-columns:12px minmax(0,1fr) auto;gap:8px;align-items:center;text-align:left;border:0;background:transparent;border-radius:8px;padding:6px 6px;cursor:pointer;color:var(--ink);font-size:13px;font-weight:600}
+.ptlLeg button:hover:not(:disabled){background:var(--track)}
+.ptlLeg button:disabled{opacity:.45;cursor:default}
+.ptlLeg i{width:12px;height:12px;border-radius:3px}
+.ptlLeg b{font-variant-numeric:tabular-nums}
+/* funil */
+.ptlFunil{display:grid;gap:6px}
+.ptlFunil .f{font:inherit;display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr) 30px;align-items:center;gap:10px;font-size:13px;border:0;background:transparent;border-radius:8px;padding:6px 4px;cursor:pointer;text-align:left;color:var(--ink)}
+.ptlFunil .f:hover:not(:disabled){background:var(--track)}
+.ptlFunil .f:disabled{cursor:default;opacity:.55}
+.ptlFunil .f span{font-weight:600}
+.ptlFunil .f i{display:block;height:12px;border-radius:99px;background:var(--track);overflow:hidden}
+.ptlFunil .f i em{display:block;height:100%;border-radius:99px;background:var(--c)}
+.ptlFunil .f b{text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:420px){.ptlFunil .f{grid-template-columns:minmax(0,118px) minmax(0,1fr) 26px;gap:8px}}
+.ptlNota{font-size:12px;color:var(--muted);margin:10px 0 0;line-height:1.4}
+/* meta */
+.ptlMetaC{cursor:pointer}
+.ptlMetaC .t{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.ptlMetaC .t b{color:var(--ink);font-size:18px}
+.ptlBarra{position:relative;height:16px;border-radius:99px;background:var(--track);overflow:hidden}
+.ptlBarra i{position:absolute;left:0;top:0;bottom:0;border-radius:99px}
+.ptlBarra .em,.ptlLegM .em,.ptlBars .em{background:var(--brand2)}
+.ptlBarra .pg,.ptlLegM .pg,.ptlBars .pg{background:var(--win)}
+.ptlLegM{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px;align-items:center}
+.ptlLegM i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.ptlLegM .vr{margin-left:auto;color:var(--brand);font-weight:700}
+.ptlMes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 12px}
+.ptlMes div{background:var(--tint);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.ptlMes b{display:block;font-size:22px;color:var(--ink);font-variant-numeric:tabular-nums}
+.ptlMes span{font-size:12px;color:var(--muted)}
+.ptlMais{font:inherit;font-size:13px;font-weight:700;color:var(--brand);background:none;border:0;padding:8px 0 0;cursor:pointer}
+/* chamativo Explorar */
+.ptlExpB{border-radius:18px;padding:18px;color:#fff;background:linear-gradient(120deg,#0A2266 0%,#1F3FA0 55%,#2F7BFF 100%);display:grid;gap:14px;position:relative;overflow:hidden}
+.ptlExpB::before{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(212,162,76,.45),transparent 70%)}
+.ptlExpB>*{position:relative}
+.ptlExpB .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--accent);color:#fff;border-radius:99px;padding:3px 9px}
+.ptlExpB h2{margin:8px 0 4px;font-size:20px;letter-spacing:-.01em}
+.ptlExpB p{margin:0;font-size:14px;opacity:.9;line-height:1.45}
+.ptlExpB .bts{display:flex;flex-wrap:wrap;gap:8px}
+.ptlExpB button{font:inherit;font-size:14px;font-weight:700;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;border-radius:99px;padding:9px 14px;cursor:pointer}
+.ptlExpB button:hover{background:rgba(255,255,255,.24)}
+.ptlExpB button.tudo{background:#fff;color:#1F3FA0;border-color:#fff}
+.ptlExpH h2{margin:2px 0 4px;font-size:22px;color:var(--ink);letter-spacing:-.01em}
+.ptlExpH p{margin:0;font-size:14px;color:var(--muted);line-height:1.45}
+.ptlExpG h3{margin:0 0 8px;font-size:15px;color:var(--ink);display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.ptlExpG h3 span{font-size:12px;color:var(--muted);font-weight:600}
+.ptlExpT{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.ptlExpT button{font:inherit;text-align:left;display:grid;grid-template-columns:44px minmax(0,1fr) 14px;grid-template-rows:auto auto;column-gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow);cursor:pointer;color:var(--ink);transition:transform .12s,border-color .12s}
+.ptlExpT button:hover,.ptlExpT button:focus-visible{border-color:var(--brand2);transform:translateY(-1px);outline:none}
+.ptlExpT .ic{grid-row:1/3;width:44px;height:44px;border-radius:12px;background:var(--watchbg);display:grid;place-items:center;font-size:22px}
+.ptlExpT b{font-size:15px;align-self:end}
+.ptlExpT span:not(.ic){grid-column:2;font-size:12.5px;color:var(--muted);line-height:1.35;align-self:start;margin-top:2px}
+.ptlExpT i{grid-column:3;grid-row:1/3;font-style:normal;color:var(--muted);font-size:20px}
+/* parlamentares */
+.ptlChips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.ptlChips button{font:inherit;font-size:12px;font-weight:700;border:1.5px solid var(--line);background:var(--panel);color:var(--muted);border-radius:99px;padding:5px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.ptlChips button i{width:8px;height:8px;border-radius:50%}
 .ptlChips button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
-.ptlLista{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.ptlP{display:grid;grid-template-columns:40px 1fr;gap:10px;align-items:start;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--tint)}
-.ptlP .av{width:40px;height:40px;border-radius:50%;background:var(--track) center/cover no-repeat;display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--muted)}
+.ptlLista{list-style:none;margin:0;padding:0;display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.ptlP{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:start;padding:12px;border:1px solid var(--line);border-left:4px solid var(--c);border-radius:12px;background:var(--tint)}
+.ptlP .av{width:44px;height:44px;border-radius:50%;background:var(--track) center/cover no-repeat;display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--muted)}
+.ptlP .cp{min-width:0}
 .ptlP .t{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap}
 .ptlP .nm{font-weight:700;color:var(--ink);font-size:14px}
 .ptlP .mt{font-size:12px;color:var(--muted)}
-.ptlP .dt{font-size:13px;color:var(--ink);margin-top:4px;line-height:1.4}
+.ptlP .dt{font-size:13px;color:var(--ink);margin-top:6px;line-height:1.4}
 .ptlEt{font-size:11px;font-weight:800;letter-spacing:.02em;border-radius:99px;padding:3px 9px;color:#fff;background:var(--c);white-space:nowrap}
 .e3 .ptlEt{color:#3a2a00}
+.ptlPassos{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:8px}
+.ptlPassos i{height:5px;border-radius:99px;background:var(--track)}
+.ptlLk{font:inherit;font-size:12.5px;font-weight:700;color:var(--brand);background:none;border:0;padding:8px 0 0;cursor:pointer}
+/* recursos */
+.ptlBars{display:grid;gap:8px}
+.ptlBars .r{display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px}
+.ptlBars .l{color:var(--ink);font-weight:600;overflow-wrap:anywhere}
+.ptlBars .l small{display:block;font-weight:400;color:var(--muted);font-size:11.5px}
+.ptlBars .tk{position:relative;height:14px;border-radius:99px;background:var(--track);overflow:hidden}
+.ptlBars .tk i{position:absolute;left:0;top:0;bottom:0;border-radius:99px}
+.ptlBars .ci{background:var(--out)}
+.ptlBars .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:700;white-space:nowrap}
+.ptlBars .v small{display:block;font-weight:600;color:var(--win);font-size:11.5px}
+.ptlFold summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ptlFold summary::-webkit-details-marker{display:none}
+.ptlFold summary::after{content:"›";font-size:22px;color:var(--muted);transition:transform .15s}
+.ptlFold[open] summary::after{transform:rotate(90deg)}
+.ptlFold summary b{display:block;color:var(--ink);font-size:16px}
+.ptlFold summary small{color:var(--muted);font-size:12.5px}
+.ptlFold[open] summary{margin-bottom:10px}
+/* oportunidades */
+.ptlOps{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.ptlOp{display:grid;gap:4px;text-decoration:none;color:var(--ink);padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--tint);transition:border-color .12s}
+.ptlOp:hover{border-color:var(--brand2)}
+.ptlOp b{font-size:14px;color:var(--brand);line-height:1.35}
+.ptlOp span{font-size:12px;color:var(--muted)}
+.ptlOp .pz{justify-self:start;font-size:11px;font-weight:800;border-radius:99px;padding:2px 8px;background:var(--track);color:var(--muted)}
+.ptlOp .pz.urg{background:var(--accent);color:#fff}
+.ptlOp .pz.pert{background:var(--supbg);color:var(--sup)}
 .ptlUl{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;color:var(--ink)}
 .ptlUl li{padding-left:14px;position:relative;line-height:1.4}
 .ptlUl li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--brand2)}
 .ptlUl small{display:block;color:var(--muted);font-size:12px}
-.ptlTab{width:100%!important;min-width:0!important;max-width:100%;table-layout:fixed;border-collapse:collapse;font-size:13px}
-.ptlTab th.n,.ptlTab td.n{width:30%}
-.ptlTab td,.ptlTab th{overflow-wrap:anywhere}
-.ptlTab th{text-align:left;font-weight:700;color:var(--muted);font-size:12px;padding:6px 4px;border-bottom:1px solid var(--line)}
-.ptlTab td{padding:7px 4px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top}
-.ptlTab td.n,.ptlTab th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.ptlOp{display:block;text-decoration:none;color:var(--ink);padding:10px 0;border-bottom:1px solid var(--line)}
-.ptlOp:last-child{border-bottom:0}
-.ptlOp b{display:block;font-size:14px;color:var(--brand);line-height:1.35}
-.ptlOp span{font-size:12px;color:var(--muted)}
 .ptlVazio{font-size:13px;color:var(--muted);margin:0}
-.ptlRod{font-size:12px;color:var(--muted);line-height:1.5}
-.ptlRod dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:8px 0}
-.ptlRod dt{font-weight:700;color:var(--ink)}
+.ptlRod{font-size:12.5px;color:var(--muted);line-height:1.5}
+.ptlRod summary{cursor:pointer;font-weight:700;color:var(--ink);font-size:14px}
+.ptlRod dl{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;margin:10px 0}
+.ptlRod dt{font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px}
+.ptlRod dt i{width:10px;height:10px;border-radius:3px}
 .ptlRod dd{margin:0}
+.ptlRodape{font-size:12px;color:var(--muted);text-align:center;line-height:1.5}
 .ptlConv{background:var(--watchbg);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:14px;color:var(--ink);line-height:1.5}
 .ptlConv code{font-size:18px;font-weight:800;letter-spacing:.06em;color:var(--brand)}
 .ptlCarr{padding:60px 16px;text-align:center;color:var(--muted)}
+/* acessos (portal e tela Acessos) */
+.usrL{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.usrL li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--tint)}
+.usrL li>div{min-width:0}
+.usrL li b{display:block;color:var(--ink);font-size:14px}
+.usrL li>div span{display:block;font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.usrL .usrB{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+@media (min-width:760px){.usrL li{grid-template-columns:auto minmax(0,1fr) auto}.usrL .usrB{grid-column:auto}}
+.usrAv{width:36px;height:36px;border-radius:50%;background:var(--watchbg);color:var(--brand);display:grid;place-items:center;font-weight:800;font-size:13px}
+.ptlCard .usrL li>div:first-child{grid-column:1/2}
+.usrSel{font:inherit;font-size:13px;padding:5px 8px;border:1.5px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}
+.btn.danger,.btn.ghost.danger{color:var(--err)!important;border-color:var(--err)!important}
+.usrSt{font-style:normal;font-weight:700}
+.usrSt.ativo{color:var(--win)}.usrSt.pendente{color:var(--sup)}.usrSt.bloqueado,.usrSt.recusado{color:var(--err)}
+.usrH{font-size:15px;color:var(--ink);margin:16px 0 6px}
+.usrH small{font-size:12px;background:var(--track);color:var(--muted);border-radius:99px;padding:1px 8px;margin-left:4px}
+.usrK{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (min-width:720px){.usrK{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.usrK div{background:var(--tint);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.usrK b{display:block;font-size:22px;color:var(--ink)}
+.usrK span{font-size:12px;color:var(--muted)}
+.usrK .al{background:var(--supbg);border-color:var(--insl)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);background:var(--ink);color:var(--panel);font-size:14px;font-weight:600;padding:10px 16px;border-radius:12px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:1200;max-width:calc(100vw - 32px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* cliente explorando o painel: só dados públicos */
+.sbPortal,.tbPortal{display:none}
+body.modoCli .sbPortal{display:block;width:100%;text-align:left;font:inherit;font-size:15px;font-weight:800;background:var(--accent)!important;color:#fff!important;border:0!important;border-radius:14px!important;padding:11px 14px!important;margin:14px 0 6px!important;cursor:pointer;box-shadow:0 6px 18px rgba(227,38,46,.35)}
+body.modoCli .sbLogo::after{content:"Portal do Cliente"}
+body.modoCli .tbPortal{display:inline-flex;align-items:center;gap:4px;font:inherit;font-size:13px;font-weight:800;border:0;border-radius:99px;padding:7px 12px;background:var(--accent);color:#fff;cursor:pointer;margin-left:auto;white-space:nowrap}
+body.modoCli #sb [data-view="ini"],body.modoCli #sb [data-view="cli"],body.modoCli #sb [data-view="con"],body.modoCli #sb [data-view="usr"],body.modoCli #sb [data-optab="cl"],
+body.modoCli #rgCli,body.modoCli #hsCard,body.modoCli #iniCard,body.modoCli #cliCard,body.modoCli #motorCard,body.modoCli #usrCard,body.modoCli .mode,body.modoCli #opCli,
+body.modoCli [data-opk="cl"],body.modoCli #opTabs [data-tab="cl"],body.modoCli [data-oficio],body.modoCli [data-mala],body.modoCli [data-boletim],body.modoCli [data-texto],
+body.modoCli [data-caminho],body.modoCli [data-plano],body.modoCli [data-ptl],body.modoCli [data-ofcli],body.modoCli [data-ofsen]{display:none!important}
+body:not(.ehAdmin) .soAdmin{display:none!important}
 </style>
 </head>
 <body>
-<div class="lgn" id="lgn" hidden role="dialog" aria-modal="true" aria-labelledby="lgnT">
+<div class="lgn ent" id="lgn" hidden role="dialog" aria-modal="true" aria-labelledby="lgnT">
  <form class="lgnBox" id="lgnForm" novalidate>
   <div class="lgnK">Otimistas · Painel de Captação</div>
   <h1 id="lgnT">Entrar</h1>
   <div class="lgnTabs"><button type="button" data-lgn="entrar" aria-pressed="true">Entrar</button><button type="button" data-lgn="cad" aria-pressed="false">Criar acesso</button></div>
   <label class="lgnCad">Nome<input id="lgNome" autocomplete="name"></label>
   <label>E-mail<input id="lgEmail" type="email" autocomplete="username" inputmode="email" autocapitalize="off" spellcheck="false"></label>
-  <label>Senha<input id="lgSenha" type="password" autocomplete="current-password"></label>
-  <label class="lgnCad">Repita a senha<input id="lgSenha2" type="password" autocomplete="new-password"></label>
+  <label class="lgnNova">Código recebido por e-mail<input id="lgCod" autocomplete="one-time-code" autocapitalize="characters" spellcheck="false" maxlength="12"></label>
+  <label class="lgnSen"><span id="lgSenL">Senha</span><input id="lgSenha" type="password" autocomplete="current-password"></label>
+  <label class="lgnS2">Repita a senha<input id="lgSenha2" type="password" autocomplete="new-password"></label>
   <label class="lgnCad">Código de convite<input id="lgConv" autocomplete="off" autocapitalize="characters" spellcheck="false"></label>
   <button class="btn" id="lgGo" type="submit">Entrar</button>
   <p class="lgnMsg" id="lgMsg" role="status" aria-live="polite"></p>
+  <button class="lgnLk" id="lgEsq" type="button">Esqueci a senha</button>
+  <button class="lgnLk" id="lgVolta" type="button">Voltar para Entrar</button>
   <button class="lgnX" id="lgFecha" type="button" hidden>Agora não</button>
  </form>
 </div>
 <div class="ptl" id="ptl" hidden aria-label="Portal do Cliente"></div>
-<nav class="tabbar" aria-label="Topo"><button class="sbBtn" id="sbBtn" aria-controls="sb" aria-expanded="false"><span class="hb3" aria-hidden="true"><i></i><i></i><i></i></span>Menu</button><b class="tbT" id="tbT">Régua de potencial</b><div class="ldg" id="prog" hidden role="status" aria-live="polite"><div class="progTxt"><span id="progTxt"></span><b id="progPct"></b></div><div class="progBar"><i id="progI"></i></div></div></nav>
+<nav class="tabbar" aria-label="Topo"><button class="sbBtn" id="sbBtn" aria-controls="sb" aria-expanded="false"><span class="hb3" aria-hidden="true"><i></i><i></i><i></i></span>Menu</button><b class="tbT" id="tbT">Régua de potencial</b><button class="tbPortal" data-meuportal type="button">‹ Meu portal</button><div class="ldg" id="prog" hidden role="status" aria-live="polite"><div class="progTxt"><span id="progTxt"></span><b id="progPct"></b></div><div class="progBar"><i id="progI"></i></div></div></nav>
 <aside class="sb" id="sb" aria-label="Menu">
   <div class="sbLogo"></div>
+  <button data-meuportal class="sbPortal" type="button">‹ Meu portal</button>
   <button data-view="ini" class="sbIni">Início</button>
   <div class="sbGrp"><p class="sbG">Captação</p>
     <button data-view="rg">Quem procurar</button>
@@ -807,6 +950,7 @@ body .chips button,body .chip{border-radius:999px!important}
   <div class="sbGrp"><p class="sbG">Ajustes</p>
     <button data-view="cli">Clientes</button>
     <button data-view="con">Motor de dados</button>
+    <button data-view="usr" class="soAdmin">Acessos</button>
     <button class="sbTog" id="thm2" type="button">Modo escuro</button></div>
 </aside>
 <div class="sbVeil" id="sbVeil" hidden></div>
@@ -952,6 +1096,7 @@ body .chips button,body .chip{border-radius:999px!important}
       <div id="cliForm" hidden style="margin-top:12px"></div>
     </details>
     <section class="card" id="motorCard" style="margin-bottom:14px"><h2>Situação das cargas</h2><div id="motorBody"><p class="sub">Conectando…</p></div></section>
+    <section class="card" id="usrCard" data-vw="usr" style="margin-bottom:14px"><h2>Acessos ao painel e ao portal</h2><div id="usrBody"><p class="sub">Carregando…</p></div></section>
     <details class="card fold"><summary><h2>Conexão com a planilha</h2></summary>
       <p class="lead">Cole o link do App da Web da planilha “OTIMISTAS | Motor de Dados”. Fica salvo neste aparelho.</p>
       <div class="cityTop"><input type="search" id="apiUrl" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off"><button class="btn sm" id="apiSalvar">Salvar</button></div>
@@ -1777,11 +1922,11 @@ function garanteClientesExtra(){
     if(apiBase()&&(tok()||store.get("otm-pin"))) salvaCliPlanilha(c).then(ok=>{if(ok)marca(c.id)}); });
 }
 const CAMPOS_OF=["razao","cnes","presidente","cargo","endereco","orgao","uo","gnd","modalidade","objeto"];
-function getCli(){let v=null;try{v=JSON.parse(store.get("otm-clientes")||"null")}catch(e){}
+function getCli(){if(CLI_MODO)return [CLI_MODO];let v=null;try{v=JSON.parse(store.get("otm-clientes")||"null")}catch(e){}
   if(!Array.isArray(v)) return CLI_PADRAO.map((c,i)=>({...c,id:"c"+i}));
   return v.map(c=>{const d=CLI_PADRAO.find(x=>(x.cnpj&&x.cnpj===c.cnpj)||kk(x.nome)===kk(c.nome));if(!d)return c;const o={...c};
     CAMPOS_OF.forEach(k=>{if(!o[k])o[k]=d[k]});if(/^MAC ·|^MinC ·|^MDHC ·/.test(o.acao||""))o.acao=d.acao;return o});}
-function setCli(l){store.set("otm-clientes",JSON.stringify(l));if(typeof renderCliChips==="function")renderCliChips()}
+function setCli(l){if(CLI_MODO)return;store.set("otm-clientes",JSON.stringify(l));if(typeof renderCliChips==="function")renderCliChips()}
 function renderCli(){
   const l=getCli();
   $("cliList").innerHTML=l.length?l.map(c=>`<div class="cli" data-cli="${esc(c.id)}">
@@ -1946,31 +2091,43 @@ let EU=null, lgnEspera=null;
 const tok=()=>store.get("otm-tok")||"";
 const primeiroNome=()=>EU&&EU.nome?String(EU.nome).trim().split(/\s+/)[0]:"Phelipe";
 async function postAcesso(body){const r=await fetch(apiBase(),{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(body)});
-  const j=await r.json(); if(j.erro) throw new Error(j.erro==="ação inválida"?"O motor ainda não tem o login. Atualize o código do Apps Script (v14.4).":j.erro); return j}
+  const j=await r.json(); if(j.erro) throw new Error(j.erro==="ação inválida"?"O motor está desatualizado. Atualize o código do Apps Script (v14.7).":j.erro); return j}
 async function perguntaEu(){const u=apiBase(); const r=await fetch(u+(u.includes("?")?"&":"?")+new URLSearchParams({acao:"eu",t:tok()})); return r.json()}
 // Na abertura: com sessão guardada, segue na hora e confere em segundo plano; sem sessão, pergunta ao motor se o login é obrigatório.
 async function iniciaSessao(){
   if(!apiBase()) return;
+  // v14.7: link do e-mail "Esqueci a senha" abre direto a tela de senha nova
+  const rl=(location.hash||"").match(/^#redefinir=([A-Za-z0-9]+)(?:&u=([^&]+))?/);
+  if(rl){ try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}
+    let em=""; try{em=decodeURIComponent(rl[2]||"")}catch(e){}
+    $("lgEmail").value=em; $("lgCod").value=rl[1].toUpperCase(); await pedeLogin(true,null,"nova"); return }
   if(tok()){ perguntaEu().then(r=>{ if(r&&r.email){const antes=store.get("otm-perfil"); EU=r; store.set("otm-perfil",r.perfil||""); if((r.perfil==="cliente")!==(antes==="cliente")){location.reload();return} mostraUsuario();if(typeof VIEW!=="undefined"&&VIEW==="ini")renderInicio()} else if(r&&r.anonimo){store.set("otm-tok","");EU=null;mostraUsuario();if(r.obrigatorio)sessaoCaiu()} }).catch(()=>{}); return }
   let r=null; try{r=await perguntaEu()}catch(e){return}
   if(r&&r.obrigatorio) await pedeLogin(true);
 }
 function sessaoCaiu(){ if(lgnEspera&&!$("lgn").hidden) return;      // a tela de entrada já está aberta: depois do login o painel segue sozinho
   store.set("otm-tok",""); EU=null; mostraUsuario(); pedeLogin(true,"Sua sessão terminou. Entre de novo.").then(()=>location.reload()) }
-function pedeLogin(obrig,msg){
+function pedeLogin(obrig,msg,modo){
   const L=$("lgn"); if(!L.hidden&&lgnEspera) return lgnEspera.p;
-  L.hidden=false; lgnModo("entrar"); $("lgFecha").hidden=!!obrig; if(msg) $("lgMsg").textContent=msg;
-  setTimeout(()=>$("lgEmail").focus(),60);
+  L.hidden=false; lgnModo(modo||"entrar"); $("lgFecha").hidden=!!obrig; if(msg) $("lgMsg").textContent=msg;
+  setTimeout(()=>(modo==="nova"&&$("lgEmail").value?$("lgCod"):$("lgEmail")).focus(),60);
   let res; const p=new Promise(r=>res=r); lgnEspera={p,res}; return p;
 }
+let LGN_M="entrar";
 function lgnModo(m){
-  const cad=m==="cad"; $("lgn").classList.toggle("cad",cad);
+  LGN_M=m; const L=$("lgn"); ["ent","cad","esq","nova"].forEach(c=>L.classList.remove(c)); L.classList.add(m==="entrar"?"ent":m);
   document.querySelectorAll("[data-lgn]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lgn===m)));
-  $("lgnT").textContent=cad?"Criar acesso":"Entrar"; $("lgGo").textContent=cad?"Enviar cadastro":"Entrar";
-  $("lgSenha").setAttribute("autocomplete",cad?"new-password":"current-password");
-  const M=$("lgMsg"); M.classList.remove("err"); M.textContent=cad?"Use o código de convite que você recebeu. A senha precisa ter pelo menos 8 caracteres. O acesso é liberado depois da aprovação.":"";
+  $("lgnT").textContent={entrar:"Entrar",cad:"Criar acesso",esq:"Esqueci a senha",nova:"Criar senha nova"}[m];
+  $("lgGo").textContent={entrar:"Entrar",cad:"Enviar cadastro",esq:"Enviar código por e-mail",nova:"Salvar e entrar"}[m];
+  $("lgSenL").textContent=m==="nova"?"Senha nova":"Senha";
+  $("lgSenha").setAttribute("autocomplete",m==="entrar"?"current-password":"new-password");
+  const M=$("lgMsg"); M.classList.remove("err");
+  M.textContent={cad:"Use o código de convite que você recebeu. A senha precisa ter pelo menos 8 caracteres. O acesso é liberado depois da aprovação.",
+    esq:"Informe o e-mail do seu acesso. Enviamos um código para você criar uma senha nova.",
+    nova:"Digite o código que chegou no seu e-mail (vale 30 minutos) e crie a senha nova, com pelo menos 8 caracteres."}[m]||"";
 }
 function mostraUsuario(){
+  document.body.classList.toggle("ehAdmin",!!(EU&&EU.perfil==="admin"));
   const b=$("eu"); if(!b) return;
   if(EU){b.hidden=false;b.textContent=primeiroNome()+" · sair";b.title=`${EU.nome} · ${EU.perfilNome||EU.perfil}${EU.restrito?" · clientes limitados":""}`}
   else if(apiBase()){b.hidden=false;b.textContent="Entrar";b.title="Entrar com e-mail e senha"}
@@ -1978,6 +2135,8 @@ function mostraUsuario(){
 }
 document.addEventListener("click",e=>{
   const tb=e.target.closest("[data-lgn]"); if(tb){lgnModo(tb.dataset.lgn);return}
+  if(e.target.closest("#lgEsq")){lgnModo("esq");$("lgEmail").focus();return}
+  if(e.target.closest("#lgVolta")){lgnModo("entrar");return}
   if(e.target.closest("#lgFecha")){$("lgn").hidden=true;lgnEspera=null;return}
   if(e.target.closest("#eu")){
     if(EU){ if(!confirm(`Sair do painel (${EU.nome})?`)) return; postAcesso({acao:"sair",t:tok()}).catch(()=>{}).then(()=>{store.set("otm-tok","");store.set("otm-perfil","");location.reload()}) }
@@ -1985,79 +2144,166 @@ document.addEventListener("click",e=>{
   }
 });
 $("lgnForm").addEventListener("submit",async e=>{
-  e.preventDefault(); const cad=$("lgn").classList.contains("cad"), M=$("lgMsg"), go=$("lgGo");
+  e.preventDefault(); const m=LGN_M, M=$("lgMsg"), go=$("lgGo");
   const email=$("lgEmail").value.trim().toLowerCase(), senha=$("lgSenha").value;
   const erro=t=>{M.textContent=t;M.classList.add("err")}; M.classList.remove("err");
-  if(!email||!senha) return erro("Preencha e-mail e senha.");
-  if(cad){ if($("lgNome").value.trim().length<3) return erro("Informe seu nome."); if(senha.length<8) return erro("A senha precisa ter pelo menos 8 caracteres.");
+  if(!email) return erro("Preencha o e-mail.");
+  if(m!=="esq"&&!senha) return erro(m==="nova"?"Crie a senha nova.":"Preencha e-mail e senha.");
+  if(m==="cad"){ if($("lgNome").value.trim().length<3) return erro("Informe seu nome."); if(senha.length<8) return erro("A senha precisa ter pelo menos 8 caracteres.");
     if(senha!==$("lgSenha2").value) return erro("As duas senhas não são iguais."); if(!$("lgConv").value.trim()) return erro("Informe o código de convite."); }
-  go.disabled=true; M.textContent=cad?"Enviando o cadastro…":"Entrando…";
+  if(m==="nova"){ if($("lgCod").value.trim().length<6) return erro("Digite o código que chegou no seu e-mail."); if(senha.length<8) return erro("A senha precisa ter pelo menos 8 caracteres.");
+    if(senha!==$("lgSenha2").value) return erro("As duas senhas não são iguais."); }
+  go.disabled=true; M.textContent={cad:"Enviando o cadastro…",esq:"Enviando o código…",nova:"Salvando a senha nova…"}[m]||"Entrando…";
   try{
-    if(cad){ const j=await postAcesso({acao:"cadastrar",nome:$("lgNome").value.trim(),email,senha,convite:$("lgConv").value.trim()});
+    if(m==="cad"){ const j=await postAcesso({acao:"cadastrar",nome:$("lgNome").value.trim(),email,senha,convite:$("lgConv").value.trim()});
       lgnModo("entrar"); $("lgSenha").value=""; $("lgSenha2").value=""; M.textContent=j.msg||"Cadastro recebido."; }
-    else { const j=await postAcesso({acao:"entrar",email,senha}); store.set("otm-tok",j.t); store.set("otm-perfil",j.perfil||""); EU=j; $("lgSenha").value="";
+    else if(m==="esq"){ const j=await postAcesso({acao:"esqueci",email}); lgnModo("nova"); M.textContent=j.msg||"Confira seu e-mail."; setTimeout(()=>$("lgCod").focus(),50) }
+    else { if(m==="nova") await postAcesso({acao:"redefinirSenha",email,codigo:$("lgCod").value.trim(),senha});
+      const j=await postAcesso({acao:"entrar",email,senha}); store.set("otm-tok",j.t); store.set("otm-perfil",j.perfil||""); EU=j;
+      $("lgSenha").value=""; $("lgSenha2").value=""; $("lgCod").value=""; if(m==="nova") lgnModo("entrar");
       $("lgn").hidden=true; mostraUsuario(); const w=lgnEspera; lgnEspera=null; if(w) w.res(j); else location.reload(); }
   }catch(err){erro(err.message||"Não consegui falar com o motor. Tente de novo.")}
   finally{go.disabled=false}
 });
 
-// ======== Portal do Cliente (v14.6) ========
-// Cliente logado vê só esta tela. Administrador e equipe abrem pelo cartão do cliente ("Portal do cliente") para conferir antes de convidar.
+// ======== Portal do Cliente (v14.7: abas, gráficos clicáveis e Explorar) ========
+// Cliente logado abre aqui. Administrador e equipe abrem pelo cartão do cliente ("Portal do cliente") para conferir antes de convidar.
 const PTL_EXPL={"Relacionamento":"Contato aberto com o gabinete","Solicitação formalizada":"Ofício com o pedido enviado ao parlamentar","Sinalização":"Parlamentar sinalizou apoio (ainda não é recurso)","Empenhado":"Recurso reservado no orçamento para a instituição","Pago":"Recurso pago à instituição"};
-let PTL={d:null,filtro:0,admin:false};
+const PTL_COR=["var(--out)","var(--brand2)","var(--gold)","var(--brand)","var(--win)"];
+const PTL_TABS=[["vg","Visão geral","Resumo"],["parl","Parlamentares","Gabinetes"],["rec","Recursos","Recursos"],["op","Oportunidades","Editais"],["exp","Explorar","Explorar"]];
+const PTL_EXP=[
+  ["Captação","Quem pode apoiar a sua causa",[["rg","🎯","Quem pode apoiar","Parlamentares que mais mandam emenda para a sua cidade e a sua área"],["dos","🧾","Dossiê do parlamentar","Todas as emendas de um parlamentar: áreas, cidades e instituições"],["pj","📁","Projetos aprovados","Projetos que já receberam emenda no TransfereGov, para se inspirar"]]],
+  ["Oportunidades","Editais para OSCs no Brasil todo",[["op:ab","📣","Abertas agora","Editais, chamamentos e programas abertos a entidades sem fins lucrativos"],["op:pv","📅","Previstas","O que costuma abrir nos próximos meses"]]],
+  ["Eleições 2026","Quem fica e quem chega em 2027",[["ap","🗳️","Resultado da eleição","Eleitos, votação e renovação por estado"],["vt","🗺️","Votos por cidade","Onde cada candidato foi votado, no mapa"],["pt","🏛️","Partidos e bancadas","Bancadas que ficam e as que chegam em 2027"]]]];
+let PTL={d:null,filtro:0,min:0,admin:false,tab:"vg",proxTodos:false};
 async function abrePortal(id,admin){
-  const P=$("ptl"); PTL={d:null,filtro:0,admin:!!admin}; P.hidden=false; P.scrollTop=0;
+  const P=$("ptl"); PTL={d:null,filtro:0,min:0,admin:!!admin,tab:admin?"vg":(store.get("otm-ptltab")||"vg"),proxTodos:false}; P.hidden=false; P.scrollTop=0;
   P.innerHTML=`<div class="ptlIn"><p class="ptlCarr">Carregando o portal…</p></div>`;
   try{ PTL.d=await api(id?{acao:"portal",id}:{acao:"portal"}); renderPortal() }
   catch(e){ if(e.message==="login") return; P.innerHTML=`<div class="ptlIn">${ptlTopo()}<div class="ptlAviso"><b>Não consegui abrir o portal.</b>${esc(e.message)}</div></div>` }
 }
+// volta para o portal (cliente explorando o painel)
+function voltaPortal(){ $("ptl").hidden=false; if(PTL.d&&!PTL.admin) renderPortal(); else abrePortal(null,false); fechaSb() }
 function ptlTopo(){
   const adm=PTL.admin, d=PTL.d;
   return `<div class="ptlTop"><div class="ptlMarca"><b>Otimistas Consultoria</b> · Portal do Cliente</div><div class="ptlAcoes">
     ${adm&&EU&&EU.perfil==="admin"&&d?`<button class="thm" type="button" data-ptlconv="${esc(d.cliente.id)}">Gerar convite</button>`:""}
-    ${adm?`<button class="thm" type="button" id="ptlFecha">Fechar</button>`:`<button class="thm" type="button" id="ptlSair">${esc(primeiroNome())} · sair</button>`}</div></div>`;
+    ${adm?`<button class="thm" type="button" id="ptlFecha">Fechar</button>`:`<button class="thm" type="button" id="ptlTema">${document.documentElement.dataset.theme==="dark"?"Modo claro":"Modo escuro"}</button><button class="thm" type="button" id="ptlSair">${esc(primeiroNome())} · sair</button>`}</div></div>`;
+}
+const ptlDin=v=>v?fmtR(v):"R$ 0";
+const ptlIni=n=>String(n).split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase();
+function ptlMeta(v){const n=Number(String(v||"").replace(/[^\d,]/g,"").replace(",","."));return n>0?n:0}
+// rosca das etapas: cada fatia é um botão (toque filtra a lista)
+function ptlRosca(cont,total){
+  if(!total) return `<div class="ptlRosca vazio"><span>Sem parlamentares ainda</span></div>`;
+  const R=52,r=34,cx=60,cy=60; let a=-Math.PI/2, fat="";
+  const p=(A,rr)=>`${(cx+rr*Math.cos(A)).toFixed(2)} ${(cy+rr*Math.sin(A)).toFixed(2)}`;
+  cont.forEach((n,i)=>{ if(!n) return; const a2=a+n/total*Math.PI*2*(n===total?0.9999:1), big=a2-a>Math.PI?1:0;
+    fat+=`<path data-ptlf="${i+1}" tabindex="0" role="button" aria-label="${esc(PTL.d.etapas[i])}: ${n}" style="fill:${PTL_COR[i]}" class="${PTL.filtro===i+1?"on":""}" d="M${p(a,R)} A${R} ${R} 0 ${big} 1 ${p(a2,R)} L${p(a2,r)} A${r} ${r} 0 ${big} 0 ${p(a,r)}Z"><title>${esc(PTL.d.etapas[i])}: ${n}</title></path>`; a=a2 });
+  return `<div class="ptlRosca"><svg viewBox="0 0 120 120" aria-hidden="false">${fat}</svg><div class="c"><b>${total}</b><span>gabinetes</span></div></div>`;
+}
+function ptlExplorarBanner(){
+  return `<section class="ptlExpB"><div><span class="tag">Novo</span><h2>Explore além do seu portal</h2><p>Veja quem mais manda emenda para ${esc(PTL.d.cliente.cidade)}, os editais abertos para OSCs e o resultado das Eleições 2026.</p></div>
+    <div class="bts"><button type="button" data-ptlexp="rg">🎯 Quem pode apoiar</button><button type="button" data-ptlexp="op:ab">📣 Editais abertos</button><button type="button" data-ptlexp="ap">🗳️ Eleições 2026</button><button type="button" class="tudo" data-ptltab="exp">Ver tudo ›</button></div></section>`;
 }
 function renderPortal(){
-  const d=PTL.d, P=$("ptl"); if(!d) return; const c=d.cliente, R=d.resumo, nv=x=>`e${x}`;
-  const maxF=Math.max(1,...d.funil.map(f=>f.n));
-  const lista=d.parlamentares.filter(p=>!PTL.filtro||p.nivel===PTL.filtro);
-  const ini=n=>String(n).split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase();
-  const din=v=>v?fmtR(v):"R$ 0";
+  const d=PTL.d, P=$("ptl"); if(!d) return; const c=d.cliente, R=d.resumo, tab=PTL.tab, st0=P.scrollTop;
+  const cont=d.etapas.map((e,i)=>d.parlamentares.filter(p=>p.nivel===i+1).length), total=d.parlamentares.length;
   let h=`<div class="ptlIn">${ptlTopo()}`;
   if(d.avisos&&d.avisos.length) h+=`<div class="ptlAviso"><b>Só você vê este quadro (pré-visualização da Otimistas).</b>${d.avisos.map(esc).join("<br>")}</div>`;
   if(PTL.conv) h+=`<div class="ptlConv">Convite de <b>${esc(PTL.conv.cliente)}</b>: <code>${esc(PTL.conv.codigo)}</code><br>Vale para <b>uma pessoa</b>. Mensagem pronta para enviar:<br><i>${esc(PTL.conv.msg)}</i><br><button class="btn sm" type="button" id="ptlCopia" style="margin-top:8px">Copiar mensagem</button></div>`;
-  h+=`<section class="ptlHero"><div class="k">${esc(c.cidade)}/${esc(c.uf)}${c.tema?` · ${esc(c.tema)}`:""}</div><h1>${esc(c.nome)}</h1>
-    ${c.causa?`<p>${esc(c.causa)}</p>`:""}${c.valor?`<p style="margin-top:6px">Meta de captação: <b>R$ ${esc(c.valor)}</b></p>`:""}
-    <div class="ptlNums"><div><b>${R.parlamentares}</b><span>parlamentares acompanhados</span></div><div><b>${R.formalizadas}</b><span>solicitações formalizadas</span></div>
-    <div><b>${R.sinalizacoes}</b><span>sinalizações de apoio</span></div><div><b>${din(R.empenhado)}</b><span>empenhado para a instituição${R.pago?` · ${din(R.pago)} pago`:""}</span></div></div></section>`;
-  h+=`<section class="ptlCard"><h2>Caminho da captação</h2><p class="sub">Cada parlamentar avança por estas etapas. O número mostra quantos já chegaram a cada uma.</p><div class="ptlFunil">
-    ${d.funil.map((f,i)=>`<div class="f ${nv(i+1)}"><span>${esc(f.etapa)}</span><i><em style="width:${Math.max(f.n?4:0,Math.round(100*f.n/maxF))}%"></em></i><b>${f.n}</b></div>`).join("")}</div></section>`;
-  h+=`<section class="ptlCard"><h2>Parlamentares</h2><p class="sub">Situação de cada gabinete trabalhado para ${esc(c.nome)}.</p>
-    <div class="ptlChips"><button type="button" data-ptlf="0" aria-pressed="${!PTL.filtro}">Todos (${d.parlamentares.length})</button>${d.etapas.map((e,i)=>{const n=d.parlamentares.filter(p=>p.nivel===i+1).length;return n?`<button type="button" data-ptlf="${i+1}" aria-pressed="${PTL.filtro===i+1}">${esc(e)} (${n})</button>`:""}).join("")}</div>
-    ${lista.length?`<ul class="ptlLista">${lista.map(p=>`<li class="ptlP ${nv(p.nivel)}"><div class="av" ${p.foto?`style="background-image:url('${esc(p.foto)}')"`:""}>${p.foto?"":esc(ini(p.nome))}</div>
-      <div><div class="t"><div><div class="nm">${esc(p.nome)}</div><div class="mt">${esc([p.cargo,[p.partido,p.uf].filter(Boolean).join("/")].filter(Boolean).join(" · "))}${p.ultima?`${p.cargo||p.partido?" · ":""}última interação ${esc(p.ultima)}`:""}</div></div><span class="ptlEt">${esc(p.etapa)}</span></div>
-      ${p.detalhe?`<div class="dt">${esc(p.detalhe)}</div>`:""}${p.emp||p.pago?`<div class="dt">Empenhado ${din(p.emp)}${p.pago?` · pago ${din(p.pago)}`:""}</div>`:""}</div></li>`).join("")}</ul>`:`<p class="ptlVazio">Nenhum parlamentar nesta etapa ainda.</p>`}</section>`;
-  h+=`<div class="ptlDuo"><section class="ptlCard"><h2>Em ${esc(d.mes.rotulo)}</h2>
-    <p class="sub">${d.mes.oficios.length} solicitaç${d.mes.oficios.length===1?"ão formalizada":"ões formalizadas"} · ${d.mes.agendas} agenda${d.mes.agendas===1?"":"s"} com gabinetes</p>
-    ${d.mes.oficios.length?`<ul class="ptlUl">${d.mes.oficios.map(n=>`<li>Ofício a ${esc(n)}</li>`).join("")}</ul>`:`<p class="ptlVazio">Nenhum ofício registrado ainda neste mês.</p>`}</section>
-    <section class="ptlCard"><h2>Próximos passos</h2>${d.proximos.length?`<ul class="ptlUl">${d.proximos.map(x=>`<li>${esc(x.texto)}${x.parlamentar||x.quando?`<small>${esc([x.parlamentar,x.quando?(x.edital?"até ":"")+x.quando:""].filter(Boolean).join(" · "))}</small>`:""}</li>`).join("")}</ul>`:`<p class="ptlVazio">A Otimistas atualiza os próximos passos a cada etapa.</p>`}</section></div>`;
-  const inst=d.recursos.instituicao, cid=d.recursos.cidade;
-  h+=`<section class="ptlCard"><h2>Recursos para a instituição</h2><p class="sub">Empenhos e pagamentos de emendas com ${esc(c.razao||c.nome)} como favorecida, segundo o Portal da Transparência.</p>
-    ${inst.length?`<table class="ptlTab"><thead><tr><th>Autor da emenda</th><th class="n">Empenhado</th><th class="n">Pago</th></tr></thead><tbody>${inst.map(a=>`<tr><td>${esc(a.autor)}</td><td class="n">${din(a.emp)}</td><td class="n">${din(a.pago)}</td></tr>`).join("")}</tbody></table>`:`<p class="ptlVazio">Ainda não há empenho de emenda registrado para a instituição desde 2023.</p>`}
-    ${cid.length?`<h2 style="margin-top:18px">Emendas que chegaram à cidade</h2><p class="sub">Recursos destinados a outros órgãos e entidades de ${esc(c.cidade)} (prefeitura, fundos municipais e outras instituições). <b>Não são recursos da instituição</b>; mostram quem já atende a cidade.</p>
-    <table class="ptlTab"><thead><tr><th>Autor · favorecido</th><th class="n">Empenhado</th></tr></thead><tbody>${cid.map(a=>`<tr><td>${esc(a.autor)}<br><span style="color:var(--muted);font-size:12px">${esc(a.favorecido)}</span></td><td class="n">${din(a.emp)}</td></tr>`).join("")}</tbody></table>`:""}</section>`;
-  h+=`<section class="ptlCard"><h2>Oportunidades abertas</h2><p class="sub">Editais e chamamentos que a instituição pode disputar. Confirme requisitos e prazo no edital.</p>
-    ${d.oportunidades.length?d.oportunidades.map(o=>`<a class="ptlOp" href="${esc(o.link)}" target="_blank" rel="noopener"><b>${esc(o.titulo)}</b><span>${esc([o.area,o.uf==="BR"?"Nacional":o.uf,o.situacao,o.prazo?"prazo "+o.prazo:""].filter(Boolean).join(" · "))}</span></a>`).join(""):`<p class="ptlVazio">Nenhuma oportunidade compatível aberta agora.</p>`}</section>`;
-  h+=`<footer class="ptlCard ptlRod"><b style="color:var(--ink)">Como ler as etapas</b><dl>${d.etapas.map(e=>`<dt>${esc(e)}</dt><dd>${esc(PTL_EXPL[e]||"")}</dd>`).join("")}</dl>
-    Solicitação formalizada e sinalização são etapas de relacionamento: <b>não significam recurso garantido</b>. Só é recurso da instituição o que aparece como empenhado ou pago.<br>
-    Atualizado em ${esc(d.atualizado.hoje)}${d.atualizado.emendas?` · emendas do Portal da Transparência até ${esc(d.atualizado.emendas)}`:""}. Dúvidas: fale com a Otimistas Consultoria.</footer></div>`;
+  const kpi=[[R.parlamentares,"parlamentares acompanhados","parl",0],[R.formalizadas,"solicitações formalizadas","parl",2],[R.sinalizacoes,"sinalizações de apoio","parl",3],[ptlDin(R.empenhado),`empenhado para a instituição${R.pago?` · ${ptlDin(R.pago)} pago`:""}`,"rec",0]];
+  h+=`<section class="ptlHero"><div class="k">${esc(c.cidade)}/${esc(c.uf)}${c.tema?` · ${esc(c.tema)}`:""}</div><h1>${esc(c.nome)}</h1>${c.causa?`<p class="cz">${esc(c.causa)}</p>`:""}
+    <div class="ptlNums">${kpi.map(([n,t,go,mn])=>`<button type="button" data-ptlgo="${go}" data-ptlmin="${mn}"><b>${n}</b><span>${esc(t)}</span><i aria-hidden="true">›</i></button>`).join("")}</div></section>`;
+  h+=`<nav class="ptlTabs" role="tablist" aria-label="Seções do portal">${PTL_TABS.map(([k,l,sh])=>`<button type="button" role="tab" data-ptltab="${k}" aria-selected="${tab===k}" class="${k==="exp"?"novo":""}"><span class="lg">${l}</span><span class="sh">${sh}</span>${k==="parl"?` <small>${total}</small>`:k==="op"?` <small>${d.oportunidades.length}</small>`:""}</button>`).join("")}</nav>`;
+  h+=`<div class="ptlCorpo" id="ptlCorpo">`;
+  if(tab==="vg"){
+    const maxF=Math.max(1,...d.funil.map(f=>f.n)), meta=ptlMeta(c.valor);
+    h+=`<div class="ptlDuo"><section class="ptlCard"><h2>Onde estão os parlamentares</h2><p class="sub">Etapa atual de cada gabinete. Toque numa fatia ou numa etapa para ver os nomes.</p>
+      <div class="ptlDon">${ptlRosca(cont,total)}<div class="ptlLeg">${d.etapas.map((e,i)=>`<button type="button" data-ptlf="${i+1}" ${cont[i]?"":"disabled"}><i style="background:${PTL_COR[i]}"></i><span>${esc(e)}</span><b>${cont[i]}</b></button>`).join("")}</div></div></section>
+      <section class="ptlCard"><h2>Caminho da captação</h2><p class="sub">Quantos gabinetes já chegaram a cada etapa. Toque numa barra para ver quem chegou.</p><div class="ptlFunil">
+      ${d.funil.map((f,i)=>`<button type="button" class="f e${i+1}" data-ptlmin2="${i+1}" ${f.n?"":"disabled"}><span>${esc(f.etapa)}</span><i><em style="width:${Math.max(f.n?4:0,Math.round(100*f.n/maxF))}%"></em></i><b>${f.n}</b></button>`).join("")}</div>
+      <p class="ptlNota">Solicitação e sinalização são etapas de relacionamento: <b>não são recurso garantido</b>.</p></section></div>`;
+    if(meta){const pe=Math.min(100,R.empenhado/meta*100), pp=Math.min(100,R.pago/meta*100);
+      h+=`<section class="ptlCard ptlMetaC" data-ptlgo="rec" role="button" tabindex="0"><div class="t"><h2>Meta de captação</h2><b>R$ ${esc(c.valor)}</b></div>
+        <div class="ptlBarra" aria-label="Empenhado ${Math.round(pe)}% da meta, pago ${Math.round(pp)}%"><i class="em" style="width:${pe}%"></i><i class="pg" style="width:${pp}%"></i></div>
+        <div class="ptlLegM"><span><i class="em"></i>Empenhado ${ptlDin(R.empenhado)} (${Math.round(pe)}%)</span><span><i class="pg"></i>Pago ${ptlDin(R.pago)} (${Math.round(pp)}%)</span><span class="vr">Ver recursos ›</span></div></section>`}
+    const prox=PTL.proxTodos?d.proximos:d.proximos.slice(0,4);
+    h+=`<div class="ptlDuo"><section class="ptlCard"><h2>Em ${esc(d.mes.rotulo)}</h2>
+      <div class="ptlMes"><div><b>${d.mes.oficios.length}</b><span>solicitaç${d.mes.oficios.length===1?"ão formalizada":"ões formalizadas"}</span></div><div><b>${d.mes.agendas}</b><span>agenda${d.mes.agendas===1?"":"s"} com gabinetes</span></div></div>
+      ${d.mes.oficios.length?`<ul class="ptlUl">${d.mes.oficios.slice(0,5).map(n=>`<li>Ofício a ${esc(n)}</li>`).join("")}${d.mes.oficios.length>5?`<li>e mais ${d.mes.oficios.length-5}</li>`:""}</ul>`:`<p class="ptlVazio">Nenhum ofício registrado ainda neste mês.</p>`}</section>
+      <section class="ptlCard"><h2>Próximos passos</h2>${prox.length?`<ul class="ptlUl">${prox.map(x=>`<li>${esc(x.texto)}${x.parlamentar||x.quando?`<small>${esc([x.parlamentar,x.quando?(x.edital?"até ":"")+x.quando:""].filter(Boolean).join(" · "))}</small>`:""}</li>`).join("")}</ul>${d.proximos.length>4?`<button type="button" class="ptlMais" data-ptlprox>${PTL.proxTodos?"Mostrar menos":`Ver todos (${d.proximos.length})`}</button>`:""}`:`<p class="ptlVazio">A Otimistas atualiza os próximos passos a cada etapa.</p>`}</section></div>`;
+    h+=ptlExplorarBanner();
+    if(PTL.admin&&d.acessos) h+=`<section class="ptlCard"><h2>Quem acessa este portal</h2><p class="sub">Só a equipe Otimistas vê este quadro.</p>${d.acessos.length?`<ul class="usrL">${d.acessos.map(a=>`<li><div><b>${esc(a.nome||a.email)}</b><span>${esc(a.email)} · ${esc(a.status)}${a.ultimo?` · último acesso ${esc(a.ultimo)}`:""}</span></div>
+      ${EU&&EU.perfil==="admin"?`<span class="usrB">${a.status==="ativo"?`<button class="btn ghost sm" data-uop="bloquear" data-uem="${esc(a.email)}" data-unm="${esc(a.nome)}">Bloquear</button>`:`<button class="btn ghost sm" data-uop="reativar" data-uem="${esc(a.email)}" data-unm="${esc(a.nome)}">Reativar</button>`}<button class="btn ghost sm danger" data-uop="excluir" data-uem="${esc(a.email)}" data-unm="${esc(a.nome)}">Excluir</button></span>`:""}</li>`).join("")}</ul>`:`<p class="ptlVazio">Ninguém ainda. Use "Gerar convite" para liberar o acesso de uma pessoa da instituição.</p>`}</section>`;
+    h+=`<details class="ptlCard ptlRod"><summary>Como ler as etapas</summary><dl>${d.etapas.map((e,i)=>`<dt><i style="background:${PTL_COR[i]}"></i>${esc(e)}</dt><dd>${esc(PTL_EXPL[e]||"")}</dd>`).join("")}</dl>
+      Solicitação formalizada e sinalização são etapas de relacionamento: <b>não significam recurso garantido</b>. Só é recurso da instituição o que aparece como empenhado ou pago.</details>`;
+  }
+  if(tab==="parl"){
+    const lista=d.parlamentares.filter(p=>PTL.min?p.nivel>=PTL.min:(!PTL.filtro||p.nivel===PTL.filtro));
+    h+=`<section class="ptlCard"><div class="ptlChips"><button type="button" data-ptlf="0" aria-pressed="${!PTL.filtro&&!PTL.min}">Todos (${total})</button>${d.etapas.map((e,i)=>cont[i]?`<button type="button" data-ptlf="${i+1}" aria-pressed="${PTL.filtro===i+1}"><i style="background:${PTL_COR[i]}"></i>${esc(e)} (${cont[i]})</button>`:"").join("")}
+      ${PTL.min?`<button type="button" data-ptlf="0" aria-pressed="true" class="x">Chegaram a ${esc(d.etapas[PTL.min-1])} ✕</button>`:""}</div>
+      ${lista.length?`<ul class="ptlLista">${lista.map(p=>`<li class="ptlP e${p.nivel}"><div class="av" ${p.foto?`style="background-image:url('${esc(https_(p.foto))}')"`:""}>${p.foto?"":esc(ptlIni(p.nome))}</div>
+        <div class="cp"><div class="t"><div><div class="nm">${esc(p.nome)}</div><div class="mt">${esc([p.cargo,[p.partido,p.uf].filter(Boolean).join("/")].filter(Boolean).join(" · "))}${p.ultima?`${p.cargo||p.partido?" · ":""}última interação ${esc(p.ultima)}`:""}</div></div><span class="ptlEt">${esc(p.etapa)}</span></div>
+        <div class="ptlPassos" aria-label="Etapa ${p.nivel} de 5">${d.etapas.map((e,i)=>`<i class="${i<p.nivel?"on":""}" style="${i<p.nivel?`background:${PTL_COR[p.nivel-1]}`:""}" title="${esc(e)}"></i>`).join("")}</div>
+        ${p.detalhe?`<div class="dt">${esc(p.detalhe)}</div>`:""}${p.emp||p.pago?`<div class="dt">Empenhado ${ptlDin(p.emp)}${p.pago?` · pago ${ptlDin(p.pago)}`:""}</div>`:""}
+        <button type="button" class="ptlLk" data-ptldos="${esc(p.nome)}" data-foto="${esc(p.foto||"")}" data-uf="${esc(p.uf||"")}" data-cargo="${/sen/i.test(p.cargo||"")?"S":p.cargo?"D":""}">Ver as emendas de ${esc(p.nome.split(" ")[0])} ›</button></div></li>`).join("")}</ul>`:`<p class="ptlVazio">Nenhum parlamentar nesta etapa ainda.</p>`}</section>`;
+  }
+  if(tab==="rec"){
+    const inst=d.recursos.instituicao, cid=d.recursos.cidade, mx=Math.max(1,...inst.map(a=>a.emp),...inst.map(a=>a.pago));
+    h+=`<section class="ptlCard"><h2>Recursos para a instituição</h2><p class="sub">Empenhos e pagamentos de emendas com ${esc(c.razao||c.nome)} como favorecida, segundo o Portal da Transparência.</p>
+      <div class="ptlMes"><div><b>${ptlDin(R.empenhado)}</b><span>empenhado</span></div><div><b>${ptlDin(R.pago)}</b><span>pago</span></div></div>
+      ${inst.length?`<div class="ptlBars">${inst.map(a=>`<div class="r"><span class="l">${esc(a.autor)}</span><span class="tk"><i class="em" style="width:${Math.max(2,a.emp/mx*100)}%"></i>${a.pago?`<i class="pg" style="width:${Math.max(2,a.pago/mx*100)}%"></i>`:""}</span><span class="v">${ptlDin(a.emp)}${a.pago?`<small>${ptlDin(a.pago)} pago</small>`:""}</span></div>`).join("")}</div>
+        <div class="ptlLegM"><span><i class="em"></i>Empenhado</span><span><i class="pg"></i>Pago</span></div>`:`<p class="ptlVazio">${d.recursos.semCnpj?"A Otimistas ainda está completando o cadastro da instituição para identificar os recursos.":"Ainda não há empenho de emenda registrado para a instituição desde 2023."}</p>`}</section>`;
+    if(cid.length){const mc=Math.max(1,...cid.map(a=>a.emp));
+      h+=`<details class="ptlCard ptlFold"><summary><span><b>Emendas que chegaram a ${esc(c.cidade)}</b><small>${cid.length} autor${cid.length===1?"":"es"} · recursos de outros órgãos e entidades da cidade</small></span></summary>
+      <p class="sub">Prefeitura, fundos municipais e outras instituições. <b>Não são recursos da instituição</b>: mostram quem já atende a cidade e é porta de entrada.</p>
+      <div class="ptlBars">${cid.map(a=>`<div class="r"><span class="l">${esc(a.autor)}<small>${esc(a.favorecido)}</small></span><span class="tk"><i class="ci" style="width:${Math.max(2,a.emp/mc*100)}%"></i></span><span class="v">${ptlDin(a.emp)}</span></div>`).join("")}</div></details>`}
+  }
+  if(tab==="op"){
+    h+=`<section class="ptlCard"><h2>Oportunidades para a instituição</h2><p class="sub">Editais e chamamentos que ${esc(c.nome)} pode disputar. Confirme requisitos e prazo no edital.</p>
+      ${d.oportunidades.length?`<div class="ptlOps">${d.oportunidades.map(o=>{const n=diasAte(o.prazo);const cls=n==null?"":n<=7?"urg":n<=30?"pert":"";
+        return `<a class="ptlOp" href="${esc(o.link)}" target="_blank" rel="noopener"><span class="pz ${cls}">${n==null?esc(o.situacao):n<0?"encerrado":n===0?"fecha hoje":`faltam ${n} dia${n===1?"":"s"}`}</span><b>${esc(o.titulo)}</b><span>${esc([o.area,o.uf==="BR"?"Nacional":o.uf,o.prazo?"prazo "+o.prazo:"",o.fonte].filter(Boolean).join(" · "))}</span></a>`}).join("")}</div>`:`<p class="ptlVazio">Nenhuma oportunidade compatível aberta agora.</p>`}
+      <button type="button" class="btn ghost" data-ptlexp="op:ab" style="margin-top:12px">Ver todas as oportunidades do Brasil ›</button></section>`;
+  }
+  if(tab==="exp"){
+    h+=`<section class="ptlExpH"><h2>Explorar</h2><p>Os mesmos dados públicos que a Otimistas usa para planejar a captação. Toque para abrir; o botão <b>Meu portal</b> traz você de volta.</p></section>`;
+    h+=PTL_EXP.map(([g,sub,its])=>`<section class="ptlExpG"><h3>${esc(g)}<span>${esc(sub)}</span></h3><div class="ptlExpT">${its.map(([v,ic,t,ds])=>`<button type="button" data-ptlexp="${v}"><span class="ic" aria-hidden="true">${ic}</span><b>${esc(t)}</b><span>${esc(ds)}</span><i aria-hidden="true">›</i></button>`).join("")}</div></section>`).join("");
+  }
+  h+=`</div><footer class="ptlRodape">Atualizado em ${esc(d.atualizado.hoje)}${d.atualizado.emendas?` · emendas do Portal da Transparência até ${esc(d.atualizado.emendas)}`:""}. Dúvidas: fale com a Otimistas Consultoria.</footer></div>`;
   P.innerHTML=h;
+  const tb=P.querySelector(".ptlTabs"); if(tb){ P.scrollTop=Math.min(st0,tb.offsetTop); const on=tb.querySelector('[aria-selected="true"]'); if(on&&on.scrollIntoView) on.scrollIntoView({block:"nearest",inline:"nearest"}) }
+}
+function ptlTab(t){ PTL.tab=t; if(!PTL.admin) store.set("otm-ptltab",t); renderPortal() }
+// cliente explorando o painel: menu enxuto, sem clientes, cadernos, envios nem motor
+var CLI_MODO=null;
+function modoCliente(){
+  if(CLI_MODO||!PTL.d) return; const c=PTL.d.cliente;
+  CLI_MODO={id:c.id,nome:c.nome,razao:c.razao||"",cidade:c.cidade,uf:String(c.uf||"").toLowerCase(),tema:c.tema||"",valor:c.valor||"",causa:c.causa||""};
+  document.body.classList.add("modoCli"); st.rel={itens:[],erro:1};
+  st.rg.uf=CLI_MODO.uf; try{initRegua()}catch(e){} mostraUsuario();
+}
+function explorar(v){
+  const [view,optab]=String(v).split(":");
+  if(!PTL.admin) modoCliente();
+  $("ptl").hidden=true;
+  if(optab) st.op.tab=optab;
+  irPara(view); if(optab) marcaOpSb();
 }
 document.addEventListener("click",async e=>{
   const t=e.target;
   const ab=t.closest("[data-ptl]"); if(ab){abrePortal(ab.dataset.ptl,true);return}
-  const f=t.closest("[data-ptlf]"); if(f){PTL.filtro=Number(f.dataset.ptlf);renderPortal();return}
+  if(t.closest("[data-meuportal]")){voltaPortal();return}
+  if(!t.closest("#ptl")) return;
+  const tb=t.closest("[data-ptltab]"); if(tb){ptlTab(tb.dataset.ptltab);return}
+  const go=t.closest("[data-ptlgo]"); if(go){PTL.filtro=0;PTL.min=Number(go.dataset.ptlmin||0);ptlTab(go.dataset.ptlgo);return}
+  const f=t.closest("[data-ptlf]"); if(f){PTL.filtro=Number(f.dataset.ptlf);PTL.min=0;ptlTab("parl");return}
+  const f2=t.closest("[data-ptlmin2]"); if(f2){PTL.filtro=0;PTL.min=Number(f2.dataset.ptlmin2);ptlTab("parl");return}
+  if(t.closest("[data-ptlprox]")){PTL.proxTodos=!PTL.proxTodos;renderPortal();return}
+  const ex=t.closest("[data-ptlexp]"); if(ex){explorar(ex.dataset.ptlexp);return}
+  const dz=t.closest("[data-ptldos]"); if(dz){const nm=dz.dataset.ptldos; explorar("dos"); abreRaioX(nm,dz.dataset.foto||"",nm,{tela:true,uf:dz.dataset.uf||"",cargo:dz.dataset.cargo||""});return}
   if(t.closest("#ptlFecha")){$("ptl").hidden=true;PTL.conv=null;return}
+  if(t.closest("#ptlTema")){trocaTema();$("thm2").textContent=$("thm").textContent;renderPortal();return}
   if(t.closest("#ptlSair")){postAcesso({acao:"sair",t:tok()}).catch(()=>{}).then(()=>{store.set("otm-tok","");store.set("otm-perfil","");location.reload()});return}
   const cv=t.closest("[data-ptlconv]"); if(cv){ if(!confirm("Gerar um código de convite? Ele vale para UMA pessoa e dá acesso só ao portal deste cliente.")) return;
     try{const j=await postPlanilha({acao:"conviteCliente",id:cv.dataset.ptlconv}); const url=j.painel||location.href.split("#")[0];
@@ -2065,6 +2311,55 @@ document.addEventListener("click",async e=>{
     catch(err){alert("Não consegui gerar o convite: "+err.message)} return}
   if(t.closest("#ptlCopia")&&PTL.conv){(navigator.clipboard?navigator.clipboard.writeText(PTL.conv.msg):Promise.reject()).then(()=>{t.textContent="Copiado"}).catch(()=>prompt("Copie a mensagem:",PTL.conv.msg))}
 });
+document.addEventListener("keydown",e=>{ if((e.key==="Enter"||e.key===" ")&&e.target.closest&&e.target.closest("#ptl")&&e.target.matches("[data-ptlf][role=button],[data-ptlgo][role=button]")){e.preventDefault();e.target.dispatchEvent(new MouseEvent("click",{bubbles:true}))} });
+
+// ======== Acessos (v14.7): só administrador. Aprovar, bloquear, reativar, mudar perfil, excluir e cancelar convites ========
+st.usr=null;
+const USR_ST={ativo:"ativo",pendente:"aguardando aprovação",bloqueado:"bloqueado",recusado:"recusado",redefinir:"trocando a senha"};
+async function renderUsr(){
+  const B=$("usrBody"); if(!B) return;
+  if(!EU||EU.perfil!=="admin"){B.innerHTML=`<p class="empty">Só o administrador vê esta tela.</p>`;return}
+  if(!st.usr) B.innerHTML=`<p class="sub">Carregando os acessos…</p>`;
+  try{ st.usr=await api({acao:"usuarios"}) }catch(e){ if(e.message!=="login") B.innerHTML=`<p class="empty">Não consegui ler os acessos: ${esc(e.message)}${/inválida/.test(e.message)?" (atualize o motor para a v14.7)":""}</p>`; return }
+  desenhaUsr();
+}
+function desenhaUsr(){
+  const B=$("usrBody"), D=st.usr; if(!B||!D) return; const L=D.lista||[];
+  const perfOpts=(sel,cli)=>Object.entries(D.perfis||{}).filter(([k])=>k!=="cliente"||cli).map(([k,v])=>`<option value="${k}" ${k===sel?"selected":""}>${esc(v)}</option>`).join("");
+  const linha=u=>{ const acts=u.voce?`<span class="pill">você</span>`:u.status==="pendente"
+      ?`<select class="usrSel" data-uperf="${esc(u.email)}" aria-label="Perfil">${perfOpts(u.perfil&&u.perfil!=="cliente"?u.perfil:"equipe",u.perfil==="cliente")}</select><button class="btn sm" data-uop="aprovar" data-uem="${esc(u.email)}" data-unm="${esc(u.nome)}">Aprovar</button><button class="btn ghost sm" data-uop="recusar" data-uem="${esc(u.email)}" data-unm="${esc(u.nome)}">Recusar</button>`
+      :`${u.status==="ativo"&&u.perfil!=="cliente"?`<select class="usrSel" data-uperf="${esc(u.email)}" data-uatual="${esc(u.perfil)}" aria-label="Perfil de ${esc(u.nome)}">${perfOpts(u.perfil,false)}</select>`:""}${u.status==="ativo"?`<button class="btn ghost sm" data-uop="bloquear" data-uem="${esc(u.email)}" data-unm="${esc(u.nome)}">Bloquear</button>`:`<button class="btn ghost sm" data-uop="reativar" data-uem="${esc(u.email)}" data-unm="${esc(u.nome)}">Reativar</button>`}`;
+    return `<li><span class="usrAv">${esc(ptlIni(u.nome||u.email))}</span><div><b>${esc(u.nome||u.email)}</b><span>${esc(u.email)} · ${esc(u.perfilNome)} · <em class="usrSt ${esc(u.status)}">${esc(USR_ST[u.status]||u.status)}</em>${u.clientes?` · ${esc(u.clientes)}`:""}</span><span>${u.ultimo?`último acesso ${esc(u.ultimo)}`:"ainda não entrou"}${u.criado?` · desde ${esc(u.criado)}`:""}</span></div>
+      <span class="usrB">${acts}${u.voce?"":`<button class="btn ghost sm danger" data-uop="excluir" data-uem="${esc(u.email)}" data-unm="${esc(u.nome)}" aria-label="Excluir ${esc(u.nome)} da base">Excluir</button>`}</span></li>`};
+  const grp=(tit,sub,arr)=>arr.length?`<h3 class="usrH">${tit} <small>${arr.length}</small></h3>${sub?`<p class="sub" style="margin:0 0 6px">${sub}</p>`:""}<ul class="usrL">${arr.map(linha).join("")}</ul>`:"";
+  const pend=L.filter(u=>u.status==="pendente"), eq=L.filter(u=>u.status==="ativo"&&u.perfil!=="cliente"), cl=L.filter(u=>u.status==="ativo"&&u.perfil==="cliente"), fora=L.filter(u=>!/^(ativo|pendente)$/.test(u.status));
+  const cv=D.convites||[];
+  B.innerHTML=`<div class="usrK"><div><b>${eq.length}</b><span>equipe ativa</span></div><div><b>${cl.length}</b><span>clientes no portal</span></div><div class="${pend.length?"al":""}"><b>${pend.length}</b><span>aguardando aprovação</span></div><div><b>${cv.length}</b><span>convites não usados</span></div></div>`+
+    (L.length?"":`<p class="empty">Nenhum acesso ainda.</p>`)+
+    grp("Aguardando aprovação","Escolha o perfil e aprove aqui mesmo, sem depender do e-mail.",pend)+grp("Equipe Otimistas","",eq)+grp("Clientes no portal","Cada um vê só o portal da própria instituição e os dados públicos.",cl)+grp("Bloqueados e recusados","Excluir apaga a pessoa da aba Usuários. Para voltar, ela precisa de convite novo.",fora)+
+    (cv.length?`<h3 class="usrH">Convites do portal não usados <small>${cv.length}</small></h3><ul class="usrL">${cv.map(c=>`<li><span class="usrAv">✉</span><div><b>${esc(c.cliente)}</b><span>código ${esc(c.codigo)}${c.criado?` · gerado em ${esc(c.criado)}`:""}</span></div><span class="usrB"><button class="btn ghost sm danger" data-ucancel="${esc(c.codigo)}">Cancelar convite</button></span></li>`).join("")}</ul>`:"")+
+    `<p class="sub" style="margin-top:12px">Bloquear e excluir derrubam a sessão da pessoa na hora. Ninguém consegue bloquear, excluir ou mudar o próprio acesso.</p>`;
+}
+async function usrAcao(body,okMsg){
+  try{ const j=await postPlanilha({acao:"usuarioAcao",...body}); st.usr=j; desenhaUsr();
+    if(PTL.d&&PTL.admin&&!$("ptl").hidden) abrePortal(PTL.d.cliente.id,true);
+    if(okMsg) aviso(okMsg) }
+  catch(err){ alert(err.message) }
+}
+function aviso(txt){let a=$("toast"); if(!a){a=document.createElement("div");a.id="toast";a.className="toast";a.setAttribute("role","status");document.body.appendChild(a)} a.textContent=txt; a.classList.add("on"); clearTimeout(aviso.t); aviso.t=setTimeout(()=>a.classList.remove("on"),3200)}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-uop]"); if(b){ const op=b.dataset.uop, em=b.dataset.uem, nm=b.dataset.unm||em;
+    if(op==="excluir"&&!confirm(`Excluir ${nm} da base?\n\nA pessoa perde o acesso na hora e some da aba Usuários. Para voltar, precisa de convite novo.`)) return;
+    if(op==="bloquear"&&!confirm(`Bloquear ${nm}? A sessão cai na hora; você pode reativar depois.`)) return;
+    if(op==="recusar"&&!confirm(`Recusar o pedido de ${nm}?`)) return;
+    const body={op,email:em}; if(op==="aprovar"){const s=document.querySelector(`[data-uperf="${CSS.escape(em)}"]`);body.perfil=s?s.value:"equipe"}
+    usrAcao(body,{excluir:`${nm} foi excluído(a) da base.`,bloquear:`${nm} foi bloqueado(a).`,reativar:`${nm} foi reativado(a).`,aprovar:`${nm} foi aprovado(a) e recebeu e-mail.`,recusar:`Pedido de ${nm} recusado.`}[op]); return }
+  const c=e.target.closest("[data-ucancel]"); if(c){ if(!confirm("Cancelar este convite? O código deixa de valer.")) return; usrAcao({op:"cancelarConvite",codigo:c.dataset.ucancel},"Convite cancelado."); return }
+});
+document.addEventListener("change",e=>{ const s=e.target.closest("[data-uperf][data-uatual]"); if(!s) return;
+  const nm=(st.usr&&(st.usr.lista||[]).find(u=>u.email===s.dataset.uperf)||{}).nome||s.dataset.uperf;
+  if(!confirm(`Mudar o perfil de ${nm} para "${s.options[s.selectedIndex].text}"?`)){s.value=s.dataset.uatual;return}
+  usrAcao({op:"perfil",email:s.dataset.uperf,perfil:s.value},`Perfil de ${nm} atualizado.`) });
 
 // ======== conexão com a planilha ========
 const API_PADRAO="https://script.google.com/macros/s/AKfycbx5na7PyvABZtqE_yafud8fc0_1yveO4pEC9eeIw4ccNPNm72CIQdDZmTTtV-y2EyUv/exec";
@@ -2623,11 +2918,13 @@ const VIEWS={ini:["capt","Início",""],
   vt:["dados","Votos por cidade","Onde cada candidato foi votado e quem foi mais votado em cada cidade."],
   pt:["dados","Partidos e bancadas","Toque num partido para ver os eleitos dele; toque no rosto para abrir o dossiê. Embaixo, quem fica e quem sai da bancada."],
   cli:["capt","Clientes","Instituições atendidas: dados usados na régua e no ofício."],
-  con:["capt","Motor de dados","Conexão com a planilha e situação das cargas automáticas."]};
+  con:["capt","Motor de dados","Conexão com a planilha e situação das cargas automáticas."],
+  usr:["capt","Acessos","Quem entra no painel e no Portal do Cliente. Aprove pedidos, bloqueie, mude o perfil ou exclua alguém da base."]};
+const HINT_CLI={rg:"Quem mais pode mandar emenda para a sua cidade e a sua área, e para onde o recurso já foi. Troque estado, cidade ou área para comparar.",dos:"Escolha um parlamentar por nome, estado ou cidade e veja todas as emendas dele: áreas, cidades, mapa e instituições.",op:"Editais, chamamentos e programas abertos a OSCs e entidades sem fins lucrativos, no Brasil todo."};
 const VIEW_ALIAS={mapa:"rg",hs:"rg",exp:"dos",rk:"dos",bc:"pt",cx:"vt",base:"ap",ren:"ap"};
 function marcaViews(){
   const q=(sel,v)=>{const el=typeof sel==="string"?document.querySelector(sel):sel;if(el)el.dataset.vw=v};
-  q("#iniCard","ini"); const T="rg dos pj ap vt pt cli con"; q("#vHero",T); q(".ttl",T); q("#vHint",T); q(".rule",T);
+  q("#iniCard","ini"); const T="rg dos pj ap vt pt cli con usr"; q("#vHero",T); q(".ttl",T); q("#vHint",T); q(".rule",T);
   q("#pCapt .hero","rg"); q("#rgKpi","rg"); q("#mapCardRg","rg"); q("#pCapt .rgGrid","rg"); q("#rgCidCard","rg"); q("#hsCard","rg");
   q("#dosCard","dos"); q("#dosBoxCard","dos"); q("#rkCard","dos"); q("#expCard","nenhum");
   q("#bcCard","pt"); q("#pjCard","pj"); q("#cliCard","cli");
@@ -2642,16 +2939,19 @@ function marcaViews(){
 }
 let VIEW="rg";
 function irPara(v,semRolar){
-  if(VIEW_ALIAS[v]) v=VIEW_ALIAS[v]; if(!VIEWS[v]) v="ini"; VIEW=v; try{localStorage.setItem("otm-view2",v)}catch(e){}
+  if(VIEW_ALIAS[v]) v=VIEW_ALIAS[v]; if(!VIEWS[v]) v="ini";
+  if(CLI_MODO&&/^(ini|cli|con|usr)$/.test(v)){voltaPortal();return}            // cliente: essas áreas são só da equipe
+  if(v==="usr"&&!(EU&&EU.perfil==="admin")) v="ini";
+  VIEW=v; try{localStorage.setItem("otm-view2",v)}catch(e){}
   if(st.pane!==VIEWS[v][0]) _setPane2(VIEWS[v][0]);
   document.querySelectorAll("[data-vw]").forEach(el=>el.classList.toggle("vOff",!el.dataset.vw.split(" ").includes(v)));
   ["cliCard","conCard"].forEach(id=>{const d=$(id);if(d&&d.dataset.vw===v)d.open=true});
   document.querySelectorAll("#sb [data-view]").forEach(b=>b.setAttribute("aria-current",b.dataset.view===v?"page":"false"));
-  $("tbT").textContent=VIEWS[v][1]; const tt=document.querySelector(".ttl"); if(tt) tt.textContent=VIEWS[v][1]; if($("vHint")) $("vHint").textContent=VIEWS[v][2]||"";
-  if($("vKick")) $("vKick").textContent={rg:"Captação",dos:"Captação",pj:"Captação",ap:"Eleições 2026",vt:"Eleições 2026",pt:"Eleições 2026",cli:"Ajustes",con:"Ajustes"}[v]||"";
+  $("tbT").textContent=VIEWS[v][1]; const tt=document.querySelector(".ttl"); if(tt) tt.textContent=VIEWS[v][1]; if($("vHint")) $("vHint").textContent=(CLI_MODO&&HINT_CLI[v])||VIEWS[v][2]||"";
+  if($("vKick")) $("vKick").textContent={rg:"Captação",dos:"Captação",pj:"Captação",ap:"Eleições 2026",vt:"Eleições 2026",pt:"Eleições 2026",cli:"Ajustes",con:"Ajustes",usr:"Ajustes"}[v]||"";
   if(VIEWS[v][0]==="dados"&&!st.apOk&&v!=="vt"){st.apOk=true;load()}
   if(v==="dos"&&!rkFeito){rkFeito=true;carregaRank()}       // apuração só carrega quando for usada
-  if(v==="op") abreOp(); if(v==="ini") renderInicio(); if(v==="vt") abreVt(); if(v==="dos") abreDosView(); if(v==="con") renderMotor(); if(v==="pt"&&st.bc&&!st.bc.uf) carregaBancada(st.rg.uf||"sp"); if(v==="rg"&&st.rg.mapaPend){st.rg.mapaPend=false;desenhaMapaRg()}
+  if(v==="op") abreOp(); if(v==="ini") renderInicio(); if(v==="usr") renderUsr(); if(v==="vt") abreVt(); if(v==="dos") abreDosView(); if(v==="con") renderMotor(); if(v==="pt"&&st.bc&&!st.bc.uf) carregaBancada(st.rg.uf||"sp"); if(v==="rg"&&st.rg.mapaPend){st.rg.mapaPend=false;desenhaMapaRg()}
   if(v==="hs"&&$("hsCard").hidden){$("vEmpty").hidden=false;$("vEmpty").textContent="Ainda não há registros dos Cadernos Parlamentares para esta instituição. Escolha um cliente na Régua de potencial."}else $("vEmpty").hidden=true;
   fechaSb(); if(!semRolar) window.scrollTo({top:0});
 }
