@@ -908,6 +908,55 @@ body.modoCli #rgCli,body.modoCli #hsCard,body.modoCli #iniCard,body.modoCli #cli
 body.modoCli [data-opk="cl"],body.modoCli #opTabs [data-tab="cl"],body.modoCli [data-oficio],body.modoCli [data-mala],body.modoCli [data-boletim],body.modoCli [data-texto],
 body.modoCli [data-caminho],body.modoCli [data-plano],body.modoCli [data-ptl],body.modoCli [data-ofcli],body.modoCli [data-ofsen]{display:none!important}
 body:not(.ehAdmin) .soAdmin{display:none!important}
+/* Congresso (v14.9) */
+.ph.sm{width:30px;height:30px;font-size:10px}.ph.lg{width:56px;height:56px;font-size:15px;flex:0 0 56px}
+.semNav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.semNav b{font-size:16px;color:var(--ink)}
+.semF{display:grid;gap:6px;margin-bottom:6px}.semSo{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted);font-weight:600}
+.semGrid{display:grid;gap:16px;min-width:0}@media (min-width:1100px){.semGrid{grid-template-columns:minmax(0,1fr) 320px}}
+.semGrid>div,.semSide{min-width:0}
+.semL{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.semE{display:grid;grid-template-columns:62px minmax(0,1fr);gap:12px;padding:12px;border:1px solid var(--line);border-left:5px solid var(--cc);border-radius:14px;background:var(--panel);box-shadow:var(--shadow)}
+.semE.cd,.qqC.cd,.casa.cd{--cc:#00A35C}.semE.sf,.qqC.sf,.casa.sf{--cc:#1F3FA0}.semE.cn,.qqC.cn,.casa.cn{--cc:#7A3FC7}
+:root[data-theme="dark"] .semE.sf,:root[data-theme="dark"] .qqC.sf,:root[data-theme="dark"] .casa.sf{--cc:#8DB0FF}
+.semE.m-planejado{background:var(--watchbg)}.semE.m-participou{background:var(--winbg)}
+.semE .hr b{display:block;font-size:18px;color:var(--ink);font-variant-numeric:tabular-nums}
+.casa{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--cc);border-radius:99px;padding:2px 7px;margin-top:4px}
+.semE .cp{min-width:0}.semE .t b{font-size:15px;color:var(--ink)}.semE .t span{font-size:13px;color:var(--muted)}
+.semE .ti{font-size:14px;color:var(--ink);margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.semE .lo{font-size:12px;color:var(--muted);margin-top:2px}
+.semPres{all:unset;cursor:pointer;display:flex;gap:8px;align-items:center;margin-top:8px}.semPres small{display:block;font-size:11px;color:var(--muted)}.semPres span{font-size:13px;color:var(--ink);font-weight:700}.semPres em{font-style:normal;font-weight:500;color:var(--muted)}
+.semCli{display:grid;gap:4px;margin-top:8px}.semCli div{font-size:12.5px;line-height:1.35;background:var(--tint);border:1px solid var(--line);border-radius:10px;padding:6px 9px}.semCli b{color:var(--win);display:block;font-size:12.5px}.semCli span{color:var(--ink)}
+.semRos{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin-top:8px}.semRos button{all:unset;cursor:pointer}.semRos .sub{margin-left:4px;font-size:12px}
+.semAc{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.lk{font:inherit;font-size:12.5px;font-weight:700;color:var(--brand);background:none;border:0;padding:4px 2px;cursor:pointer;text-decoration:none}
+.semSide section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+.semSide .calH{margin-top:0}
+.semPd summary{cursor:pointer;font-weight:700;color:var(--ink);font-size:14px;padding:4px 0}.semPd summary small{color:var(--muted)}
+.semPd ul{margin:4px 0 8px;padding:0;list-style:none;display:grid;gap:6px}.semPd li{font-size:13px;color:var(--ink);line-height:1.35}.semPd li b{display:block;font-size:12px;color:var(--muted)}.semPd li small{display:block;color:var(--sup)}
+.qqF{display:grid;gap:8px;margin-bottom:10px}.qqF input{font:inherit;font-size:15px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);width:100%;box-sizing:border-box}
+.qqF select{font:inherit;font-size:12.5px;border:1.5px solid var(--line);border-radius:99px;padding:4px 8px;background:var(--panel);color:var(--muted)}
+.qqTabs{position:static;margin:0 0 6px}
+@media (max-width:600px){.ptlTabs.qqTabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:0}.ptlTabs.qqTabs button{padding:6px 11px;font-size:12.5px;background:var(--track)}.ptlTabs.qqTabs button[aria-selected="true"]{background:var(--ink)}}
+.qqL{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.qqL.big{grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr))}.qqL.big .ph.lg{width:72px;height:72px;flex-basis:72px}
+.qqL.mini{grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:6px}.qqL.mini .qqC{padding:8px}.qqL.mini .ph.lg{width:40px;height:40px;flex-basis:40px}
+.qqC{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-top:4px solid var(--cc);border-radius:14px;background:var(--panel);min-width:0}
+.qqC .cp{min-width:0;display:grid;gap:2px}.qqC b{font-size:15px;color:var(--ink)}.qqC .cg{font-size:13px;color:var(--ink);font-weight:600}.qqC .pt{font-size:12px;color:var(--muted)}
+.qqC .ct{display:grid;gap:2px;margin-top:4px;font-size:12.5px}.qqC .ct a{color:var(--brand);text-decoration:none;overflow-wrap:anywhere}.qqC .ct span{color:var(--muted)}
+.qqCom{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:10px 12px;margin-bottom:8px}
+.qqCom summary{cursor:pointer;display:flex;gap:8px;align-items:center;flex-wrap:wrap;list-style:none}.qqCom summary::-webkit-details-marker{display:none}
+.qqCom summary b{font-size:15px;color:var(--ink)}.qqCom summary>span:not(.casa):not(.faces){font-size:13px;color:var(--muted)}.qqCom summary small{flex-basis:100%;font-size:12px;color:var(--muted)}
+.qqCom .faces{display:inline-flex;margin-left:auto}.qqCom .faces .ph{margin-left:-6px;border:2px solid var(--panel)}
+.qqCom[open] summary{margin-bottom:10px}
+.qqMud{background:var(--ins);border:1px solid var(--insl);border-radius:12px;padding:10px 12px;margin-bottom:10px;font-size:13px}.qqMud summary{cursor:pointer;font-weight:700}.qqMud ul{margin:6px 0 0;padding-left:18px}
+/* RPs no calendário */
+.calRp{background:var(--watchbg);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:12px}
+.calRp summary{cursor:pointer;font-weight:800;color:var(--ink);font-size:15px}.calRp summary small{font-weight:600;color:var(--muted);font-size:12.5px}
+.calRp dl{display:grid;grid-template-columns:auto 1fr;gap:8px 12px;margin:12px 0 4px;font-size:13.5px;color:var(--ink);line-height:1.45}
+.calRp dt{font-weight:800}.calRp dt span{display:inline-block;min-width:44px;text-align:center;background:var(--brand);color:#fff;border-radius:8px;padding:2px 6px;font-size:12px}
+.calRp dd{margin:0}.calRp dd b{color:var(--ink)}.calRp .ok{color:var(--win);font-weight:700}.calRp .no{color:var(--err);font-weight:700}
+
+body.modoCli #sb [data-view="sem"],body.modoCli #sb [data-view="qq"],body.modoCli #sb .sbCong{display:none!important}
 /* calendário de emendas (v14.8) */
 .calK{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
 @media (min-width:760px){.calK{grid-template-columns:repeat(4,minmax(0,1fr))}}
@@ -956,6 +1005,76 @@ body:not(.ehAdmin) .soAdmin{display:none!important}
 .simBar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:1100;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;background:#E3262E;color:#fff;font-size:13.5px;font-weight:700;padding:9px 12px 9px 16px;border-radius:99px;box-shadow:0 10px 24px rgba(227,38,46,.35);max-width:calc(100vw - 24px);box-sizing:border-box}
 .simBar button{font:inherit;font-size:13px;font-weight:800;border:0;border-radius:99px;padding:6px 12px;background:#fff;color:#E3262E;cursor:pointer}
 
+
+/* v15.0: oportunidades por cliente */
+.ocChips{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;margin-bottom:6px;scrollbar-width:thin}
+.ocChips button{flex:0 0 auto;font:inherit;font-size:13px;font-weight:700;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);border-radius:99px;padding:7px 12px;cursor:pointer;display:flex;gap:6px;align-items:center}
+.ocChips button small{font-size:11px;font-weight:800;background:var(--track);color:var(--muted);border-radius:99px;padding:1px 7px}
+.ocChips button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.ocChips button[aria-selected="true"] small{background:rgba(255,255,255,.2);color:var(--panel)}
+.ocHead{border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--tint);margin-bottom:6px}
+.ocHead h3{margin:0;font-size:18px;color:var(--ink)}.ocHead p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.ocBar{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--track);margin:10px 0 6px}.ocBar i{display:block;height:100%}
+.ocHead .ocRes{color:var(--ink);font-size:13px}
+.ocH{font-size:14.5px;color:var(--ink);margin:16px 0 8px;padding-left:10px;border-left:4px solid var(--cor)}
+.ocH small,.ocConf summary small{font-size:12px;background:var(--track);color:var(--muted);border-radius:99px;padding:1px 8px;margin-left:4px}
+.ocL{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ocI{border:1px solid var(--line);border-left:4px solid var(--cor);border-radius:12px;padding:10px 12px;background:var(--panel);min-width:0}
+.ocI .t{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.ocI .t a{font-weight:700;font-size:14px;color:var(--ink);text-decoration:none;line-height:1.35;overflow-wrap:anywhere}.ocI .t a:hover{color:var(--brand)}
+.ocI .pz{flex:0 0 auto;font-size:11px;font-weight:800;border-radius:99px;padding:2px 8px;background:var(--watchbg);color:var(--watch);white-space:nowrap}
+.ocI .pz.q{background:var(--accent);color:#fff}.ocI .pz.an{background:var(--track);color:var(--muted)}
+.ocI .m{font-size:12px;color:var(--muted);margin-top:4px}
+.ocI .nx{font-size:12.5px;color:var(--win);margin-top:4px;font-weight:600}
+.ocConf{margin-top:14px}.ocConf summary{cursor:pointer;font-weight:700;font-size:14.5px;margin-bottom:6px}
+/* financiadores */
+.finF{margin:0 0 8px}.finF input{width:100%;font:inherit;font-size:14px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink)}
+.finGuia{margin:6px 0 12px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--tint)}
+.finGuia summary{cursor:pointer;font-weight:700;color:var(--ink);font-size:14px}.finGuia ol{margin:8px 0 0;padding-left:20px;font-size:13.5px;color:var(--ink);line-height:1.5}
+.finG{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.finC{border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--panel);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px;min-width:0}
+.finC.nov{border-color:var(--win);box-shadow:0 0 0 1px var(--win) inset,var(--shadow)}
+.finT{display:flex;gap:12px;align-items:center}.finT h4{margin:0;font-size:15px;color:var(--ink);line-height:1.25}.finT span{font-size:12px;color:var(--muted)}
+.finLg{position:relative;flex:0 0 48px;width:48px;height:48px;border-radius:12px;background:var(--watchbg);display:grid;place-items:center;overflow:hidden;border:1px solid var(--line)}
+.finLg em{font-style:normal;font-weight:800;font-size:15px;color:var(--watch)}
+.finLg img{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);object-fit:contain;background:#fff;border-radius:6px}
+.finNov{background:var(--winbg);border-radius:10px;padding:8px 10px;font-size:13px;display:grid;gap:3px}.finNov b{color:var(--win);font-size:12px}.finNov a{color:var(--ink);font-weight:600;text-decoration:none;overflow-wrap:anywhere}
+.finSt{margin:0;font-size:12.5px;color:var(--muted);display:flex;gap:6px;align-items:center}.finSt i{width:8px;height:8px;border-radius:50%;background:var(--out);flex:0 0 8px}
+.finSt.ok i{background:var(--win)}.finSt.bl i{background:var(--sup)}.finSt.sem i{background:var(--accent)}
+.finAch{list-style:none;margin:0;padding:0;display:grid;gap:4px}.finAch li{font-size:13px;line-height:1.35}.finAch a{color:var(--brand);font-weight:600;text-decoration:none;overflow-wrap:anywhere}
+.finRou{margin:0;font-size:12.5px;color:var(--ink);background:var(--ins);border:1px solid var(--insl);border-radius:10px;padding:7px 9px;line-height:1.4}
+.finObs{margin:0;font-size:12px;color:var(--muted)}
+.finA{display:flex;gap:12px;flex-wrap:wrap;margin-top:auto}.finA a{font-size:13px;font-weight:700;color:var(--brand);text-decoration:none}
+.finComo summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--ink)}.finComo p,.finComo ol{font-size:13px;color:var(--ink);line-height:1.5;margin:6px 0 0}.finComo ol{padding-left:18px}
+/* rouanet */
+.rouForm{border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--tint);display:grid;gap:10px}
+.rouForm label{display:grid;gap:4px;font-size:13px;font-weight:700;color:var(--ink)}
+.rouForm textarea,.rouForm select{font:inherit;font-size:14px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);width:100%}
+.rouSel{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end}
+.rouMsg{margin:0;font-size:13px;color:var(--muted);min-height:1em}
+.rouRes{margin-top:14px}
+.rouSum{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}.rouSum div{border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--tint)}
+.rouSum b{display:block;font-size:22px;color:var(--ink);font-variant-numeric:tabular-nums}.rouSum span{font-size:12px;color:var(--muted)}
+.rouAj{margin:0;padding-left:20px;font-size:13.5px;color:var(--ink);line-height:1.5}
+.rouChk{width:100%;min-width:0;border-collapse:collapse;margin-top:12px;font-size:13px}.rouChk th{text-align:left;font-size:12px;color:var(--muted);font-weight:700;padding:6px 4px;border-bottom:1px solid var(--line)}
+.rouChk td{padding:7px 4px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:middle}.rouChk .sim{color:var(--win)}.rouChk .nao{color:var(--accent)}
+.rouPct{display:inline-block;width:70px;height:6px;border-radius:99px;background:var(--track);margin-right:6px;vertical-align:middle;overflow:hidden}.rouPct i{display:block;height:100%;background:var(--brand2)}
+.rouDist{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:6px 0;font-size:12.5px}.rouDist b{font-size:12.5px;color:var(--muted);margin-right:4px}
+.rouDist span{background:var(--track);color:var(--ink);border-radius:99px;padding:3px 9px}.rouDist small{font-weight:800;color:var(--muted)}
+.rouP{list-style:none;margin:0;padding:0;display:grid;gap:8px}.rouP li{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--panel)}
+.rouP .t{display:flex;justify-content:space-between;gap:8px}.rouP .t a{font-weight:800;color:var(--brand);text-decoration:none;font-size:14px}
+.rouSim{font-size:11px;font-weight:800;background:var(--watchbg);color:var(--watch);border-radius:99px;padding:2px 8px}
+.rouP .m{font-size:12px;color:var(--muted);margin-top:3px}.rouP p{margin:6px 0 0;font-size:13px;color:var(--ink);line-height:1.45;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.rouP li:hover p,.rouP li:focus-within p{-webkit-line-clamp:unset}
+.rouInc{list-style:none;margin:0;padding:0;display:grid;gap:6px;counter-reset:r}
+.rouInc li{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(60px,1fr) auto;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px}
+.rouInc .n{color:var(--ink);font-weight:700;overflow-wrap:anywhere}.rouInc .n small{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
+.rouInc .b{height:6px;border-radius:99px;background:var(--track);overflow:hidden}.rouInc .b i{display:block;height:100%;background:var(--gold)}
+.rouInc b{font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+.rouComo{border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--tint)}.rouComo h4{margin:0 0 6px;color:var(--ink)}.rouComo ol{margin:0;padding-left:20px;font-size:14px;color:var(--ink);line-height:1.55}
+@media (max-width:560px){.rouInc li{grid-template-columns:minmax(0,1fr) auto}.rouInc .b{display:none}}
+#rouBody .opTabs{display:flex;flex-wrap:wrap;border-radius:16px}
+@media (max-width:560px){.rouPct{display:none}.rouChk{font-size:12px;table-layout:fixed}.rouChk th:first-child{width:46%}.rouChk th,.rouChk td{overflow-wrap:anywhere}}
 </style>
 </head>
 <body>
@@ -988,10 +1107,15 @@ body:not(.ehAdmin) .soAdmin{display:none!important}
     <button data-view="dos">Raio-X do parlamentar<small>Todas as emendas de um nome</small></button>
     <button data-view="cal">Calendário de emendas<small>Prazos de indicação e impedimentos</small></button>
     <button data-view="pj">Projetos que já receberam emenda<small>Modelos aprovados no TransfereGov</small></button></div>
+  <div class="sbGrp sbCong"><p class="sbG">Congresso</p>
+    <button data-view="sem">Semana no Congresso<small>Agenda, para qual cliente, quem vai</small></button>
+    <button data-view="qq">Quem é quem<small>Presidentes, líderes e comissões, com contato</small></button></div>
   <div class="sbGrp"><p class="sbG">Editais e chamamentos</p>
     <button data-view="op" data-optab="ab">Abertos agora<small>Para OSCs, em todo o Brasil</small></button>
     <button data-view="op" data-optab="pv">Previstos<small>O que costuma abrir em breve</small></button>
-    <button data-view="op" data-optab="cl">Por cliente<small>O que serve a cada instituição</small></button></div>
+    <button data-view="op" data-optab="cl">Por cliente<small>O que serve a cada instituição</small></button>
+    <button data-view="fin">Financiadores privados<small>Institutos, fundações e empresas: sites e editais</small></button>
+    <button data-view="rou">Lei Rouanet<small>Quem incentiva e comparador de projeto</small></button></div>
   <div class="sbGrp"><p class="sbG">Eleições 2026</p>
     <button data-view="ap">Resultado<small>Eleitos, votação e renovação</small></button>
     <button data-view="vt">Votos por cidade<small>Onde cada candidato foi votado</small></button>
@@ -1026,6 +1150,8 @@ body:not(.ehAdmin) .soAdmin{display:none!important}
       <div class="iniAt">
         <button class="at a1" data-ir="rg"><b>Quem pode mandar emenda para a cidade do cliente?</b><span>Quem pode mandar emenda</span></button>
         <button class="at" data-ir="cal"><b>Qual prazo de emenda está aberto agora?</b><span>Calendário de emendas</span></button>
+        <button class="at" data-ir="sem"><b>Onde a equipe precisa estar nesta semana?</b><span>Semana no Congresso</span></button>
+        <button class="at" data-ir="qq"><b>Quem preside a comissão, quem lidera, como falar com o gabinete?</b><span>Quem é quem</span></button>
         <button class="at" data-ir="dos"><b>O que esse parlamentar já financiou, e onde?</b><span>Raio-X do parlamentar</span></button>
         <button class="at" data-ir="pj"><b>Que projeto parecido já recebeu emenda?</b><span>Projetos que já receberam emenda</span></button>
         <button class="at" data-ir="op"><b>Que editais abertos servem para OSCs?</b><span>Editais e chamamentos</span></button>
@@ -1102,6 +1228,10 @@ body:not(.ehAdmin) .soAdmin{display:none!important}
       <div class="opAreas" id="opAreas"></div>
       <div id="opRes"><p class="sub">Carregando oportunidades…</p></div>
     </section>
+    <section class="card" id="finCard" data-vw="fin" style="margin-bottom:14px"><div id="finBody"><p class="sub">Carregando…</p></div></section>
+    <section class="card" id="rouCard" data-vw="rou" style="margin-bottom:14px"><div id="rouBody"><p class="sub">Carregando…</p></div></section>
+    <section class="card" id="semCard" data-vw="sem" style="margin-bottom:14px"><div id="semBody"><p class="sub">Carregando…</p></div></section>
+    <section class="card" id="qqCard" data-vw="qq" style="margin-bottom:14px"><div id="qqBody"><p class="sub">Carregando…</p></div></section>
     <section class="card" id="calCard" data-vw="cal" style="margin-bottom:14px"><div id="calBody"><p class="sub">Carregando…</p></div></section>
     <section class="card" id="pjCard" style="margin-bottom:14px">
       <h2>Banco de projetos apoiados</h2>
@@ -2225,7 +2355,7 @@ const PTL_COR=["var(--out)","var(--brand2)","var(--gold)","var(--brand)","var(--
 const PTL_TABS=[["vg","Visão geral","Resumo"],["parl","Parlamentares","Gabinetes"],["rec","Recursos","Recursos"],["op","Oportunidades","Editais"],["exp","Explorar","Explorar"]];
 const PTL_EXP=[
   ["Emendas parlamentares","Quem pode apoiar e quando",[["rg","🎯","Quem pode apoiar","Parlamentares que mais mandam emenda para a sua cidade e a sua área"],["cal","📆","Calendário de emendas","Prazos de indicação, cadastro de propostas e impedimentos técnicos"],["dos","🧾","Raio-X do parlamentar","Todas as emendas de um parlamentar: áreas, cidades e instituições"],["pj","📁","Projetos aprovados","Projetos que já receberam emenda no TransfereGov, para se inspirar"]]],
-  ["Editais e chamamentos","Para OSCs no Brasil todo",[["op:ab","📣","Abertas agora","Editais, chamamentos e programas abertos a entidades sem fins lucrativos"],["op:pv","📅","Previstas","O que costuma abrir nos próximos meses"]]],
+  ["Editais e chamamentos","Para OSCs no Brasil todo",[["op:ab","📣","Abertas agora","Editais, chamamentos e programas abertos a entidades sem fins lucrativos"],["op:pv","📅","Previstas","O que costuma abrir nos próximos meses"],["fin","🏢","Financiadores privados","Institutos, fundações e empresas: sites, editais e como captar"],["rou","🎭","Lei Rouanet","Compare o seu projeto com os aprovados e veja quem incentiva"]]],
   ["Eleições 2026","Quem fica e quem chega em 2027",[["ap","🗳️","Resultado da eleição","Eleitos, votação e renovação por estado"],["vt","🗺️","Votos por cidade","Onde cada candidato foi votado, no mapa"],["pt","🏛️","Partidos e bancadas","Bancadas que ficam e as que chegam em 2027"]]]];
 let PTL={d:null,filtro:0,min:0,admin:false,tab:"vg",proxTodos:false};
 async function abrePortal(id,admin){
@@ -2457,7 +2587,15 @@ function renderCal(){
       (sem.length?`<h3 class="calH">Comunicados sem data lida <small>${sem.length}</small></h3><p class="sub" style="margin:0 0 8px">O motor não conseguiu ler as datas (geralmente estão num PDF). Abra o comunicado.</p><ul class="calL">${sem.map(i=>calItem(i,h)).join("")}</ul>`:"")+
       (enc.length?`<details class="calEnc"><summary>Encerradas este ano (${enc.length})</summary><ul class="calL">${enc.map(i=>calItem(i,h)).join("")}</ul></details>`:"");
   }
-  B.innerHTML=`<div class="calK">${K.map(([id,n,t])=>`<button type="button" data-calk="${id}" aria-pressed="${k===id}" class="${id==="f15"&&n?"al":""}"><b>${n}</b><span>${t}</span></button>`).join("")}</div>
+  B.innerHTML=`<details class="calRp" ${store.get("otm-rpvisto")?"":"open"}><summary>Entenda as RPs <small>· o que é cada tipo de emenda e o que serve para OSC</small></summary><dl>
+      <dt><span>RP 6</span></dt><dd><b>Emendas individuais</b> (impositivas: o governo é obrigado a pagar, salvo impedimento técnico). Cada deputado e senador indica as suas. Têm duas formas:<br>
+        · <b>Finalidade definida:</b> o recurso entra num programa do ministério e chega por fundo a fundo, convênio, termo de fomento ou colaboração, ou contrato de repasse. <span class="ok">É por aqui que OSC e Santa Casa recebem diretamente.</span><br>
+        · <b>Transferência especial</b> (a "emenda Pix"): cai direto no caixa do estado ou da prefeitura, sem convênio. <span class="no">OSC não recebe direto:</span> só se a prefeitura repassar depois.</dd>
+      <dt><span>RP 7</span></dt><dd><b>Emendas de bancada estadual</b> (impositivas): a bancada do estado decide em conjunto. Costumam ir para obras e projetos maiores; a entidade entra pela articulação com o coordenador da bancada.</dd>
+      <dt><span>RP 8</span></dt><dd><b>Emendas de comissão</b>: apresentadas pelas comissões permanentes (Saúde, Assuntos Sociais, Cultura…). Não são impositivas; a execução depende do ministério. Por isso o presidente e os membros da comissão importam (veja Congresso › Quem é quem).</dd>
+      <dt><span>RP 9</span></dt><dd><b>Emendas de relator</b> (o "orçamento secreto"): o STF declarou inconstitucionais em dezembro de 2022. Não existem mais.</dd>
+      <dt><span>RP 2</span></dt><dd><b>Despesa discricionária dos ministérios</b> (não é emenda): os programas e editais próprios do governo. É no programa do ministério que a emenda de finalidade definida se encaixa.</dd></dl>
+      <button type="button" class="lk" data-rpok>Entendi, pode recolher</button></details><div class="calK">${K.map(([id,n,t])=>`<button type="button" data-calk="${id}" aria-pressed="${k===id}" class="${id==="f15"&&n?"al":""}"><b>${n}</b><span>${t}</span></button>`).join("")}</div>
     <div class="calChips"><button type="button" data-calt="" aria-pressed="${!st.cal.tipo}">Todos os tipos</button>${Object.entries(tipos).map(([t,n])=>`<button type="button" data-calt="${esc(t)}" aria-pressed="${st.cal.tipo===t}">${esc(t)} <small>${n}</small></button>`).join("")}</div>
     ${k?`<button type="button" class="calLimpa" data-calk="">‹ Ver o calendário inteiro</button>`:""}${lista}
     <p class="calNota">Datas lidas automaticamente dos cronogramas oficiais do TransfereGov${d.atualizado?` (última leitura em ${esc(d.atualizado)})`:""}. Antes de orientar um cliente, confirme no comunicado. O motor confere todo dia e avisa por e-mail quando um prazo muda.</p>`;
@@ -2465,7 +2603,112 @@ function renderCal(){
 document.addEventListener("click",e=>{
   const k=e.target.closest("[data-calk]"); if(k){st.cal.k=st.cal.k===k.dataset.calk?"":k.dataset.calk;renderCal();return}
   const t=e.target.closest("[data-calt]"); if(t){st.cal.tipo=t.dataset.calt;renderCal();return}
+  if(e.target.closest("[data-rpok]")){store.set("otm-rpvisto","1");const d=e.target.closest("details");if(d)d.open=false;return}
 });
+
+
+// ======== Congresso (v14.9): Semana no Congresso e Quem é quem ========
+const CASA_COR={"Câmara":"cd","Senado":"sf","Congresso":"cn"};
+const DIAS_CURTO=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
+st.sem={d:null,semana:0,dia:"",cli:"",so:true};
+async function abreSem(forca){
+  const B=$("semBody"); if(!B) return;
+  if(!st.sem.d||forca){ B.innerHTML=`<p class="sub">Lendo a agenda da Câmara e do Senado…</p>`;
+    try{ st.sem.d=await api({acao:"semana",semana:st.sem.semana}) }catch(e){ if(e.message!=="login") B.innerHTML=`<p class="empty">Não consegui ler a agenda: ${esc(e.message)}${/inválida/.test(e.message)?" (atualize o motor para a v14.9 e rode instalarCongresso)":""}</p>`; return } }
+  renderSem();
+}
+const fotoP=(p,cls="")=>{const u=https_(p&&p.foto||"");return `<span class="ph ${cls}">${esc(iniciais(p&&p.nome||"?"))}${u?`<img loading="lazy" alt="" src="${esc(u)}" onerror="this.remove()">`:""}</span>`};
+function semCard(e){
+  const m=e.marca&&e.marca.status||"", cl=st.sem.cli?e.clientes.filter(c=>c.id===st.sem.cli):e.clientes;
+  const rostos=[]; cl.forEach(c=>c.rostos.forEach(r=>{if(!rostos.some(x=>x.id===r.id))rostos.push(r)}));
+  return `<li class="semE ${CASA_COR[e.casa]||"cd"} ${m?"m-"+m.replace(" ","-"):""}" data-semid="${esc(e.id)}">
+    <div class="hr"><b>${esc(e.hora||"—")}</b><span class="casa">${esc(e.casa)}</span></div>
+    <div class="cp"><div class="t"><b>${esc(e.sigla)}</b> <span>${esc(e.orgao)}</span></div>
+      <div class="ti">${esc(e.tipo)}${e.titulo&&e.titulo!==e.tipo?` · ${esc(e.titulo)}`:""}</div>
+      <div class="lo">${esc(e.local||"")}${e.situacao?` · ${esc(e.situacao)}`:""}</div>
+      ${e.pres?`<button class="semPres" data-dos="${esc(e.pres.nome)}" data-dosfoto="${esc(e.pres.foto||"")}" data-dosnm="${esc(e.pres.nome)}" data-dosuf="${esc(e.pres.uf||"")}">${fotoP(e.pres)}<span><small>Presidente</small>${esc(e.pres.nome)} <em>${esc(e.pres.partido)}/${esc(e.pres.uf)}</em></span></button>`:""}
+      ${cl.length?`<div class="semCli">${cl.slice(0,3).map(c=>`<div><b>Bom para ${esc(c.nome)}</b><span>${esc(c.motivos.join(" · "))}</span></div>`).join("")}${cl.length>3?`<div><span>e mais ${cl.length-3} cliente(s)</span></div>`:""}</div>`:""}
+      ${rostos.length?`<div class="semRos">${rostos.slice(0,8).map(r=>`<button title="${esc(r.nome)} · ${esc(r.partido)}/${esc(r.uf)} · ${esc(r.cargo)}" data-dos="${esc(r.nome)}" data-dosfoto="${esc(r.foto||"")}" data-dosnm="${esc(r.nome)}" data-dosuf="${esc(r.uf||"")}">${fotoP(r,"sm")}</button>`).join("")}<span class="sub">${rostos.length} parlamentar${rostos.length>1?"es":""} ligado${rostos.length>1?"s":""} aos clientes</span></div>`:""}
+      <div class="semAc">${m==="participou"?`<span class="pill ok">Participamos${e.marca.nota?": "+esc(e.marca.nota):""}</span><button class="lk" data-semm="limpar">desfazer</button>`:m==="nao foi"?`<span class="pill">Não fomos</span><button class="lk" data-semm="limpar">desfazer</button>`:
+        `<button class="btn sm ${m==="planejado"?"":"ghost"}" data-semm="planejado" aria-pressed="${m==="planejado"}">${m==="planejado"?"✓ Vamos":"Vamos"}</button><button class="btn ghost sm" data-semm="participou">Participamos</button>${m==="planejado"?`<button class="lk" data-semm="nao foi">não fomos</button>`:""}`}
+        <a class="lk" href="${esc(e.link)}" target="_blank" rel="noopener">pauta e detalhes ›</a></div></div></li>`;
+}
+function renderSem(){
+  const B=$("semBody"), d=st.sem.d; if(!B||!d) return;
+  const S=st.sem, ev=d.eventos.filter(e=>(!S.so||e.clientes.length)&&(!S.cli||e.clientes.some(c=>c.id===S.cli))&&(!S.dia||e.data===S.dia));
+  const dias={}; d.eventos.forEach(e=>{dias[e.data]=dias[e.data]||{t:0,r:0};dias[e.data].t++;if(e.clientes.length)dias[e.data].r++});
+  const K=[[d.eventos.length,"reuniões e sessões na semana"],[d.eventos.filter(e=>e.clientes.length).length,"interessam aos clientes"],[d.eventos.filter(e=>e.marca&&e.marca.status==="planejado").length,"marcadas \"vamos\""],[d.eventos.filter(e=>e.marca&&e.marca.status==="participou").length,"participamos"]];
+  const grupos={}; ev.forEach(e=>(grupos[e.data]=grupos[e.data]||[]).push(e));
+  const nomeDia=s=>{const x=new Date(s+"T12:00:00");return `${["domingo","segunda","terça","quarta","quinta","sexta","sábado"][x.getDay()]}, ${s.slice(8,10)}/${s.slice(5,7)}`};
+  const pc={}; (d.pendencias||[]).forEach(p=>(pc[p.cliente]=pc[p.cliente]||[]).push(p));
+  B.innerHTML=`<div class="semNav"><button class="btn ghost sm" data-semw="-1">‹ anterior</button><b>${S.semana===0?"Esta semana":S.semana===1?"Próxima semana":S.semana===-1?"Semana passada":"Semana"} · ${esc(d.ini.slice(0,5))} a ${esc(d.fim.slice(0,5))}</b><button class="btn ghost sm" data-semw="1">próxima ›</button>${d.atualizado?`<span class="sub">agenda lida em ${esc(d.atualizado)}</span>`:""}</div>
+    <div class="calK">${K.map(([n,t])=>`<div><b>${n}</b><span>${t}</span></div>`).join("")}</div>
+    <div class="semF"><div class="calChips"><button data-semd="" aria-pressed="${!S.dia}">Semana toda</button>${Object.keys(dias).sort().map(k=>{const x=new Date(k+"T12:00:00");return `<button data-semd="${k}" aria-pressed="${S.dia===k}">${DIAS_CURTO[x.getDay()]} ${k.slice(8,10)} <small>${S.so?dias[k].r:dias[k].t}</small></button>`}).join("")}</div>
+      <div class="calChips"><button data-semc="" aria-pressed="${!S.cli}">Todos os clientes</button>${d.clientes.map(c=>`<button data-semc="${esc(c.id)}" aria-pressed="${S.cli===c.id}">${esc(c.nome)}</button>`).join("")}</div>
+      <label class="semSo"><input type="checkbox" id="semSo" ${S.so?"checked":""}> Só o que interessa aos clientes</label></div>
+    <div class="semGrid"><div>${Object.keys(grupos).sort().map(k=>`<h3 class="calH">${nomeDia(k)} <small>${grupos[k].length}</small></h3><ul class="semL">${grupos[k].sort((a,b)=>a.hora.localeCompare(b.hora)).map(semCard).join("")}</ul>`).join("")||`<p class="calVazio">${d.eventos.length?"Nada com esse filtro. Desmarque \"Só o que interessa aos clientes\" para ver a agenda inteira.":"A agenda desta semana ainda não foi publicada (ou o motor ainda não leu: rode instalarCongresso)."}</p>`}</div>
+    <aside class="semSide">${d.janelas&&d.janelas.length?`<section><h3 class="calH">Janelas de emendas</h3><ul class="ptlJan">${d.janelas.map(j=>`<li><b>${esc(j.etapa)}</b><span>${esc(j.tipo)} · ${j.ini?esc(j.ini)+" a ":"até "}${esc(j.fim)}</span></li>`).join("")}</ul></section>`:""}
+      <section><h3 class="calH">Pendências dos cadernos <small>${(d.pendencias||[]).length}</small></h3>${Object.keys(pc).length?Object.keys(pc).filter(c=>!S.cli||d.clientes.some(x=>x.id===S.cli&&x.nome===c)).map(c=>`<details class="semPd" ${Object.keys(pc).length<=3?"open":""}><summary>${esc(c)} <small>${pc[c].length}</small></summary><ul>${pc[c].map(p=>`<li><b>${esc(p.parl)}</b>${esc(p.acao)}${p.prev?`<small>prevista ${esc(p.prev)}</small>`:""}</li>`).join("")}</ul></details>`).join(""):`<p class="sub">Nenhuma próxima ação em aberto nos cadernos.</p>`}</section></aside></div>
+    <p class="calNota">Agenda oficial da Câmara (dadosabertos) e das comissões do Senado e do Congresso, lida a cada 6 horas. "Bom para" junta a área do cliente, o estado dos membros e quem já está nos cadernos. Toque num rosto para abrir o Raio-X. Toda segunda às 7h chega o plano da semana por e-mail; na sexta às 16h, o fechamento.</p>`;
+}
+document.addEventListener("click",async e=>{
+  const w=e.target.closest("[data-semw]"); if(w){st.sem.semana+=Number(w.dataset.semw);st.sem.dia="";abreSem(true);return}
+  const dd=e.target.closest("[data-semd]"); if(dd){st.sem.dia=dd.dataset.semd;renderSem();return}
+  const cc=e.target.closest("[data-semc]"); if(cc){st.sem.cli=cc.dataset.semc;renderSem();return}
+  const mm=e.target.closest("[data-semm]"); if(mm){ const li=mm.closest("[data-semid]"), ev=st.sem.d.eventos.find(x=>x.id===li.dataset.semid); if(!ev) return;
+    let st2=mm.dataset.semm; if(st2==="planejado"&&ev.marca&&ev.marca.status==="planejado") st2="limpar";
+    let nota=""; if(st2==="participou"){ nota=prompt("Participamos. Quer anotar o que aconteceu? (opcional, entra no relatório)")||"" }
+    const body={acao:"agendaMarca",evento:{id:ev.id,casa:ev.casa,data:ev.data,hora:ev.hora,sigla:ev.sigla,titulo:ev.tipo+(ev.titulo?" · "+ev.titulo:"")},status:st2,clientes:ev.clientes.map(c=>c.nome).join("; "),quem:EU?EU.nome:"",nota};
+    try{ await postPlanilha(body); ev.marca=st2==="limpar"?null:{status:st2,nota,clientes:body.clientes}; renderSem(); aviso(st2==="limpar"?"Marcação desfeita.":st2==="planejado"?"Marcado: vamos. Entra no plano e no fechamento da semana.":st2==="participou"?"Participação registrada: entra no relatório do mês.":"Registrado.") }
+    catch(err){ alert(err.message) } return }
+});
+document.addEventListener("change",e=>{ if(e.target.id==="semSo"){st.sem.so=e.target.checked;renderSem()} });
+
+// ---- Quem é quem ----
+st.qq={d:null,aba:"cmd",q:"",uf:""};
+const QQ_ABAS=[["cmd","Presidências e Mesas"],["lid","Lideranças"],["com","Comissões"],["cmo","Orçamento (CMO)"],["fr","Frentes"],["man","Outros cargos"]];
+async function abreQq(forca){
+  const B=$("qqBody"); if(!B) return;
+  if(!st.qq.d||forca){ B.innerHTML=`<p class="sub">Carregando quem é quem…</p>`;
+    try{ st.qq.d=await api({acao:"quem"}) }catch(e){ if(e.message!=="login") B.innerHTML=`<p class="empty">Não consegui ler: ${esc(e.message)}${/inválida/.test(e.message)?" (atualize o motor para a v14.9 e rode instalarCongresso)":""}</p>`; return } }
+  renderQq();
+}
+function qqCard(p,mini){
+  const tel=String(p.tel||"").replace(/\D/g,"");
+  return `<li class="qqC ${CASA_COR[p.casa]||"cd"}">${fotoP(p,"lg")}<div class="cp"><b>${esc(p.nome)}</b><span class="cg">${esc(p.cargo)}${p.orgao&&!/^Mesa|^Lideran/.test(p.grupo)?` · ${esc(p.orgao)}`:/^Lideran/.test(p.grupo)&&p.orgao?` · ${esc(p.orgao)}`:""}</span>
+    <span class="pt">${esc(p.partido)}${p.uf?"/"+esc(p.uf):""} · ${esc(p.casa)}</span>
+    <div class="ct">${p.tel?`<a href="tel:+55${esc(tel)}">📞 ${esc(p.tel)}</a>`:""}${p.email&&!mini?`<a href="mailto:${esc(p.email)}">✉ ${esc(p.email)}</a>`:""}${p.gab&&!mini?`<span>🏢 ${esc(p.gab)}</span>`:""}</div>
+    <button class="lk" data-dos="${esc(p.nome)}" data-dosfoto="${esc(p.foto||"")}" data-dosnm="${esc(p.nome)}" data-dosuf="${esc(p.uf||"")}" data-doscargo="${p.casa==="Senado"?"S":"D"}">Raio-X das emendas ›</button></div></li>`;
+}
+function renderQq(){
+  const B=$("qqBody"), D=st.qq.d; if(!B||!D) return; const Q=st.qq, q=norm(Q.q);
+  const L=D.lista.filter(p=>(!Q.uf||p.uf===Q.uf)&&(!q||norm([p.nome,p.partido,p.uf,p.cargo,p.sigla,p.orgao].join(" ")).includes(q)));
+  const g={cmd:L.filter(p=>/^(Presidência|Mesa Diretora)$/.test(p.grupo)),lid:L.filter(p=>p.grupo==="Lideranças"),com:L.filter(p=>p.grupo==="Comissões"||p.grupo==="Membros de comissão"),cmo:L.filter(p=>/^Orçamento/.test(p.grupo)),fr:L.filter(p=>p.grupo==="Frentes parlamentares"),man:L.filter(p=>p.manual)};
+  const ufsCli=[...new Set(getCli().map(c=>String(c.uf||"").toUpperCase()).filter(Boolean))];
+  let corpo="";
+  if(Q.aba==="cmd"){ const pres=g.cmd.filter(p=>p.grupo==="Presidência"), mesa=g.cmd.filter(p=>p.grupo!=="Presidência");
+    corpo=(pres.length?`<h3 class="calH">Presidentes</h3><ul class="qqL big">${pres.map(p=>qqCard(p)).join("")}</ul>`:"")+["Câmara","Senado"].map(c=>{const m=mesa.filter(p=>p.casa===c);return m.length?`<h3 class="calH">Mesa ${c==="Câmara"?"da Câmara":"do Senado"} <small>${m.length}</small></h3><ul class="qqL">${m.map(p=>qqCard(p)).join("")}</ul>`:""}).join("") }
+  else if(Q.aba==="com"){ const por={}; g.com.forEach(p=>{const k=p.casa+"|"+p.sigla;(por[k]=por[k]||{casa:p.casa,sigla:p.sigla,orgao:p.orgao,cmd:[],mem:[]})[/Presidente/i.test(p.cargo)&&p.grupo==="Comissões"?"cmd":"mem"].push(p)});
+    const temaCli=getCli().map(c=>norm(c.tema||"")).join(" "); const rel=k=>/SAUDE|CAS$/.test(norm(k))&&/SAUDE|CANCER/.test(temaCli)||/CULT|^CE$/.test(norm(k))&&/CULTUR/.test(temaCli)?0:1;
+    corpo=Object.values(por).sort((a,b)=>rel(a.sigla)-rel(b.sigla)||a.casa.localeCompare(b.casa)||a.sigla.localeCompare(b.sigla)).map(o=>`<details class="qqCom" ${Q.uf||q?"open":""}><summary><span class="casa ${CASA_COR[o.casa]}">${esc(o.casa)}</span><b>${esc(o.sigla)}</b><span>${esc(o.orgao)}</span>
+      <span class="faces">${o.cmd.slice(0,3).map(p=>fotoP(p,"sm")).join("")}</span><small>${o.cmd.length?esc(o.cmd.find(p=>/^Presidente/i.test(p.cargo))?o.cmd.find(p=>/^Presidente/i.test(p.cargo)).nome:o.cmd[0].nome):""}${o.mem.length?` · ${o.mem.length} membro${o.mem.length>1?"s":""}${Q.uf?" de "+Q.uf:""}`:""}</small></summary>
+      <ul class="qqL">${o.cmd.map(p=>qqCard(p)).join("")}</ul>${o.mem.length?`<p class="sub" style="margin:10px 0 6px">${Q.uf?"Membros de "+Q.uf:"Membros"}</p><ul class="qqL mini">${o.mem.slice(0,Q.uf||q?60:24).map(p=>qqCard(p,true)).join("")}</ul>${!Q.uf&&!q&&o.mem.length>24?`<p class="sub">Escolha um estado acima para ver só os membros dele.</p>`:""}`:""}</details>`).join("") }
+  else{ const arr=g[Q.aba]||[]; const por={}; arr.forEach(p=>{const k=Q.aba==="fr"||Q.aba==="lid"?p.orgao||p.casa:p.casa;(por[k]=por[k]||[]).push(p)});
+    corpo=Object.keys(por).sort().map(k=>`<h3 class="calH">${esc(k)} <small>${por[k].length}</small></h3><ul class="qqL">${por[k].map(p=>qqCard(p)).join("")}</ul>`).join("") }
+  if(!corpo) corpo=`<p class="calVazio">${Q.aba==="man"?"Aqui entram os cargos que não estão nas bases oficiais (coordenador de bancada estadual, bancada temática etc.). Preencha a aba <b>Cargos (manual)</b> da planilha com as mesmas colunas da aba Quem é quem.":"Ninguém com esse filtro."}</p>`;
+  B.innerHTML=`${D.mudancas&&D.mudancas.length?`<details class="qqMud"><summary>Mudanças de cargo desde a última leitura <small>${D.mudancas.length}</small></summary><ul>${D.mudancas.map(m=>`<li>${esc(m)}</li>`).join("")}</ul></details>`:""}
+    <div class="qqF"><input id="qqQ" type="search" placeholder="Buscar nome, partido, comissão…" value="${esc(Q.q)}" autocomplete="off">
+      <div class="calChips"><button data-qquf="" aria-pressed="${!Q.uf}">Todos os estados</button>${ufsCli.map(u=>`<button data-qquf="${u}" aria-pressed="${Q.uf===u}">${u}</button>`).join("")}<select id="qqUfSel" aria-label="Outro estado"><option value="">outro estado…</option>${Object.keys(UFS).map(u=>u.toUpperCase()).filter(u=>!ufsCli.includes(u)).map(u=>`<option ${Q.uf===u?"selected":""}>${u}</option>`).join("")}</select></div></div>
+    <nav class="ptlTabs qqTabs" role="tablist">${QQ_ABAS.map(([k,l])=>`<button type="button" role="tab" data-qqa="${k}" aria-selected="${Q.aba===k}">${l} <small>${(g[k]||[]).length}</small></button>`).join("")}</nav>
+    ${corpo}<p class="calNota">Bases oficiais da Câmara e do Senado, atualizadas toda segunda às 5h${D.atualizado?` (última: ${esc(D.atualizado)})`:""}. Cargos mudam com frequência: confirme antes de uma visita. Contato do gabinete: telefone, e-mail e sala.</p>`;
+  if(document.activeElement&&document.activeElement.id!=="qqQ"){}
+}
+document.addEventListener("click",e=>{
+  const a=e.target.closest("[data-qqa]"); if(a){st.qq.aba=a.dataset.qqa;renderQq();return}
+  const u=e.target.closest("[data-qquf]"); if(u){st.qq.uf=u.dataset.qquf;renderQq();return}
+});
+document.addEventListener("change",e=>{ if(e.target.id==="qqUfSel"){st.qq.uf=e.target.value;renderQq()} });
+document.addEventListener("input",e=>{ if(e.target.id==="qqQ"){ st.qq.q=e.target.value; clearTimeout(st.qq.t); st.qq.t=setTimeout(()=>{renderQq(); const i=$("qqQ"); if(i){i.focus(); i.setSelectionRange(i.value.length,i.value.length)}},250) } });
 
 // ======== conexão com a planilha ========
 const API_PADRAO="https://script.google.com/macros/s/AKfycbx5na7PyvABZtqE_yafud8fc0_1yveO4pEC9eeIw4ccNPNm72CIQdDZmTTtV-y2EyUv/exec";
@@ -2476,7 +2719,7 @@ async function api(params){const u=apiBase(); if(!u) throw new Error("sem-link")
     const j=await r.json(); if(j&&j.erro==="LOGIN"){sessaoCaiu();throw new Error("login")} if(j&&j.erro) throw new Error(j.erro); return j}
   finally{if(lab) progFim()}}
 // ---- barra de carregamento (topo): tempo estimado nas consultas; percentual real na varredura da cidade
-const PROG_LAB={calendario:"Lendo o calendário de emendas",regua:p=>`Calculando a régua${p.municipio?" de "+p.municipio:""}`,deputado:"Buscando as emendas do parlamentar",favorecidos:"Consultando o Portal da Transparência",
+const PROG_LAB={semana:"Lendo a agenda do Congresso",quem:"Carregando quem é quem",calendario:"Lendo o calendário de emendas",regua:p=>`Calculando a régua${p.municipio?" de "+p.municipio:""}`,deputado:"Buscando as emendas do parlamentar",favorecidos:"Consultando o Portal da Transparência",
   relac:"Lendo os cadernos parlamentares",projetos:"Buscando projetos",emendas:"Buscando emendas",autores:"Buscando parlamentares"};
 st.prog={n:0,sim:0,lab:"",t:null,varr:null};
 function progIni(lab){const P=st.prog;P.n++;P.lab=lab;if(P.n===1){P.sim=4;clearInterval(P.t);P.t=setInterval(()=>{P.sim+=(92-P.sim)*0.06;progDraw()},250)}progDraw()}
@@ -3018,8 +3261,12 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-ir]");if(b
 const VIEWS={ini:["capt","Início",""],
   rg:["capt","Quem pode mandar emenda","Escolha o cliente (ou estado, cidade e área). A régua mostra quem mais pode mandar emenda para lá, por quê, e o que a Otimistas já fez com cada gabinete."],
   dos:["capt","Raio-X do parlamentar","Escolha um nome (ou um estado, ou uma cidade) e veja todas as emendas dele desde 2023: áreas, cidades, mapa e instituições que receberam."],
+  sem:["capt","Semana no Congresso","Reuniões, audiências e sessões da Câmara e do Senado na semana, com o que interessa a cada cliente, quem preside e quem é do estado do cliente. Marque \"Vamos\" e \"Participamos\": entra no plano de segunda, no fechamento de sexta e no relatório."],
+  qq:["capt","Quem é quem","Presidentes da Câmara e do Senado, Mesas, líderes, comando das comissões e da CMO, coordenadores das frentes das áreas dos clientes. Com foto, telefone, e-mail e gabinete."],
   cal:["capt","Calendário de emendas","Prazos oficiais do ano: indicação de beneficiários, cadastro de propostas, impedimentos técnicos, ajustes e empenho. O motor confere todo dia e avisa por e-mail quando muda."],
   op:["capt","Editais e chamamentos","Editais, chamamentos e programas que OSCs podem disputar, por estado e área. Busca diária em ministérios, diários oficiais, notícias e curadorias."],
+  fin:["capt","Financiadores privados","Institutos, fundações, empresas e cooperativas que apoiam OSCs: associados do GIFE e nomes indicados pela Otimistas, com site, página de editais, o que está aberto e como captar com cada tipo. O motor lê os sites todo domingo e avisa na segunda o que mudou."],
+  rou:["capt","Lei Rouanet","Quem mais incentiva pela Rouanet desde 1992 e um comparador: cole o resumo do seu projeto e veja os parecidos da base do SALIC, o que eles trazem e o que ajustar."],
   pj:["capt","Projetos aprovados","Projetos que já viraram emenda no TransfereGov. Compare a sua ideia ou um PDF."],
   ap:["dados","Resultado da eleição","Eleitos, votação, mapa e renovação, por estado e cargo."],
   vt:["dados","Votos por cidade","Onde cada candidato foi votado e quem foi mais votado em cada cidade."],
@@ -3027,11 +3274,11 @@ const VIEWS={ini:["capt","Início",""],
   cli:["capt","Clientes","Instituições atendidas: dados usados na régua e no ofício."],
   con:["capt","Motor de dados","Conexão com a planilha e situação das cargas automáticas."],
   usr:["capt","Acessos","Quem entra no painel e no Portal do Cliente. Aprove pedidos, bloqueie, mude o perfil ou exclua alguém da base."]};
-const HINT_CLI={cal:"Prazos oficiais das emendas parlamentares: quando os parlamentares indicam, quando a instituição cadastra a proposta e quando os impedimentos técnicos precisam ser resolvidos.",rg:"Quem mais pode mandar emenda para a sua cidade e a sua área, e para onde o recurso já foi. Troque estado, cidade ou área para comparar.",dos:"Escolha um parlamentar por nome, estado ou cidade e veja todas as emendas dele: áreas, cidades, mapa e instituições.",op:"Editais, chamamentos e programas abertos a OSCs e entidades sem fins lucrativos, no Brasil todo."};
+const HINT_CLI={cal:"Prazos oficiais das emendas parlamentares: quando os parlamentares indicam, quando a instituição cadastra a proposta e quando os impedimentos técnicos precisam ser resolvidos.",rg:"Quem mais pode mandar emenda para a sua cidade e a sua área, e para onde o recurso já foi. Troque estado, cidade ou área para comparar.",dos:"Escolha um parlamentar por nome, estado ou cidade e veja todas as emendas dele: áreas, cidades, mapa e instituições.",op:"Editais, chamamentos e programas abertos a OSCs e entidades sem fins lucrativos, no Brasil todo.",fin:"Institutos, fundações, empresas e cooperativas que apoiam projetos sociais: o site de cada um, os editais que estão no ar e como se aproximar.",rou:"Cole o resumo do seu projeto cultural e compare com os projetos da Lei Rouanet: o que os parecidos trazem e o que ajustar. Veja também quem mais incentiva."};
 const VIEW_ALIAS={mapa:"rg",hs:"rg",exp:"dos",rk:"dos",bc:"pt",cx:"vt",base:"ap",ren:"ap"};
 function marcaViews(){
   const q=(sel,v)=>{const el=typeof sel==="string"?document.querySelector(sel):sel;if(el)el.dataset.vw=v};
-  q("#iniCard","ini"); const T="rg dos cal pj ap vt pt cli con usr"; q("#vHero",T); q(".ttl",T); q("#vHint",T); q(".rule",T);
+  q("#iniCard","ini"); const T="rg dos cal pj sem qq fin rou ap vt pt cli con usr"; q("#vHero",T); q(".ttl",T); q("#vHint",T); q(".rule",T);
   q("#pCapt .hero","rg"); q("#rgKpi","rg"); q("#mapCardRg","rg"); q("#pCapt .rgGrid","rg"); q("#rgCidCard","rg"); q("#hsCard","rg");
   q("#dosCard","dos"); q("#dosBoxCard","dos"); q("#rkCard","dos"); q("#expCard","nenhum");
   q("#bcCard","pt"); q("#pjCard","pj"); q("#cliCard","cli");
@@ -3047,7 +3294,7 @@ function marcaViews(){
 let VIEW="rg";
 function irPara(v,semRolar){
   if(VIEW_ALIAS[v]) v=VIEW_ALIAS[v]; if(!VIEWS[v]) v="ini";
-  if(CLI_MODO&&/^(ini|cli|con|usr)$/.test(v)){voltaPortal();return}            // cliente: essas áreas são só da equipe
+  if(CLI_MODO&&/^(ini|cli|con|usr|sem|qq)$/.test(v)){voltaPortal();return}            // cliente: essas áreas são só da equipe
   if(v==="usr"&&!(EU&&EU.perfil==="admin")) v="ini";
   VIEW=v; try{localStorage.setItem("otm-view2",v)}catch(e){}
   if(st.pane!==VIEWS[v][0]) _setPane2(VIEWS[v][0]);
@@ -3055,10 +3302,10 @@ function irPara(v,semRolar){
   ["cliCard","conCard"].forEach(id=>{const d=$(id);if(d&&d.dataset.vw===v)d.open=true});
   document.querySelectorAll("#sb [data-view]").forEach(b=>b.setAttribute("aria-current",b.dataset.view===v?"page":"false"));
   $("tbT").textContent=VIEWS[v][1]; const tt=document.querySelector(".ttl"); if(tt) tt.textContent=VIEWS[v][1]; if($("vHint")) $("vHint").textContent=(CLI_MODO&&HINT_CLI[v])||VIEWS[v][2]||"";
-  if($("vKick")) $("vKick").textContent={rg:"Emendas parlamentares",dos:"Emendas parlamentares",cal:"Emendas parlamentares",pj:"Emendas parlamentares",op:"Editais e chamamentos",ap:"Eleições 2026",vt:"Eleições 2026",pt:"Eleições 2026",cli:"Gestão",con:"Gestão",usr:"Gestão"}[v]||"";
+  if($("vKick")) $("vKick").textContent={sem:"Congresso",qq:"Congresso",rg:"Emendas parlamentares",dos:"Emendas parlamentares",cal:"Emendas parlamentares",pj:"Emendas parlamentares",op:"Editais e chamamentos",fin:"Editais e chamamentos",rou:"Editais e chamamentos",ap:"Eleições 2026",vt:"Eleições 2026",pt:"Eleições 2026",cli:"Gestão",con:"Gestão",usr:"Gestão"}[v]||"";
   if(VIEWS[v][0]==="dados"&&!st.apOk&&v!=="vt"){st.apOk=true;load()}
   if(v==="dos"&&!rkFeito){rkFeito=true;carregaRank()}       // apuração só carrega quando for usada
-  if(v==="op") abreOp(); if(v==="ini") renderInicio(); if(v==="usr") renderUsr(); if(v==="cal") abreCal(); if(v==="vt") abreVt(); if(v==="dos") abreDosView(); if(v==="con") renderMotor(); if(v==="pt"&&st.bc&&!st.bc.uf) carregaBancada(st.rg.uf||"sp"); if(v==="rg"&&st.rg.mapaPend){st.rg.mapaPend=false;desenhaMapaRg()}
+  if(v==="op") abreOp(); if(v==="ini") renderInicio(); if(v==="usr") renderUsr(); if(v==="cal") abreCal(); if(v==="sem") abreSem(); if(v==="fin") abreFin(); if(v==="rou") abreRou(); if(v==="qq") abreQq(); if(v==="vt") abreVt(); if(v==="dos") abreDosView(); if(v==="con") renderMotor(); if(v==="pt"&&st.bc&&!st.bc.uf) carregaBancada(st.rg.uf||"sp"); if(v==="rg"&&st.rg.mapaPend){st.rg.mapaPend=false;desenhaMapaRg()}
   if(v==="hs"&&$("hsCard").hidden){$("vEmpty").hidden=false;$("vEmpty").textContent="Ainda não há registros dos Cadernos Parlamentares para esta instituição. Escolha um cliente na Régua de potencial."}else $("vEmpty").hidden=true;
   fechaSb(); if(!semRolar) window.scrollTo({top:0});
 }
@@ -3557,19 +3804,20 @@ function diasAte(s){const d=dBR(s);if(!d)return null;const h=new Date();h.setHou
 function nrm(s){return String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toUpperCase()}
 const OP_AREA_RX=[["Saúde",/SAUD|HOSPIT|ONCO|CANCER|MEDIC/],["Cultura",/CULTUR|ARTE|MUSIC|TEATRO|AUDIOVIS/],["Esporte",/ESPORT|LAZER/],["Assistência social",/ASSIST|SOCIAL|CRIANC|IDOS|DEFICI|INFANC/],["Educação",/EDUC|ESCOL|ENSIN/],["Meio ambiente",/AMBIENT|SUSTENT/],["Ciência e inovação",/CIENC|PESQUIS|INOVA/],["Direitos humanos",/DIREITOS|MULHER|RACIAL/],["Trabalho e renda",/RENDA|EMPREEND|RURAL|TURISM/]];
 function areasDoTema(t){const n=nrm(t);return OP_AREA_RX.filter(([,rx])=>rx.test(n)).map(([a])=>a)}
-function serveOp(o,c){const cu=String(c.uf||"").toUpperCase();if(o.uf!=="BR"&&o.uf!==cu)return false;
+function serveOp(o,c){const cu=String(c.uf||"").toUpperCase();if(o.uf==="ND"||(o.uf!=="BR"&&o.uf!==cu))return false;
   if(o.municipio&&nrm(o.municipio).replace(/[^A-Z]/g,"")!==nrm(c.cidade).replace(/[^A-Z]/g,""))return false;
   const as=areasDoTema(c.tema||"");return !as.length||o.area==="Outras"||/^Projetos sociais/.test(o.area)||as.includes(o.area)}
 async function abreOp(){
-  if(!$("opUf").options.length){$("opUf").innerHTML=`<option value="">Todo o Brasil</option><option value="BR">Só nacionais</option>`+Object.values(UFS).map(u=>`<option value="${u}">${u}</option>`).join("");
+  if(!$("opUf").options.length){$("opUf").innerHTML=`<option value="">Todo o Brasil</option><option value="BR">Só nacionais</option><option value="ND">Estado não identificado</option>`+Object.values(UFS).map(u=>`<option value="${u}">${u}</option>`).join("");
     const cl=getCli();$("opCli").innerHTML=`<option value="">Clientes</option>`+cl.map(c=>`<option value="${esc(c.id)}">${esc(c.nome)}</option>`).join("");
     $("opAr").innerHTML=`<option value="">Áreas</option>`+Object.keys(OP_COR).map(a=>`<option value="${esc(a)}">${OP_IC[a]||""} ${esc(a)}</option>`).join("");
-    ["opQ","opUf","opTp","opCli","opAr"].forEach(id=>$(id).addEventListener(id==="opQ"?"input":"change",()=>{st.op.lim=40;renderOp()}))}
+    ["opQ","opUf","opTp","opCli","opAr"].forEach(id=>$(id).addEventListener(id==="opQ"?"input":"change",()=>{st.op.lim=40;
+      if(id==="opCli"&&st.op.tab==="cl"&&$("opCli").value){st.op.cli=$("opCli").value;store.set("otm-opcli",st.op.cli);$("opCli").value=""}renderOp()}))}
   marcaOpSb();
-  if(!st.op.dados){try{const c=JSON.parse(store.get("otm-op2")||"null");if(c&&c.lista){st.op.dados=c;renderOp()}}catch(e){}}
+  if(!st.op.dados){try{const c=JSON.parse(store.get("otm-op2")||"null");if(c&&c.lista){c.lista.forEach(ufCorrigeOp_);st.op.dados=c;renderOp()}}catch(e){}}
   else renderOp();
   if(st.op.carregando)return; st.op.carregando=true;
-  try{const r=await api({acao:"oportunidades"});const C=r.campos||[];r.lista=(r.lista||[]).map(a=>{const o={};C.forEach((k,i)=>o[k]=a[i]);return o});
+  try{const r=await api({acao:"oportunidades"});const C=r.campos||[];r.lista=(r.lista||[]).map(a=>{const o={};C.forEach((k,i)=>o[k]=a[i]);return ufCorrigeOp_(o)});   // v15.0: confere o estado também no painel
     st.op.dados=r;store.set("otm-op2",JSON.stringify(r));renderOp()}
   catch(e){if(!st.op.dados)$("opRes").innerHTML=`<p class="empty">${/sem-link/.test(e.message)?"Conecte o motor de dados (Ajustes › Motor de dados).":"Não consegui buscar as oportunidades agora."}</p>`}
   finally{st.op.carregando=false}
@@ -3582,7 +3830,7 @@ function filtraOp(){
 }
 function cardOp(o,cls){
   const cor=OP_COR[o.area]||OP_COR.Outras,dd=diasAte(o.prazo),sit=o.situacao,sc=sit==="Aberto"?"ab":sit==="Previsto"?"pv":"an";
-  const lugar=o.uf==="BR"?"Nacional":(o.municipio?tc(o.municipio)+"/":"")+o.uf;
+  const lugar=lugarOp(o);
   const pz=o.prazo?`<div class="pz ${dd!=null&&dd<=7?"q":""}">⏳ ${dd===0?"Fecha hoje":dd===1?"Fecha amanhã":dd>1?`Faltam ${dd} dias`:"Prazo"} · ${esc(o.prazo)}</div>`:(sit==="Previsto"&&o.abertura?`<div class="pz">📅 Abre em ${esc(o.abertura)}</div>`:"");
   return `<article class="opC" style="--cor:${cor}"><div class="tg"><span class="opT ${sc}"><i></i>${esc(sit==="Anunciado"?"Anunciado · confirmar prazo":sit)}</span><span class="opT">${OP_IC[o.area]||""} ${esc(o.area)}</span><span class="opT">${esc(lugar)}</span><span class="opT">${esc(String(o.tipo).replace("Programa Transferegov – ","Transferegov · "))}</span></div>
     <h4>${o.link?`<a href="${esc(o.link)}" target="_blank" rel="noopener">${esc(o.titulo)}</a>`:esc(o.titulo)}</h4>
@@ -3592,7 +3840,8 @@ function cardOp(o,cls){
     <div class="ac">${o.link?`<a href="${esc(o.link)}" target="_blank" rel="noopener">${/transferegov/.test(o.link)?"Abrir Transferegov ↗":/news\.google/.test(o.link)?"Abrir notícia ↗":"Abrir edital ↗"}</a>`:""}<button data-opcopia="${esc(o.id)}">Copiar resumo</button></div></article>`;
 }
 function renderOp(){
-  const d=st.op.dados;if(!d)return;const cl=getCli(),todos=filtraOp();
+  const d=st.op.dados;if(!d)return;
+  if(st.op.tab==="cl"&&$("opCli")&&$("opCli").value){st.op.cli=$("opCli").value;store.set("otm-opcli",st.op.cli);$("opCli").value=""}const cl=getCli(),todos=filtraOp();
   const serve=o=>cl.filter(c=>serveOp(o,c));
   const ab=todos.filter(o=>o.situacao!=="Previsto"),pv=todos.filter(o=>o.situacao==="Previsto"),fecha=ab.filter(o=>{const x=diasAte(o.prazo);return x!=null&&x>=0&&x<=7}),pcli=ab.filter(o=>serve(o).length);
   $("opSub").textContent=`${d.lista.length.toLocaleString("pt-BR")} oportunidades abertas a OSCs e entidades sem fins lucrativos${d.ultima?` · atualizado em ${d.ultima}`:""}. Busca diária às 6h; resumo no seu e-mail às segundas, 8h.`;
@@ -3611,13 +3860,12 @@ function renderOp(){
     const max=Math.max(1,...G.map(([,a,b])=>com.filter(o=>{const x=diasAte(o.prazo);return x>=a&&x<=b}).length));
     $("opRes").innerHTML=com.length?`<div class="pzBar">${G.map(([t,a,b,c])=>{const n=com.filter(o=>{const x=diasAte(o.prazo);return x>=a&&x<=b}).length;return `<div><i style="height:${Math.max(6,Math.round(n/max*84))}px;background:${c}"></i><b>${n}</b><span>${t}</span></div>`}).join("")}</div>`+
       G.map(([t,a,b,c])=>{const l=com.filter(o=>{const x=diasAte(o.prazo);return x>=a&&x<=b}).sort((x,y)=>diasAte(x.prazo)-diasAte(y.prazo));if(!l.length)return "";
-        return `<h3 class="iniH" style="color:${c}!important">${t} · ${l.length}</h3><div class="pzL">${l.map(o=>{const x=diasAte(o.prazo),sv=serve(o);return `<a class="pzI" href="${esc(o.link)}" target="_blank" rel="noopener" style="--cor:${OP_COR[o.area]||OP_COR.Outras}"><span class="d"><b>${esc(o.prazo.slice(0,5))}</b><small>${x===0?"hoje":x===1?"amanhã":x+" dias"}</small></span><span class="t">${esc(o.titulo)}<small>${OP_IC[o.area]||""} ${esc(o.area)} · ${esc(o.uf==="BR"?"Nacional":(o.municipio?tc(o.municipio)+"/":"")+o.uf)}${sv.length?` · <b>serve para ${esc(sv.map(c=>c.nome).slice(0,2).join(", "))}${sv.length>2?" +"+(sv.length-2):""}</b>`:""}</small></span></a>`}).join("")}</div>`}).join("")+
+        return `<h3 class="iniH" style="color:${c}!important">${t} · ${l.length}</h3><div class="pzL">${l.map(o=>{const x=diasAte(o.prazo),sv=serve(o);return `<a class="pzI" href="${esc(o.link)}" target="_blank" rel="noopener" style="--cor:${OP_COR[o.area]||OP_COR.Outras}"><span class="d"><b>${esc(o.prazo.slice(0,5))}</b><small>${x===0?"hoje":x===1?"amanhã":x+" dias"}</small></span><span class="t">${esc(o.titulo)}<small>${OP_IC[o.area]||""} ${esc(o.area)} · ${esc(lugarOp(o))}${sv.length?` · <b>serve para ${esc(sv.map(c=>c.nome).slice(0,2).join(", "))}${sv.length>2?" +"+(sv.length-2):""}</b>`:""}</small></span></a>`}).join("")}</div>`}).join("")+
       `<p class="sub" style="margin-top:12px">Só entram aqui as oportunidades com prazo identificado. As "anunciadas" sem prazo ficam na aba Abertas.</p>`
       :`<p class="empty">Nenhuma oportunidade com prazo identificado com esses filtros.</p>`;return}
   if(st.op.tab==="cl"){
     if(!cl.length){$("opRes").innerHTML=`<p class="empty">Cadastre os clientes (Ajustes › Clientes) para ver o que serve para cada um.</p>`;return}
-    $("opRes").innerHTML=`<div class="opL">`+cl.map(c=>{const l=ab.filter(o=>serveOp(o,c)).sort(ord);return `<div class="opCli"><h4>${esc(c.nome)}</h4><div class="s">${esc(tc(c.cidade||""))}/${esc(String(c.uf||"").toUpperCase())}${c.tema?" · "+esc(c.tema):""} · <b>${l.length}</b> oportunidades</div>
-      ${l.length?`<ul>${l.slice(0,6).map(o=>`<li><a href="${esc(o.link)}" target="_blank" rel="noopener">${esc(o.titulo)}</a><div class="m">${OP_IC[o.area]||""} ${esc(o.area)} · ${esc(o.uf==="BR"?"Nacional":o.uf)} · ${esc(o.situacao)}${o.prazo?` · prazo ${esc(o.prazo)}`:""}</div></li>`).join("")}</ul>${l.length>6?`<button class="opMais" style="margin-top:8px" data-opverc="${esc(c.id)}">Ver as ${l.length}</button>`:""}`:`<p class="sub" style="margin:6px 0 0">Nada aberto agora para o estado e a área deste cliente.</p>`}</div>`}).join("")+`</div>`;return}
+    renderOpCli(cl,ab,pv);return}
   base.sort(ord);
   $("opRes").innerHTML=base.length?`<div class="opL">${base.slice(0,st.op.lim).map(o=>cardOp(o,serve(o))).join("")}</div>${base.length>st.op.lim?`<button class="opMais" style="margin-top:10px" id="opMais">Mostrar mais (${base.length-st.op.lim})</button>`:""}<p class="sub" style="margin-top:12px">"Anunciado" = divulgado, prazo ainda não confirmado: abra o edital antes de decidir. Fontes: páginas oficiais, Transferegov, diários oficiais municipais (Querido Diário), notícias e o calendário da Otimistas.</p>`
     :`<p class="empty">${d.lista.length?"Nada com esses filtros. Tente outro estado ou área.":"Ainda não há oportunidades na planilha. No Apps Script, rode instalarOportunidades."}</p>`;
@@ -3628,7 +3876,7 @@ document.addEventListener("click",e=>{
   const k=t.closest("[data-opk]");if(k){const id=k.dataset.opk;st.op.kpi=st.op.kpi===id||id==="ab"?"":id;if(id==="pv"){st.op.tab="pv";st.op.kpi=""}else if(st.op.tab!=="ab")st.op.tab="ab";st.op.area="";st.op.lim=40;renderOp();marcaOpSb();return}
   const a=t.closest("[data-oparea]");if(a){st.op.area=a.dataset.oparea;st.op.lim=40;renderOp();return}
   if(t.closest("#opMais")){st.op.lim+=40;renderOp();return}
-  const vc=t.closest("[data-opverc]");if(vc){$("opCli").value=vc.dataset.opverc;st.op.tab="ab";renderOp();marcaOpSb();$("opRes").scrollIntoView({behavior:"smooth"});return}
+  const vc=t.closest("[data-opverc]");if(vc){st.op.cli=vc.dataset.opverc;st.op.tab="cl";renderOp();marcaOpSb();return}
   const cp=t.closest("[data-opcopia]");if(cp){const o=st.op.dados.lista.find(x=>x.id===cp.dataset.opcopia);if(!o)return;
     const txt=`${o.titulo}\n${o.area} · ${o.uf==="BR"?"Nacional":(o.municipio?o.municipio+"/":"")+o.uf} · ${o.situacao}${o.prazo?" · prazo "+o.prazo:""}\nFonte: ${o.fonte}\n${o.link}`;
     (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>{cp.textContent="Copiado ✓";setTimeout(()=>cp.textContent="Copiar resumo",1500)}).catch(()=>prompt("Copie:",txt));return}
@@ -3745,6 +3993,254 @@ $("sim").onchange=e=>{st.sim=e.target.checked;st.munOk=false;st.muns={};st.mun=n
 ["busca","soEleitos","soBase"].forEach(id=>$(id).addEventListener("input",()=>{st.limite=50;render()}));
 $("more").onclick=()=>{st.limite+=100;render()};
 fillMunList(); render(); setInterval(tick,1000); setTimeout(carregaFotos,1500);
+
+// v15.0: estado citado no texto (nome, sigla, gentílico, capital ou cidade grande). Corrige o "edital de MT para cliente de SP"
+// e o "Pará" que casava com a palavra "para" (e o "Acre" de "acredita").
+const UF_PADROES_ = [
+  ['MS', "mato grosso do sul|sul-mato-grossen[sc]es?|campo grande|dourados|tr[eê]s lagoas|corumb[aá]"],
+  ['MT', "mato grosso|mato-grossen[sc]es?|matogrossen[sc]es?|cuiab[aá]|v[aá]rzea grande|rondon[oó]polis|sinop|lucas do rio verde|tangar[aá] da serra|barra do gar[cç]as|primavera do leste"],
+  ['RN', "rio grande do norte|norte-rio-grandenses?|potiguar(?:es)?|mossor[oó]|parnamirim"],
+  ['RS', "rio grande do sul|sul-rio-grandenses?|ga[uú]ch[oa]s?|porto alegre|caxias do sul|pelotas|canoas|passo fundo|novo hamburgo|s[aã]o leopoldo"],
+  ['RJ', "rio de janeiro|fluminenses?|cariocas?|niter[oó]i|duque de caxias|nova igua[cç]u|s[aã]o gon[cç]alo|petr[oó]polis|volta redonda|campos dos goytacazes"],
+  ['CE', "cear[aá]|cearenses?|fortaleza|juazeiro do norte|sobral|caucaia|maracana[uú]"],
+  ['SP', "s[aã]o paulo|paulistas?|paulistan[oa]s?|campinas|guarulhos|osasco|santo andr[eé]|s[aã]o bernardo do campo|ribeir[aã]o preto|sorocaba|s[aã]o jos[eé] dos campos|jundia[ií]|piracicaba|bauru|s[aã]o jos[eé] do rio preto|mogi das cruzes|diadema|mar[ií]lia|presidente prudente|limeira|taubat[eé]"],
+  ['MG', "minas gerais|mineir[oa]s?|belo horizonte|uberl[aâ]ndia|contagem|juiz de fora|betim|montes claros|uberaba|governador valadares|ipatinga|sete lagoas|divin[oó]polis|po[cç]os de caldas|ouro preto"],
+  ['ES', "esp[ií]rito santo|capixabas?|vila velha|cariacica|linhares|cachoeiro de itapemirim|guarapari"],
+  ['PR', "paran[aá]|paranaenses?|curitiba|londrina|maring[aá]|ponta grossa|cascavel|foz do igua[cç]u|guarapuava|paranagu[aá]"],
+  ['SC', "santa catarina|catarinenses?|florian[oó]polis|joinville|blumenau|chapec[oó]|crici[uú]ma|itaja[ií]|balne[aá]rio cambori[uú]|jaragu[aá] do sul"],
+  ['GO', "goi[aá]s|goian[oa]s?|goi[aâ]nia|an[aá]polis|luzi[aâ]nia|catal[aã]o"],
+  ['DF', "distrito federal|brasilienses?|gdf|ceil[aâ]ndia|taguatinga"],
+  ['BA', "bahia|baian[oa]s?|salvador|feira de santana|vit[oó]ria da conquista|cama[cç]ari|itabuna|ilh[eé]us|lauro de freitas"],
+  ['PE', "pernambuco|pernambucan[oa]s?|recife|olinda|caruaru|petrolina|jaboat[aã]o(?: dos guararapes)?|garanhuns"],
+  ['PB', "para[ií]ba|paraiban[oa]s?|jo[aã]o pessoa|campina grande"],
+  ['AL', "alagoas|alagoan[oa]s?|macei[oó]|arapiraca"],
+  ['SE', "sergipe|sergipan[oa]s?|aracaju"],
+  ['PI', "piau[ií]|piauienses?|teresina"],
+  ['MA', "maranh[aã]o|maranhenses?|s[aã]o lu[ií]s|imperatriz"],
+  ['PA', "pará|estado do para|paraenses?|bel[eé]m|ananindeua|santar[eé]m|marab[aá]|parauapebas|castanhal"],
+  ['AM', "amazonas|amazonenses?|manaus|parintins"],
+  ['AP', "amap[aá]|amapaenses?|macap[aá]"],
+  ['AC', "acre|acreanos?"],
+  ['RO', "rond[oô]nia|rondonienses?|porto velho|ji-paran[aá]|ariquemes|vilhena"],
+  ['RR', "roraima|roraimenses?"],
+  ['TO', "tocantins|tocantinenses?|aragua[ií]na|gurupi"]
+];
+const UF_RX_ = UF_PADROES_.map(([uf, p]) => [uf, new RegExp('(?<![a-zà-ÿ0-9])(?:' + p + ')(?![a-zà-ÿ0-9])', 'g')]);
+const UF_SIGLA_RX_ = /(^|[^A-Za-zÀ-ÿ0-9])(AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO)(?![A-Za-zÀ-ÿ0-9])/g;
+// sinais de que é federal de verdade (vale para todo o país)
+const UF_FEDERAL_RX_ = /MINISTERIO|GOVERNO FEDERAL|\bFEDERA(L|IS)\b|\bNACIONA(L|IS)\b|\bBNDES\b|\bFINEP\b|\bCNPQ\b|\bCAPES\b|FUNARTE|\bMINC\b|\bMDS\b|\bMEC\b|\bIPHAN\b|PETROBRAS|TODO O (BRASIL|PAIS)|TODOS OS ESTADOS|TODAS AS REGIOES|\bUNIAO\b|PRONON|PRONAS|ROUANET|TRANSFEREGOV|INCENTIVO AO ESPORTE|CULTURA VIVA|BRASILIA|FUNDO NACIONAL|EMBAIXADA/;
+function ufsTexto_(t) {
+  const T = String(t || ''); let s = ' ' + T.toLowerCase().replace(/\s+/g, ' ') + ' '; const out = [];
+  UF_RX_.forEach(([uf, rx]) => { const s2 = s.replace(rx, ' '); if (s2 !== s) { if (out.indexOf(uf) < 0) out.push(uf); s = s2; } });
+  const letras = (T.match(/[A-Za-zÀ-ÿ]/g) || []).length, caps = letras > 0 && (T.match(/[A-ZÀ-Ý]/g) || []).length > 0.6 * letras;
+  let m; UF_SIGLA_RX_.lastIndex = 0;
+  while ((m = UF_SIGLA_RX_.exec(T))) {
+    const antes = T.slice(Math.max(0, m.index - 2), m.index + m[1].length), depois = T.charAt(m.index + m[0].length);
+    const forte = /[\/(]/.test(m[1]) || depois === ')' || /[-–]\s?$/.test(antes);
+    if ((forte || !caps) && out.indexOf(m[2]) < 0) out.push(m[2]);
+  }
+  return out;
+}
+function ufNormaliza_(t) { return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase(); }
+// recebe {titulo, orgao, uf, municipio, tipo, trecho} e devolve com uf corrigida:
+//  - estado citado no título manda (se o título fala de MT, é MT, mesmo que a busca tenha sido de SP)
+//  - "Nacional" só com sinal federal; sem estado e sem sinal federal vira ND (estado não identificado)
+//  - notícia de busca estadual sem estado no título fica marcada "estado deduzido pela busca (confirmar)"
+function ufCorrigeOp_(o) {
+  if (!o || /^(Calend|Programa Transferegov|Diário|Página oficial)/.test(String(o.tipo || '')) || o.municipio) return o;
+  const tit = String(o.titulo || ''), org = String(o.orgao || '');
+  let f = ufsTexto_(tit);
+  if (!f.length && /GOVERNO|PREFEITURA|SECRETARIA|ASSEMBLEIA|CAMARA MUNICIPAL|TRIBUNAL|DEFENSORIA|MINISTERIO PUBLICO/.test(ufNormaliza_(org))) f = ufsTexto_(org);
+  const MARCA = ' · estado deduzido pela busca (confirmar)';
+  let tr = String(o.trecho || '').replace(MARCA, '');
+  if (f.length && f.length <= 3) { if (f.indexOf(o.uf) < 0) o.uf = f[0]; }
+  else if (!f.length) {
+    if (o.uf === 'BR' || o.uf === 'ND' || !o.uf) o.uf = (UF_FEDERAL_RX_.test(ufNormaliza_(tit + ' ' + org)) || o.tipo === 'Financiador privado') ? 'BR' : 'ND';
+    else if (o.tipo === 'Notícia') tr += MARCA;
+  }
+  o.trecho = tr; return o;
+}
+
+// ======== v15.0: Oportunidades por cliente (um cliente por vez, com o porquê), Financiadores privados e Lei Rouanet ========
+function fmtBRL(v){v=Number(v)||0;const a=Math.abs(v);return a>=1e9?"R$ "+(v/1e9).toLocaleString("pt-BR",{maximumFractionDigits:1})+" bi":a>=1e6?"R$ "+(v/1e6).toLocaleString("pt-BR",{maximumFractionDigits:1})+" mi":a>=1e3?"R$ "+Math.round(v/1e3).toLocaleString("pt-BR")+" mil":"R$ "+Math.round(v).toLocaleString("pt-BR")}
+async function postLeitura(body){const r=await fetch(apiBase(),{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...body,t:tok()})});
+  const j=await r.json(); if(j.erro==="LOGIN"){sessaoCaiu();throw new Error("Entre de novo para continuar.")} if(j.erro) throw new Error(j.erro); return j}
+function lugarOp(o){return o.uf==="BR"?(o.tipo==="Financiador privado"?"Financiador privado":"Nacional"):o.uf==="ND"?"Estado não identificado":(o.municipio?tc(o.municipio)+"/":"")+o.uf+(/estado deduzido/.test(o.trecho||"")?" (a confirmar)":"")}
+// ---- por que serve para este cliente
+function nexoOp(o,c){const cu=String(c.uf||"").toUpperCase(),r=[];
+  if(o.municipio) r.push(`na cidade do cliente (${tc(o.municipio)})`);
+  else if(o.uf===cu) r.push(/estado deduzido/.test(o.trecho||"")?`${cu} só pela busca: abra e confirme o estado`:`edital do estado do cliente (${cu})`);
+  else if(o.tipo==="Financiador privado") r.push("financiador privado: confira se atende a região");
+  else r.push("federal: vale para instituições de todo o país");
+  const as=areasDoTema(c.tema||"");
+  if(as.includes(o.area)) r.push(`área ${o.area}, igual ao tema do cliente`);
+  else if(as.length) r.push(o.area==="Outras"||/^Projetos sociais/.test(o.area)?"área ampla: confira se o objeto cabe":`área ${o.area}`);
+  return r.join(" · ")}
+function grupoOpCli(o){if(o.municipio)return "cid";if(/estado deduzido/.test(o.trecho||""))return "conf";if(o.uf!=="BR")return "uf";if(o.tipo==="Financiador privado")return "priv";return "br"}
+function itemOpCli(o,c){const dd=diasAte(o.prazo);
+  const pz=o.prazo?`<span class="pz ${dd!=null&&dd<=7?"q":""}">${dd===0?"fecha hoje":dd===1?"fecha amanhã":dd>1?`faltam ${dd} dias`:"prazo"} · ${esc(o.prazo)}</span>`:o.situacao==="Previsto"&&o.abertura?`<span class="pz">abre em ${esc(o.abertura)}</span>`:`<span class="pz an">prazo a confirmar</span>`;
+  return `<li class="ocI" style="--cor:${OP_COR[o.area]||OP_COR.Outras}"><div class="t">${o.link?`<a href="${esc(o.link)}" target="_blank" rel="noopener">${esc(o.titulo)}</a>`:esc(o.titulo)}${pz}</div>
+    <div class="m">${OP_IC[o.area]||""} ${esc(o.area)} · ${esc(lugarOp(o))} · ${esc(o.situacao==="Anunciado"?"anunciado":o.situacao.toLowerCase())} · ${esc(o.fonte||o.orgao||"")}</div>
+    <div class="nx">Por que serve: ${esc(nexoOp(o,c))}</div></li>`}
+function renderOpCli(cl,ab,pv){
+  let id=st.op.cli||store.get("otm-opcli")||""; if(!cl.some(c=>c.id===id)) id=cl[0].id; st.op.cli=id;
+  const c=cl.find(x=>x.id===id), ord=(a,b)=>{const x=diasAte(a.prazo),y=diasAte(b.prazo);return (a.situacao==="Aberto"?0:1)-(b.situacao==="Aberto"?0:1)||(x==null?999:x)-(y==null?999:y)||String(b.encontrado).split("/").reverse().join("").localeCompare(String(a.encontrado).split("/").reverse().join(""))};
+  const conta=cl.map(x=>ab.filter(o=>serveOp(o,x)).length);
+  const L=ab.filter(o=>serveOp(o,c)).sort(ord), P=pv.filter(o=>serveOp(o,c)).sort(ord), cu=String(c.uf||"").toUpperCase();
+  const G=[["cid",`Na cidade (${tc(c.cidade||"")})`,"#00A35C"],["uf",`No estado (${cu})`,"#2F7BFF"],["br","Federais: valem para todo o país","#1F3FA0"],["priv","Financiadores privados","#B07800"],["conf","Estado só pela busca: confirmar","#8A94A8"]];
+  const por={};L.forEach(o=>{const g=grupoOpCli(o);(por[g]=por[g]||[]).push(o)});
+  const tot=Math.max(1,L.length);
+  $("opRes").innerHTML=`<div class="ocChips" role="tablist" aria-label="Clientes">${cl.map((x,i)=>`<button type="button" role="tab" data-opcli="${esc(x.id)}" aria-selected="${x.id===id}">${esc(x.nome)}<small>${conta[i]}</small></button>`).join("")}</div>
+    <section class="ocHead"><div><h3>${esc(c.nome)}</h3><p>${esc(tc(c.cidade||""))}/${esc(cu)}${c.tema?" · "+esc(c.tema):""}</p></div>
+      <div class="ocBar" aria-label="Composição">${G.filter(([g])=>por[g]).map(([g,t,cor])=>`<i style="width:${por[g].length/tot*100}%;background:${cor}" title="${esc(t)}: ${por[g].length}"></i>`).join("")}</div>
+      <p class="ocRes"><b>${L.length}</b> abertas ou anunciadas${G.filter(([g])=>por[g]).map(([g,t,cor])=>` · <span style="color:${cor}">●</span> ${por[g].length} ${g==="cid"?"na cidade":g==="uf"?"no estado":g==="br"?"federais":g==="priv"?"de financiadores privados":"a confirmar"}`).join("")}${P.length?` · ${P.length} previstas`:""}</p></section>
+    ${L.length?G.filter(([g])=>por[g]).map(([g,t,cor])=>g==="conf"?`<details class="ocConf"><summary style="color:${cor}">${t} <small>${por[g].length}</small></summary><p class="sub">A busca foi feita para ${cu}, mas o título não cita o estado. Abra e confirme antes de indicar ao cliente.</p><ul class="ocL">${por[g].map(o=>itemOpCli(o,c)).join("")}</ul></details>`
+      :`<h4 class="ocH" style="--cor:${cor}">${t} <small>${por[g].length}</small></h4><ul class="ocL">${por[g].map(o=>itemOpCli(o,c)).join("")}</ul>`).join("")
+      :`<p class="empty">Nada aberto agora para ${esc(cu)} e para a área deste cliente. Veja a aba Abertas ou os Financiadores privados.</p>`}
+    ${P.length?`<h4 class="ocH" style="--cor:#B07800">Previstas para este cliente <small>${P.length}</small></h4><ul class="ocL">${P.map(o=>itemOpCli(o,c)).join("")}</ul>`:""}
+    <p class="sub" style="margin-top:12px">Entra aqui o que é da cidade ou do estado do cliente, os federais e os financiadores privados, na área do tema cadastrado. Editais de outros estados ficam de fora. Ordem: abertos com prazo mais perto primeiro, depois os anunciados mais recentes.</p>`;
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-opcli]");if(!b)return;st.op.cli=b.dataset.opcli;store.set("otm-opcli",st.op.cli);if($("opCli"))$("opCli").value="";renderOp()});
+
+// ======== FINANCIADORES PRIVADOS ========
+st.fin={d:null,tipo:"",q:"",so:"",lim:60,carregando:false};
+const FIN_COMO={
+  "Empresarial":["Instituto ou fundação de empresa","<p>Costuma abrir <b>edital próprio</b> uma vez por ano ou apoiar por convite. Pesa muito o <b>território onde a empresa atua</b> (fábricas, lojas, agências, áreas de concessão).</p><ol><li>Abra a página de editais e anote o ciclo (quando abre, valores, quem pode).</li><li>Sem edital aberto: identifique quem cuida de investimento social ou sustentabilidade e peça uma conversa curta.</li><li>Leve um projeto com metas, orçamento e a ligação clara com a causa e o território da empresa.</li><li>A empresa-mãe, se for lucro real, também pode patrocinar pelas leis de incentivo: vale ter projeto aprovado (Rouanet, Esporte, fundos da criança e do idoso, PRONON/PRONAS).</li></ol>"],
+  "Empresa":["Empresa","<p>Duas portas: <b>doação ou patrocínio incentivado</b> e <b>patrocínio direto</b> (marketing, ESG).</p><ol><li>Incentivo fiscal só funciona para empresa no <b>lucro real</b>: confirme antes de gastar energia.</li><li>Tenha o projeto <b>já aprovado e autorizado a captar</b> (Rouanet, Lei de Incentivo ao Esporte, FIA, Fundo do Idoso, PRONON/PRONAS). Sem isso, não há o que oferecer.</li><li>Chegue cedo: a decisão da destinação costuma sair no segundo semestre, antes do fechamento do imposto do ano.</li><li>Fale com sustentabilidade/ESG, marketing ou tributário. Mostre contrapartidas (marca, relatório, visita) e o território onde a empresa atua.</li><li>Veja na aba Lei Rouanet se a empresa (ou o grupo) já incentiva: é o melhor sinal de que há verba e processo.</li></ol>"],
+  "Familiar":["Fundação ou instituto familiar","<p>Raramente abre edital. A decisão passa por <b>relacionamento e indicação</b>.</p><ol><li>Mapeie quem decide (família, conselho, diretoria executiva) e quem da sua rede conhece.</li><li>Peça apresentação por alguém de confiança (conselheiro, parceiro, rede GIFE/IDIS).</li><li>Mostre resultados, governança e prestação de contas; o primeiro apoio costuma ser pequeno e cresce com a relação.</li></ol>"],
+  "Independente":["Fundação ou instituto independente","<p>Costuma trabalhar com <b>editais e chamadas periódicas</b> e com parceiros de longo prazo.</p><ol><li>Leia a estratégia e as causas prioritárias: se o projeto não está nelas, não insista.</li><li>Acompanhe a página de editais e as redes; inscreva-se na newsletter.</li><li>Prepare documentação e indicadores com antecedência: o prazo de inscrição é curto.</li></ol>"],
+  "Cooperativa":["Cooperativa (Sicredi, Sicoob e similares)","<p>Cada cooperativa local tem o seu <b>fundo social ou programa</b>, com edital próprio, quase sempre <b>anual</b> e restrito à área de atuação dela.</p><ol><li>Descubra qual cooperativa atende a cidade do cliente (procure a agência local).</li><li>Peça o calendário do fundo social e o regulamento do ano.</li><li>Ser associado ou ter relação com a agência ajuda; projetos com impacto comunitário local são os preferidos.</li></ol>"],
+  "Internacional":["Fonte internacional","<p>Chamadas próprias, muitas vezes em inglês, com exigência alta de prestação de contas.</p><ol><li>Confira o programa vigente no site oficial e as regras de elegibilidade para organização brasileira.</li><li>Tenha relatório financeiro e de atividades em ordem, e alguém que escreva bem em inglês.</li></ol>"],
+  "Organização de apoio":["Organização de apoio","<p>Em geral <b>não financia direto</b>: oferece capacitação, rede, estudos e, às vezes, gestão de fundos e editais de terceiros.</p><ol><li>Use para qualificar a instituição (governança, captação, avaliação) e para chegar a financiadores.</li><li>Acompanhe chamadas que ela gere em nome de empresas e famílias.</li></ol>"],
+  "Comunitária":["Fundo ou instituto comunitário","<p>Filantropia comunitária: <b>editais para organizações do território</b>, valores menores e foco em base comunitária.</p><ol><li>Confira se a cidade do cliente está na área de atuação.</li><li>Projetos simples, com participação da comunidade e orçamento enxuto, têm mais chance.</li></ol>"],
+  "_":["Financiador","<p>O tipo deste financiador ainda não foi confirmado. Abra o site, veja se há edital, programa ou contato de investimento social, e anote na aba Financiadores (colunas Tipo e Obs).</p>"]};
+async function abreFin(forca){
+  const B=$("finBody"); if(!B) return;
+  if(!st.fin.d||forca){ if(!st.fin.d) B.innerHTML=`<p class="sub">Carregando os financiadores…</p>`;
+    try{ st.fin.d=await api({acao:"financiadores"}) }catch(e){ if(e.message!=="login") B.innerHTML=`<p class="empty">Não consegui ler os financiadores: ${esc(e.message)}${/inválida/.test(e.message)?" (atualize o motor para a v15.0)":""}</p>`; return } }
+  renderFin();
+}
+function finLogo(f){const h=String(f.site||"").replace(/^https?:\/\/(www\.)?/i,"").split(/[/?#]/)[0];
+  const ini=String(f.nome).replace(/\(.*?\)/g,"").replace(/^(Instituto|Fundação|Fundo|Associação)\s+(de\s+|do\s+|da\s+)?/i,"").split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase();
+  const src=f.logo||(h?`https://www.google.com/s2/favicons?domain=${encodeURIComponent(h)}&sz=128`:"");
+  return `<span class="finLg" aria-hidden="true"><em>${esc(ini||"?")}</em>${src?`<img src="${esc(src)}" alt="" loading="lazy" referrerpolicy="no-referrer">`:""}</span>`}
+document.addEventListener("error",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&t.parentNode&&t.parentNode.classList&&t.parentNode.classList.contains("finLg"))t.remove()},true);
+document.addEventListener("load",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&t.parentNode&&t.parentNode.classList&&t.parentNode.classList.contains("finLg")&&t.naturalWidth&&t.naturalWidth<24)t.remove()},true);   // ícone genérico de 16px: fica a sigla
+function finStatus(f){const s=String(f.status||"");
+  if(!f.site||/falta o site/.test(s)) return ["sem","Site ainda não cadastrado"];
+  if(/bloqueia/.test(s)) return ["bl","O site bloqueia leitura automática: abra e confira"];
+  if(/^erro/.test(s)) return ["bl","O site não abriu na última varredura"];
+  if(/^ok/.test(s)) return f.nAchados?["ok",`${f.nAchados} link${f.nAchados>1?"s":""} de edital no site${f.check?" (lido em "+f.check+")":""}`]:["vz",`Nenhum edital aberto no site${f.check?" (lido em "+f.check+")":""}`];
+  return ["vz","Ainda não verificado"]}
+function finCard(f){const [cls,txt]=finStatus(f),tp=FIN_COMO[f.tipo]?f.tipo:"_",nv=f.novidades&&f.novidades.itens||[];
+  return `<article class="finC ${nv.length?"nov":""}">
+    <div class="finT">${finLogo(f)}<div><h4>${esc(f.nome)}</h4><span>${esc(f.tipo||"tipo a confirmar")}${f.origem?" · "+esc(f.origem):""}</span></div></div>
+    ${nv.length?`<div class="finNov"><b>Novo desde ${esc(f.novidades.data)}</b>${nv.slice(0,3).map(([t,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join("")}</div>`:""}
+    <p class="finSt ${cls}"><i></i>${esc(txt)}</p>
+    ${f.achados&&f.achados.length?`<ul class="finAch">${f.achados.slice(0,3).map(([t,u])=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a></li>`).join("")}</ul>`:""}
+    ${f.rouanet?`<p class="finRou">Indício: empresas com nome parecido já incentivaram <b>${fmtBRL(f.rouanet.total)}</b> pela Lei Rouanet (${esc(f.rouanet.nomes.join("; "))}${f.rouanet.n>3?"…":""}). Confira se é o mesmo grupo.</p>`:""}
+    ${f.obs?`<p class="finObs">${esc(f.obs)}</p>`:""}
+    <div class="finA">${f.site?`<a href="${esc(f.site)}" target="_blank" rel="noopener">Site ↗</a>`:`<a href="https://www.google.com/search?q=${encodeURIComponent(f.nome+" site oficial investimento social")}" target="_blank" rel="noopener">Procurar o site ↗</a>`}${f.editais?`<a href="${esc(f.editais)}" target="_blank" rel="noopener">Página de editais ↗</a>`:""}</div>
+    <details class="finComo"><summary>Como captar: ${esc(FIN_COMO[tp][0].toLowerCase())}</summary>${FIN_COMO[tp][1]}</details></article>`}
+function renderFin(){
+  const B=$("finBody"),d=st.fin.d; if(!B||!d) return;
+  if(!d.lista||!d.lista.length){B.innerHTML=`<div class="calVazio"><b>A base de financiadores ainda está vazia.</b><p>${EU&&EU.perfil!=="cliente"&&!CLI_MODO?"No Apps Script, rode <code>instalarFinanciadores</code> uma vez. O motor carrega os associados do GIFE e os nomes indicados, lê os sites aos domingos e manda o resumo na segunda.":"A Otimistas está montando esta base. Volte em breve."}</p></div>`;return}
+  const L=d.lista, q=nrm(st.fin.q);
+  const K=[["",L.length,"financiadores monitorados"],["ed",L.filter(f=>f.nAchados).length,"com edital ou chamada no site"],["nov",L.filter(f=>f.novidades).length,"com novidade na semana"],["sem",L.filter(f=>!f.site).length,"sem site cadastrado"]];
+  const tipos={}; L.forEach(f=>{const t=f.tipo||"A confirmar";tipos[t]=(tipos[t]||0)+1});
+  let base=L.filter(f=>(!st.fin.tipo||(f.tipo||"A confirmar")===st.fin.tipo)&&(!q||nrm(f.nome+" "+f.tipo+" "+f.origem+" "+f.obs+" "+(f.achados||[]).map(a=>a[0]).join(" ")).includes(q)));
+  if(st.fin.so==="ed")base=base.filter(f=>f.nAchados); if(st.fin.so==="nov")base=base.filter(f=>f.novidades); if(st.fin.so==="sem")base=base.filter(f=>!f.site);
+  base.sort((a,b)=>(b.novidades?1:0)-(a.novidades?1:0)||(b.nAchados||0)-(a.nAchados||0)||(b.site?1:0)-(a.site?1:0)||String(a.nome).localeCompare(String(b.nome),"pt-BR"));
+  B.innerHTML=`<div class="calK">${K.map(([id,n,t])=>`<button type="button" data-fink="${id}" aria-pressed="${st.fin.so===id}" class="${id==="nov"&&n?"al":""}"><b>${n}</b><span>${t}</span></button>`).join("")}</div>
+    <div class="finF"><input id="finQ" type="search" placeholder="Buscar por nome, causa ou edital (ex.: saúde, Votorantim, esporte)" value="${esc(st.fin.q)}" aria-label="Buscar financiador"></div>
+    <div class="calChips"><button type="button" data-fint="" aria-pressed="${!st.fin.tipo}">Todos</button>${Object.entries(tipos).sort((a,b)=>b[1]-a[1]).map(([t,n])=>`<button type="button" data-fint="${esc(t)}" aria-pressed="${st.fin.tipo===t}">${esc(t)} <small>${n}</small></button>`).join("")}</div>
+    <details class="finGuia"><summary>Como usar esta base para captar</summary><ol>
+      <li><b>Comece pelo que tem edital aberto</b> (filtro “com edital ou chamada no site”): é dinheiro com regra clara e prazo.</li>
+      <li><b>Empresas e institutos de empresa</b>: cruze com a aba Lei Rouanet. Quem já incentiva tem verba, processo e área que decide.</li>
+      <li><b>Familiares</b>: não abrem edital; entram pela rede. Liste quem da sua rede conhece alguém lá.</li>
+      <li><b>Cooperativas</b>: o edital é da cooperativa local, não da central. Procure a agência da cidade do cliente.</li>
+      <li>Toda segunda chega por e-mail o que mudou nos sites. Novidade aparece aqui com o selo verde.</li></ol></details>
+    <div class="finG">${base.slice(0,st.fin.lim).map(finCard).join("")||`<p class="empty">Nada com esses filtros.</p>`}</div>
+    ${base.length>st.fin.lim?`<button type="button" class="opMais" id="finMais" style="margin-top:10px">Mostrar mais (${base.length-st.fin.lim})</button>`:""}
+    <p class="calNota">Associados do GIFE${d.gife?` (lista atualizada em ${esc(d.gife)})`:""}, nomes indicados pela Otimistas e logos das apresentações. O motor lê a página inicial e a página de editais de cada site aos domingos${d.ultima?`; última varredura concluída em ${esc(d.ultima)}`:""}. Link de edital achado no site não é garantia de que esteja aberto ou de que a instituição seja elegível: abra e confira. Para corrigir um site ou o tipo, edite a aba Financiadores.</p>`;
+  const qi=$("finQ"); if(qi){qi.addEventListener("input",()=>{st.fin.q=qi.value;st.fin.lim=60;clearTimeout(st.fin.tq);st.fin.tq=setTimeout(()=>{renderFin();const n=$("finQ");if(n){n.focus();n.setSelectionRange(n.value.length,n.value.length)}},250)})}
+}
+document.addEventListener("click",e=>{
+  const k=e.target.closest("[data-fink]"); if(k){st.fin.so=st.fin.so===k.dataset.fink?"":k.dataset.fink;st.fin.lim=60;renderFin();return}
+  const t=e.target.closest("[data-fint]"); if(t){st.fin.tipo=t.dataset.fint;st.fin.lim=60;renderFin();return}
+  if(e.target.closest("#finMais")){st.fin.lim+=60;renderFin();return}
+});
+
+// ======== LEI ROUANET: incentivadores e comparador de projeto ========
+st.rou={d:null,tab:"cmp",q:"",tipo:"",cmp:null,lim:100,carregando:false};
+async function abreRou(forca){
+  const B=$("rouBody"); if(!B) return;
+  if(!st.rou.d||forca){ if(!st.rou.d) B.innerHTML=`<p class="sub">Carregando a base da Rouanet…</p>`;
+    try{ st.rou.d=await api({acao:"rouanet"}) }catch(e){ if(e.message!=="login") B.innerHTML=`<p class="empty">Não consegui ler a base: ${esc(e.message)}${/inválida/.test(e.message)?" (atualize o motor para a v15.0)":""}</p>`; return } }
+  renderRou();
+}
+function rouCmpHtml(r){
+  if(!r) return "";
+  const ok=r.checklist.filter(c=>c.seu).length, falta=r.checklist.filter(c=>c.dica);
+  const curto=r.tamanho.mediana&&r.tamanho.seu<r.tamanho.mediana*0.6;
+  const dist=(t,arr)=>arr&&arr.length?`<div class="rouDist"><b>${t}</b>${arr.map(([k,n])=>`<span>${esc(k)} <small>${n}</small></span>`).join("")}</div>`:"";
+  return `<section class="rouRes" id="rouRes">
+    <div class="rouSum"><div><b>${ok} de ${r.checklist.length}</b><span>elementos que os parecidos costumam ter</span></div><div><b>${r.tamanho.seu.toLocaleString("pt-BR")}</b><span>caracteres no seu resumo (mediana dos parecidos: ${r.tamanho.mediana.toLocaleString("pt-BR")})</span></div><div><b>${r.parecidos.length}</b><span>projetos mais parecidos, de ${r.base.toLocaleString("pt-BR")} na base</span></div></div>
+    <h4 class="ocH" style="--cor:#E3262E">O que ajustar</h4>
+    <ul class="rouAj">${falta.map(c=>`<li><b>${esc(c.item)}</b>: ${c.parecidos}% dos parecidos citam; o seu não. ${esc(c.dica)}</li>`).join("")}${curto?`<li><b>Resumo curto</b>: o seu tem ${r.tamanho.seu} caracteres; os parecidos ficam em torno de ${r.tamanho.mediana}. Detalhe o que será feito, para quem, onde, quanto e quando.</li>`:""}${!falta.length&&!curto?`<li>O resumo já traz o que os parecidos costumam trazer. Compare o enquadramento (área, segmento e produto) abaixo.</li>`:""}</ul>
+    <table class="rouChk"><thead><tr><th>Elemento</th><th>Parecidos que têm</th><th>Seu texto</th></tr></thead><tbody>${r.checklist.map(c=>`<tr><td>${esc(c.item)}</td><td><span class="rouPct"><i style="width:${c.parecidos}%"></i></span>${c.parecidos}%</td><td>${c.seu?'<b class="sim">✓ tem</b>':'<b class="nao">✗ não</b>'}</td></tr>`).join("")}</tbody></table>
+    <h4 class="ocH" style="--cor:#2F7BFF">Como os parecidos se enquadram</h4>
+    ${dist("Área",r.perfil.areas)}${dist("Segmento",r.perfil.segmentos)}${dist("Produto",r.perfil.produtos)}${dist("UF",r.perfil.ufs)}
+    ${r.termos&&r.termos.length?`<div class="rouDist"><b>Palavras frequentes nos parecidos que o seu não usa</b>${r.termos.map(([w,n])=>`<span>${esc(w)} <small>${n}</small></span>`).join("")}</div>`:""}
+    <h4 class="ocH" style="--cor:#1F3FA0">Projetos mais parecidos</h4>
+    <ul class="rouP">${r.parecidos.map(p=>`<li><div class="t"><a href="${esc(p.link)}" target="_blank" rel="noopener">Pronac ${esc(p.pronac)} ↗</a><span class="rouSim" title="semelhança relativa">${p.sim}%</span></div><div class="m">${esc(p.area)} · ${esc(p.segmento)} · ${esc(p.produto)} · ${esc(p.uf)}</div><p>${esc(p.resumo)}</p></li>`).join("")}</ul>
+    <p class="calNota">${esc(r.aviso)} Para comparar valores e captação de projetos específicos, use também o <a href="https://aplicacoes.cultura.gov.br/comparar/salicnet/" target="_blank" rel="noopener">SALICNet Comparar</a>.</p></section>`}
+function renderRou(){
+  const B=$("rouBody"),d=st.rou.d; if(!B||!d) return;
+  if(d.vazio||(!d.nInc&&!d.nProj)){B.innerHTML=`<div class="calVazio"><b>A base da Rouanet ainda não foi importada.</b><p>${EU&&EU.perfil!=="cliente"&&!CLI_MODO?"Suba no Google Drive os arquivos baixados do SALICNet (os nomes começam com <code>grid_</code>, por exemplo grid_Incentivadores.xlsx) e, no Apps Script, rode <code>importarSalic</code>. Dá para importar mais arquivos depois: o motor junta tudo.":"A Otimistas está montando esta base. Volte em breve."}</p></div>`;return}
+  const T=[["cmp","Comparar meu projeto"],["inc","Quem incentiva"],["como","Como captar"]];
+  let h=`<div class="opTabs" role="tablist">${T.map(([id,t])=>`<button role="tab" type="button" data-routab="${id}" aria-selected="${st.rou.tab===id}">${t}</button>`).join("")}</div>`;
+  if(st.rou.tab==="cmp"){
+    h+=`<p class="sub" style="margin:4px 0 10px">Cole o resumo do seu projeto como iria no SALIC. O painel acha os projetos mais parecidos entre os ${d.nProj.toLocaleString("pt-BR")} da base${d.arquivos&&d.arquivos.length?` (${esc(d.arquivos.filter(a=>!/Incentivador/i.test(a)).join(", "))})`:""} e mostra o que eles trazem que o seu não traz.</p>
+      <div class="rouForm"><label>Resumo do projeto<textarea id="rouTxt" rows="7" placeholder="Ex.: Oficinas gratuitas de teatro para 120 jovens de escolas públicas da zona leste de São Paulo, em 6 meses, com apresentação final aberta ao público e intérprete de Libras.">${esc(st.rou.txt||"")}</textarea></label>
+      <div class="rouSel"><label>Área cultural<select id="rouArea"><option value="">Qualquer</option>${(d.areas||[]).map(([a])=>`<option ${st.rou.area===a?"selected":""}>${esc(a)}</option>`).join("")}</select></label>
+      <label>UF<select id="rouUf"><option value="">Qualquer</option>${Object.values(UFS).map(u=>`<option ${st.rou.uf===u?"selected":""}>${u}</option>`).join("")}</select></label>
+      <button type="button" class="btn" id="rouIr">Comparar</button></div><p class="rouMsg" id="rouMsg" role="status"></p></div>${rouCmpHtml(st.rou.cmp)}`;
+  } else if(st.rou.tab==="inc"){
+    const q=nrm(st.rou.q), I=(d.inc||[]).filter(r=>(!st.rou.tipo||r[1]===st.rou.tipo)&&(!q||nrm(r[0]).includes(q)));
+    const max=Math.max(1,...I.slice(0,1).map(r=>r[3]));
+    h+=`<div class="calK"><button type="button" aria-pressed="false" disabled><b>${d.nInc.toLocaleString("pt-BR")}</b><span>incentivadores no arquivo</span></button><button type="button" aria-pressed="false" disabled><b>${fmtBRL(d.somaInc)}</b><span>incentivados (soma do arquivo)</span></button><button type="button" data-rout="Empresa" aria-pressed="${st.rou.tipo==="Empresa"}"><b>${d.nPJ.toLocaleString("pt-BR")}</b><span>empresas</span></button><button type="button" data-rout="Pessoa física" aria-pressed="${st.rou.tipo==="Pessoa física"}"><b>${(d.nInc-d.nPJ).toLocaleString("pt-BR")}</b><span>pessoas físicas</span></button></div>
+      <div class="finF"><input id="rouQ" type="search" placeholder="Buscar incentivador (ex.: Votorantim, banco, energia)" value="${esc(st.rou.q)}" aria-label="Buscar incentivador"></div>
+      <ol class="rouInc">${I.slice(0,st.rou.lim).map(r=>`<li><span class="n">${esc(r[0])}<small>${esc(r[1])}${r[1]==="Empresa"&&r[2]?" · "+esc(r[2]):""}</small></span><span class="b"><i style="width:${Math.max(1,r[3]/max*100)}%"></i></span><b>${fmtBRL(r[3])}</b></li>`).join("")}</ol>
+      ${I.length>st.rou.lim?`<button type="button" class="opMais" id="rouMais">Mostrar mais (${I.length-st.rou.lim})</button>`:""}
+      <p class="calNota">Valores totais incentivados pela Lei Rouanet segundo o arquivo do SALICNet${d.importado?` importado em ${esc(d.importado)}`:""}. CPF de pessoa física fica mascarado. Empresa que já incentiva tem verba e processo: é a lista mais quente para prospectar, cruzando com a área do projeto e a região onde a empresa atua.</p>`;
+  } else {
+    h+=`<div class="rouComo"><h4>Como captar pela Lei Rouanet</h4><ol>
+      <li><b>Projeto aprovado e autorizado a captar.</b> Sem a publicação da autorização no Diário Oficial, não há o que oferecer ao incentivador. Acompanhe no SALIC.</li>
+      <li><b>Quem pode deduzir.</b> Empresa tributada pelo <b>lucro real</b> (até 4% do imposto de renda devido) e pessoa física que faz a declaração completa (até 6%). Empresa do lucro presumido ou do Simples não deduz.</li>
+      <li><b>Onde procurar.</b> Use a aba “Quem incentiva”: quem já incentivou tem verba e caminho interno. Priorize empresas da região do projeto e de setores ligados ao público.</li>
+      <li><b>Quando.</b> A decisão costuma sair no segundo semestre, com base na estimativa do imposto do ano. Chegue entre março e agosto com o projeto pronto.</li>
+      <li><b>Com quem falar.</b> Sustentabilidade/ESG, marketing ou comunicação; o tributário confirma o limite. Leve contrapartidas claras (marca, ingressos, ações para colaboradores, relatório).</li>
+      <li><b>Pessoa física.</b> Campanha com conselheiros, associados e rede: valores menores, mas somam. O recibo de mecenato sai pelo SALIC.</li></ol>
+      <p class="calNota">Regras e percentuais vigentes conforme a Lei 8.313/1991 e normas do MinC: confira sempre a instrução normativa em vigor antes de orientar o cliente.</p></div>`;
+  }
+  B.innerHTML=h;
+  const qi=$("rouQ"); if(qi) qi.addEventListener("input",()=>{st.rou.q=qi.value;st.rou.lim=100;clearTimeout(st.rou.tq);st.rou.tq=setTimeout(()=>{renderRou();const n=$("rouQ");if(n){n.focus();n.setSelectionRange(n.value.length,n.value.length)}},250)});
+}
+async function rouComparar(){
+  const txt=$("rouTxt").value.trim(); st.rou.txt=txt; st.rou.area=$("rouArea").value; st.rou.uf=$("rouUf").value;
+  if(txt.length<80){$("rouMsg").textContent="Cole o resumo completo (pelo menos umas 3 ou 4 frases).";return}
+  $("rouMsg").textContent="Comparando com a base…"; $("rouIr").disabled=true; progIni("Comparando com os projetos da Rouanet");
+  try{ st.rou.cmp=await postLeitura({acao:"rouanetComparar",texto:txt.slice(0,6000),area:st.rou.area,uf:st.rou.uf}); renderRou(); const r=$("rouRes"); if(r) r.scrollIntoView({behavior:"smooth",block:"start"}) }
+  catch(e){ const m=$("rouMsg"); if(m) m.textContent=e.message; const b=$("rouIr"); if(b) b.disabled=false }
+  finally{ progFim() }
+}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-routab]"); if(t){if($("rouTxt"))st.rou.txt=$("rouTxt").value;st.rou.tab=t.dataset.routab;renderRou();return}
+  const k=e.target.closest("[data-rout]"); if(k){st.rou.tipo=st.rou.tipo===k.dataset.rout?"":k.dataset.rout;st.rou.lim=100;renderRou();return}
+  if(e.target.closest("#rouMais")){st.rou.lim+=100;renderRou();return}
+  if(e.target.closest("#rouIr")){rouComparar();return}
+});
 </script>
 </body>
 </html>
