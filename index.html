@@ -1297,6 +1297,7 @@ body.modoCli #sb [data-view="sem"],body.modoCli #sb [data-view="qq"],body.modoCl
   </section>
 
   <div class="row" style="margin-bottom:0">
+    <select id="turno" aria-label="Turno"><option value="1">1º turno · 04/10</option><option value="2">2º turno · 25/10</option></select>
     <select id="cargo" aria-label="Cargo">
       <option value="1">Presidente</option>
       <option value="6" selected>Deputado federal</option>
@@ -1433,7 +1434,9 @@ const CORES={PL:"#21409A",PT:"#C8102E",UNIAO:"#0E86C4",PP:"#6C8BD8",PSD:"#E8A317
 const EXTRA=["#7D8CA3","#A07E5B","#5F8D4E","#B07BAC","#4C7A8F","#C2A15A","#8D6A9F","#5A7D7C"];
 function cor(p){const k=norm(p).toUpperCase().replace(/[^A-Z0-9]/g,"");if(CORES[k])return CORES[k];let h=0;for(const ch of k)h=(h*31+ch.charCodeAt(0))>>>0;return EXTRA[h%EXTRA.length]}
 
-const st={view:"br",uf:"mg",cargo:"6",sim:false,cache:{},reg:{},muns:{},munOk:false,mun:null,cityTab:"6",scan:{},fp:null,limite:50,count:REFRESH_BR,token:0,dlgK:null};
+// v15.0.1: 2º turno (códigos conferidos no TSE em 25/10/2026: 6258 presidente, 6260 governador; governador só nestes estados)
+const UFS2=["ac","am","df","es","rn","to"];
+const st={view:"br",uf:"mg",cargo:"6",turno:Date.now()>=new Date(2026,9,25).getTime()&&Date.now()<new Date(2027,0,1).getTime()?"2":"1",sim:false,cache:{},reg:{},muns:{},munOk:false,mun:null,cityTab:"6",scan:{},fp:null,limite:50,count:REFRESH_BR,token:0,dlgK:null};
 const $=id=>document.getElementById(id);
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 function norm(s){return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim()}
@@ -1448,7 +1451,8 @@ const tc=s=>String(s||"").toLowerCase().split(" ").map((w,i)=>/^d['’]/.test(w)
 const reduz=()=>matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // ---- endereços do TSE ----
-const eleDe=cargo=>{const fed=String(cargo)==="1";return st.sim?(fed?"21270":"21272"):(fed?"6257":"6259")};
+const t2=cargo=>st.turno==="2"&&!st.sim&&["1","3"].includes(String(cargo));
+const eleDe=cargo=>{const fed=String(cargo)==="1";return st.sim?(fed?"21270":"21272"):t2(cargo)?(fed?"6258":"6260"):(fed?"6257":"6259")};
 const e6=e=>"e"+String(e).padStart(6,"0");
 const raiz=()=>st.sim?BASE_SIM:BASE_OF;
 function urlArq(uf,cargo,mun=""){const e=eleDe(cargo);return `${raiz()}/${e}/dados/${uf}/${uf}${mun}-c${String(cargo).padStart(4,"0")}-${e6(e)}-u.json`}
@@ -1456,10 +1460,10 @@ const urlMun=cargo=>{const e=eleDe(cargo);return `${raiz()}/${e}/config/mun-${e6
 const fotoUrl=(uf,sq,ele,alt)=>`${raiz()}/${ele}/fotos/${alt?"br":uf}/${sq}.jpeg`;
 const cargoDe=uf=>(uf==="df"&&st.cargo==="7")?"8":st.cargo;
 const cEst=uf=>uf==="df"?"8":"7";
-const ck=(uf,cargo,mun="")=>`${st.sim?1:0}-${uf}${mun}-${cargo}`;
+const ck=(uf,cargo,mun="")=>`${st.sim?1:0}${t2(cargo)?"t2":""}-${uf}${mun}-${cargo}`;
 const chave=uf=>ck(uf,cargoDe(uf));
 const nomeUF=u=>u==="br"?"Brasil":UFS[u];
-function fontes(){return st.view==="br"?(st.cargo==="1"?["br"]:Object.keys(UFS)):[st.uf]}
+function fontes(){return st.view==="br"?(st.cargo==="1"?["br"]:t2(st.cargo)?UFS2.slice():Object.keys(UFS)):[st.uf]}
 
 // ---- leitura dos arquivos ----
 function parse(j,uf){
@@ -1523,16 +1527,17 @@ function fillMunList(){
 // ---- ciclo de atualização ----
 async function load(){
   const my=++st.token;
-  st.count=st.view==="br"?REFRESH_BR:REFRESH_UF;
+  st.count=t2(st.cargo)?60:st.view==="br"?REFRESH_BR:REFRESH_UF;      // 2º turno: lê de novo a cada minuto
   $("status").innerHTML="Buscando dados…";
   loadMuns();
+  if(st.view==="uf"&&t2(st.cargo)&&st.cargo==="3"&&!UFS2.includes(st.uf)){ render(); msg(`${UFS[st.uf]} não tem 2º turno para governador. O 2º turno de governador é em ${UFS2.map(u=>UFS[u]).join(", ")}.`); $("status").innerHTML="Sem 2º turno neste estado"; return }
   if(st.view==="uf"){
     await fetchUF(st.uf); if(my!==st.token) return; finish();
     if(st.mun) loadCidade();
     loadRenov(st.uf);
     return;
   }
-  const fila=st.cargo==="1"?["br",...Object.keys(UFS)]:Object.keys(UFS); const total=fila.length; let feitos=0;
+  const fila=st.cargo==="1"?["br",...Object.keys(UFS)]:t2(st.cargo)?UFS2.slice():Object.keys(UFS); const total=fila.length; let feitos=0;
   async function worker(){ while(fila.length){ const uf=fila.shift(); await fetchUF(uf); if(my!==st.token) return;
     feitos++; $("status").innerHTML=`Lendo estados… ${feitos}/${total}`; render(); } }
   await Promise.all(Array.from({length:POOL},worker));
@@ -1550,10 +1555,10 @@ function finish(){
     $("status").innerHTML="Aguardando publicação";return;
   }
   const presBloq=st.cargo==="1"&&ok.some(e=>e.data.dv==="n");
-  msg(presBloq?"O TSE só libera os votos para presidente às 19h de Brasília (17h no Acre). Até lá, os números vêm zerados.":
+  msg(presBloq?"O TSE só libera os votos para presidente depois que as urnas fecham em todo o país (17h de Brasília). Até lá, os números vêm zerados.":
     (st.sim?"Você está vendo dados de teste do simulado do TSE, não o resultado real.":""));
   const ult=ok.map(e=>e.data).sort((a,b)=>(b.dt+b.ht).localeCompare(a.dt+a.ht))[0];
-  $("status").innerHTML=`Totalização TSE: <b>${esc(ult.dt)} ${esc(ult.ht)}</b>${st.view==="br"&&st.cargo!=="1"?` · ${ok.length}/27 UFs`:""}<br>Lido às ${new Date().toLocaleTimeString("pt-BR")} · próxima em <span id="cd">${st.count}</span>s`;
+  $("status").innerHTML=`Totalização TSE: <b>${esc(ult.dt)} ${esc(ult.ht)}</b>${st.view==="br"&&st.cargo!=="1"?` · ${ok.length}/${fontes().length} UFs`:""}${t2(st.cargo)?" · 2º turno":""}<br>Lido às ${new Date().toLocaleTimeString("pt-BR")} · próxima em <span id="cd">${st.count}</span>s`;
 }
 
 // ---- utilidades de exibição ----
@@ -3989,6 +3994,12 @@ paint();
 $("watch").value=store.get("otm-watch")||"";
 $("watch").oninput=()=>{store.set("otm-watch",$("watch").value);render()};
 $("cargo").onchange=e=>{st.fp=null;st.cargo=e.target.value;st.limite=50;render();load()};
+function ajustaTurno(){const dois=st.turno==="2";$("turno").value=st.turno;
+  [...$("cargo").options].forEach(o=>{o.disabled=dois&&!["1","3"].includes(o.value)});
+  if(dois&&!["1","3"].includes(st.cargo)){st.cargo="1";$("cargo").value="1"}
+  if(dois&&st.sim){st.sim=false;$("sim").checked=false} $("sim").disabled=dois; $("sim").title=dois?"O simulado do TSE é só do 1º turno":""}
+$("turno").onchange=e=>{st.turno=e.target.value;st.fp=null;st.limite=50;ajustaTurno();render();load()};
+ajustaTurno();
 $("sim").onchange=e=>{st.sim=e.target.checked;st.munOk=false;st.muns={};st.mun=null;st.scan={};renderCidade();fillMunList();render();load()};
 ["busca","soEleitos","soBase"].forEach(id=>$(id).addEventListener("input",()=>{st.limite=50;render()}));
 $("more").onclick=()=>{st.limite+=100;render()};
