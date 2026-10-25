@@ -902,12 +902,60 @@ body .chips button,body .chip{border-radius:999px!important}
 .sbPortal,.tbPortal{display:none}
 body.modoCli .sbPortal{display:block;width:100%;text-align:left;font:inherit;font-size:15px;font-weight:800;background:var(--accent)!important;color:#fff!important;border:0!important;border-radius:14px!important;padding:11px 14px!important;margin:14px 0 6px!important;cursor:pointer;box-shadow:0 6px 18px rgba(227,38,46,.35)}
 body.modoCli .sbLogo::after{content:"Portal do Cliente"}
-body.modoCli .tbPortal{display:inline-flex;align-items:center;gap:4px;font:inherit;font-size:13px;font-weight:800;border:0;border-radius:99px;padding:7px 12px;background:var(--accent);color:#fff;cursor:pointer;margin-left:auto;white-space:nowrap}
+body.modoCli .tbPortal{flex:0 0 auto!important;width:auto!important;display:inline-flex;align-items:center;gap:4px;font:inherit;font-size:13px;font-weight:800;border:0;border-radius:99px;padding:7px 12px;background:var(--accent);color:#fff;cursor:pointer;margin-left:auto;white-space:nowrap}
 body.modoCli #sb [data-view="ini"],body.modoCli #sb [data-view="cli"],body.modoCli #sb [data-view="con"],body.modoCli #sb [data-view="usr"],body.modoCli #sb [data-optab="cl"],
 body.modoCli #rgCli,body.modoCli #hsCard,body.modoCli #iniCard,body.modoCli #cliCard,body.modoCli #motorCard,body.modoCli #usrCard,body.modoCli .mode,body.modoCli #opCli,
 body.modoCli [data-opk="cl"],body.modoCli #opTabs [data-tab="cl"],body.modoCli [data-oficio],body.modoCli [data-mala],body.modoCli [data-boletim],body.modoCli [data-texto],
 body.modoCli [data-caminho],body.modoCli [data-plano],body.modoCli [data-ptl],body.modoCli [data-ofcli],body.modoCli [data-ofsen]{display:none!important}
 body:not(.ehAdmin) .soAdmin{display:none!important}
+/* calendário de emendas (v14.8) */
+.calK{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
+@media (min-width:760px){.calK{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.calK button{font:inherit;text-align:left;background:var(--tint);border:1px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;color:var(--ink)}
+.calK button:hover{border-color:var(--brand2)}
+.calK button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.calK button.al{background:var(--supbg);border-color:var(--insl)}
+.calK b{display:block;font-size:24px;font-variant-numeric:tabular-nums}
+.calK span{font-size:12px;color:var(--muted)}
+.calChips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 6px}
+.calChips button{font:inherit;font-size:12.5px;font-weight:700;border:1.5px solid var(--line);background:var(--panel);color:var(--muted);border-radius:99px;padding:5px 11px;cursor:pointer}
+.calChips button small{font-weight:800;opacity:.75}
+.calChips button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.calLimpa{font:inherit;font-size:13px;font-weight:700;color:var(--brand);background:none;border:0;padding:6px 0;cursor:pointer}
+.calH{font-size:15px;color:var(--ink);margin:16px 0 8px}
+.calH small{font-size:12px;background:var(--track);color:var(--muted);border-radius:99px;padding:1px 8px;margin-left:4px}
+.calL{list-style:none;margin:0;padding:0;display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
+.calI{border:1px solid var(--line);border-left:4px solid var(--c,var(--out));border-radius:12px;padding:11px 12px;background:var(--tint);min-width:0}
+.calI.ab{--c:var(--win)}.calI.urg{--c:var(--accent)}.calI.br{--c:var(--brand2)}.calI.enc{--c:var(--out);opacity:.75}
+.calI .t{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.calI .t b{font-size:14px;color:var(--ink);line-height:1.35}
+.calI .pz{flex:0 0 auto;font-size:11px;font-weight:800;border-radius:99px;padding:2px 8px;color:#fff;background:var(--c);white-space:nowrap}
+.calI .m{font-size:12px;color:var(--muted);margin-top:3px}
+.calI .d{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:12.5px;margin-top:6px;color:var(--ink);font-weight:600}
+.calI .d a{color:var(--brand);font-weight:700;text-decoration:none;overflow-wrap:anywhere}
+.calTl{position:relative;height:6px;border-radius:99px;background:var(--track);margin-top:8px}
+.calTl i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--c)}
+.calTl b{position:absolute;top:-3px;width:2px;height:12px;background:var(--ink);transform:translateX(-1px)}
+.calEnc{margin-top:14px}.calEnc summary{cursor:pointer;font-weight:700;color:var(--muted);font-size:14px;margin-bottom:8px}
+.calMud{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.calMud li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--tint)}
+.calMud .dt{font-size:12px;font-weight:800;color:var(--muted);white-space:nowrap}
+.calMud b{display:block;font-size:14px;color:var(--ink)}.calMud span{display:block;font-size:13px;color:var(--ink);margin:2px 0}.calMud a{font-size:12.5px;font-weight:700;color:var(--brand);text-decoration:none}
+.calNota{font-size:12px;color:var(--muted);margin:16px 0 0;line-height:1.45}
+.calVazio{background:var(--tint);border:1px dashed var(--line);border-radius:14px;padding:16px;color:var(--ink)}.calVazio p{margin:6px 0 0;font-size:14px;color:var(--muted)}
+/* janelas no portal */
+.ptlJan{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ptlJan li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:var(--tint)}
+.ptlJan b{font-size:13.5px;color:var(--ink);line-height:1.3}.ptlJan span{grid-column:1;font-size:12px;color:var(--muted)}
+.ptlJan em{grid-row:1/3;grid-column:2;font-style:normal;font-size:11px;font-weight:800;border-radius:99px;padding:3px 9px;color:#fff;background:var(--win);white-space:nowrap}
+.ptlJan em.urg{background:var(--accent)}.ptlJan em.br{background:var(--brand2)}
+/* início: o que cada área responde */
+.iniAt .at b{font-size:14.5px;line-height:1.3}
+.iniAt .at span{font-size:12px}
+/* visualizando como o cliente (pré-visualização da equipe) */
+.simBar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:1100;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;background:#E3262E;color:#fff;font-size:13.5px;font-weight:700;padding:9px 12px 9px 16px;border-radius:99px;box-shadow:0 10px 24px rgba(227,38,46,.35);max-width:calc(100vw - 24px);box-sizing:border-box}
+.simBar button{font:inherit;font-size:13px;font-weight:800;border:0;border-radius:99px;padding:6px 12px;background:#fff;color:#E3262E;cursor:pointer}
+
 </style>
 </head>
 <body>
@@ -935,22 +983,23 @@ body:not(.ehAdmin) .soAdmin{display:none!important}
   <div class="sbLogo"></div>
   <button data-meuportal class="sbPortal" type="button">‹ Meu portal</button>
   <button data-view="ini" class="sbIni">Início</button>
-  <div class="sbGrp"><p class="sbG">Captação</p>
-    <button data-view="rg">Quem procurar</button>
-    <button data-view="dos">Dossiê do parlamentar</button>
-    <button data-view="pj">Projetos aprovados</button></div>
-  <div class="sbGrp"><p class="sbG">Oportunidades</p>
-    <button data-view="op" data-optab="ab">Abertas agora</button>
-    <button data-view="op" data-optab="pv">Previstas</button>
-    <button data-view="op" data-optab="cl">Por cliente</button></div>
+  <div class="sbGrp"><p class="sbG">Emendas parlamentares</p>
+    <button data-view="rg">Quem pode mandar emenda<small>Régua por cidade e área do cliente</small></button>
+    <button data-view="dos">Raio-X do parlamentar<small>Todas as emendas de um nome</small></button>
+    <button data-view="cal">Calendário de emendas<small>Prazos de indicação e impedimentos</small></button>
+    <button data-view="pj">Projetos que já receberam emenda<small>Modelos aprovados no TransfereGov</small></button></div>
+  <div class="sbGrp"><p class="sbG">Editais e chamamentos</p>
+    <button data-view="op" data-optab="ab">Abertos agora<small>Para OSCs, em todo o Brasil</small></button>
+    <button data-view="op" data-optab="pv">Previstos<small>O que costuma abrir em breve</small></button>
+    <button data-view="op" data-optab="cl">Por cliente<small>O que serve a cada instituição</small></button></div>
   <div class="sbGrp"><p class="sbG">Eleições 2026</p>
-    <button data-view="ap">Resultado da eleição</button>
-    <button data-view="vt">Votos por cidade</button>
-    <button data-view="pt">Partidos e bancadas</button></div>
-  <div class="sbGrp"><p class="sbG">Ajustes</p>
-    <button data-view="cli">Clientes</button>
-    <button data-view="con">Motor de dados</button>
-    <button data-view="usr" class="soAdmin">Acessos</button>
+    <button data-view="ap">Resultado<small>Eleitos, votação e renovação</small></button>
+    <button data-view="vt">Votos por cidade<small>Onde cada candidato foi votado</small></button>
+    <button data-view="pt">Partidos e bancadas<small>Quem fica e quem chega em 2027</small></button></div>
+  <div class="sbGrp"><p class="sbG">Gestão</p>
+    <button data-view="cli">Clientes<small>Cadastro e portal de cada instituição</small></button>
+    <button data-view="usr" class="soAdmin">Acessos<small>Quem entra no painel e no portal</small></button>
+    <button data-view="con">Motor de dados<small>Cargas automáticas e conexão</small></button>
     <button class="sbTog" id="thm2" type="button">Modo escuro</button></div>
 </aside>
 <div class="sbVeil" id="sbVeil" hidden></div>
@@ -973,14 +1022,16 @@ body:not(.ehAdmin) .soAdmin{display:none!important}
       <div class="iniAtn" id="iniAtn"></div>
       <h3 class="iniH">Continue de onde parou</h3>
       <div class="iniCont" id="iniCont"></div>
-      <h3 class="iniH">Atalhos</h3>
+      <h3 class="iniH">O que cada área responde</h3>
       <div class="iniAt">
-        <button class="at a1" data-ir="rg"><b>Quem procurar</b><span>Régua de quem mais pode mandar emenda para cada cliente</span></button>
-        <button class="at" data-ir="vt"><b>Votos por cidade</b><span>Onde cada candidato foi votado</span></button>
-        <button class="at" data-ir="dos"><b>Dossiê do parlamentar</b><span>Tudo o que ele já indicou, com mapa</span></button>
-        <button class="at" data-ir="pj"><b>Projetos já aprovados</b><span>Compare sua ideia ou um PDF</span></button>
-        <button class="at" data-ir="op"><b>Oportunidades</b><span>Editais e chamamentos abertos, por estado e área</span></button>
-        <button class="at" data-ir="cli"><b>Novo cliente</b><span>Cole um texto ou só o CNPJ</span></button>
+        <button class="at a1" data-ir="rg"><b>Quem pode mandar emenda para a cidade do cliente?</b><span>Quem pode mandar emenda</span></button>
+        <button class="at" data-ir="cal"><b>Qual prazo de emenda está aberto agora?</b><span>Calendário de emendas</span></button>
+        <button class="at" data-ir="dos"><b>O que esse parlamentar já financiou, e onde?</b><span>Raio-X do parlamentar</span></button>
+        <button class="at" data-ir="pj"><b>Que projeto parecido já recebeu emenda?</b><span>Projetos que já receberam emenda</span></button>
+        <button class="at" data-ir="op"><b>Que editais abertos servem para OSCs?</b><span>Editais e chamamentos</span></button>
+        <button class="at" data-ir="vt"><b>Onde esse parlamentar tem voto?</b><span>Votos por cidade</span></button>
+        <button class="at" data-ir="cli"><b>Cadastrar uma instituição nova</b><span>Clientes · cole um texto ou só o CNPJ</span></button>
+        <button class="at" data-ir="cli"><b>Como o cliente vê a captação dele?</b><span>Clientes › Portal do cliente</span></button>
       </div>
     </section>
     <section class="card hero">
@@ -1051,6 +1102,7 @@ body:not(.ehAdmin) .soAdmin{display:none!important}
       <div class="opAreas" id="opAreas"></div>
       <div id="opRes"><p class="sub">Carregando oportunidades…</p></div>
     </section>
+    <section class="card" id="calCard" data-vw="cal" style="margin-bottom:14px"><div id="calBody"><p class="sub">Carregando…</p></div></section>
     <section class="card" id="pjCard" style="margin-bottom:14px">
       <h2>Banco de projetos apoiados</h2>
       <p class="lead">Descreva a ideia (ex.: "reforma de UTI pediátrica", "oficinas de circo em hospital") e veja projetos parecidos que já receberam emenda no TransfereGov, com o programa, o órgão e o contato da instituição.</p>
@@ -2172,8 +2224,8 @@ const PTL_EXPL={"Relacionamento":"Contato aberto com o gabinete","Solicitação 
 const PTL_COR=["var(--out)","var(--brand2)","var(--gold)","var(--brand)","var(--win)"];
 const PTL_TABS=[["vg","Visão geral","Resumo"],["parl","Parlamentares","Gabinetes"],["rec","Recursos","Recursos"],["op","Oportunidades","Editais"],["exp","Explorar","Explorar"]];
 const PTL_EXP=[
-  ["Captação","Quem pode apoiar a sua causa",[["rg","🎯","Quem pode apoiar","Parlamentares que mais mandam emenda para a sua cidade e a sua área"],["dos","🧾","Dossiê do parlamentar","Todas as emendas de um parlamentar: áreas, cidades e instituições"],["pj","📁","Projetos aprovados","Projetos que já receberam emenda no TransfereGov, para se inspirar"]]],
-  ["Oportunidades","Editais para OSCs no Brasil todo",[["op:ab","📣","Abertas agora","Editais, chamamentos e programas abertos a entidades sem fins lucrativos"],["op:pv","📅","Previstas","O que costuma abrir nos próximos meses"]]],
+  ["Emendas parlamentares","Quem pode apoiar e quando",[["rg","🎯","Quem pode apoiar","Parlamentares que mais mandam emenda para a sua cidade e a sua área"],["cal","📆","Calendário de emendas","Prazos de indicação, cadastro de propostas e impedimentos técnicos"],["dos","🧾","Raio-X do parlamentar","Todas as emendas de um parlamentar: áreas, cidades e instituições"],["pj","📁","Projetos aprovados","Projetos que já receberam emenda no TransfereGov, para se inspirar"]]],
+  ["Editais e chamamentos","Para OSCs no Brasil todo",[["op:ab","📣","Abertas agora","Editais, chamamentos e programas abertos a entidades sem fins lucrativos"],["op:pv","📅","Previstas","O que costuma abrir nos próximos meses"]]],
   ["Eleições 2026","Quem fica e quem chega em 2027",[["ap","🗳️","Resultado da eleição","Eleitos, votação e renovação por estado"],["vt","🗺️","Votos por cidade","Onde cada candidato foi votado, no mapa"],["pt","🏛️","Partidos e bancadas","Bancadas que ficam e as que chegam em 2027"]]]];
 let PTL={d:null,filtro:0,min:0,admin:false,tab:"vg",proxTodos:false};
 async function abrePortal(id,admin){
@@ -2183,7 +2235,7 @@ async function abrePortal(id,admin){
   catch(e){ if(e.message==="login") return; P.innerHTML=`<div class="ptlIn">${ptlTopo()}<div class="ptlAviso"><b>Não consegui abrir o portal.</b>${esc(e.message)}</div></div>` }
 }
 // volta para o portal (cliente explorando o painel)
-function voltaPortal(){ $("ptl").hidden=false; if(PTL.d&&!PTL.admin) renderPortal(); else abrePortal(null,false); fechaSb() }
+function voltaPortal(){ $("ptl").hidden=false; if(PTL.d) renderPortal(); else abrePortal(null,false); fechaSb() }
 function ptlTopo(){
   const adm=PTL.admin, d=PTL.d;
   return `<div class="ptlTop"><div class="ptlMarca"><b>Otimistas Consultoria</b> · Portal do Cliente</div><div class="ptlAcoes">
@@ -2204,7 +2256,7 @@ function ptlRosca(cont,total){
 }
 function ptlExplorarBanner(){
   return `<section class="ptlExpB"><div><span class="tag">Novo</span><h2>Explore além do seu portal</h2><p>Veja quem mais manda emenda para ${esc(PTL.d.cliente.cidade)}, os editais abertos para OSCs e o resultado das Eleições 2026.</p></div>
-    <div class="bts"><button type="button" data-ptlexp="rg">🎯 Quem pode apoiar</button><button type="button" data-ptlexp="op:ab">📣 Editais abertos</button><button type="button" data-ptlexp="ap">🗳️ Eleições 2026</button><button type="button" class="tudo" data-ptltab="exp">Ver tudo ›</button></div></section>`;
+    <div class="bts"><button type="button" data-ptlexp="rg">🎯 Quem pode apoiar</button><button type="button" data-ptlexp="cal">📆 Prazos de emendas</button><button type="button" data-ptlexp="op:ab">📣 Editais abertos</button><button type="button" data-ptlexp="ap">🗳️ Eleições 2026</button><button type="button" class="tudo" data-ptltab="exp">Ver tudo ›</button></div></section>`;
 }
 function renderPortal(){
   const d=PTL.d, P=$("ptl"); if(!d) return; const c=d.cliente, R=d.resumo, tab=PTL.tab, st0=P.scrollTop;
@@ -2233,6 +2285,8 @@ function renderPortal(){
       <div class="ptlMes"><div><b>${d.mes.oficios.length}</b><span>solicitaç${d.mes.oficios.length===1?"ão formalizada":"ões formalizadas"}</span></div><div><b>${d.mes.agendas}</b><span>agenda${d.mes.agendas===1?"":"s"} com gabinetes</span></div></div>
       ${d.mes.oficios.length?`<ul class="ptlUl">${d.mes.oficios.slice(0,5).map(n=>`<li>Ofício a ${esc(n)}</li>`).join("")}${d.mes.oficios.length>5?`<li>e mais ${d.mes.oficios.length-5}</li>`:""}</ul>`:`<p class="ptlVazio">Nenhum ofício registrado ainda neste mês.</p>`}</section>
       <section class="ptlCard"><h2>Próximos passos</h2>${prox.length?`<ul class="ptlUl">${prox.map(x=>`<li>${esc(x.texto)}${x.parlamentar||x.quando?`<small>${esc([x.parlamentar,x.quando?(x.edital?"até ":"")+x.quando:""].filter(Boolean).join(" · "))}</small>`:""}</li>`).join("")}</ul>${d.proximos.length>4?`<button type="button" class="ptlMais" data-ptlprox>${PTL.proxTodos?"Mostrar menos":`Ver todos (${d.proximos.length})`}</button>`:""}`:`<p class="ptlVazio">A Otimistas atualiza os próximos passos a cada etapa.</p>`}</section></div>`;
+    if(d.janelas&&d.janelas.length){ const hj=new Date(); hj.setHours(0,0,0,0);
+      h+=`<section class="ptlCard"><h2>Janelas de emendas</h2><p class="sub">Prazos oficiais abertos agora ou que abrem em breve. É nessas janelas que o parlamentar indica a instituição e a proposta é cadastrada.</p><ul class="ptlJan">${d.janelas.map(j=>{const x=calFase(j,hj);return `<li><b>${esc(j.etapa)}</b><span>${esc(j.tipo)} · ${j.ini?esc(j.ini)+" a ":"até "}${esc(j.fim)}</span><em class="${x.f==="breve"?"br":x.n!=null&&x.n<=7?"urg":""}">${x.f==="breve"?`abre em ${x.n} d`:x.n===0?"fecha hoje":`fecha em ${x.n} d`}</em></li>`}).join("")}</ul><button type="button" class="ptlMais" data-ptlexp="cal">Ver o calendário completo ›</button></section>` }
     h+=ptlExplorarBanner();
     if(PTL.admin&&d.acessos) h+=`<section class="ptlCard"><h2>Quem acessa este portal</h2><p class="sub">Só a equipe Otimistas vê este quadro.</p>${d.acessos.length?`<ul class="usrL">${d.acessos.map(a=>`<li><div><b>${esc(a.nome||a.email)}</b><span>${esc(a.email)} · ${esc(a.status)}${a.ultimo?` · último acesso ${esc(a.ultimo)}`:""}</span></div>
       ${EU&&EU.perfil==="admin"?`<span class="usrB">${a.status==="ativo"?`<button class="btn ghost sm" data-uop="bloquear" data-uem="${esc(a.email)}" data-unm="${esc(a.nome)}">Bloquear</button>`:`<button class="btn ghost sm" data-uop="reativar" data-uem="${esc(a.email)}" data-unm="${esc(a.nome)}">Reativar</button>`}<button class="btn ghost sm danger" data-uop="excluir" data-uem="${esc(a.email)}" data-unm="${esc(a.nome)}">Excluir</button></span>`:""}</li>`).join("")}</ul>`:`<p class="ptlVazio">Ninguém ainda. Use "Gerar convite" para liberar o acesso de uma pessoa da instituição.</p>`}</section>`;
@@ -2285,7 +2339,9 @@ function modoCliente(){
 }
 function explorar(v){
   const [view,optab]=String(v).split(":");
-  if(!PTL.admin) modoCliente();
+  modoCliente();
+  if(PTL.admin&&!$("simBar")){ document.body.classList.add("simCli"); const b=document.createElement("div"); b.id="simBar"; b.className="simBar"; b.setAttribute("role","status");
+    b.innerHTML=`<span>Você está vendo o painel como ${esc(PTL.d.cliente.nome)} vê</span><button type="button" data-simsai>Sair da visualização</button>`; document.body.appendChild(b) }
   $("ptl").hidden=true;
   if(optab) st.op.tab=optab;
   irPara(view); if(optab) marcaOpSb();
@@ -2294,6 +2350,7 @@ document.addEventListener("click",async e=>{
   const t=e.target;
   const ab=t.closest("[data-ptl]"); if(ab){abrePortal(ab.dataset.ptl,true);return}
   if(t.closest("[data-meuportal]")){voltaPortal();return}
+  if(t.closest("[data-simsai]")){location.reload();return}
   if(!t.closest("#ptl")) return;
   const tb=t.closest("[data-ptltab]"); if(tb){ptlTab(tb.dataset.ptltab);return}
   const go=t.closest("[data-ptlgo]"); if(go){PTL.filtro=0;PTL.min=Number(go.dataset.ptlmin||0);ptlTab(go.dataset.ptlgo);return}
@@ -2302,7 +2359,7 @@ document.addEventListener("click",async e=>{
   if(t.closest("[data-ptlprox]")){PTL.proxTodos=!PTL.proxTodos;renderPortal();return}
   const ex=t.closest("[data-ptlexp]"); if(ex){explorar(ex.dataset.ptlexp);return}
   const dz=t.closest("[data-ptldos]"); if(dz){const nm=dz.dataset.ptldos; explorar("dos"); abreRaioX(nm,dz.dataset.foto||"",nm,{tela:true,uf:dz.dataset.uf||"",cargo:dz.dataset.cargo||""});return}
-  if(t.closest("#ptlFecha")){$("ptl").hidden=true;PTL.conv=null;return}
+  if(t.closest("#ptlFecha")){ if(CLI_MODO){location.reload();return} $("ptl").hidden=true;PTL.conv=null;return}
   if(t.closest("#ptlTema")){trocaTema();$("thm2").textContent=$("thm").textContent;renderPortal();return}
   if(t.closest("#ptlSair")){postAcesso({acao:"sair",t:tok()}).catch(()=>{}).then(()=>{store.set("otm-tok","");store.set("otm-perfil","");location.reload()});return}
   const cv=t.closest("[data-ptlconv]"); if(cv){ if(!confirm("Gerar um código de convite? Ele vale para UMA pessoa e dá acesso só ao portal deste cliente.")) return;
@@ -2361,6 +2418,55 @@ document.addEventListener("change",e=>{ const s=e.target.closest("[data-uperf][d
   if(!confirm(`Mudar o perfil de ${nm} para "${s.options[s.selectedIndex].text}"?`)){s.value=s.dataset.uatual;return}
   usrAcao({op:"perfil",email:s.dataset.uperf,perfil:s.value},`Perfil de ${nm} atualizado.`) });
 
+
+// ======== Calendário de emendas (v14.8): janelas de indicação, impedimentos técnicos, ajustes e empenho ========
+st.cal={d:null,tipo:"",k:"",carregando:false};
+async function abreCal(forca){
+  const B=$("calBody"); if(!B) return;
+  if(!st.cal.d||forca){ if(!st.cal.d) B.innerHTML=`<p class="sub">Carregando o calendário…</p>`;
+    try{ st.cal.d=await api({acao:"calendario"}) }catch(e){ if(e.message!=="login") B.innerHTML=`<p class="empty">Não consegui ler o calendário: ${esc(e.message)}${/inválida/.test(e.message)?" (atualize o motor para a v14.8)":""}</p>`; return } }
+  renderCal();
+}
+function calFase(i,h){ const I=dBR(i.ini), F=dBR(i.fim); if(!F) return {f:"sem",n:null};
+  if(F<h) return {f:"enc",n:null}; if(I&&I>h) return {f:"breve",n:Math.round((I-h)/864e5)}; return {f:"aberta",n:Math.round((F-h)/864e5)} }
+function calItem(i,h){
+  const x=calFase(i,h), I=dBR(i.ini), F=dBR(i.fim);
+  const pill=x.f==="aberta"?(x.n===0?"fecha hoje":`fecha em ${x.n} dia${x.n===1?"":"s"}`):x.f==="breve"?(x.n===1?"abre amanhã":`abre em ${x.n} dias`):x.f==="enc"?"encerrada":"sem data";
+  const cls=x.f==="aberta"?(x.n<=7?"urg":"ab"):x.f==="breve"?"br":"enc";
+  let barra=""; if(I&&F&&F>I){ const tot=F-I, p=Math.max(0,Math.min(100,(h-I)/tot*100)); barra=`<div class="calTl" aria-hidden="true"><i style="width:${x.f==="enc"?100:x.f==="breve"?0:p}%"></i>${x.f==="aberta"?`<b style="left:${p}%"></b>`:""}</div>` }
+  return `<li class="calI ${cls}"><div class="t"><b>${esc(i.etapa)}</b><span class="pz">${pill}</span></div>
+    <div class="m">${esc(i.tipo)}${i.resp?` · ${esc(i.resp)}`:""}</div>
+    <div class="d"><span>${i.ini?`${esc(i.ini)} a ${esc(i.fim)}`:i.fim?`até ${esc(i.fim)}`:"abrir o comunicado"}</span><a href="${esc(i.link)}" target="_blank" rel="noopener">${esc(i.comunicado.length>60?i.comunicado.slice(0,58)+"…":i.comunicado)} ›</a></div>${barra}</li>`;
+}
+function renderCal(){
+  const B=$("calBody"), d=st.cal.d; if(!B||!d) return; const h=new Date(); h.setHours(0,0,0,0);
+  if(!d.itens.length){ B.innerHTML=`<div class="calVazio"><b>O calendário ainda está vazio.</b><p>${EU&&EU.perfil!=="cliente"&&!CLI_MODO?"No Apps Script, rode <code>instalarCalendarioEmendas</code> uma vez. O motor passa a ler os cronogramas oficiais todo dia às 7h e avisa por e-mail quando um prazo muda.":"A Otimistas está montando o calendário. Volte em breve."}</p></div>`; return }
+  const its=d.itens.map(i=>({...i,x:calFase(i,h)})), tipos={}; its.forEach(i=>tipos[i.tipo]=(tipos[i.tipo]||0)+1);
+  let base=st.cal.tipo?its.filter(i=>i.tipo===st.cal.tipo):its;
+  const ab=base.filter(i=>i.x.f==="aberta").sort((a,b)=>a.x.n-b.x.n), br=base.filter(i=>i.x.f==="breve").sort((a,b)=>a.x.n-b.x.n), enc=base.filter(i=>i.x.f==="enc").sort((a,b)=>dBR(b.fim)-dBR(a.fim)), sem=base.filter(i=>i.x.f==="sem");
+  const f15=ab.filter(i=>i.x.n<=15), b30=br.filter(i=>i.x.n<=30), mud30=(d.mudancas||[]).filter(m=>{const x=dBR(m.data);return x&&(h-x)/864e5<=30});
+  const K=[["ab",ab.length,"janelas abertas agora"],["f15",f15.length,"fecham em até 15 dias"],["b30",b30.length,"abrem nos próximos 30 dias"],["mud",mud30.length,"mudanças nos últimos 30 dias"]];
+  const k=st.cal.k;
+  let lista="";
+  if(k==="mud") lista=`<h3 class="calH">Mudanças recentes</h3>`+((d.mudancas||[]).length?`<ul class="calMud">${d.mudancas.map(m=>`<li><span class="dt">${esc(m.data)}</span><div><b>${esc(m.comunicado)}</b><span>${esc(m.oque)}</span><a href="${esc(m.link)}" target="_blank" rel="noopener">abrir ›</a></div></li>`).join("")}</ul>`:`<p class="sub">Nenhuma mudança registrada ainda.</p>`);
+  else{
+    const sec=(t,arr,vazio)=>`<h3 class="calH">${t} <small>${arr.length}</small></h3>${arr.length?`<ul class="calL">${arr.map(i=>calItem(i,h)).join("")}</ul>`:`<p class="sub">${vazio}</p>`}`;
+    if(k==="f15") lista=sec("Fecham em até 15 dias",f15,"Nenhuma janela fecha nos próximos 15 dias.");
+    else if(k==="b30") lista=sec("Abrem nos próximos 30 dias",b30,"Nenhuma janela abre nos próximos 30 dias.");
+    else lista=sec("Abertas agora",ab,"Nenhuma janela aberta hoje.")+sec("Abrem em breve",br,"Nenhuma janela prevista.")+
+      (sem.length?`<h3 class="calH">Comunicados sem data lida <small>${sem.length}</small></h3><p class="sub" style="margin:0 0 8px">O motor não conseguiu ler as datas (geralmente estão num PDF). Abra o comunicado.</p><ul class="calL">${sem.map(i=>calItem(i,h)).join("")}</ul>`:"")+
+      (enc.length?`<details class="calEnc"><summary>Encerradas este ano (${enc.length})</summary><ul class="calL">${enc.map(i=>calItem(i,h)).join("")}</ul></details>`:"");
+  }
+  B.innerHTML=`<div class="calK">${K.map(([id,n,t])=>`<button type="button" data-calk="${id}" aria-pressed="${k===id}" class="${id==="f15"&&n?"al":""}"><b>${n}</b><span>${t}</span></button>`).join("")}</div>
+    <div class="calChips"><button type="button" data-calt="" aria-pressed="${!st.cal.tipo}">Todos os tipos</button>${Object.entries(tipos).map(([t,n])=>`<button type="button" data-calt="${esc(t)}" aria-pressed="${st.cal.tipo===t}">${esc(t)} <small>${n}</small></button>`).join("")}</div>
+    ${k?`<button type="button" class="calLimpa" data-calk="">‹ Ver o calendário inteiro</button>`:""}${lista}
+    <p class="calNota">Datas lidas automaticamente dos cronogramas oficiais do TransfereGov${d.atualizado?` (última leitura em ${esc(d.atualizado)})`:""}. Antes de orientar um cliente, confirme no comunicado. O motor confere todo dia e avisa por e-mail quando um prazo muda.</p>`;
+}
+document.addEventListener("click",e=>{
+  const k=e.target.closest("[data-calk]"); if(k){st.cal.k=st.cal.k===k.dataset.calk?"":k.dataset.calk;renderCal();return}
+  const t=e.target.closest("[data-calt]"); if(t){st.cal.tipo=t.dataset.calt;renderCal();return}
+});
+
 // ======== conexão com a planilha ========
 const API_PADRAO="https://script.google.com/macros/s/AKfycbx5na7PyvABZtqE_yafud8fc0_1yveO4pEC9eeIw4ccNPNm72CIQdDZmTTtV-y2EyUv/exec";
 const apiBase=()=>store.get("otm-api")||API_PADRAO;
@@ -2370,7 +2476,7 @@ async function api(params){const u=apiBase(); if(!u) throw new Error("sem-link")
     const j=await r.json(); if(j&&j.erro==="LOGIN"){sessaoCaiu();throw new Error("login")} if(j&&j.erro) throw new Error(j.erro); return j}
   finally{if(lab) progFim()}}
 // ---- barra de carregamento (topo): tempo estimado nas consultas; percentual real na varredura da cidade
-const PROG_LAB={regua:p=>`Calculando a régua${p.municipio?" de "+p.municipio:""}`,deputado:"Buscando as emendas do parlamentar",favorecidos:"Consultando o Portal da Transparência",
+const PROG_LAB={calendario:"Lendo o calendário de emendas",regua:p=>`Calculando a régua${p.municipio?" de "+p.municipio:""}`,deputado:"Buscando as emendas do parlamentar",favorecidos:"Consultando o Portal da Transparência",
   relac:"Lendo os cadernos parlamentares",projetos:"Buscando projetos",emendas:"Buscando emendas",autores:"Buscando parlamentares"};
 st.prog={n:0,sim:0,lab:"",t:null,varr:null};
 function progIni(lab){const P=st.prog;P.n++;P.lab=lab;if(P.n===1){P.sim=4;clearInterval(P.t);P.t=setInterval(()=>{P.sim+=(92-P.sim)*0.06;progDraw()},250)}progDraw()}
@@ -2768,7 +2874,7 @@ function renderRx(){
     <h4>Mapa de onde mandou${R.path.length?" (com o filtro acima)":""}</h4><div class="mapW" id="rxMapa"><p class="sub">Carregando o mapa…</p></div>
     ${area.length>1?`<h4>Por área</h4>${donut(area.slice(0,6),"data-rxarea")}`:""}
     ${bar("uf",8)}${bar("loc",10)}${bar("ano",6)}${bar("sub",6)}${lista}
-    ${typeof blocoRel==="function"?`<h4>Relacionamento Otimistas</h4>${blocoRel(R.nm)}`:""}
+    ${typeof blocoRel==="function"&&!CLI_MODO?`<h4>Relacionamento Otimistas</h4>${blocoRel(R.nm)}`:""}
     <h4>Votação em 2026</h4><div id="rxVotos"><p class="sub">Buscando…</p></div>`}</div>`;
   if(R.itens.length){ const ufm=(R.path.find(f=>f.t==="uf")||{}).v||ufPrincipal(its); if(ufm&&UFS[ufm.toLowerCase()]) mapaEmendas("rxMapa",ufm.toLowerCase(),its.filter(x=>(x.uf||"")===ufm)); else $("rxMapa").innerHTML=`<p class="sub">Sem cidades identificadas para o mapa.</p>`;
     rxVotos(R); }
@@ -2904,15 +3010,16 @@ function renderInicio(){
   const cont=[cli?`<button class="ct" data-ir="rg"><b>Régua · ${esc(cli.nome)}</b><span>${esc(cli.cidade)} · ${esc(cli.tema||"")}</span></button>`:"",
     up?`<button class="ct" data-rx="${esc(up)}" data-rxfoto=""><b>Emendas de ${esc(tc(up))}</b><span>Raio-X do parlamentar</span></button>`:"",
     uv?`<button class="ct" data-ir="vt"><b>Votos de ${esc(tc(uv))}</b><span>Mapa de votos por cidade</span></button>`:""].filter(Boolean);
-  $("iniCont").innerHTML=cont.length?cont.join(""):`<p class="sub">Nada recente ainda. Comece por <b>Quem procurar</b>.</p>`;
+  $("iniCont").innerHTML=cont.length?cont.join(""):`<p class="sub">Nada recente ainda. Comece por <b>Quem pode mandar emenda</b>.</p>`;
 }
 document.addEventListener("click",e=>{const b=e.target.closest("[data-ir]");if(b){if(b.dataset.ir==="cli"&&b.closest(".iniAt")){irPara("cli");formCli();return}irPara(b.dataset.ir)}});
 
 // ===== MENU LATERAL: cada item mostra só a sua área =====
 const VIEWS={ini:["capt","Início",""],
-  rg:["capt","Quem procurar","Quem mais pode mandar emenda para a cidade e a área do cliente, onde o recurso já chegou e o que a Otimistas já fez com cada gabinete."],
-  dos:["capt","Dossiê do parlamentar","Escolha por nome, por estado ou por cidade e veja a vida inteira de emendas dele: áreas, cidades, mapa, instituições e relacionamento."],
-  op:["capt","Oportunidades","Editais, chamamentos e programas abertos por estado e área."],
+  rg:["capt","Quem pode mandar emenda","Escolha o cliente (ou estado, cidade e área). A régua mostra quem mais pode mandar emenda para lá, por quê, e o que a Otimistas já fez com cada gabinete."],
+  dos:["capt","Raio-X do parlamentar","Escolha um nome (ou um estado, ou uma cidade) e veja todas as emendas dele desde 2023: áreas, cidades, mapa e instituições que receberam."],
+  cal:["capt","Calendário de emendas","Prazos oficiais do ano: indicação de beneficiários, cadastro de propostas, impedimentos técnicos, ajustes e empenho. O motor confere todo dia e avisa por e-mail quando muda."],
+  op:["capt","Editais e chamamentos","Editais, chamamentos e programas que OSCs podem disputar, por estado e área. Busca diária em ministérios, diários oficiais, notícias e curadorias."],
   pj:["capt","Projetos aprovados","Projetos que já viraram emenda no TransfereGov. Compare a sua ideia ou um PDF."],
   ap:["dados","Resultado da eleição","Eleitos, votação, mapa e renovação, por estado e cargo."],
   vt:["dados","Votos por cidade","Onde cada candidato foi votado e quem foi mais votado em cada cidade."],
@@ -2920,11 +3027,11 @@ const VIEWS={ini:["capt","Início",""],
   cli:["capt","Clientes","Instituições atendidas: dados usados na régua e no ofício."],
   con:["capt","Motor de dados","Conexão com a planilha e situação das cargas automáticas."],
   usr:["capt","Acessos","Quem entra no painel e no Portal do Cliente. Aprove pedidos, bloqueie, mude o perfil ou exclua alguém da base."]};
-const HINT_CLI={rg:"Quem mais pode mandar emenda para a sua cidade e a sua área, e para onde o recurso já foi. Troque estado, cidade ou área para comparar.",dos:"Escolha um parlamentar por nome, estado ou cidade e veja todas as emendas dele: áreas, cidades, mapa e instituições.",op:"Editais, chamamentos e programas abertos a OSCs e entidades sem fins lucrativos, no Brasil todo."};
+const HINT_CLI={cal:"Prazos oficiais das emendas parlamentares: quando os parlamentares indicam, quando a instituição cadastra a proposta e quando os impedimentos técnicos precisam ser resolvidos.",rg:"Quem mais pode mandar emenda para a sua cidade e a sua área, e para onde o recurso já foi. Troque estado, cidade ou área para comparar.",dos:"Escolha um parlamentar por nome, estado ou cidade e veja todas as emendas dele: áreas, cidades, mapa e instituições.",op:"Editais, chamamentos e programas abertos a OSCs e entidades sem fins lucrativos, no Brasil todo."};
 const VIEW_ALIAS={mapa:"rg",hs:"rg",exp:"dos",rk:"dos",bc:"pt",cx:"vt",base:"ap",ren:"ap"};
 function marcaViews(){
   const q=(sel,v)=>{const el=typeof sel==="string"?document.querySelector(sel):sel;if(el)el.dataset.vw=v};
-  q("#iniCard","ini"); const T="rg dos pj ap vt pt cli con usr"; q("#vHero",T); q(".ttl",T); q("#vHint",T); q(".rule",T);
+  q("#iniCard","ini"); const T="rg dos cal pj ap vt pt cli con usr"; q("#vHero",T); q(".ttl",T); q("#vHint",T); q(".rule",T);
   q("#pCapt .hero","rg"); q("#rgKpi","rg"); q("#mapCardRg","rg"); q("#pCapt .rgGrid","rg"); q("#rgCidCard","rg"); q("#hsCard","rg");
   q("#dosCard","dos"); q("#dosBoxCard","dos"); q("#rkCard","dos"); q("#expCard","nenhum");
   q("#bcCard","pt"); q("#pjCard","pj"); q("#cliCard","cli");
@@ -2948,10 +3055,10 @@ function irPara(v,semRolar){
   ["cliCard","conCard"].forEach(id=>{const d=$(id);if(d&&d.dataset.vw===v)d.open=true});
   document.querySelectorAll("#sb [data-view]").forEach(b=>b.setAttribute("aria-current",b.dataset.view===v?"page":"false"));
   $("tbT").textContent=VIEWS[v][1]; const tt=document.querySelector(".ttl"); if(tt) tt.textContent=VIEWS[v][1]; if($("vHint")) $("vHint").textContent=(CLI_MODO&&HINT_CLI[v])||VIEWS[v][2]||"";
-  if($("vKick")) $("vKick").textContent={rg:"Captação",dos:"Captação",pj:"Captação",ap:"Eleições 2026",vt:"Eleições 2026",pt:"Eleições 2026",cli:"Ajustes",con:"Ajustes",usr:"Ajustes"}[v]||"";
+  if($("vKick")) $("vKick").textContent={rg:"Emendas parlamentares",dos:"Emendas parlamentares",cal:"Emendas parlamentares",pj:"Emendas parlamentares",op:"Editais e chamamentos",ap:"Eleições 2026",vt:"Eleições 2026",pt:"Eleições 2026",cli:"Gestão",con:"Gestão",usr:"Gestão"}[v]||"";
   if(VIEWS[v][0]==="dados"&&!st.apOk&&v!=="vt"){st.apOk=true;load()}
   if(v==="dos"&&!rkFeito){rkFeito=true;carregaRank()}       // apuração só carrega quando for usada
-  if(v==="op") abreOp(); if(v==="ini") renderInicio(); if(v==="usr") renderUsr(); if(v==="vt") abreVt(); if(v==="dos") abreDosView(); if(v==="con") renderMotor(); if(v==="pt"&&st.bc&&!st.bc.uf) carregaBancada(st.rg.uf||"sp"); if(v==="rg"&&st.rg.mapaPend){st.rg.mapaPend=false;desenhaMapaRg()}
+  if(v==="op") abreOp(); if(v==="ini") renderInicio(); if(v==="usr") renderUsr(); if(v==="cal") abreCal(); if(v==="vt") abreVt(); if(v==="dos") abreDosView(); if(v==="con") renderMotor(); if(v==="pt"&&st.bc&&!st.bc.uf) carregaBancada(st.rg.uf||"sp"); if(v==="rg"&&st.rg.mapaPend){st.rg.mapaPend=false;desenhaMapaRg()}
   if(v==="hs"&&$("hsCard").hidden){$("vEmpty").hidden=false;$("vEmpty").textContent="Ainda não há registros dos Cadernos Parlamentares para esta instituição. Escolha um cliente na Régua de potencial."}else $("vEmpty").hidden=true;
   fechaSb(); if(!semRolar) window.scrollTo({top:0});
 }
@@ -3372,9 +3479,9 @@ const doCliente=(r,cl)=>cl&&kk(cl.nome+" "+(cl.razao||"")).includes(kk(r.cliente
 async function carregaRel(){if(st.rel)return st.rel;try{const j=await api({acao:"relac"});st.rel=j}catch(e){st.rel={itens:[],erro:1}}return st.rel}
 function relDe(nome,cl){const L=(st.rel&&st.rel.itens)||[];return L.filter(r=>mesmoParl(r.parl,nome)&&(!cl||doCliente(r,cl)))}
 const recCls=r=>{const n=norm(r||"").toUpperCase();return /POSIT/.test(n)?"rec-POS":/NEGAT/.test(n)?"rec-NEG":n?"rec-NEU":""};
-function pillRel(nome){const cl=getCli().find(x=>x.id===st.rg.cli);const r=cl&&relDe(nome,cl)[0];if(!r)return"";
+function pillRel(nome){if(CLI_MODO)return"";const cl=getCli().find(x=>x.id===st.rg.cli);const r=cl&&relDe(nome,cl)[0];if(!r)return"";
   return ` <span class="pill ${recCls(r.rec)}" title="Caderno ${esc(r.cliente)} · ${esc(r.mes)}">${r.ult||Number(r.nvis)>0?"Visitado":"No caderno"}${r.rec?" · "+esc(tc(r.rec)):""}</span>`}
-function blocoRel(nome){
+function blocoRel(nome){if(CLI_MODO)return"";
   const L=relDe(nome); if(!L.length) return st.rel&&!st.rel.erro?`<h4>Relacionamento Otimistas</h4><p class="sub">Nenhum registro nos Cadernos Parlamentares.</p>`:"";
   return `<h4>Relacionamento Otimistas</h4>`+L.map(r=>{const pend=(r.proxs||[]).filter(x=>!/conclu/i.test(x.status)).slice(0,3);const h=(r.hist||[]).slice(-3).reverse();
     return `<div class="relbox"><div class="h2"><b>${esc(r.cliente)}</b><span>${r.rec?`<span class="pill ${recCls(r.rec)}">${esc(tc(r.rec))}</span>`:""}${r.prio?` <span class="pill">Prioridade ${esc(tc(r.prio))}</span>`:""}</span></div>
@@ -3394,7 +3501,7 @@ function resumoCliente(L,cl){
   return `<b>${vis.length} gabinetes visitados</b> de ${L.length} listados no caderno (${esc(mes)}): ${pos.length} receptivos, ${neg.length} negativos. `+
     (top.length?`Mais promissores: <b>${top.map(esc).join(", ")}</b>. `:"")+(tt?`Pendências mais comuns: ${esc(tt)}.`:"");
 }
-async function renderHist(){
+async function renderHist(){ if(CLI_MODO){$("hsCard").hidden=true;return}
   const cl=getCli().find(x=>x.id===st.rg.cli), card=$("hsCard"); if(!cl){card.hidden=true;return}
   await carregaRel(); const L=((st.rel&&st.rel.itens)||[]).filter(r=>doCliente(r,cl));
   card.hidden=false; $("hsT").textContent=`O que já fizemos · ${cl.nome}`;
