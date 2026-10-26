@@ -1201,6 +1201,7 @@ body.ptlAberto .bnav{display:none}
 .evC input,.evC select{font:inherit;font-size:13px;padding:6px 9px;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--ink);min-width:0}
 .evOf{margin-top:4px}.evOf.ok{color:var(--win)!important;font-weight:700}.evOf.nao{color:var(--accent)!important}
 .evMod{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));align-items:end;background:var(--tint);border:1px solid var(--line);border-radius:14px;padding:12px}
+.evAgd{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;background:var(--watchbg);border-radius:12px;padding:10px 12px;margin:0 0 12px;font-size:13px;color:var(--ink)}
 .evRes{margin-top:10px;border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--tint)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 body.modoCli [data-envios]{display:none!important}
@@ -4554,7 +4555,7 @@ async function abreEnvios(cliId,fonte){
   const dl=$("dlg");if(!dl.open){if(dl.showModal)dl.showModal();else dl.setAttribute("open","")}
   try{ await carregaParlEnv() }catch(e){ $("dlgIn").insertAdjacentHTML("beforeend",`<p class="empty">Não consegui ler os parlamentares: ${esc(e.message)}</p>`); return }
   if(!st.qq.d){ api({acao:"quem"}).then(d=>{st.qq.d=d; if($("envCom")) renderEnvios()}).catch(()=>{}) }
-  postPlanilha({acao:"enviosDoCliente",cliente:c.nome}).then(j=>{if(st.env.cli!==c)return;const E=st.env;Object.values(j.envios||{}).forEach(v=>{const k=kParl(v.nome||"");if(!k)return;E.env[k]=v;E.marc[k]=false});E.cota=j.cota;guardaCamposEnv();renderEnvios()}).catch(()=>{});
+  postPlanilha({acao:"enviosDoCliente",cliente:c.nome}).then(j=>{if(st.env.cli!==c)return;const E=st.env;E.agd=j.agendados||null;Object.values(j.envios||{}).forEach(v=>{const k=kParl(v.nome||"");if(!k)return;E.env[k]=v;E.marc[k]=false});E.cota=j.cota;guardaCamposEnv();renderEnvios()}).catch(()=>{});
   renderEnvios(true);
 }
 function renderEnvios(primeira){
@@ -4573,6 +4574,7 @@ function renderEnvios(primeira){
   const ex=c, num=proxNumOf(c);
   $("dlgIn").innerHTML=`<button class="x" id="dlgX" aria-label="Fechar">✕</button><h3 id="dlgNome" style="margin:0 0 2px">Enviar ofícios · ${esc(c.nome)}</h3>
    <p class="sub" style="margin:0 0 12px">Um e-mail por parlamentar, com o ofício dele em PDF anexado. ${E.cota!=null?`Envios diretos que ainda cabem hoje: <b>${E.cota}</b>.`:""}</p>
+   ${E.agd&&E.agd.pendentes?`<div class="evAgd"><span><b>${E.agd.pendentes} e-mail${E.agd.pendentes>1?"s":""} agendado${E.agd.pendentes>1?"s":""}</b> deste cliente na fila (${esc(E.agd.proximo)}${E.agd.ultimo&&E.agd.ultimo!==E.agd.proximo?" a "+esc(E.agd.ultimo):""})</span><button type="button" class="btn ghost sm soAdmin" id="envCancAg">Cancelar os agendados</button></div>`:""}
    <div class="evG"><section class="evPassos">
      <h4>1. Para quem</h4>
      <div class="calChips">${F.map(([id,t])=>`<button type="button" data-evf="${id}" aria-pressed="${E.fonte===id}">${t}</button>`).join("")}</div>
@@ -4606,14 +4608,18 @@ Otimistas Consultoria`)}</textarea></label>
      <p class="sub" style="margin:0">Use {{vocativo}}, {{parlamentar}}, {{numero}}, {{razao}}, {{cidade}}, {{uf}}, {{objeto}}, {{valor}}.</p>
      <h4>4. Como sair</h4>
      <fieldset class="mlModo"><legend class="sr">Modo</legend>
-       <label><input type="radio" name="envModo" value="rascunho" checked> <b>Rascunhos no Gmail</b> para revisar e enviar (recomendado)</label>
-       <label class="soAdmin"><input type="radio" name="envModo" value="enviar"> <b>Enviar agora</b> (só administrador; o Gmail permite cerca de 100 por dia)</label></fieldset>
-     <div class="acts"><button class="btn" id="envVai" ${marcados.length?"":"disabled"}>Preparar ${marcados.length} e-mail${marcados.length===1?"":"s"}</button><button type="button" class="btn ghost" id="envPrev" ${marcados.length&&E.modoOf!=="drive"?"":"disabled"}>Ver o 1º ofício</button></div>
+       <label><input type="radio" name="envModo" value="rascunho" ${(E.saida||"rascunho")==="rascunho"?"checked":""}> <b>Rascunhos no Gmail</b> para revisar e enviar (recomendado)</label>
+       <label class="soAdmin"><input type="radio" name="envModo" value="enviar" ${E.saida==="enviar"?"checked":""}> <b>Enviar agora</b> (só administrador; o Gmail permite cerca de 100 por dia)</label>
+       <label class="soAdmin"><input type="radio" name="envModo" value="agendar" ${E.saida==="agendar"?"checked":""}> <b>Agendar o envio</b> (só administrador; saem sozinhos no dia e hora marcados, em blocos)</label></fieldset>
+     ${E.saida==="agendar"?`<div class="evMod"><label class="evLab">Começar em<input type="datetime-local" id="envQuando" value="${esc(E.quando||proxDiaUtil8())}"></label><label class="evLab">E-mails por hora<input type="number" id="envPorHora" min="1" max="60" value="${esc(E.porHora||20)}"></label>
+       <p class="sub" style="grid-column:1/-1;margin:0">${(()=>{const n=marcados.length,ph=Math.max(1,Number(E.porHora)||20),ini=new Date(E.quando||proxDiaUtil8());if(!n||isNaN(ini))return"";const fim=new Date(ini.getTime()+Math.floor((n-1)/ph)*3600e3);return `${n} e-mails: de ${ini.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})} a ${fim.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}. O motor confere a fila a cada 15 minutos; se a cota do Gmail do dia acabar, o resto sai no dia seguinte.`})()}</p></div>`:""}
+     <div class="acts"><button class="btn" id="envVai" ${marcados.length?"":"disabled"}>${E.saida==="agendar"?"Agendar":"Preparar"} ${marcados.length} e-mail${marcados.length===1?"":"s"}</button><button type="button" class="btn ghost" id="envPrev" ${marcados.length&&E.modoOf!=="drive"?"":"disabled"}>Ver o 1º ofício</button></div>
      <div id="envRes">${E.res||""}</div>
    </section></div>`;
 }
 function listaEnvSemPartido(){const p=st.env.part;st.env.part="";const L=listaEnv();st.env.part=p;return L}
-function guardaCamposEnv(){const E=st.env;[["num","envNum"],["val","envVal"],["extra","envExtra"],["as","envAs"],["tx","envTx"]].forEach(([k,id])=>{if($(id))E[k]=$(id).value});if($("envGera"))E.gera=$("envGera").checked}
+function proxDiaUtil8(){const d=new Date();d.setDate(d.getDate()+1);while(d.getDay()===0||d.getDay()===6)d.setDate(d.getDate()+1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}T08:00`}
+function guardaCamposEnv(){const E=st.env;const m=document.querySelector('[name="envModo"]:checked');if(m)E.saida=m.value;[["quando","envQuando"],["porHora","envPorHora"],["num","envNum"],["val","envVal"],["extra","envExtra"],["as","envAs"],["tx","envTx"]].forEach(([k,id])=>{if($(id))E[k]=$(id).value});if($("envGera"))E.gera=$("envGera").checked}
 function cliComValor(){const c={...st.env.cli};if(st.env.val!=null)c.valor=st.env.val;return c}
 function ofHtmlDe(p,num){const E=st.env,k=kParl(p.nome);return oficioHtml({cl:cliComValor(),trat:E.trat[k]||tratDe(p),parl:p.nome,partido:`${p.partido}/${p.uf}`,gab:"",num,extra:E.extra||""})}
 document.addEventListener("click",async e=>{
@@ -4629,11 +4635,14 @@ document.addEventListener("click",async e=>{
   if(t.id==="envPrev"){guardaCamposEnv();const L=listaEnv().filter(x=>E.marc[kParl(x.nome)]);if(!L.length)return;const w=window.open("","_blank");if(!w){alert("Permita pop-ups para ver o ofício.");return}
     w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Prévia do ofício</title><style>body{font-family:Georgia,serif;font-size:12.5px;line-height:1.5;color:#111;max-width:760px;margin:30px auto;padding:0 20px}p{text-align:justify}</style></head><body>${ofHtmlDe(L[0],String(E.num||proxNumOf(E.cli)))}</body></html>`);w.document.close();return}
   if(t.id==="envVai"){guardaCamposEnv(); await enviaLoteEnv(); return}
+  if(t.id==="envCancAg"){if(!confirm("Cancelar todos os e-mails agendados deste cliente que ainda não saíram?"))return;
+    try{const j=await postPlanilha({acao:"agendadosCancelar",cliente:E.cli.nome});E.agd=j.agendados;E.res=`<div class="evRes"><b>${j.cancelados} agendamento(s) cancelado(s).</b></div>`;renderEnvios()}catch(x){alert(x.message)} return}
 });
 document.addEventListener("change",e=>{const t=e.target; if(!t.closest||!t.closest("#dlgIn")||!st.env.cli) return; const E=st.env;
   if(t.dataset.evm!=null){E.marc[t.dataset.evm]=t.checked;guardaCamposEnv();renderEnvios();return}
   if(t.dataset.evt!=null){E.trat[t.dataset.evt]=t.value;return}
   if(t.name==="envOf"){guardaCamposEnv();E.modoOf=t.value;renderEnvios();return}
+  if(t.name==="envModo"||t.id==="envQuando"||t.id==="envPorHora"){guardaCamposEnv();renderEnvios();return}
   if(t.id==="envCom"){guardaCamposEnv();E.com=t.value;E.part="";renderEnvios();return}
   if(t.id==="envBusca"){const p=(E.todos||[]).find(x=>x.nome===t.value.trim()); if(p&&!E.escolhidos.some(x=>x.nome===p.nome)){E.escolhidos.push(p);E.marc[kParl(p.nome)]=true} E.busca="";guardaCamposEnv();renderEnvios();return}
 });
@@ -4641,7 +4650,11 @@ document.addEventListener("input",e=>{const t=e.target; if(t.dataset&&t.dataset.
 async function enviaLoteEnv(){
   const E=st.env, c=E.cli, L=listaEnv().filter(x=>E.marc[kParl(x.nome)]); if(!L.length) return;
   const modo=(document.querySelector('[name="envModo"]:checked')||{}).value||"rascunho";
-  if(modo==="enviar"&&!(EU&&EU.perfil==="admin")){alert("Envio direto é só para o administrador. Gere os rascunhos.");return}
+  if((modo==="enviar"||modo==="agendar")&&!(EU&&EU.perfil==="admin")){alert("Envio direto ou agendado é só para o administrador. Gere os rascunhos.");return}
+  const ini=new Date(E.quando||proxDiaUtil8()), ph=Math.max(1,Number(E.porHora)||20);
+  if(modo==="agendar"){ if(isNaN(ini)||ini<new Date(Date.now()-60e3)){alert("Escolha uma data e hora no futuro.");return}
+    const fim=new Date(ini.getTime()+Math.floor((L.length-1)/ph)*3600e3);
+    if(!confirm(`Agendar ${L.length} e-mail(s) em nome da Otimistas, de ${ini.toLocaleString("pt-BR")} a ${fim.toLocaleString("pt-BR")} (${ph} por hora)? Eles saem sozinhos, sem nova confirmação. Dá para cancelar aqui enquanto não saírem.`))return }
   if(modo==="enviar"&&E.cota!=null&&L.length>E.cota&&!confirm(`O Gmail ainda permite ${E.cota} envios hoje. Os ${L.length-E.cota} que passarem viram rascunho. Continuar?`))return;
   if(modo==="enviar"&&!confirm(`Enviar AGORA ${L.length} e-mail(s) em nome da Otimistas, com os ofícios anexados? Não dá para desfazer.`))return;
   const ano=new Date().getFullYear(), base=Number(String(E.num||proxNumOf(c)).replace(/\D/g,""))||1, d0=dadosCli(cliComValor()); let n=base, maior=base-1;
@@ -4651,13 +4664,14 @@ async function enviaLoteEnv(){
     else if(E.modoOf==="drive"&&!E.gera){it.buscar=of===undefined}
     else{numero=String(n).padStart(3,"0")+"/"+ano; it.html=ofHtmlDe(p,String(n).padStart(3,"0")); it.arquivo=`Oficio ${String(n).padStart(3,"0")}-${ano} ${c.nome} - ${p.nome}.pdf`.replace(/[\/\\:*?"<>|]/g,""); maior=n; n++}
     it.dados={...d0,parlamentar:p.nome,vocativo:TRAT_VOC[tr]||"Excelentíssimo(a) Senhor(a)",numero:numero||"(em anexo)"}; return it});
+  if(modo==="agendar") itens.forEach((it,i)=>{it.quando=new Date(ini.getTime()+Math.floor(i/ph)*3600e3).toISOString()});
   const res=$("envRes"), out=[]; $("envVai").disabled=true;
   for(let k=0;k<itens.length;k+=4){ res.innerHTML=`<p class="sub">Preparando ${Math.min(k+4,itens.length)} de ${itens.length}… (gera o PDF, anexa e ${modo==="enviar"?"envia":"cria o rascunho"})</p>`;
-    try{const j=await postPlanilha({acao:"envioLote",cliente:c.nome+(c.razao?" "+c.razao:""),clienteNome:c.nome,cidade:c.cidade,modo,exigeOficio:true,assunto:E.as,corpo:E.tx,itens:itens.slice(k,k+4)});out.push(...(j.resultados||[]));if(j.cota!=null)E.cota=j.cota}
+    try{const j=await postPlanilha({acao:"envioLote",cliente:c.nome+(c.razao?" "+c.razao:""),clienteNome:c.nome,cidade:c.cidade,modo,exigeOficio:true,assunto:E.as,corpo:E.tx,itens:itens.slice(k,k+4)});out.push(...(j.resultados||[]));if(j.cota!=null)E.cota=j.cota;if(j.agendados)E.agd=j.agendados}
     catch(x){itens.slice(k,k+4).forEach(i=>out.push({parlamentar:i.parlamentar,status:"erro: "+x.message}))} }
   if(maior>=base) store.set("otm-of-"+c.id,String(maior));
-  out.forEach(r=>{if(/^(enviado|rascunho)/.test(r.status)) E.env[kParl(r.parlamentar)]={data:new Date().toLocaleDateString("pt-BR"),modo:r.status}});
-  const ok=out.filter(r=>/^(enviado|rascunho)/.test(r.status)).length;
+  out.forEach(r=>{if(/^(enviado|rascunho|agendado)/.test(r.status)){const k=kParl(r.parlamentar);E.env[k]={data:new Date().toLocaleDateString("pt-BR"),modo:r.status.split(" para ")[0]};E.marc[k]=false}});
+  const ok=out.filter(r=>/^(enviado|rascunho|agendado)/.test(r.status)).length;
   E.res=`<div class="evRes"><b>${ok} de ${out.length} prontos</b><ul class="mlR">${out.map(r=>`<li><b>${esc(r.parlamentar)}</b> · ${esc(r.status)}${r.anexo?` · ${esc(r.anexo)}`:""}${r.link?` · <a href="${esc(r.link)}" target="_blank" rel="noopener">abrir</a>`:""}</li>`).join("")}</ul>
     <p class="sub">Tudo registrado na aba Envios. ${modo==="rascunho"?`<a href="https://mail.google.com/mail/?authuser=${encodeURIComponent(CONTA_GMAIL)}#drafts" target="_blank" rel="noopener">Abrir os rascunhos no Gmail</a>`:""}</p></div>`;
   E.num=String(maior+1).padStart(3,"0"); renderEnvios();
