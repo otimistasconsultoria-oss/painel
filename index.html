@@ -1113,6 +1113,69 @@ body.modoCli [data-envios]{display:none!important}
 .dfRa button:hover{background:var(--tint)}.dfRa span{font-size:13px;font-weight:700}.dfRa b{font-size:13px;text-align:right}.dfRa small{grid-column:1/-1;font-size:11.5px;color:var(--muted)}
 .dfRa em{display:block;height:7px;border-radius:99px;background:var(--track);overflow:hidden}.dfRa em i{display:block;height:100%;background:#2552D9}.dfRa em.pt{background:none;height:12px}.dfRa em.pt i{width:12px;height:12px;border-radius:50%}
 .dfTop{margin:0;padding-left:20px;font-size:13px;display:grid;gap:6px}.dfTop b{display:block;color:var(--ink)}.dfTop span{font-size:12px;color:var(--muted)}.dfTop em{font-style:normal;font-weight:700;color:var(--brand);display:block}
+/* ================= v16.6: experiência de uso ================= */
+/* Início: resumo da semana */
+.iniProx{font-size:15.5px!important;color:var(--ink)!important;opacity:.85}
+.iniSemH{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin:22px 0 8px}
+.iniSemH .iniH{margin:0!important}
+.iniSemF{display:flex;flex-wrap:wrap;gap:6px}
+.iniSemF button{font:inherit;font-size:12.5px;font-weight:700;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:99px;padding:6px 11px;cursor:pointer;min-height:34px;display:flex;gap:6px;align-items:center}
+.iniSemF button[aria-pressed="true"]{background:var(--brand2);border-color:var(--brand2);color:#fff}
+.iniSemF small{font-size:11px;font-weight:800;opacity:.75}
+.iniSem{display:grid;gap:8px}
+.semIt{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:86px minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:14px;padding:11px 14px;box-shadow:0 1px 2px rgba(14,27,61,.04)}
+.semIt:hover,.semIt:focus-visible{border-color:var(--brand2);border-left-color:var(--c);outline:none}
+.semIt .q{font-size:12.5px;font-weight:800;color:var(--c);line-height:1.2}
+.semIt .q small{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-top:2px}
+.semIt .x{min-width:0}
+.semIt .x em{font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.semIt .x b{display:block;font-size:14px;color:var(--ink);line-height:1.3;overflow-wrap:anywhere}
+.semIt .x span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px;overflow-wrap:anywhere}
+.semIt .go{font-size:12.5px;font-weight:800;color:var(--brand2);white-space:nowrap}
+@media (max-width:640px){.semIt{grid-template-columns:1fr;gap:4px}.semIt .go{justify-self:start}}
+.iniVazio{background:var(--panel);border:1px dashed var(--line);border-radius:14px;padding:16px;color:var(--ink)}
+.iniVazio b{display:block;font-size:15px;margin-bottom:4px}.iniVazio p{margin:0 0 10px;color:var(--muted);font-size:13.5px}
+.iniVazio .bts{display:flex;flex-wrap:wrap;gap:8px}
+.iniVazio .bts button{font:inherit;font-size:13px;font-weight:700;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;padding:8px 13px;cursor:pointer}
+.iniMais{font:inherit;font-size:13px;font-weight:800;color:var(--brand2);background:none;border:0;cursor:pointer;padding:6px 2px;justify-self:start}
+.skel{height:58px;border-radius:14px;background:linear-gradient(90deg,var(--track) 0%,var(--line) 50%,var(--track) 100%);background-size:200% 100%;animation:skel 1.2s linear infinite}
+@keyframes skel{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.skel{animation:none}}
+.iniNums button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:12px 14px;box-shadow:0 1px 2px rgba(14,27,61,.04),0 8px 22px rgba(14,27,61,.05)}
+.iniNums button:hover,.iniNums button:focus-visible{border-color:var(--brand2)}
+.iniNums button b{display:block;font-size:24px;font-weight:800;color:var(--ink);line-height:1}
+.iniNums button span{font-size:12.5px;color:var(--muted)}
+.iniNums .ic{flex:none;width:36px;height:36px;border-radius:11px;display:grid;place-items:center;font-size:17px;background:var(--watchbg)}
+/* situação do sistema: recolhida, só para quem administra */
+.iniCfg{margin:26px 0 0;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+.iniCfg>summary{cursor:pointer;list-style:none;padding:13px 16px;font-size:14px;font-weight:800;color:var(--ink);display:flex;gap:10px;align-items:center}
+.iniCfg>summary::-webkit-details-marker{display:none}
+.iniCfg>summary:before{content:"›";font-size:18px;color:var(--muted);transition:transform .15s}
+.iniCfg[open]>summary:before{transform:rotate(90deg)}
+.iniCfg>summary small{font-weight:600;color:var(--muted)}
+.iniCfg .iniHero{margin:0 12px 12px}
+/* menu: grupos que abrem e fecham + busca */
+#sb .sbBusca{margin:4px 8px 6px;position:relative}
+#sb .sbBusca input{width:100%;box-sizing:border-box;font:inherit;font-size:14px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;border-radius:12px;padding:9px 12px 9px 34px}
+#sb .sbBusca input::placeholder{color:rgba(255,255,255,.65)}
+#sb .sbBusca:before{content:"";position:absolute;left:12px;top:50%;width:11px;height:11px;border:2px solid rgba(255,255,255,.7);border-radius:50%;transform:translateY(-62%)}
+#sb .sbBusca:after{content:"";position:absolute;left:23px;top:58%;width:6px;height:2px;background:rgba(255,255,255,.7);transform:rotate(45deg)}
+#sb .sbGT{all:unset;box-sizing:border-box;cursor:pointer;display:flex;justify-content:space-between;align-items:center;width:100%;padding:4px 12px;border-radius:10px}
+#sb .sbGT:hover{background:rgba(255,255,255,.06)}
+#sb .sbGT:focus-visible{outline:2px solid #fff;outline-offset:2px}
+#sb .sbGT .sbG{margin:4px 0!important}
+#sb .sbGT i{font-style:normal;font-size:16px;color:rgba(255,255,255,.7);transition:transform .15s}
+#sb .sbGrp.aberto .sbGT i{transform:rotate(90deg)}
+#sb .sbGrp:not(.aberto):not(.busca) > button[data-view]{display:none}
+#sb .sbGrp.busca .sbGT i{visibility:hidden}
+#sb .sbGrp [data-view].sbNo,#sb .sbGrp.sbNo{display:none!important}
+#sb .sbSem{margin:8px 14px;color:rgba(255,255,255,.75);font-size:13px}
+/* glossário: termo técnico com explicação ao tocar */
+.glo{border-bottom:1.5px dotted currentColor;cursor:help;text-decoration:none}
+.glo:focus-visible{outline:2px solid var(--brand2);outline-offset:2px;border-radius:3px}
+#gloPop{position:fixed;z-index:9999;max-width:min(320px,calc(100vw - 32px));background:var(--ink);color:var(--panel);border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.45;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+#gloPop b{display:block;font-size:13.5px;margin-bottom:3px}
+#gloPop[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -1174,17 +1237,13 @@ body.modoCli [data-envios]{display:none!important}
     <section id="iniCard" class="ini">
       <p class="iniData" id="iniData"></p>
       <h1 class="iniOi" id="iniOi">Bom dia, Phelipe.</h1>
-      <p class="iniProx" id="iniProx"></p>
-      <div class="iniHero">
-        <div class="ring" id="iniRing"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="50" class="rb"/><circle cx="60" cy="60" r="50" class="rf" id="iniArc"/></svg><div><b id="iniPct">–</b><span>em ordem</span></div></div>
-        <div class="iniChk"><h2>Seu motor de captação</h2><ul id="iniChk"></ul></div>
-      </div>
+      <p class="iniProx" id="iniProx" aria-live="polite"></p>
       <div class="iniNums" id="iniNums"></div>
-      <h3 class="iniH">Atenções da captação</h3>
-      <div class="iniAtn" id="iniAtn"></div>
+      <div class="iniSemH"><h3 class="iniH">Esta semana</h3><div class="iniSemF" id="iniSemF" role="group" aria-label="Filtrar a semana"></div></div>
+      <div class="iniSem" id="iniSem"></div>
       <h3 class="iniH">Continue de onde parou</h3>
       <div class="iniCont" id="iniCont"></div>
-      <h3 class="iniH">O que cada área responde</h3>
+      <h3 class="iniH">O que você quer saber?</h3>
       <div class="iniAt">
         <button class="at a1" data-ir="rg"><b>Quem pode mandar emenda para a cidade do cliente?</b><span>Quem pode mandar emenda</span></button>
         <button class="at" data-ir="cal"><b>Qual prazo de emenda está aberto agora?</b><span>Calendário de emendas</span></button>
@@ -1197,6 +1256,11 @@ body.modoCli [data-envios]{display:none!important}
         <button class="at" data-ir="cli"><b>Cadastrar uma instituição nova</b><span>Clientes · cole um texto ou só o CNPJ</span></button>
         <button class="at" data-ir="cli"><b>Como o cliente vê a captação dele?</b><span>Clientes › Portal do cliente</span></button>
       </div>
+      <details class="iniCfg" id="iniCfg"><summary>Situação do motor de dados <small id="iniCfgS"></small></summary>
+        <div class="iniHero">
+          <div class="ring" id="iniRing"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="50" class="rb"/><circle cx="60" cy="60" r="50" class="rf" id="iniArc"/></svg><div><b id="iniPct">–</b><span>em ordem</span></div></div>
+          <div class="iniChk"><h2>Cargas automáticas</h2><ul id="iniChk"></ul></div>
+        </div></details>
     </section>
     <section class="card hero">
       <h2>Para quem vamos captar?</h2>
@@ -2507,7 +2571,7 @@ function ptlTab(t){ PTL.tab=t; if(!PTL.admin) store.set("otm-ptltab",t); renderP
 var CLI_MODO=null;
 function modoCliente(){
   if(CLI_MODO||!PTL.d) return; const c=PTL.d.cliente;
-  CLI_MODO={id:c.id,nome:c.nome,razao:c.razao||"",cidade:c.cidade,uf:String(c.uf||"").toLowerCase(),tema:c.tema||"",valor:c.valor||"",causa:c.causa||""};
+  CLI_MODO={id:c.id,nome:c.nome,razao:c.razao||"",cidade:c.cidade,uf:String(c.uf||"").toLowerCase(),tema:c.tema||"",valor:c.valor||"",causa:c.causa||""}; document.querySelectorAll("#sb .sbGrp").forEach(g=>{g.classList.add("aberto");const t=g.querySelector(".sbGT");if(t)t.setAttribute("aria-expanded","true")});
   document.body.classList.add("modoCli"); st.rel={itens:[],erro:1};
   st.rg.uf=CLI_MODO.uf; try{initRegua()}catch(e){} mostraUsuario();
 }
@@ -3276,8 +3340,9 @@ $("dosCidPop").addEventListener("mousedown",e=>{const o=e.target.closest("[data-
 function renderInicio(){
   const S=st.status||{}, h=new Date().getHours();
   $("iniOi").textContent=(h<12?"Bom dia":h<18?"Boa tarde":"Boa noite")+", "+primeiroNome()+".";
-  const dt=new Date().toLocaleDateString("pt-BR",{weekday:"long",day:"numeric",month:"long"}); $("iniData").textContent="Otimistas Consultoria · "+dt[0].toUpperCase()+dt.slice(1);
+  const dt=new Date().toLocaleDateString("pt-BR",{weekday:"long",day:"numeric",month:"long"}); $("iniData").textContent=dt[0].toUpperCase()+dt.slice(1);
   const nCli=S.clientes||getCli().length, nCid=S.cidadesClientes||nCli;
+  // situação do sistema (v16.6: recolhida e só para quem administra)
   const itens=[
     ["Clientes cadastrados",nCli>0,`${nCli} instituições`,"cli"],
     ["Cidades dos clientes varridas no Portal",S.varridas&&S.varridas>=nCid,S.varridas!=null?`${S.varridas} de ${nCid}${S.filaVarredura&&S.filaVarredura.length?" · lendo "+S.filaVarredura[0]:""}`:"aguardando o motor","mapa"],
@@ -3288,17 +3353,84 @@ function renderInicio(){
   const ok=itens.filter(x=>x[1]).length, pct=Math.round(ok/itens.length*100);
   $("iniPct").textContent=st.status?pct+"%":"–"; const C=2*Math.PI*50; $("iniArc").style.strokeDasharray=`${C*pct/100} ${C}`;
   $("iniChk").innerHTML=itens.map(([t,b,sub,v])=>`<li class="${b?"ok":""}"><button data-ir="${v}"><i aria-hidden="true">${b?"✓":""}</i><span><b>${esc(t)}</b><small>${esc(sub)}</small></span></button></li>`).join("");
-  const PX={cli:"cadastrar os clientes",mapa:"terminar a varredura das cidades dos clientes (o motor faz sozinho)",rk:"atualizar a base de emendas",vt:"terminar a cópia dos votos do TSE (o motor faz sozinho)",pj:"carregar o banco de projetos (Preparador + importarProjetos)",hs:"ler os Cadernos Parlamentares"};
-  const prox=itens.find(x=>!x[1]); $("iniProx").textContent=!st.status?"Conectando ao motor de dados…":prox?`Próximo passo: ${PX[prox[3]]}.`:"Tudo em ordem. Bom trabalho de captação.";
-  $("iniNums").innerHTML=[[nCli,"clientes"],[(S.documentosCidade||0).toLocaleString("pt-BR"),"documentos lidos nas cidades"],[(S.relacionamentos||0).toLocaleString("pt-BR"),"registros de gabinete"],[(S.votosLinhas||0).toLocaleString("pt-BR"),"candidatos com votos por cidade"]]
-    .map(([n,t],i)=>`<div><span class="ic" aria-hidden="true">${["🏥","📄","🤝","🗳️"][i]}</span><span><b>${n}</b><span>${t}</span></span></div>`).join("");
+  const cfg=$("iniCfg"); if(cfg){ cfg.hidden=!!(EU&&EU.perfil&&EU.perfil!=="admin");
+    $("iniCfgS").textContent=!st.status?"conectando…":ok===itens.length?"tudo em ordem":`${ok} de ${itens.length} em ordem`; }
   renderAtencoes(itens);
   const cli=getCli().find(x=>x.id===store.get("otm-rgcli")), up=store.get("otm-ultparl"), uv=store.get("otm-ultvt");
   const cont=[cli?`<button class="ct" data-ir="rg"><b>Régua · ${esc(cli.nome)}</b><span>${esc(cli.cidade)} · ${esc(cli.tema||"")}</span></button>`:"",
     up?`<button class="ct" data-rx="${esc(up)}" data-rxfoto=""><b>Emendas de ${esc(tc(up))}</b><span>Raio-X do parlamentar</span></button>`:"",
     uv?`<button class="ct" data-ir="vt"><b>Votos de ${esc(tc(uv))}</b><span>Mapa de votos por cidade</span></button>`:""].filter(Boolean);
-  $("iniCont").innerHTML=cont.length?cont.join(""):`<p class="sub">Nada recente ainda. Comece por <b>Quem pode mandar emenda</b>.</p>`;
+  $("iniCont").innerHTML=cont.length?cont.join(""):`<div class="iniVazio"><b>Nada aberto ainda</b><p>O que você consultar aparece aqui para retomar com um toque. Por onde quer começar?</p><div class="bts"><button data-ir="rg">Quem pode mandar emenda para um cliente</button><button data-ir="op" data-iroptab="cl">Editais que servem aos clientes</button><button data-ir="sem">Agenda do Congresso</button></div></div>`;
+  renderSemanaIni(); carregaSemanaIni();
 }
+// ---- v16.6: "Esta semana" junta prazos de emenda, editais, Congresso e pendências dos cadernos ----
+st.ini={carregando:false,t:0,f:"",mais:false,sem:null};
+async function carregaSemanaIni(forca){
+  if(st.ini.carregando||(!forca&&Date.now()-st.ini.t<10*60*1000)) return;
+  if(CLI_MODO) return; st.ini.carregando=true;
+  const tarefas=[];
+  if(!st.cal.d) tarefas.push(api({acao:"calendario"}).then(r=>{st.cal.d=r}));
+  if(st.sem.d&&st.sem.semana===0) st.ini.sem=st.sem.d; else tarefas.push(api({acao:"semana",semana:0}).then(r=>{st.ini.sem=r; if(!st.sem.d&&st.sem.semana===0) st.sem.d=r}));
+  if(!opListaIni().length) tarefas.push(api({acao:"oportunidades"}).then(r=>{const Cp=r.campos||[];r.lista=(r.lista||[]).map(a=>{const o={};Cp.forEach((k,i)=>o[k]=a[i]);return typeof ufCorrigeOp_==="function"?ufCorrigeOp_(o):o});st.op.dados=r;store.set("otm-op2",JSON.stringify(r))}));
+  await Promise.allSettled(tarefas);
+  st.ini.carregando=false; st.ini.t=Date.now();
+  if(VIEW==="ini") renderSemanaIni();
+}
+function opListaIni(){
+  let op=st.op&&st.op.dados; if(!op){try{op=JSON.parse(store.get("otm-op2")||"null")}catch(e){}}
+  if(!op||!op.lista) return [];
+  return op.lista.map(a=>Array.isArray(a)?Object.fromEntries((op.campos||[]).map((k,i)=>[k,a[i]])):a);
+}
+const SEM_TIPO={em:["Prazo de emenda","#E3262E","cal"],ed:["Edital","#B07800","op"],cg:["Congresso","#7A4DE8","sem"],pd:["Pendência","#1F6FEB","sem"]};
+function itensSemanaIni(){
+  const hoje=new Date(); hoje.setHours(0,0,0,0); const it=[], cl=getCli();
+  const dIso=s=>{const x=new Date(String(s)+"T12:00:00");if(isNaN(x))return null;x.setHours(0,0,0,0);return Math.round((x-hoje)/864e5)};
+  const pl=(n,u)=>`${n} ${u}${n===1?"":"s"}`;
+  const cal=st.cal.d&&st.cal.d.itens||[];
+  cal.forEach(i=>{const x=calFase(i,hoje);
+    if(x.f==="aberta"&&x.n<=15) it.push({k:"em",d:x.n,q:x.n===0?"Fecha hoje":x.n===1?"Fecha amanhã":`Fecha em ${pl(x.n,"dia")}`,qs:i.fim?"até "+i.fim:"",t:i.etapa,s:[i.tipo,i.resp].filter(Boolean).join(" · "),ir:"cal",go:"Ver prazo"});
+    else if(x.f==="breve"&&x.n<=7) it.push({k:"em",d:x.n,q:x.n===1?"Abre amanhã":`Abre em ${pl(x.n,"dia")}`,qs:i.ini||"",t:i.etapa,s:[i.tipo,i.resp].filter(Boolean).join(" · "),ir:"cal",go:"Preparar"});});
+  opListaIni().forEach(o=>{const dd=diasAte(o.prazo); if(dd==null||dd<0||dd>7||o.situacao==="Previsto") return;
+    const sv=cl.filter(c=>serveOp(o,c)); if(!sv.length) return;
+    it.push({k:"ed",d:dd,q:dd===0?"Fecha hoje":dd===1?"Fecha amanhã":`Fecha em ${pl(dd,"dia")}`,qs:o.prazo,t:o.titulo,s:"Serve para "+sv.slice(0,3).map(c=>c.nome).join(", ")+(sv.length>3?` e mais ${sv.length-3}`:""),ir:"op",tab:"cl",go:"Abrir edital"})});
+  const sd=st.ini.sem||(st.sem.semana===0?st.sem.d:null);
+  if(sd){
+    (sd.eventos||[]).forEach(e=>{const d=dIso(e.data); if(d==null||d<0) return; const m=e.marca&&e.marca.status;
+      if(m==="planejado") it.push({k:"cg",d,q:(d===0?"Hoje":d===1?"Amanhã":DIAS_CURTO[new Date(e.data+"T12:00:00").getDay()]+" "+e.data.slice(8,10)+"/"+e.data.slice(5,7)),qs:e.hora||"",t:`${e.sigla} · ${e.tipo}`,s:"Vocês marcaram \"Vamos\""+(e.clientes.length?" · bom para "+e.clientes.slice(0,2).map(c=>c.nome).join(", "):""),ir:"sem",go:"Ver pauta"});});
+    const sem=(sd.eventos||[]).filter(e=>{const d=dIso(e.data);return d!=null&&d>=0&&e.clientes&&e.clientes.length&&!(e.marca&&e.marca.status)});
+    if(sem.length) it.push({k:"cg",d:0.5,q:sem.length===1?"1 reunião":`${sem.length} reuniões`,qs:"sem decisão",t:`${sem.length===1?"Uma reunião interessa":sem.length+" reuniões interessam"} aos clientes e ninguém marcou "Vamos"`,s:"Decida quem vai: entra no plano da semana e no relatório",ir:"sem",go:"Decidir"});
+    const pend=(sd.pendencias||[]); let semData=0;
+    pend.forEach(p=>{const x=dBR(p.prev); if(!x){semData++;return} const d=Math.round((x-hoje)/864e5); if(d>7) return;
+      it.push({k:"pd",d,q:d<0?`Atrasada ${pl(-d,"dia")}`:d===0?"Hoje":`Em ${pl(d,"dia")}`,qs:p.prev,t:p.acao,s:`${p.cliente} · ${tc(p.parl||"")}`,ir:"sem",go:"Ver caderno"})});
+    if(semData) it.push({k:"pd",d:8,q:`${semData} sem data`,qs:"",t:`${semData===1?"Uma próxima ação":semData+" próximas ações"} dos cadernos sem data prevista`,s:"Dar data ajuda a não esquecer",ir:"sem",go:"Ver"});
+  }
+  return it.sort((a,b)=>a.d-b.d||"emedcgpd".indexOf(a.k)-"emedcgpd".indexOf(b.k));
+}
+function renderSemanaIni(){
+  const box=$("iniSem"), fil=$("iniSemF"); if(!box) return;
+  const it=itensSemanaIni(), carregando=st.ini.carregando||(!st.ini.t&&!it.length);
+  const cont={}; it.forEach(i=>cont[i.k]=(cont[i.k]||0)+1);
+  const urg=it.filter(i=>i.d<=2).length;
+  $("iniProx").textContent=carregando&&!it.length?"Juntando os prazos e a agenda da semana…":it.length?`${it.length===1?"Uma coisa pede":it.length+" coisas pedem"} atenção nos próximos 7 dias${urg?`, ${urg} até depois de amanhã`:""}.`:"Semana tranquila: nenhum prazo nos próximos 7 dias.";
+  if(st.ini.f&&!cont[st.ini.f]) st.ini.f="";
+  fil.innerHTML=it.length?`<button data-semf="" aria-pressed="${!st.ini.f}">Tudo <small>${it.length}</small></button>`+Object.keys(SEM_TIPO).filter(k=>cont[k]).map(k=>`<button data-semf="${k}" aria-pressed="${st.ini.f===k}">${SEM_TIPO[k][0]} <small>${cont[k]}</small></button>`).join(""):"";
+  if(carregando&&!it.length){box.innerHTML=`<div class="skel"></div><div class="skel"></div><div class="skel"></div>`;return}
+  const L=st.ini.f?it.filter(i=>i.k===st.ini.f):it, N=st.ini.mais?L.length:6;
+  box.innerHTML=L.length?L.slice(0,N).map(i=>{const [tp,cor]=SEM_TIPO[i.k];return `<button class="semIt" style="--c:${cor}" data-ir="${i.ir}"${i.tab?` data-iroptab="${i.tab}"`:""}><span class="q">${esc(i.q)}${i.qs?`<small>${esc(i.qs)}</small>`:""}</span><span class="x"><em>${tp}</em><b>${esc(i.t)}</b>${i.s?`<span>${esc(i.s)}</span>`:""}</span><span class="go">${esc(i.go)} ›</span></button>`}).join("")+(L.length>6?`<button class="iniMais" data-semmais>${st.ini.mais?"Mostrar menos":`Ver mais ${L.length-6}`}</button>`:"")
+    :`<div class="iniVazio"><b>Nada urgente nesta semana</b><p>Bom momento para abrir relacionamento e preparar documentos antes da próxima janela.</p><div class="bts"><button data-ir="cal">Próximas janelas de emenda</button><button data-ir="op" data-iroptab="pv">Editais previstos</button><button data-ir="rg">Quem pode mandar emenda</button></div></div>`;
+  // números do topo: o que importa para a captação
+  const opL=opListaIni(), cl=getCli(), hoje=new Date(); hoje.setHours(0,0,0,0);
+  const opCli=opL.filter(o=>o.situacao==="Aberto"&&cl.some(c=>serveOp(o,c))).length;
+  const jan=(st.cal.d&&st.cal.d.itens||[]).filter(i=>calFase(i,hoje).f==="aberta").length;
+  const sd=st.ini.sem||(st.sem.semana===0?st.sem.d:null), reun=sd?(sd.eventos||[]).filter(e=>e.clientes&&e.clientes.length).length:null;
+  const S=st.status||{}, nCli=S.clientes||cl.length;
+  $("iniNums").innerHTML=[["🏥",nCli,nCli===1?"cliente na carteira":"clientes na carteira","cli",""],["📣",opCli,"editais abertos que servem aos clientes","op","cl"],["⏳",jan,jan===1?"janela de emenda aberta":"janelas de emenda abertas","cal",""],["🏛️",reun==null?"–":reun,"reuniões no Congresso com interesse dos clientes","sem",""]]
+    .map(([ic,n,t,v,tab])=>`<button data-ir="${v}"${tab?` data-iroptab="${tab}"`:""}><span class="ic" aria-hidden="true">${ic}</span><span><b>${typeof n==="number"?n.toLocaleString("pt-BR"):n}</b><span>${t}</span></span></button>`).join("");
+}
+document.addEventListener("click",e=>{
+  const f=e.target.closest("[data-semf]"); if(f){st.ini.f=f.dataset.semf;st.ini.mais=false;renderSemanaIni();return}
+  if(e.target.closest("[data-semmais]")){st.ini.mais=!st.ini.mais;renderSemanaIni()}
+});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-ir]");if(b){if(b.dataset.ir==="cli"&&b.closest(".iniAt")){irPara("cli");formCli();return}irPara(b.dataset.ir)}});
 
 // ===== MENU LATERAL: cada item mostra só a sua área =====
@@ -3322,7 +3454,7 @@ const HINT_CLI={cal:"Prazos oficiais das emendas parlamentares: quando os parlam
 const VIEW_ALIAS={mapa:"rg",hs:"rg",exp:"dos",rk:"dos",bc:"pt",cx:"vt",base:"ap",ren:"ap"};
 function marcaViews(){
   const q=(sel,v)=>{const el=typeof sel==="string"?document.querySelector(sel):sel;if(el)el.dataset.vw=v};
-  q("#iniCard","ini"); const T="rg dos cal pj sem qq fin rou ap vt pt cli con usr"; q("#vHero",T); q(".ttl",T); q("#vHint",T); q(".rule",T);
+  q("#iniCard","ini"); const sm=$("sim")&&$("sim").closest("label"); if(sm) q(sm,"ap vt pt"); const T="rg dos cal pj sem qq fin rou ap vt pt cli con usr"; q("#vHero",T); q(".ttl",T); q("#vHint",T); q(".rule",T);
   q("#pCapt .hero","rg"); q("#rgKpi","rg"); q("#mapCardRg","rg"); q("#pCapt .rgGrid","rg"); q("#rgCidCard","rg"); q("#hsCard","rg");
   q("#dosCard","dos"); q("#dosBoxCard","dos"); q("#rkCard","dos"); q("#expCard","nenhum");
   q("#bcCard","pt"); q("#pjCard","pj"); q("#cliCard","cli");
@@ -3345,6 +3477,7 @@ function irPara(v,semRolar){
   document.querySelectorAll("[data-vw]").forEach(el=>el.classList.toggle("vOff",!el.dataset.vw.split(" ").includes(v)));
   ["cliCard","conCard"].forEach(id=>{const d=$(id);if(d&&d.dataset.vw===v)d.open=true});
   document.querySelectorAll("#sb [data-view]").forEach(b=>b.setAttribute("aria-current",b.dataset.view===v?"page":"false"));
+  if(typeof abreGrpSb==="function") abreGrpSb(v);
   $("tbT").textContent=VIEWS[v][1]; const tt=document.querySelector(".ttl"); if(tt) tt.textContent=VIEWS[v][1]; if($("vHint")) $("vHint").textContent=(CLI_MODO&&HINT_CLI[v])||VIEWS[v][2]||"";
   if($("vKick")) $("vKick").textContent={sem:"Congresso",qq:"Congresso",rg:"Emendas parlamentares",dos:"Emendas parlamentares",cal:"Emendas parlamentares",pj:"Emendas parlamentares",op:"Editais e chamamentos",fin:"Editais e chamamentos",rou:"Editais e chamamentos",ap:"Eleições 2026",vt:"Eleições 2026",pt:"Eleições 2026",cli:"Gestão",con:"Gestão",usr:"Gestão"}[v]||"";
   if(VIEWS[v][0]==="dados"&&!st.apOk&&v!=="vt"){st.apOk=true;load()}
@@ -4292,6 +4425,90 @@ document.addEventListener("click",e=>{
   if(e.target.closest("#rouIr")){rouComparar();return}
 });
 
+
+// ================= v16.6: menu em grupos que abrem e fecham, com busca =================
+const SB_CHAVES={rg:"régua potencial deputado senador cidade cliente quem manda",dos:"raio-x parlamentar deputado senador emendas histórico nome",cal:"prazo prazos calendário indicação beneficiário impedimento rp6 rp7 rp8 janela",pj:"projeto modelo transferegov aprovado proposta",
+  sem:"agenda congresso câmara senado comissão reunião audiência semana visita",qq:"quem é quem presidente líder comissão cmo contato telefone gabinete",op:"edital editais chamamento chamada pública oportunidade",fin:"financiador instituto fundação empresa privado gife",rou:"rouanet cultura incentivo salic",
+  ap:"resultado eleição eleitos apuração turno",vt:"votos cidade mapa brasília df região",pt:"partido bancada",cli:"cliente instituição cadastro portal ofício envio",usr:"acesso usuário senha aprovar",con:"motor dados planilha conexão teste"};
+function montaMenuSb(){
+  const sb=$("sb"); if(!sb||sb.dataset.v166) return; sb.dataset.v166="1";
+  const ini=sb.querySelector(".sbIni");
+  const bx=document.createElement("div"); bx.className="sbBusca"; bx.innerHTML=`<input type="search" id="sbQ" placeholder="O que você procura?" aria-label="Buscar no menu" autocomplete="off">`;
+  if(ini) ini.after(bx);
+  let aberto=[]; try{aberto=JSON.parse(localStorage.getItem("otm-sbgrp")||"[]")}catch(e){}
+  sb.querySelectorAll(".sbGrp").forEach((g,i)=>{const p=g.querySelector(".sbG"); if(!p) return;
+    const t=document.createElement("button"); t.type="button"; t.className="sbGT"; t.setAttribute("aria-expanded","false");
+    p.replaceWith(t); t.appendChild(p); t.insertAdjacentHTML("beforeend",`<i aria-hidden="true">›</i>`);
+    g.dataset.g=String(i); if(aberto.includes(String(i))||CLI_MODO) g.classList.add("aberto"); t.setAttribute("aria-expanded",g.classList.contains("aberto"));
+    t.addEventListener("click",()=>{g.classList.toggle("aberto");t.setAttribute("aria-expanded",g.classList.contains("aberto"));salvaGrpSb()});
+    g.querySelectorAll("[data-view]").forEach(b=>{b.dataset.k=nrm(b.textContent+" "+(SB_CHAVES[b.dataset.view]||""))});});
+  const sem=document.createElement("p"); sem.className="sbSem"; sem.hidden=true; sem.textContent="Nada com esse nome. Tente outra palavra."; bx.after(sem);
+  const q=$("sbQ");
+  q.addEventListener("input",()=>{const v=nrm(q.value.trim()); let n=0;
+    sb.querySelectorAll(".sbGrp").forEach(g=>{g.classList.toggle("busca",!!v); g.classList.remove("sbNo"); let m=0;
+      g.querySelectorAll("[data-view]").forEach(b=>{const ok=!v||v.split(/\s+/).every(w=>b.dataset.k.includes(w)); b.classList.toggle("sbNo",!ok); if(ok&&getComputedStyle(b).display!=="none") m++});
+      g.classList.toggle("sbNo",!!v&&!m); n+=m});
+    sem.hidden=!v||n>0});
+  q.addEventListener("keydown",e=>{if(e.key==="Enter"){const b=[...sb.querySelectorAll(".sbGrp [data-view]:not(.sbNo)")].find(x=>getComputedStyle(x).display!=="none"); if(b){b.click();q.value="";q.dispatchEvent(new Event("input"))}}
+    if(e.key==="Escape"){q.value="";q.dispatchEvent(new Event("input"))}});
+}
+function salvaGrpSb(){try{localStorage.setItem("otm-sbgrp",JSON.stringify([...document.querySelectorAll("#sb .sbGrp.aberto")].map(g=>g.dataset.g)))}catch(e){}}
+function abreGrpSb(v){const b=document.querySelector(`#sb .sbGrp [data-view="${v}"]`); const g=b&&b.closest(".sbGrp"); if(g&&!g.classList.contains("aberto")){g.classList.add("aberto");const t=g.querySelector(".sbGT");if(t)t.setAttribute("aria-expanded","true");salvaGrpSb()}}
+
+// ================= v16.6: glossário (termo técnico com explicação ao tocar) =================
+const GLOS=[
+  ["rp6",/\bRP ?6\b/,"RP 6 · emenda individual","Cada deputado e senador indica as suas. O governo é obrigado a pagar, salvo impedimento técnico."],
+  ["rp7",/\bRP ?7\b/,"RP 7 · emenda de bancada","A bancada do estado decide em conjunto. Também é obrigatória e costuma ir para projetos maiores."],
+  ["rp8",/\bRP ?8\b/,"RP 8 · emenda de comissão","Apresentada pelas comissões (Saúde, Cultura…). Não é obrigatória: depende do ministério."],
+  ["rp9",/\bRP ?9\b/,"RP 9 · emenda de relator","O \"orçamento secreto\". O STF declarou inconstitucional em dezembro de 2022."],
+  ["rp2",/\bRP ?2\b/,"RP 2 · despesa dos ministérios","Não é emenda: são os programas e editais do próprio governo."],
+  ["emp",/\b[Ee]mpenh(?:ad[oa]s?|os?)\b/,"Empenho","O governo reservou o dinheiro no orçamento para aquele destino. É um compromisso, ainda não é dinheiro na conta."],
+  ["liq",/\b[Ll]iquidad[oa]s?\b/,"Liquidado","O governo confirmou que a etapa foi cumprida e o pagamento pode sair. Ainda falta pagar."],
+  ["imp",/\b[Ii]mpedimentos? técnicos?\b/,"Impedimento técnico","Problema na proposta (documento, valor, projeto) que permite ao governo não executar a emenda. Precisa ser corrigido no prazo."],
+  ["pix",/\b[Tt]ransferências? especia(?:l|is)\b/,"Transferência especial","A \"emenda Pix\": cai direto no caixa do estado ou da prefeitura. A OSC não recebe direto, só se a prefeitura repassar."],
+  ["tgov",/\bTransfere[Gg]ov\b/,"TransfereGov","Sistema do governo federal onde se cadastram as propostas e se acompanham convênios e repasses."],
+  ["cmo",/\bCMO\b/,"CMO","Comissão Mista de Orçamento: deputados e senadores que analisam o orçamento e as emendas."],
+  ["loa",/\bLOA\b/,"LOA","Lei Orçamentária Anual: o orçamento do ano, onde as emendas entram."],
+  ["ldo",/\bLDO\b/,"LDO","Lei de Diretrizes Orçamentárias: regras para montar e executar o orçamento do ano seguinte, inclusive das emendas."],
+  ["osc",/\bOSCs?\b/,"OSC","Organização da Sociedade Civil: associação, fundação ou organização religiosa sem fins lucrativos."],
+  ["mrosc",/\bMROSC\b/,"MROSC","Marco Regulatório das OSCs (Lei 13.019/2014): regras das parcerias entre OSC e governo."],
+  ["fom",/\b[Tt]ermos? de fomento\b/,"Termo de fomento","Parceria com o governo em que a proposta parte da OSC."],
+  ["col",/\b[Tt]ermos? de colaboração\b/,"Termo de colaboração","Parceria com o governo em que a proposta parte do próprio governo."],
+  ["ff",/\b[Ff]undo a fundo\b/,"Fundo a fundo","Repasse direto de um fundo federal (por exemplo, o Fundo Nacional de Saúde) para o fundo do estado ou do município."],
+  ["cebas",/\bCEBAS\b/,"CEBAS","Certificação de entidade beneficente (saúde, educação ou assistência social). Garante imunidade de contribuições sociais."],
+  ["salic",/\bSALIC\b/,"SALIC","Sistema do Ministério da Cultura onde ficam os projetos da Lei Rouanet."],
+  ["cham",/\b[Cc]hamamentos? públicos?\b/,"Chamamento público","Seleção pública que o governo faz para escolher a OSC parceira."]];
+const GLOS_PULA=new Set("A BUTTON INPUT SELECT OPTION TEXTAREA SCRIPT STYLE CODE SVG LABEL SUMMARY TH DT H1".split(" "));
+function glossario(raiz){
+  if(!raiz) return; const tw=document.createTreeWalker(raiz,NodeFilter.SHOW_TEXT,{acceptNode:n=>{
+    if(!n.nodeValue||n.nodeValue.length<2) return NodeFilter.FILTER_REJECT; let p=n.parentElement;
+    for(let k=0;p&&k<40;k++,p=p.parentElement){ if(GLOS_PULA.has(p.tagName.toUpperCase())||p.classList.contains("glo")||p.classList.contains("calRp")||p.classList.contains("sb")||p.id==="gloPop"||p.isContentEditable) return NodeFilter.FILTER_REJECT }
+    return NodeFilter.FILTER_ACCEPT}});
+  const nos=[]; let n, lim=0; while((n=tw.nextNode())&&lim++<4000) nos.push(n);
+  nos.forEach(t=>{const esc0=t.parentElement&&(t.parentElement.closest("section,.card,details,dialog")||document.body); 
+    for(const [k,rx,tit] of GLOS){ const m=t.nodeValue.match(rx); if(!m) continue;
+      if(esc0&&esc0.querySelector(`.glo[data-glos="${k}"]`)) continue;
+      const r=t.splitText(m.index); r.splitText(m[0].length); const s=document.createElement("span"); s.className="glo"; s.tabIndex=0; s.setAttribute("role","button"); s.dataset.glos=k; s.title=tit; s.textContent=r.nodeValue; r.replaceWith(s); break }});
+}
+let gloT=null, gloPend=new Set();
+function gloObserva(){
+  const w=document.querySelector(".wrap"); if(!w||!window.MutationObserver) return;
+  new MutationObserver(ms=>{ms.forEach(m=>m.addedNodes.forEach(x=>{if(x.nodeType===1&&!x.classList.contains("glo"))gloPend.add(x)}));
+    clearTimeout(gloT); gloT=setTimeout(()=>{const L=[...gloPend]; gloPend.clear(); L.forEach(x=>{if(x.isConnected)glossario(x)})},250)}).observe(w,{childList:true,subtree:true});
+  glossario(w);
+}
+function gloMostra(el){
+  let p=$("gloPop"); if(!p){p=document.createElement("div");p.id="gloPop";p.setAttribute("role","tooltip");document.body.appendChild(p)}
+  const g=GLOS.find(x=>x[0]===el.dataset.glos); if(!g) return;
+  p.innerHTML=`<b>${esc(g[2])}</b>${esc(g[3])}`; p.hidden=false;
+  const r=el.getBoundingClientRect(), W=Math.min(320,innerWidth-32); let x=Math.max(16,Math.min(r.left,innerWidth-W-16)); p.style.left=x+"px";
+  const hP=p.offsetHeight; p.style.top=(r.bottom+8+hP>innerHeight?Math.max(8,r.top-hP-8):r.bottom+8)+"px"; p.dataset.k=el.dataset.glos; p.dataset.y=String(scrollY);
+}
+function gloFecha(){const p=$("gloPop"); if(p) p.hidden=true}
+document.addEventListener("click",e=>{const g=e.target.closest(".glo"); if(g){e.stopPropagation();const p=$("gloPop"); if(p&&!p.hidden&&p.dataset.k===g.dataset.glos) gloFecha(); else gloMostra(g); return} if(!e.target.closest("#gloPop")) gloFecha()},true);
+document.addEventListener("keydown",e=>{const g=e.target.closest&&e.target.closest(".glo"); if(g&&(e.key==="Enter"||e.key===" ")){e.preventDefault();gloMostra(g)} if(e.key==="Escape") gloFecha()});
+addEventListener("scroll",()=>{const p=$("gloPop"); if(p&&!p.hidden&&Math.abs(scrollY-(+p.dataset.y||0))>40) gloFecha()},{passive:true});
+try{montaMenuSb();gloObserva();if(typeof VIEW!=="undefined")abreGrpSb(VIEW)}catch(e){console.warn("v16.6",e)}
 
 // ================= v16.1: CENTRAL DE ENVIOS (ofícios em lote, por cliente) =================
 st.env={cli:null,fonte:"uf",com:"",part:"",lista:[],marc:{},email:{},trat:{},ofi:{},env:{},cota:null,modoOf:"modelo",busca:""};
