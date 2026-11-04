@@ -3379,7 +3379,7 @@ async function carregaSemanaIni(forca){
 function opListaIni(){
   let op=st.op&&st.op.dados; if(!op){try{op=JSON.parse(store.get("otm-op2")||"null")}catch(e){}}
   if(!op||!op.lista) return [];
-  return op.lista.map(a=>Array.isArray(a)?Object.fromEntries((op.campos||[]).map((k,i)=>[k,a[i]])):a);
+  return op.lista.map(a=>Array.isArray(a)?Object.fromEntries((op.campos||[]).map((k,i)=>[k,a[i]])):a).filter(o=>!opVelha(o));
 }
 const SEM_TIPO={em:["Prazo de emenda","#E3262E","cal"],ed:["Edital","#B07800","op"],cg:["Congresso","#7A4DE8","sem"],pd:["Pendência","#1F6FEB","sem"]};
 function itensSemanaIni(){
@@ -3389,7 +3389,7 @@ function itensSemanaIni(){
   const cal=st.cal.d&&st.cal.d.itens||[];
   cal.forEach(i=>{const x=calFase(i,hoje);
     if(x.f==="aberta"&&x.n<=15) it.push({k:"em",d:x.n,q:x.n===0?"Fecha hoje":x.n===1?"Fecha amanhã":`Fecha em ${pl(x.n,"dia")}`,qs:i.fim?"até "+i.fim:"",t:i.etapa,s:[i.tipo,i.resp].filter(Boolean).join(" · "),ir:"cal",go:"Ver prazo"});
-    else if(x.f==="breve"&&x.n<=7) it.push({k:"em",d:x.n,q:x.n===1?"Abre amanhã":`Abre em ${pl(x.n,"dia")}`,qs:i.ini||"",t:i.etapa,s:[i.tipo,i.resp].filter(Boolean).join(" · "),ir:"cal",go:"Preparar"});});
+    else if(x.f==="breve"&&x.n<=14) it.push({k:"em",d:x.n,q:x.n===1?"Abre amanhã":`Abre em ${pl(x.n,"dia")}`,qs:i.ini||"",t:i.etapa,s:[i.tipo,i.resp].filter(Boolean).join(" · "),ir:"cal",go:"Preparar"});});
   opListaIni().forEach(o=>{const dd=diasAte(o.prazo); if(dd==null||dd<0||dd>7||o.situacao==="Previsto") return;
     const sv=cl.filter(c=>serveOp(o,c)); if(!sv.length) return;
     it.push({k:"ed",d:dd,q:dd===0?"Fecha hoje":dd===1?"Fecha amanhã":`Fecha em ${pl(dd,"dia")}`,qs:o.prazo,t:o.titulo,s:"Serve para "+sv.slice(0,3).map(c=>c.nome).join(", ")+(sv.length>3?` e mais ${sv.length-3}`:""),ir:"op",tab:"cl",go:"Abrir edital"})});
@@ -3977,6 +3977,12 @@ const OP_COR={"Saúde":"#E3262E","Cultura":"#8B5CF6","Esporte":"#00A35C","Assist
 const OP_IC={"Saúde":"🩺","Cultura":"🎭","Esporte":"🏅","Assistência social":"🤝","Educação":"📚","Meio ambiente":"🌱","Ciência e inovação":"🔬","Direitos humanos":"⚖️","Trabalho e renda":"💼","Projetos sociais (várias áreas)":"🧩","Outras":"📌"};
 function marcaOpSb(){document.querySelectorAll('#sb [data-optab]').forEach(b=>b.setAttribute("aria-current",VIEW==="op"&&b.dataset.optab===st.op.tab?"page":"false"))}
 function dBR(s){const m=String(s||"").match(/(\d{2})\/(\d{2})\/(\d{4})/);return m?new Date(+m[3],m[2]-1,+m[1]):null}
+// v16.6.1: oportunidade velha não aparece, mesmo antes de o motor limpar (data no endereço do link ou ano antigo no título)
+function dataUrlOp(u){const m=String(u||"").match(/[\/_-](20\d\d)[\/_-](0[1-9]|1[0-2])(?:[\/_-](0[1-9]|[12]\d|3[01]))?(?=[\/_.-]|$)/);if(!m)return null;const y=+m[1],mo=+m[2],d=m[3]?+m[3]:new Date(y,mo,0).getDate(),x=new Date(y,mo-1,d,12);return x>new Date()?null:x}
+function anoTituloOp(t){const n=nrm(t).replace(/\bLEI(S)?( COMPLEMENTAR| FEDERAL| ESTADUAL| MUNICIPAL)?( N\S{0,3})?\s*[\d.]+\/(19|20)\d\d/g," ").replace(/\bDECRETO( N\S{0,3})?\s*[\d.]+\/(19|20)\d\d/g," ");const a=(n.match(/(?:^|[^\d])(20\d\d)(?!\d)/g)||[]).map(x=>+x.replace(/\D/g,""));return a.length?Math.max(...a):0}
+function dPubOp(o){const a=dataUrlOp(o.link),b=dBR(o.encontrado);return a&&b?(a<b?a:b):(a||b)}
+function opVelha(o){if(/^(Calend|Programa Transferegov)/.test(String(o.tipo||"")))return false;const dp=diasAte(o.prazo);if(dp!=null)return dp<0;
+  if(o.situacao==="Previsto")return false;const du=dataUrlOp(o.link);if(du&&(Date.now()-du)>40*864e5)return true;const at=anoTituloOp(o.titulo);return !!(at&&at<new Date().getFullYear())}
 function diasAte(s){const d=dBR(s);if(!d)return null;const h=new Date();h.setHours(0,0,0,0);return Math.round((d-h)/864e5)}
 function nrm(s){return String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toUpperCase()}
 const OP_AREA_RX=[["Saúde",/SAUD|HOSPIT|ONCO|CANCER|MEDIC/],["Cultura",/CULTUR|ARTE|MUSIC|TEATRO|AUDIOVIS/],["Esporte",/ESPORT|LAZER/],["Assistência social",/ASSIST|SOCIAL|CRIANC|IDOS|DEFICI|INFANC/],["Educação",/EDUC|ESCOL|ENSIN/],["Meio ambiente",/AMBIENT|SUSTENT/],["Ciência e inovação",/CIENC|PESQUIS|INOVA/],["Direitos humanos",/DIREITOS|MULHER|RACIAL/],["Trabalho e renda",/RENDA|EMPREEND|RURAL|TURISM/]];
@@ -4003,7 +4009,7 @@ function anelOp(p,cor){const r=15,c=2*Math.PI*r,v=Math.max(0,Math.min(1,p));retu
 function filtraOp(){
   const d=st.op.dados;if(!d)return [];const q=nrm($("opQ").value.trim()),uf=$("opUf").value,tp=$("opTp").value,cid=$("opCli").value,ar=$("opAr").value;
   const cli=cid?getCli().find(c=>c.id===cid):null;
-  return d.lista.filter(o=>(!ar||o.area===ar)&&(!uf||o.uf===uf)&&(!tp||(tp==="oficial"?/Página oficial/.test(o.tipo):String(o.tipo).includes(tp)))&&(!cli||serveOp(o,cli))&&(!q||nrm(o.titulo+" "+o.orgao+" "+o.municipio+" "+o.trecho+" "+o.area).includes(q)));
+  return d.lista.filter(o=>!opVelha(o)&&(!ar||o.area===ar)&&(!uf||o.uf===uf)&&(!tp||(tp==="oficial"?/Página oficial/.test(o.tipo):String(o.tipo).includes(tp)))&&(!cli||serveOp(o,cli))&&(!q||nrm(o.titulo+" "+o.orgao+" "+o.municipio+" "+o.trecho+" "+o.area).includes(q)));
 }
 function cardOp(o,cls){
   const cor=OP_COR[o.area]||OP_COR.Outras,dd=diasAte(o.prazo),sit=o.situacao,sc=sit==="Aberto"?"ab":sit==="Previsto"?"pv":"an";
@@ -4011,7 +4017,7 @@ function cardOp(o,cls){
   const pz=o.prazo?`<div class="pz ${dd!=null&&dd<=7?"q":""}">⏳ ${dd===0?"Fecha hoje":dd===1?"Fecha amanhã":dd>1?`Faltam ${dd} dias`:"Prazo"} · ${esc(o.prazo)}</div>`:(sit==="Previsto"&&o.abertura?`<div class="pz">📅 Abre em ${esc(o.abertura)}</div>`:"");
   return `<article class="opC" style="--cor:${cor}"><div class="tg"><span class="opT ${sc}"><i></i>${esc(sit==="Anunciado"?"Anunciado · confirmar prazo":sit)}</span><span class="opT">${OP_IC[o.area]||""} ${esc(o.area)}</span><span class="opT">${esc(lugar)}</span><span class="opT">${esc(String(o.tipo).replace("Programa Transferegov – ","Transferegov · "))}</span></div>
     <h4>${o.link?`<a href="${esc(o.link)}" target="_blank" rel="noopener">${esc(o.titulo)}</a>`:esc(o.titulo)}</h4>
-    <div class="m">${esc(o.orgao&&o.orgao!==o.fonte?tc(o.orgao)+" · ":"")}${esc(o.fonte||"")}${o.encontrado?" · visto em "+esc(o.encontrado):""}</div>
+    <div class="m">${esc(o.orgao&&o.orgao!==o.fonte?tc(o.orgao)+" · ":"")}${esc(o.fonte||"")}${o.encontrado?(/^Página oficial/.test(o.tipo)?" · na lista desde ":" · publicado em ")+esc(o.encontrado):""}</div>${(()=>{const p=dPubOp(o),dd2=p?Math.round((Date.now()-p)/864e5):null;return !o.prazo&&o.situacao!=="Previsto"&&dd2!=null&&dd2>20?`<div class="m" style="color:var(--loss,#C2410C)"><b>Publicado há ${dd2} dias e sem prazo confirmado.</b> Confira no edital antes de indicar ao cliente.</div>`:""})()}
     ${(()=>{const m=String(o.trecho||"").match(/^Público: ([^·]+)(?:· )?([\s\S]*)$/);return (m?`<div class="m"><b style="color:var(--win)">✓ Aberto a OSC</b> · ${esc(m[1].trim())}</div>`+(m[2]?`<div class="m">${esc(m[2])}</div>`:""):(o.trecho?`<div class="m">${esc(o.trecho)}</div>`:""))})()}${pz}
     ${cls.length?`<div class="sv">Serve para: ${cls.slice(0,4).map(c=>`<span>${esc(c.nome)}</span>`).join("")}${cls.length>4?` +${cls.length-4}`:""}</div>`:""}
     <div class="ac">${o.link?`<a href="${esc(o.link)}" target="_blank" rel="noopener">${/transferegov/.test(o.link)?"Abrir Transferegov ↗":/news\.google/.test(o.link)?"Abrir notícia ↗":"Abrir edital ↗"}</a>`:""}<button data-opcopia="${esc(o.id)}">Copiar resumo</button></div></article>`;
@@ -4021,7 +4027,7 @@ function renderOp(){
   if(st.op.tab==="cl"&&$("opCli")&&$("opCli").value){st.op.cli=$("opCli").value;store.set("otm-opcli",st.op.cli);$("opCli").value=""}const cl=getCli(),todos=filtraOp();
   const serve=o=>cl.filter(c=>serveOp(o,c));
   const ab=todos.filter(o=>o.situacao!=="Previsto"),pv=todos.filter(o=>o.situacao==="Previsto"),fecha=ab.filter(o=>{const x=diasAte(o.prazo);return x!=null&&x>=0&&x<=7}),pcli=ab.filter(o=>serve(o).length);
-  $("opSub").textContent=`${d.lista.length.toLocaleString("pt-BR")} oportunidades abertas a OSCs e entidades sem fins lucrativos${d.ultima?` · atualizado em ${d.ultima}`:""}. Busca diária às 6h; resumo no seu e-mail às segundas, 8h.`;
+  $("opSub").textContent=`${d.lista.filter(o=>!opVelha(o)).length.toLocaleString("pt-BR")} oportunidades abertas a OSCs e entidades sem fins lucrativos${d.ultima?` · atualizado em ${d.ultima}`:""}. Busca diária às 6h; resumo no seu e-mail às segundas, 8h.`;
   const T=Math.max(1,todos.length),k=[["ab","📣",ab.length,"Abertas e anunciadas","#2F7BFF",ab.length/T],["fe","⏳",fecha.length,"Fecham em 7 dias","#E3262E",fecha.length/Math.max(1,ab.length)],["pv","📅",pv.length,"Previstas","#B07800",pv.length/T],["cl","🎯",pcli.length,"Servem aos clientes","#00A35C",pcli.length/Math.max(1,ab.length)]];
   $("opK").innerHTML=k.map(([id,ic,n,l,cor,p])=>`<button data-opk="${id}" aria-pressed="${st.op.kpi===id}"><span class="ic">${ic}</span><span class="tx"><span class="n">${n.toLocaleString("pt-BR")}</span><span class="l" style="display:block">${l}</span></span>${anelOp(p,cor)}</button>`).join("");
   document.querySelectorAll("#opTabs [data-tab]").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===st.op.tab));
@@ -4030,7 +4036,7 @@ function renderOp(){
   $("opAreas").innerHTML=`<button data-oparea="" aria-pressed="${!st.op.area}">Todas<b>${base.length}</b></button>`+Object.entries(cont).sort((a,b)=>b[1]-a[1]).map(([a,n])=>`<button data-oparea="${esc(a)}" aria-pressed="${st.op.area===a}">${OP_IC[a]||""} ${esc(a)}<b>${n}</b></button>`).join("");
   $("opAreas").style.display=st.op.tab==="cl"?"none":"";
   if(st.op.area)base=base.filter(o=>o.area===st.op.area);
-  const ord=(a,b)=>{const x=diasAte(a.prazo),y=diasAte(b.prazo);return (a.situacao==="Aberto"?0:1)-(b.situacao==="Aberto"?0:1)||(x==null?999:x)-(y==null?999:y)||(serve(b).length-serve(a).length)};
+  const ord=(a,b)=>{const x=diasAte(a.prazo),y=diasAte(b.prazo);return (a.situacao==="Aberto"?0:1)-(b.situacao==="Aberto"?0:1)||(x==null?999:x)-(y==null?999:y)||((dPubOp(b)||0)-(dPubOp(a)||0))||(serve(b).length-serve(a).length)};   // v16.6.1: sem prazo, o mais recente primeiro
   if(st.op.tab==="pz"){
     const com=ab.concat(pv).filter(o=>diasAte(o.prazo)!=null&&diasAte(o.prazo)>=0&&(!st.op.area||o.area===st.op.area));
     const G=[["Esta semana",0,7,"#E3262E"],["Próximos 15 dias",8,15,"#F08C00"],["Ainda este mês",16,31,"#2F7BFF"],["Depois",32,9999,"#8A94A8"]];
