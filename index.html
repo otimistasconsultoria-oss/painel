@@ -956,7 +956,7 @@ body:not(.ehAdmin) .soAdmin{display:none!important}
 .calRp dt{font-weight:800}.calRp dt span{display:inline-block;min-width:44px;text-align:center;background:var(--brand);color:#fff;border-radius:8px;padding:2px 6px;font-size:12px}
 .calRp dd{margin:0}.calRp dd b{color:var(--ink)}.calRp .ok{color:var(--win);font-weight:700}.calRp .no{color:var(--err);font-weight:700}
 
-body.modoCli #sb [data-view="sem"],body.modoCli #sb [data-view="qq"],body.modoCli #sb .sbCong{display:none!important}
+body.modoCli #sb [data-view="sem"],body.modoCli #sb [data-view="qq"],body.modoCli #sb [data-view="gab"],body.modoCli #sb .sbCong{display:none!important}
 /* calendário de emendas (v14.8) */
 .calK{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
 @media (min-width:760px){.calK{grid-template-columns:repeat(4,minmax(0,1fr))}}
@@ -1176,6 +1176,37 @@ body.modoCli [data-envios]{display:none!important}
 #gloPop{position:fixed;z-index:9999;max-width:min(320px,calc(100vw - 32px));background:var(--ink);color:var(--panel);border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.45;box-shadow:0 12px 30px rgba(0,0,0,.25)}
 #gloPop b{display:block;font-size:13.5px;margin-bottom:3px}
 #gloPop[hidden]{display:none}
+/* v16.6.3: Gabinetes e contatos */
+.gbTop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px}
+.gbTop input,.gbTop select{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:12px;padding:9px 12px;min-height:42px}
+.gbTop input{flex:1 1 220px;min-width:0}
+.gbTop .btn{min-height:42px}
+.gbAviso{background:var(--watchbg);border-radius:12px;padding:10px 14px;font-size:13px;color:var(--ink);margin:0 0 12px}
+.gbMud{border:1px solid var(--line);border-radius:14px;margin:0 0 14px;background:var(--panel)}
+.gbMud>summary{cursor:pointer;padding:12px 14px;font-weight:800;font-size:14px;color:var(--ink)}
+.gbMud>summary small{font-weight:600;color:var(--muted)}
+.gbMud ul{list-style:none;margin:0;padding:0 14px 12px;display:grid;gap:8px}
+.gbMud li{display:grid;grid-template-columns:78px minmax(0,1fr);gap:10px;font-size:13px;border-top:1px solid var(--track);padding-top:8px}
+.gbMud li .dt{color:var(--muted);font-weight:700}
+.gbMud li b{color:var(--ink)}.gbMud li span{display:block;color:var(--muted);overflow-wrap:anywhere}
+.gbMud li .tp{display:inline-block;font-size:11px;font-weight:800;border-radius:99px;padding:1px 8px;margin-right:6px;background:var(--track);color:var(--ink)}
+.gbMud li .tp.in{background:#DCFCE7;color:#166534}.gbMud li .tp.out{background:#FEE2E2;color:#991B1B}
+.gbGrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.gbC{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.gbH{display:flex;gap:10px;align-items:center;min-width:0}
+.gbH .ph{flex:none}
+.gbH b{display:block;font-size:15px;color:var(--ink);overflow-wrap:anywhere}
+.gbH small{display:block;font-size:12.5px;color:var(--muted)}
+.gbSup{display:inline-block;font-size:11px;font-weight:800;background:#FEF3C7;color:#92400E;border-radius:99px;padding:2px 8px;margin-top:3px}
+.gbL{font-size:13px;color:var(--ink);display:grid;gap:4px}
+.gbL div{display:grid;grid-template-columns:62px minmax(0,1fr);gap:8px}
+.gbL div>span:first-child{color:var(--muted);font-size:12px;padding-top:1px}
+.gbL a{color:var(--brand2);overflow-wrap:anywhere}
+.gbAs{font-size:12.5px;color:var(--ink);background:var(--tint,var(--bg));border-radius:10px;padding:8px 10px}
+.gbAs b{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.gbAc{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.gbAc button,.gbAc a{font:inherit;font-size:12.5px;font-weight:700;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;padding:6px 11px;cursor:pointer;text-decoration:none}
+.gbMais{display:block;margin:14px auto 0}
 </style>
 </head>
 <body>
@@ -1210,7 +1241,8 @@ body.modoCli [data-envios]{display:none!important}
     <button data-view="pj">Projetos que já receberam emenda<small>Modelos aprovados no TransfereGov</small></button></div>
   <div class="sbGrp sbCong"><p class="sbG">Congresso</p>
     <button data-view="sem">Semana no Congresso<small>Agenda, para qual cliente, quem vai</small></button>
-    <button data-view="qq">Quem é quem<small>Presidentes, líderes e comissões, com contato</small></button></div>
+    <button data-view="qq">Quem é quem<small>Presidentes, líderes e comissões, com contato</small></button>
+    <button data-view="gab">Gabinetes e contatos<small>Deputados e senadores em exercício, suplentes e mudanças</small></button></div>
   <div class="sbGrp"><p class="sbG">Editais e chamamentos</p>
     <button data-view="op" data-optab="ab">Abertos agora<small>Para OSCs, em todo o Brasil</small></button>
     <button data-view="op" data-optab="pv">Previstos<small>O que costuma abrir em breve</small></button>
@@ -1334,6 +1366,7 @@ body.modoCli [data-envios]{display:none!important}
     <section class="card" id="rouCard" data-vw="rou" style="margin-bottom:14px"><div id="rouBody"><p class="sub">Carregando…</p></div></section>
     <section class="card" id="semCard" data-vw="sem" style="margin-bottom:14px"><div id="semBody"><p class="sub">Carregando…</p></div></section>
     <section class="card" id="qqCard" data-vw="qq" style="margin-bottom:14px"><div id="qqBody"><p class="sub">Carregando…</p></div></section>
+    <section class="card" id="gabCard" data-vw="gab" style="margin-bottom:14px"><div id="gabBody"><p class="sub">Carregando…</p></div></section>
     <section class="card" id="calCard" data-vw="cal" style="margin-bottom:14px"><div id="calBody"><p class="sub">Carregando…</p></div></section>
     <section class="card" id="pjCard" style="margin-bottom:14px">
       <h2>Banco de projetos apoiados</h2>
@@ -3449,12 +3482,13 @@ const VIEWS={ini:["capt","Início",""],
   pt:["dados","Partidos e bancadas","Toque num partido para ver os eleitos dele; toque no rosto para abrir o dossiê. Embaixo, quem fica e quem sai da bancada."],
   cli:["capt","Clientes","Instituições atendidas: dados usados na régua e no ofício."],
   con:["capt","Motor de dados","Conexão com a planilha e situação das cargas automáticas."],
+  gab:["capt","Gabinetes e contatos","Todos os deputados e senadores em exercício hoje, com gabinete, telefone, e-mail, se é titular ou suplente e os assessores que a equipe cadastrou. O motor confere toda segunda e registra quem entrou, quem saiu e quem mudou de gabinete."],
   usr:["capt","Acessos","Quem entra no painel e no Portal do Cliente. Aprove pedidos, bloqueie, mude o perfil ou exclua alguém da base."]};
 const HINT_CLI={cal:"Prazos oficiais das emendas parlamentares: quando os parlamentares indicam, quando a instituição cadastra a proposta e quando os impedimentos técnicos precisam ser resolvidos.",rg:"Quem mais pode mandar emenda para a sua cidade e a sua área, e para onde o recurso já foi. Troque estado, cidade ou área para comparar.",dos:"Escolha um parlamentar por nome, estado ou cidade e veja todas as emendas dele: áreas, cidades, mapa e instituições.",op:"Editais, chamamentos e programas abertos a OSCs e entidades sem fins lucrativos, no Brasil todo.",fin:"Institutos, fundações, empresas e cooperativas que apoiam projetos sociais: o site de cada um, os editais que estão no ar e como se aproximar.",rou:"Cole o resumo do seu projeto cultural e compare com os projetos da Lei Rouanet: o que os parecidos trazem e o que ajustar. Veja também quem mais incentiva."};
 const VIEW_ALIAS={mapa:"rg",hs:"rg",exp:"dos",rk:"dos",bc:"pt",cx:"vt",base:"ap",ren:"ap"};
 function marcaViews(){
   const q=(sel,v)=>{const el=typeof sel==="string"?document.querySelector(sel):sel;if(el)el.dataset.vw=v};
-  q("#iniCard","ini"); const sm=$("sim")&&$("sim").closest("label"); if(sm) q(sm,"ap vt pt"); const T="rg dos cal pj sem qq fin rou ap vt pt cli con usr"; q("#vHero",T); q(".ttl",T); q("#vHint",T); q(".rule",T);
+  q("#iniCard","ini"); const sm=$("sim")&&$("sim").closest("label"); if(sm) q(sm,"ap vt pt"); const T="rg dos cal pj sem qq gab fin rou ap vt pt cli con usr"; q("#vHero",T); q(".ttl",T); q("#vHint",T); q(".rule",T);
   q("#pCapt .hero","rg"); q("#rgKpi","rg"); q("#mapCardRg","rg"); q("#pCapt .rgGrid","rg"); q("#rgCidCard","rg"); q("#hsCard","rg");
   q("#dosCard","dos"); q("#dosBoxCard","dos"); q("#rkCard","dos"); q("#expCard","nenhum");
   q("#bcCard","pt"); q("#pjCard","pj"); q("#cliCard","cli");
@@ -3470,7 +3504,7 @@ function marcaViews(){
 let VIEW="rg";
 function irPara(v,semRolar){
   if(VIEW_ALIAS[v]) v=VIEW_ALIAS[v]; if(!VIEWS[v]) v="ini";
-  if(CLI_MODO&&/^(ini|cli|con|usr|sem|qq)$/.test(v)){voltaPortal();return}            // cliente: essas áreas são só da equipe
+  if(CLI_MODO&&/^(ini|cli|con|usr|sem|qq|gab)$/.test(v)){voltaPortal();return}            // cliente: essas áreas são só da equipe
   if(v==="usr"&&!(EU&&EU.perfil==="admin")) v="ini";
   VIEW=v; try{localStorage.setItem("otm-view2",v)}catch(e){}
   if(st.pane!==VIEWS[v][0]) _setPane2(VIEWS[v][0]);
@@ -3482,7 +3516,7 @@ function irPara(v,semRolar){
   if($("vKick")) $("vKick").textContent={sem:"Congresso",qq:"Congresso",rg:"Emendas parlamentares",dos:"Emendas parlamentares",cal:"Emendas parlamentares",pj:"Emendas parlamentares",op:"Editais e chamamentos",fin:"Editais e chamamentos",rou:"Editais e chamamentos",ap:"Eleições 2026",vt:"Eleições 2026",pt:"Eleições 2026",cli:"Gestão",con:"Gestão",usr:"Gestão"}[v]||"";
   if(VIEWS[v][0]==="dados"&&!st.apOk&&v!=="vt"){st.apOk=true;load()}
   if(v==="dos"&&!rkFeito){rkFeito=true;carregaRank()}       // apuração só carrega quando for usada
-  if(v==="op") abreOp(); if(v==="ini") renderInicio(); if(v==="usr") renderUsr(); if(v==="cal") abreCal(); if(v==="sem") abreSem(); if(v==="fin") abreFin(); if(v==="rou") abreRou(); if(v==="qq") abreQq(); if(v==="vt"){ abreVt(); abreDf(); } if(v==="dos") abreDosView(); if(v==="con") renderMotor(); if(v==="pt"&&st.bc&&!st.bc.uf) carregaBancada(st.rg.uf||"sp"); if(v==="rg"&&st.rg.mapaPend){st.rg.mapaPend=false;desenhaMapaRg()}
+  if(v==="op") abreOp(); if(v==="ini") renderInicio(); if(v==="usr") renderUsr(); if(v==="cal") abreCal(); if(v==="sem") abreSem(); if(v==="fin") abreFin(); if(v==="rou") abreRou(); if(v==="qq") abreQq(); if(v==="gab") abreGab(); if(v==="vt"){ abreVt(); abreDf(); } if(v==="dos") abreDosView(); if(v==="con") renderMotor(); if(v==="pt"&&st.bc&&!st.bc.uf) carregaBancada(st.rg.uf||"sp"); if(v==="rg"&&st.rg.mapaPend){st.rg.mapaPend=false;desenhaMapaRg()}
   if(v==="hs"&&$("hsCard").hidden){$("vEmpty").hidden=false;$("vEmpty").textContent="Ainda não há registros dos Cadernos Parlamentares para esta instituição. Escolha um cliente na Régua de potencial."}else $("vEmpty").hidden=true;
   fechaSb(); if(!semRolar) window.scrollTo({top:0});
 }
@@ -4434,7 +4468,7 @@ document.addEventListener("click",e=>{
 
 // ================= v16.6: menu em grupos que abrem e fecham, com busca =================
 const SB_CHAVES={rg:"régua potencial deputado senador cidade cliente quem manda",dos:"raio-x parlamentar deputado senador emendas histórico nome",cal:"prazo prazos calendário indicação beneficiário impedimento rp6 rp7 rp8 janela",pj:"projeto modelo transferegov aprovado proposta",
-  sem:"agenda congresso câmara senado comissão reunião audiência semana visita",qq:"quem é quem presidente líder comissão cmo contato telefone gabinete",op:"edital editais chamamento chamada pública oportunidade",fin:"financiador instituto fundação empresa privado gife",rou:"rouanet cultura incentivo salic",
+  sem:"agenda congresso câmara senado comissão reunião audiência semana visita",qq:"quem é quem presidente líder comissão cmo contato telefone",gab:"gabinete gabinetes contato telefone e-mail email suplente titular deputado senador assessor sala anexo mandato",op:"edital editais chamamento chamada pública oportunidade",fin:"financiador instituto fundação empresa privado gife",rou:"rouanet cultura incentivo salic",
   ap:"resultado eleição eleitos apuração turno",vt:"votos cidade mapa brasília df região",pt:"partido bancada",cli:"cliente instituição cadastro portal ofício envio",usr:"acesso usuário senha aprovar",con:"motor dados planilha conexão teste"};
 function montaMenuSb(){
   const sb=$("sb"); if(!sb||sb.dataset.v166) return; sb.dataset.v166="1";
@@ -4515,6 +4549,63 @@ document.addEventListener("click",e=>{const g=e.target.closest(".glo"); if(g){e.
 document.addEventListener("keydown",e=>{const g=e.target.closest&&e.target.closest(".glo"); if(g&&(e.key==="Enter"||e.key===" ")){e.preventDefault();gloMostra(g)} if(e.key==="Escape") gloFecha()});
 addEventListener("scroll",()=>{const p=$("gloPop"); if(p&&!p.hidden&&Math.abs(scrollY-(+p.dataset.y||0))>40) gloFecha()},{passive:true});
 try{montaMenuSb();gloObserva();if(typeof VIEW!=="undefined")abreGrpSb(VIEW)}catch(e){console.warn("v16.6",e)}
+
+// ================= v16.6.3: GABINETES E CONTATOS (deputados e senadores em exercício, atualizados toda segunda) =================
+st.gab={d:null,ctg:null,q:"",casa:"",uf:"",so:"",lim:60,carregando:false};
+async function abreGab(forca){
+  const B=$("gabBody"); if(!B) return;
+  if((!st.gab.d||forca)&&!st.gab.carregando){ st.gab.carregando=true; if(!st.gab.d) B.innerHTML=`<div class="skel"></div><div class="skel" style="margin-top:8px"></div>`;
+    try{ const [g,c]=await Promise.allSettled([api({acao:"gabinetes"}),api({acao:"contatosGabinete"})]);
+      if(g.status!=="fulfilled") throw g.reason; st.gab.d=g.value; st.gab.ctg=c.status==="fulfilled"?(c.value.lista||[]):[] }
+    catch(e){ if(e.message!=="login") B.innerHTML=`<p class="empty">Não consegui ler os gabinetes: ${esc(e.message)}${/inválida/.test(e.message)?" (atualize o motor para a v16.6)":""}</p>`; st.gab.carregando=false; return }
+    st.gab.carregando=false }
+  renderGab();
+}
+function gabFiltra(){
+  const G=st.gab, q=nrm(G.q.trim()), ufsCli=new Set(getCli().map(c=>String(c.uf||"").toUpperCase()));
+  return (G.d.lista||[]).filter(p=>(!G.casa||p.casa===G.casa)&&(!G.uf||p.uf===G.uf)&&(G.so!=="sup"||/suplente/i.test(p.cond))&&(G.so!=="cli"||ufsCli.has(p.uf))&&
+    (!q||q.split(/\s+/).every(w=>nrm([p.nome,p.civil,p.partido,p.uf,p.casa,p.gab,p.email].join(" ")).includes(w))))
+    .sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR"));
+}
+function gabAss(p){return (st.gab.ctg||[]).filter(c=>kParl(c.parlamentar)===kParl(p.nome))}
+function renderGab(){
+  const B=$("gabBody"), d=st.gab.d, G=st.gab; if(!B||!d) return;
+  const L=d.lista||[], sup=L.filter(p=>/suplente/i.test(p.cond)).length, h=new Date(); h.setHours(0,0,0,0);
+  const m30=(d.mudancas||[]).filter(m=>{const x=dBR(m.data);return x&&(h-x)/864e5<=30});
+  const F=gabFiltra(), ufs=[...new Set(L.map(p=>p.uf))].filter(Boolean).sort();
+  const ehAdm=!EU||EU.perfil==="admin";
+  const tpc=t=>/Entrou/.test(t)?"in":/Saiu/.test(t)?"out":"";
+  const card=p=>{const as=gabAss(p);return `<article class="gbC"><div class="gbH">${fotoP({nome:p.nome,foto:p.foto})}<div style="min-width:0"><b>${esc(p.nome)}</b><small>${p.casa==="Senado"?"Senador(a)":"Deputado(a)"} · ${esc(p.partido)}/${esc(p.uf)}</small>${/suplente/i.test(p.cond)?`<span class="gbSup">Suplente em exercício</span>`:""}</div></div>
+    <div class="gbL">${p.gab?`<div><span>Gabinete</span><span>${esc(p.gab)}</span></div>`:""}${p.tel?`<div><span>Telefone</span><span>${p.tel.split(" / ").map(t=>`<a href="tel:${esc(t.replace(/\D/g,""))}">${esc(t)}</a>`).join(" / ")}</span></div>`:""}${p.email?`<div><span>E-mail</span><a href="mailto:${esc(p.email)}">${esc(p.email)}</a></div>`:""}${p.civil&&nrm(p.civil)!==nrm(p.nome)?`<div><span>Nome civil</span><span>${esc(p.civil)}</span></div>`:""}</div>
+    ${as.length?`<div class="gbAs"><b>Assessores cadastrados</b>${as.map(c=>`${esc(c.contato||"")}${c.cargo?` (${esc(c.cargo)})`:""} · <a href="mailto:${esc(c.email)}">${esc(c.email)}</a>${c.tel?` · ${esc(c.tel)}`:""}`).join("<br>")}</div>`:""}
+    <div class="gbAc"><button type="button" data-dos="${esc(p.nome)}" data-dosfoto="${esc(p.foto||"")}" data-dosnm="${esc(p.nome)}" data-dosuf="${esc(p.uf)}">Emendas (Raio-X)</button>${p.email?`<button type="button" data-gbcopia="${esc(p.email)}">Copiar e-mail</button>`:""}${EU&&EU.perfil==="consulta"?"":`<button type="button" data-gbass="${esc(p.nome)}" data-gbcasa="${esc(p.casa)}" data-gbuf="${esc(p.uf)}">+ Assessor</button>`}${p.pag?`<a href="${esc(p.pag)}" target="_blank" rel="noopener">Página oficial ↗</a>`:""}</div></article>`};
+  B.innerHTML=`<p class="sub" style="margin:0 0 10px">${L.filter(p=>p.casa==="Câmara").length} deputados e ${L.filter(p=>p.casa==="Senado").length} senadores em exercício${d.atualizado?` · ficha atualizada em ${esc(d.atualizado)}`:""}. O motor confere toda segunda às 6h e avisa por e-mail quando alguém entra, sai ou muda de gabinete.</p>
+    ${!d.completo?`<p class="gbAviso">${ehAdm?"Por enquanto só a lista básica (nome, partido e e-mail). Gabinete, telefone e titular/suplente chegam depois que você rodar <b>instalarVigiaMandato</b> uma vez no Apps Script.":"Por enquanto só a lista básica. Gabinete e telefone chegam na próxima atualização do motor."}</p>`:""}
+    <div class="calK"><button type="button" data-gbso="" aria-pressed="${!G.so}"><b>${L.length}</b><span>em exercício</span></button><button type="button" data-gbso="sup" aria-pressed="${G.so==="sup"}"><b>${sup}</b><span>suplentes em exercício</span></button><button type="button" data-gbso="cli" aria-pressed="${G.so==="cli"}"><b>${L.filter(p=>getCli().some(c=>String(c.uf||"").toUpperCase()===p.uf)).length}</b><span>nas bancadas dos clientes</span></button><button type="button" data-gbmud><b>${m30.length}</b><span>mudanças nos últimos 30 dias</span></button></div>
+    ${(d.mudancas||[]).length?`<details class="gbMud" id="gbMud" ${m30.length?"open":""}><summary>Mudanças recentes <small>· ${d.mudancas.length} registradas</small></summary><ul>${d.mudancas.slice(0,G.mudTodas?80:8).map(m=>`<li><span class="dt">${esc(m.data)}</span><div><span class="tp ${tpc(m.tipo)}">${esc(m.tipo)}</span><b>${esc(m.nome)}</b> <small>(${esc(m.casa)} · ${esc(m.partido)}/${esc(m.uf)})</small><span>${esc(m.detalhe)}</span></div></li>`).join("")}</ul>${!G.mudTodas&&d.mudancas.length>8?`<button type="button" class="iniMais" style="margin:0 14px 10px" data-gbmudtodas>Ver todas</button>`:""}</details>`:""}
+    <div class="gbTop"><input type="search" id="gbQ" placeholder="Nome, partido, estado ou sala" value="${esc(G.q)}" aria-label="Buscar parlamentar"><select id="gbCasa" aria-label="Casa"><option value="">Câmara e Senado</option><option ${G.casa==="Câmara"?"selected":""}>Câmara</option><option ${G.casa==="Senado"?"selected":""}>Senado</option></select><select id="gbUf" aria-label="Estado"><option value="">Todos os estados</option>${ufs.map(u=>`<option ${G.uf===u?"selected":""}>${u}</option>`).join("")}</select><button type="button" class="btn ghost sm" id="gbCsv">Baixar lista (CSV)</button></div>
+    <p class="sub" id="gbN" style="margin:0 0 8px">${F.length} ${F.length===1?"parlamentar":"parlamentares"}${G.so==="sup"?" · só suplentes em exercício":G.so==="cli"?" · só bancadas dos estados dos clientes":""}</p>
+    <div class="gbGrid">${F.slice(0,G.lim).map(card).join("")||`<p class="empty">Ninguém com esse filtro.</p>`}</div>
+    ${F.length>G.lim?`<button type="button" class="btn ghost gbMais" data-gbmais>Mostrar mais ${Math.min(60,F.length-G.lim)} de ${F.length-G.lim}</button>`:""}`;
+}
+document.addEventListener("input",e=>{if(e.target.id==="gbQ"){st.gab.q=e.target.value;st.gab.lim=60;clearTimeout(st.gab.t);st.gab.t=setTimeout(()=>{const pos=e.target.selectionStart;renderGab();const q=$("gbQ");if(q){q.focus();try{q.setSelectionRange(pos,pos)}catch(x){}}},250)}});
+document.addEventListener("change",e=>{if(e.target.id==="gbCasa"){st.gab.casa=e.target.value;st.gab.lim=60;renderGab()} if(e.target.id==="gbUf"){st.gab.uf=e.target.value;st.gab.lim=60;renderGab()}});
+document.addEventListener("click",async e=>{
+  const t=e.target; if(!t.closest||!t.closest("#gabBody")) return;
+  const so=t.closest("[data-gbso]"); if(so){st.gab.so=st.gab.so===so.dataset.gbso?"":so.dataset.gbso;st.gab.lim=60;renderGab();return}
+  if(t.closest("[data-gbmud]")){const m=$("gbMud");if(m){m.open=true;m.scrollIntoView({behavior:"smooth",block:"start"})}return}
+  if(t.closest("[data-gbmudtodas]")){st.gab.mudTodas=true;renderGab();return}
+  if(t.closest("[data-gbmais]")){st.gab.lim+=60;renderGab();return}
+  const cp=t.closest("[data-gbcopia]"); if(cp){try{await navigator.clipboard.writeText(cp.dataset.gbcopia);aviso("E-mail copiado")}catch(x){prompt("Copie o e-mail:",cp.dataset.gbcopia)}return}
+  if(t.id==="gbCsv"){const F=gabFiltra(),c=s=>`"${String(s??"").replace(/"/g,'""')}"`;
+    const csv="﻿"+[["Casa","Nome","Nome civil","Partido","UF","Condição","Gabinete","Telefone","E-mail","Assessores"].map(c).join(";")].concat(F.map(p=>[p.casa,p.nome,p.civil,p.partido,p.uf,p.cond,p.gab,p.tel,p.email,gabAss(p).map(a=>`${a.contato} <${a.email}>`).join(", ")].map(c).join(";"))).join("\r\n");
+    const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download=`gabinetes-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);aviso(`${F.length} parlamentares na planilha`);return}
+  const as=t.closest("[data-gbass]"); if(as){const nm=as.dataset.gbass;
+    const contato=prompt(`Nome do assessor ou chefe de gabinete de ${nm}:`,"");if(contato===null)return;const email=prompt(`E-mail de ${contato||"contato"} (gabinete de ${nm}):`,"");if(!email)return;
+    if(!/^[^\s@,;]+@[^\s@,;]+\.[^\s@,;]+$/.test(email.trim())){alert("E-mail inválido.");return}
+    const tel=prompt("Telefone (opcional):","")||"";
+    try{const j=await postPlanilha({acao:"contatoSalvar",parlamentar:nm,casa:as.dataset.gbcasa,uf:as.dataset.gbuf,contato:contato.trim(),email:email.trim(),tel:tel.trim()});st.gab.ctg=j.lista||[];if(st.env)st.env.ctg=st.gab.ctg;renderGab();aviso("Assessor salvo: entra também na central de envios")}catch(x){alert(x.message)} return}
+});
 
 // ================= v16.1: CENTRAL DE ENVIOS (ofícios em lote, por cliente) =================
 st.env={cli:null,fonte:"uf",com:"",part:"",lista:[],marc:{},email:{},trat:{},ofi:{},env:{},cota:null,modoOf:"modelo",busca:""};
